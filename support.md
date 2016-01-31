@@ -7,6 +7,8 @@
 
 [tutorials](http://pandas.pydata.org/pandas-docs/stable/tutorials.html)
 
+[plotting](http://pandas.pydata.org/pandas-docs/stable/visualization.html)
+
 
 ## github
 
@@ -21,7 +23,6 @@ http://manishamde.github.io/blog/2013/03/07/pandas-and-python-top-10/
 http://www.gregreda.com/2013/10/26/intro-to-pandas-data-structures/
 http://www.gregreda.com/2013/10/26/working-with-pandas-dataframes/
 https://sites.google.com/site/aslugsguidetopython/data-analysis/pandas/pandas-example
-http://pandas.pydata.org/pandas-docs/stable/visualization.html
 http://pandas.pydata.org/pandas-docs/version/0.15.0/visualization.html#visualization-scatter
 
 
