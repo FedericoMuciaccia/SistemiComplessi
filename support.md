@@ -15,6 +15,12 @@
 [branch graph](https://github.com/FedericoMuciaccia/SistemiComplessi/network)
 
 
+## geopy
+
+[homepage](https://pypi.python.org/pypi/geopy)
+[documentation](http://geopy.readthedocs.org/en/latest/)
+
+
 
 
 altri link vari:
@@ -24,10 +30,10 @@ http://www.gregreda.com/2013/10/26/intro-to-pandas-data-structures/
 http://www.gregreda.com/2013/10/26/working-with-pandas-dataframes/
 https://sites.google.com/site/aslugsguidetopython/data-analysis/pandas/pandas-example
 http://pandas.pydata.org/pandas-docs/version/0.15.0/visualization.html#visualization-scatter
-
-
-
-
-
+http://geopandas.org/
+http://toblerity.org/shapely/project.html
+http://toblerity.org/shapely/manual.html
+https://pypi.python.org/pypi/Rtree/
+http://toblerity.org/fiona/README.html
 
 
