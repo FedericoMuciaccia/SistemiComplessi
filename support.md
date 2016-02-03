@@ -15,6 +15,10 @@
 [branch graph](https://github.com/FedericoMuciaccia/SistemiComplessi/network)
 
 
+# markdown
+[tutorial](https://guides.github.com/features/mastering-markdown/)
+
+
 ## geopy
 
 [homepage](https://pypi.python.org/pypi/geopy)
@@ -35,5 +39,15 @@ http://toblerity.org/shapely/project.html
 http://toblerity.org/shapely/manual.html
 https://pypi.python.org/pypi/Rtree/
 http://toblerity.org/fiona/README.html
+https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+https://github.com/blog/2069-git-large-file-storage-v1-0
+https://github.com/blog/2085-a-new-look-for-repositories
+https://github.com/blog/2071-github-supports-universal-2nd-factor-authentication
+https://github.com/blog/2046-github-desktop-is-now-available
+https://github.com/blog/2041-improving-map-data-on-github
+https://github.com/blog/2031-announcing-atom-1-0
+https://github.com/blog/1986-announcing-git-large-file-storage-lfs
+https://github.com/blog/1957-git-2-3-has-been-released
+
 
 

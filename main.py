@@ -45,6 +45,8 @@ def geolocate(place): # string
     """
     geolocator = geopy.geocoders.Nominatim()
     location = geolocator.geocode(place)
+    # i dati si danno in (latitudine, longitudine), ma vanno intesi come (y, x)
+    # ovvero vanno visualizzati come x=longitudine, y=latitudine
     return (location.latitude, location.longitude) # coordinate
     
 def geodesicDistance(A, B = geolocate("Colosseo")):
@@ -75,7 +77,62 @@ copertura = dataframe[["range"]]
 
 dataframe.plot(kind="scatter", x="lon", y="lat", s=copertura/1000) # TODO
 
+# pyplot.show()
+
 ######################################
+
+isInItaly = dataframe.mcc == 222
+
+isReliable = dataframe.samples > 1
+
+# Crit3 = isInRome((dataframe.lat, dataframe.lon))
+
+# AllCriteria = isInItaly & isReliable & Crit3
+
+# dataframe[AllCriteria]
+
+italyDataframe = dataframe[isInItaly & isReliable]
+
+# TODO riordinare gli indici levando i buchi
+
+######################################
+
+italyDataframe.plot(kind="scatter", x="lon", y="lat", label="Italy")
+
+# pyplot.show()
+
+######################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
