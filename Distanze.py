@@ -1,4 +1,3 @@
-
 import geopy
 from geopy import distance #TODO BUGGONE
 import math
@@ -12,42 +11,52 @@ def geodesicDistance(A, B=colosseo):
     return geopy.distance.vincenty(A, B).meters
 
 raggi = map(geodesicDistance, raccordo)
-
+print raggi
 raggiomedio = 0
 for i in raggi:
 	raggiomedio += i
-raggiomedio /= len(distanza)
-raggiomedio = 11000
-#print distanza
+raggiomedio /= len(raggi)
+#raggiomedio = 11000
+print raggiomedio
 #print media
+
 
 import pandas
 dataframe = pandas.read_csv("copiaprova.csv")
 #dataframe
+criterioMCC = dataframe.mcc == 222
+criterioMinsamples = dataframe.samples > 1
+italydoitcleaner = dataframe[criterioMCC & criterioMinsamples]
+italydoitcleaner
+#del italydoitcleaner['index']
+italydoitcleaner = italydoitcleaner.reset_index()
+#print italydoitcleaner
 
 
-distanza = []
-#dataframe['lon'] == "Noise - Street/Sidewalk"
-coordinate = dataframe[dataframe.lat > 0][dataframe.lon > 0][['lon', 'lat']].values
 #inroma = pandas.DataFrame([[41.947416, 12.371001],
 #                            [41.899392, 12.397436],
 #                            [41.870510, 12.287917],
 #                            [41.899648, 12.515196]], 
 #                            columns=('lon', 'lat'))
 
+#istruzione che fa selezione alcune righe con criteri su alcune colonne, 
+#ne seleziona alcune e restituisce un array nompy di valori desiderati
+coordinate = dataframe[criterioMCC & criterioMinsamples][['lat', 'lon']].values
+#print coordinate
 
+distanza = []
 distanza = map(geodesicDistance, coordinate)
+print len(distanza)
 
-
-def isInRome(point):
-    return geodesicDistance(point) <= raggiomedio
-#latitudini = dataframe[dataframe.lat > 0][['lat']].values
-#longitudini = dataframe[dataframe.lat > 0][['lat']].values 
-
-#coordinate = (latitudini, longitudini)
-a = isInRome((41.899903, 12.503008))
-print geodesicDistance((41.899903, 12.503008))
-print raggiomedio
-print a
-filter(isInRome, coordinate)
-#isInRome(colosseo)
+#da approfondire
+#italydoitcleaner['distanze'] = italydoitcleaner[['lat', 'lon']].map(lambda x: geodesicDistance())
+italydoitcleaner['distanze'] = distanza
+italydoitcleaner
+criterioRaccordo = italydoitcleaner.distanze < raggiomedio
+romacellid = italydoitcleaner[criterioRaccordo]
+romacellid = romacellid.reset_index()
+romacellid
+#distanza = map(geodesicDistance, cell)
+#def isInRome(point):
+#    return geodesicDistance(point) <= raggiomedio
+#filter(isInRome, cell)
