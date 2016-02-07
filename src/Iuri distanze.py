@@ -19,8 +19,23 @@ raggi = []
 def geodesicDistance(A, B=colosseo):
     return geopy.distance.vincenty(A, B).meters
 
+raggioTerra = 6371000
+def euclidDistance(A, B=colosseo):
+    x1 = raggioTerra*math.sin(math.pi-A[0])*math.cos(A[1])
+    y1 = raggioTerra*math.sin(math.pi-A[0])*math.sin(A[1])
+    z1 = raggioTerra*math.cos(math.pi-A[0])
+    x2 = raggioTerra*math.sin(math.pi-B[0])*math.cos(B[1])
+    y2 = raggioTerra*math.sin(math.pi-B[0])*math.sin(B[1])
+    z2 = raggioTerra*math.cos(math.pi-B[0])
+    return math.sqrt((x1-x2)**2+(y1-y2)**2+(z1-z2)**2)
+
 raggi = map(geodesicDistance, raccordo)
 print raggi
+
+raggi1= []
+raggi1 = map(euclidDistance, raccordo)
+print raggi1
+
 raggiomedio = 0
 for i in raggi:
 	raggiomedio += i
@@ -109,31 +124,40 @@ raggio = dataframe['range'].values
 
 def geodesicDistance(A, B):
     return geopy.distance.vincenty(A, B).meters
+    #return geopy.distance.great_circle(A, B).meters
+    
+def euclidDistance(A, B):
+    return math.sqrt((A[0]-B[0])**2+(A[1]-B[1])**2)
 
-def sommaRange(A, B):
-    return A+B
+def matricesuperiore(datiCoordinate, datiRaggi):
+    a = numpy.zeros((datiRaggi.size,datiRaggi.size))
+    for i in xrange(datiRaggi.size):
+        for j in xrange(datiRaggi.size-i-1):
+            if euclidDistance(datiCoordinate[i], datiCoordinate[j+i+1]) <= datiRaggi[i] + datiRaggi[j+i+1]:
+#            if geodesicDistance(datiCoordinate[i], datiCoordinate[j+i+1]) <= datiRaggi[i] + datiRaggi[j+i+1]:
+                a[i,j+i+1] = 1
+                a[j+i+1,i] = 1
+    return a
+                
+def matricetutta(datiCoordinate, datiRaggi):
+    a = numpy.zeros((datiRaggi.size,datiRaggi.size))
+    for i in xrange(datiRaggi.size):
+        for j in xrange(datiRaggi.size):
+            if geodesicDistance(datiCoordinate[i], datiCoordinate[j]) <= datiRaggi[i] + datiRaggi[j]:
+                a[i,j] = 1
+            if (i == j):
+                a[i,j] = 0
+    return a
 
-def sonoLinkati(A, rangeA, B, rangeB):
-    return geodesicDistance(A, B) <= sommaRange(rangeA, rangeB)
+%time adiacenzasopra = matricesuperiore(coordinate, raggio)
 
-def linkVettori(rigA, rigB):
-    return sonoLinkati((rigA['lat'], rigA['lon']), rigA['range'], (rigB['lat'], rigB['lon']), rigB['range'])
+%time adiacenzatutta = matricetutta(coordinate, raggio)
 
-dimensioni = raggio.size
-a = numpy.zeros((dimensioni,dimensioni))
-print a
 
-for i in xrange(raggio.size):
-    for j in xrange(raggio.size):
-        if geodesicDistance(coordinate[i], coordinate[j]) <= raggio[i] + raggio[j]:
-            a[i,j] = 1
 
-print a
-#for i in celle:
-#    for j in celle:
-#        if linkVettori(i, j):
-#            a[i,j] = 1
 
+#print adiacenzasopra
+#print adiacenzatutta
             
 #ridotto = dataframe[['cell', 'lat', 'lon', 'range']]        
 #b = numpy.zeros((50,50))
@@ -146,8 +170,26 @@ print a
             
             
 
-# <codecell>
+# <markdowncell>
 
+# Il primo tentativo è stato di fare la matrice di adiacenza a forza bruta. Con un campione di soli 50 nodi ci metteva pochi microsecondi, quindi abbiamo provato a fare la matrice di adiacenza delle 7000 antenne entro il raccordo anulare, notando che la compilazione durava tanto, facendo le dovute proporzioni abbiamo preventivato 2,5 ore di tempo di calcolo. La prima cosa che abbiamo sistemato è stato ovviamente fare un ciclo che calcolasse soltanto la metà superiore della matrice, dimezzando il tempo di calcolo. 
+# 
+# La prima cosa che abbiamo pensato di fare è stato di diagonalizzare a blocchi la matrice, o fare un ciclo di bassissimo livello che mettesse 0 a tutti gli elementi relativi alle antenne con $\Delta$Latitudine e/o $\Delta$Longitudine maggiori del range massimo del campione di dati. Il problema avuto è che il range delle antenne è tendenzialmente grande, con alcune che arrivano a 10km (con raggioRoma 11km)(e anche tanti samples), quindi non c'era modo di ridurre i calcoli. 
+# 
+# L'unica altra idea che abbiamo avuto è stata di non fare il calcolo complicato con la distanza sul geoide con il metodo vincenty. Primo passo è stato usare il metodo con great circles, l'altro è stato di considerare la porzione di Roma presa come un cerchio piano, calcolando quindi la distanza euclidea tra coordinate geografiche e convertendola in metri. E ci mette MOLTO meno tempo $\sim$10 volte in meno. Con un preventivo quindi di 10 minuti di tempo di calcolo invece di 1 ora e mezza.
+# 
+# TODO vedere parallelaizazione
+
+# <markdowncell>
+
+# con vincenti 
+# $\sim$45 ms
+# 
+# con great circols
+# $\sim$25 ms
+# 
+# con euclid
+# $\sim$5 ms
 
 # <codecell>
 
