@@ -22,6 +22,15 @@
 [examples](http://networkx.github.io/documentation/latest/examples/)
 [reference](https://networkx.github.io/documentation/latest/reference/index.html)
 
+## Matplotlib
+[homepage](http://matplotlib.org/index.html)
+[API](http://matplotlib.org/api/index.html)
+[examples](http://matplotlib.org/examples/index.html)
+[pyplot reference](http://matplotlib.org/api/pyplot_summary.html)
+[pyplot API](http://matplotlib.org/api/pyplot_api.html)
+[tutorial](http://matplotlib.org/users/pyplot_tutorial.html)
+[guide](http://matplotlib.org/users/index.html)
+[external toolkits](http://matplotlib.org/mpl_toolkits/index.html)
 
 
 
@@ -51,6 +60,24 @@ http://networkx.github.io/documentation/latest/gallery.html
 http://networkx.github.io/documentation/latest/examples/graph/degree_sequence.html
 http://networkx.github.io/documentation/latest/examples/drawing/weighted_graph.html
 http://networkx.github.io/documentation/latest/examples/drawing/sampson.html
+http://matplotlib.org/gallery.html
+http://matplotlib.org/examples/statistics/histogram_demo_multihist.html
+https://networkx.github.io/documentation/latest/reference/generated/networkx.linalg.graphmatrix.adjacency_matrix.html
+http://stackoverflow.com/questions/29572623/plot-networkx-graph-from-adjacency-matrix-in-csv-file
+http://stackoverflow.com/questions/33773187/efficiently-create-adjacency-matrix-from-network-graph-vice-versa-python-netwo
+http://matplotlib.org/1.5.0/examples/pylab_examples/index.html
+
+
+
+http://matplotlib.org/1.2.1/examples/pylab_examples/histogram_demo.html
+https://plot.ly/matplotlib/histograms/
+http://matplotlib.org/1.3.0/examples/pylab_examples/histogram_demo_extended.html
+https://bespokeblog.wordpress.com/2011/07/11/basic-data-plotting-with-matplotlib-part-3-histograms/
+http://matplotlib.org/examples/statistics/histogram_demo_features.html
+
+
+
+
 
 
 http://www.damian.oquanta.info/posts/48-themes-for-your-ipython-notebook.html
