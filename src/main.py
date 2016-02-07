@@ -6,7 +6,7 @@
 
 import pandas
 
-dataframe = pandas.read_csv("cell_towers_diff-2016012100.csv")
+dataframe = pandas.read_csv("../data/cell_towers_diff-2016012100.csv")
 
 # coordinate = dataframe[['lon', 'lat']]
 
