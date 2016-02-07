@@ -1,9 +1,16 @@
+# -*- coding: utf-8 -*-
+# <nbformat>3.0</nbformat>
+
+# <codecell>
+
 import geopy
 from geopy import distance #TODO BUGGONE
 import math
 import itertools
 import pandas
 import numpy
+
+# <codecell>
 
 colosseo = (41.890173, 12.492331)
 raccordo = [(41.914456, 12.615807),(41.990672, 12.502714),(41.793883, 12.511297),(41.812566, 12.396628),(41.956277, 12.384611)]
@@ -22,6 +29,8 @@ raggiomedio /= len(raggi)
 print raggiomedio
 #print media
 
+# <codecell>
+
 dataframe = pandas.read_csv("../Siscomp_datas/cell_towers.csv")
 #dataframe = pandas.read_csv("./romaprova.csv")
 #dataframe
@@ -32,6 +41,8 @@ italydoitcleaner
 #del italydoitcleaner['index']
 italydoitcleaner = italydoitcleaner.reset_index()
 #print italydoitcleaner
+
+# <codecell>
 
 #inroma = pandas.DataFrame([[41.947416, 12.371001],
 #                            [41.899392, 12.397436],
@@ -62,10 +73,30 @@ romacellid.to_csv("roma_towers.csv")
 #    return geodesicDistance(point) <= raggiomedio
 #filter(isInRome, cell)
 
+# <markdowncell>
+
+# ##TODO:  
+# * Prendere arrays coordinate                                                           ✔
+# * fare array distanze                                                                  ✔
+# * mettere colonna distanze in dataframe  ✔
+# * selezionare righe con variabile compresa entro raggiomedio                           ✔  
+# * fare un nuovo dataframe  ✔
+# * escludere tutti i nodi con 1 sample solo ✔
+# * fare P(k)
+# 
+# ✔✔ggwpbb
+
+# <markdowncell>
+
+# Domande su iterazione su panda dataframe e efficienza, un tizio dice che la funzione iterrows è molto poco efficiente e sarebbe molto meglio usare un numpy array. Forse esistono funzioni più efficienti.
+# http://stackoverflow.com/questions/10729210/iterating-row-by-row-through-a-pandas-dataframe
+# http://stackoverflow.com/questions/7837722/what-is-the-most-efficient-way-to-loop-through-dataframes-with-pandas
+
+# <codecell>
 
 
 #dataframe = pandas.read_csv("../Siscomp_datas/cell_towers.csv")
-dataframe = pandas.read_csv("roma_towers.csv")
+dataframe = pandas.read_csv("romaprova.csv")
 #dataframe
 
 #celle = dataframe[['cell', 'lat', 'lon', 'range']].values
@@ -114,3 +145,10 @@ print a
 
             
             
+
+# <codecell>
+
+
+# <codecell>
+
+
