@@ -46,7 +46,7 @@ def euclideanDistace(x,y):
 
 # <codecell>
 
-# import geopy # TODO AttributeError: 'module' object has no attribute 'distance'
+import geopy # TODO AttributeError: 'module' object has no attribute 'distance'
 from geopy import distance, geocoders
 
 # distanze in km
@@ -93,7 +93,7 @@ print(isInRome(geolocate(name)))
 
 copertura = dataframe[["range"]]
 
-dataframe.plot(kind="scatter", x="lon", y="lat", s=copertura/1000) # TODO
+dataframe.plot(kind="scatter", x="lon", y="lat", s=copertura/1000, alpha=0.5) # TODO
 
 # pyplot.show()
 
@@ -185,7 +185,7 @@ roma.plot(kind="scatter", x="lon", y="lat", label="Roma PRELIMINARE")
 
 # <markdowncell>
 
-# ## creazione del grafo con NetworkX
+# ## Creazione del grafo con NetworkX
 # 
 # TODO si può anche fare un grafo pesato sull'intensità del segnale  
 # 
@@ -241,7 +241,7 @@ dataframePiccolo["cell"]
 
 # <codecell>
 
-dataframePiccolo = italia[0:10]
+dataframePiccolo = roma[0:10]
 
 grafoPiccolo = networkx.Graph()
 grafoPiccolo.add_nodes_from(dataframePiccolo["cell"])
@@ -258,6 +258,129 @@ matriceDiAdiacenza = numpy.zeros((10,10))
 # <codecell>
 
 matriceDiAdiacenza
+
+# <codecell>
+
+
+
+#dataframe = pandas.read_csv("../Siscomp_datas/cell_towers.csv")
+romaPiccolo = roma[0:50]
+#dataframe
+
+#celle = dataframe[['cell', 'lat', 'lon', 'range']].values
+#print celle
+coordinate = romaPiccolo[['lat', 'lon']].values
+raggio = romaPiccolo['range'].values
+
+#print coordinate
+#print raggio
+
+def geodesicDistance(A, B):
+    return geopy.distance.vincenty(A, B).meters
+
+def sommaRange(A, B):
+    return A+B
+
+def sonoLinkati(A, rangeA, B, rangeB):
+    return geodesicDistance(A, B) <= sommaRange(rangeA, rangeB)
+
+def linkVettori(rigA, rigB):
+    return sonoLinkati((rigA['lat'], rigA['lon']), rigA['range'], (rigB['lat'], rigB['lon']), rigB['range'])
+
+dimensioni = raggio.size
+a = numpy.zeros((dimensioni,dimensioni))
+# print a
+
+for i in xrange(raggio.size):
+    for j in xrange(raggio.size):
+        if geodesicDistance(coordinate[i], coordinate[j]) <= raggio[i] + raggio[j]:
+            a[i,j] = 1
+        if (i == j):
+            a[i,j] = 0
+print a
+
+
+#for i in celle:
+#    for j in celle:
+#        if linkVettori(i, j):
+#            a[i,j] = 1
+
+            
+#ridotto = dataframe[['cell', 'lat', 'lon', 'range']]        
+#b = numpy.zeros((50,50))
+
+#for i in ridotto.iterrows():
+#    for j in ridotto.iterrows():
+#        if linkVettori(i, j):
+#            a[ridotto["index"],ridotto["index"]] = 1
+
+# <codecell>
+
+# A = numpy.reshape(numpy.random.random_integers(0,1,size=100),(10,10))
+# D = networkx.DiGraph(A)
+
+# networkx.draw(D)
+
+F50 = networkx.Graph(a)
+
+
+# position=networkx.spring_layout(F50)
+# networkx.draw(F50)
+
+# networkx.draw_networkx_nodes(F50,position,node_size=300)
+# networkx.draw_networkx_edges(F50,position,width=5)
+# networkx.draw_networkx_labels(F50,position,font_size=15,font_family='sans-serif')
+networkx.draw_random(F50)
+
+# <codecell>
+
+# networkx.degree(F50)
+grado = F50.degree().values()
+
+def degreeDistribution(gradi):
+    pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step')
+    pyplot.title('Degree distribution')
+    pyplot.xlabel("Degree")
+    pyplot.ylabel("Frequency")
+    # return
+    # histtype='bar', alpha=0.5
+    # bins=max(grado)-min(grado)
+
+distribuzione = degreeDistribution(grado)
+
+# <markdowncell>
+
+# ## Distribuzione dei raggi di copertura delle antenne
+# 
+# TODO fare il fit esponenziale
+# 
+# ci sono molte antenne "piccole" e poche antenne "grandi"
+# 
+# ci sono pure alcune antenne dal raggio di copertura gigante $\sim 10 Km$
+# (ovvero quanto tutto il raggio del Grande Raccordo Anulare e quindi di tutto il nostro data sample)
+# 
+# probabilmente questi saranno degli hub se la nostra rete risulterà essere complessa
+
+# <codecell>
+
+distribuzioneRange = pyplot.hist(roma['range'].values, 100)
+massimoRange = max(distribuzioneRange[1])
+massimoRange
+
+# TODO vedere se l'antenna di massimo range sta su Monte Mario
+# TODO fare mappa geografica delle antenne di range gigante per vedere dove sono messe
+
+# <markdowncell>
+
+# TODO fare lo scatterplot georeferenziato con  
+# 
+# basemap e cartopy:
+# 
+# http://matplotlib.org/basemap/
+# http://scitools.org.uk/cartopy/docs/latest/
+# http://scitools.org.uk/cartopy/docs/latest/gallery.html
+# 
+# oppure con le API o bindings per OperStreetMaps o Google Maps
 
 # <codecell>
 
