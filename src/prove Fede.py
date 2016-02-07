@@ -19,7 +19,7 @@
 
 import pandas
 
-dataframe = pandas.read_csv("cell_towers_diff-2016012100.csv")
+dataframe = pandas.read_csv("../data/cell_towers_diff-2016012100.csv")
 
 # coordinate = dataframe[['lon', 'lat']]
 
@@ -46,8 +46,8 @@ def euclideanDistace(x,y):
 
 # <codecell>
 
-import geopy # TODO AttributeError: 'module' object has no attribute 'distance'
-# from geopy import distance, geocoders
+# import geopy # TODO AttributeError: 'module' object has no attribute 'distance'
+from geopy import distance, geocoders
 
 # distanze in km
 # geopy.distance.vincenty(A, B) # su sferoide oblato
@@ -155,7 +155,7 @@ italia.plot(kind="scatter", x="lon", y="lat", label="Italy")
 
 # <codecell>
 
-roma = pandas.read_csv("roma_towers.csv")
+roma = pandas.read_csv("../data/roma_towers.csv")
 roma.plot(kind="scatter", x="lon", y="lat", label="Roma PRELIMINARE")
 
 # pyplot.show()
@@ -187,7 +187,16 @@ roma.plot(kind="scatter", x="lon", y="lat", label="Roma PRELIMINARE")
 
 # ## creazione del grafo con NetworkX
 # 
-# TODO si può anche fare un grafo pesato sull'intensità del segnale
+# TODO si può anche fare un grafo pesato sull'intensità del segnale  
+# 
+# TODO:
+# 
+# * mettere sfondo allo scatterplot con mappa terrestre
+# (farlo con le API di Google Maps o con quelle di OpenStreetMaps)
+# 
+# * provare API grafi per fare grafo delle antenne
+# * aggiungere colonna database per distanze e coperture antenne
+# 
 
 # <codecell>
 

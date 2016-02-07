@@ -1,7 +1,7 @@
 
 import pandas
 
-dataframe = pandas.read_csv("cell_towers.csv")
+dataframe = pandas.read_csv("../data/cell_towers.csv")
 
 # from matplotlib import pyplot
 
