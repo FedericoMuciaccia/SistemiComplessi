@@ -66,7 +66,7 @@ italydoitcleaner
 criterioRaccordo = italydoitcleaner.distanze < raggiomedio
 romacellid = italydoitcleaner[criterioRaccordo]
 romacellid = romacellid.reset_index()
-romacellid.to_csv("roma_towers.csv")
+romacellid.to_csv("../data/roma_towers.csv")
 
 #distanza = map(geodesicDistance, cell)
 #def isInRome(point):
@@ -76,7 +76,7 @@ romacellid.to_csv("roma_towers.csv")
 # <markdowncell>
 
 # ##TODO:  
-# * Prendere arrays coordinate                                                           ✔
+# * Prendere array coordinate                                                           ✔
 # * fare array distanze                                                                  ✔
 # * mettere colonna distanze in dataframe  ✔
 # * selezionare righe con variabile compresa entro raggiomedio                           ✔  
@@ -96,7 +96,7 @@ romacellid.to_csv("roma_towers.csv")
 
 
 #dataframe = pandas.read_csv("../Siscomp_datas/cell_towers.csv")
-dataframe = pandas.read_csv("romaprova.csv")
+dataframe = pandas.read_csv("../data/romaprova.csv")
 #dataframe
 
 #celle = dataframe[['cell', 'lat', 'lon', 'range']].values

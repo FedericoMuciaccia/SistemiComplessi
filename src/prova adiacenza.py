@@ -8,7 +8,7 @@ import numpy
 
 
 #dataframe = pandas.read_csv("../Siscomp_datas/cell_towers.csv")
-dataframe = pandas.read_csv("romaprova.csv")
+dataframe = pandas.read_csv("../data/romaprova.csv")
 #dataframe
 
 #celle = dataframe[['cell', 'lat', 'lon', 'range']].values
