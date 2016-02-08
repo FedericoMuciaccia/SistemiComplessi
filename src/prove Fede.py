@@ -252,11 +252,8 @@ networkx.draw(grafoPiccolo)
 # <codecell>
 
 import numpy
-matriceDiAdiacenza = numpy.zeros((10,10))
+matriceDiAdiacenza = numpy.zeros((10,10), dtype=int)
 # le matrici hanno indici che partono da zero
-
-# <codecell>
-
 matriceDiAdiacenza
 
 # <codecell>
@@ -288,7 +285,7 @@ def linkVettori(rigA, rigB):
     return sonoLinkati((rigA['lat'], rigA['lon']), rigA['range'], (rigB['lat'], rigB['lon']), rigB['range'])
 
 dimensioni = raggio.size
-a = numpy.zeros((dimensioni,dimensioni))
+a = numpy.zeros((dimensioni,dimensioni), dtype=int)
 # print a
 
 for i in xrange(raggio.size):
@@ -363,9 +360,35 @@ distribuzione = degreeDistribution(grado)
 
 # <codecell>
 
-distribuzioneRange = pyplot.hist(roma['range'].values, 100)
+import numpy
+
+raggi = roma['range'].values
+
+raggiBuoni = roma[roma.range > 1]['range'].values
+
+#distribuzioneRange = pyplot.hist(raggi, 100)
+
+#distribuzioneRangeLogLog = pyplot.hist(numpy.log2(raggiBuoni), 100, log=True)
+
+pyplot.figure(1)
+pyplot.subplot(211)
+distribuzioneRange = pyplot.hist(raggi, 100)
+pyplot.title('Range distribution')
+pyplot.xlabel("Degree")
+pyplot.ylabel("Frequency")
+
+pyplot.subplot(212)
+distribuzioneRangeLogLog = pyplot.hist(numpy.log2(raggiBuoni), 100, log=True)
+pyplot.title('Range distribution (log-log)')
+pyplot.xlabel("log2 Grado")
+pyplot.ylabel("Frequency (scala log10)")
+
 massimoRange = max(distribuzioneRange[1])
 massimoRange
+
+
+#numpy.nan in raggi
+#min(raggi)
 
 # TODO vedere se l'antenna di massimo range sta su Monte Mario
 # TODO fare mappa geografica delle antenne di range gigante per vedere dove sono messe
@@ -381,6 +404,78 @@ massimoRange
 # http://scitools.org.uk/cartopy/docs/latest/gallery.html
 # 
 # oppure con le API o bindings per OperStreetMaps o Google Maps
+
+# <markdowncell>
+
+# ## multiprocessing e calcolo parallelo
+# 
+
+# <codecell>
+
+from joblib import Parallel, delayed  
+import multiprocessing
+
+inputs = range(10)  
+def processInput(i):  
+    return i * i
+
+
+num_cores = multiprocessing.cpu_count()
+
+results = Parallel(n_jobs=num_cores)(delayed(processInput)(i) for i in inputs)
+results
+
+# <codecell>
+
+def matriceSuperiore(datiCoordinate, datiRaggi):
+    a = numpy.zeros((datiRaggi.size,datiRaggi.size))
+    for i in xrange(datiRaggi.size):
+        for j in xrange(datiRaggi.size-i-1):
+            if geodesicDistance(datiCoordinate[i], datiCoordinate[j+i+1]) <= datiRaggi[i] + datiRaggi[j+i+1]:
+#            if geodesicDistance(datiCoordinate[i], datiCoordinate[j+i+1]) <= datiRaggi[i] + datiRaggi[j+i+1]:
+                a[i,j+i+1] = 1
+                a[j+i+1,i] = 1
+    return a
+
+# <codecell>
+
+# iterare su una matrice numpy
+
+def matriceSimilSimmetrica(N):
+    """
+    crea una matrice triangolare bassa
+    (per adesso includendo la diagonale, per seplicità)
+    """
+    #a = range(N)
+    #return [range(i+1) for i in a]
+    
+    #bucket = [0] * N
+    for i in range(N):
+        j = i + 1
+        a[i] = [0] * j
+    return a
+
+b = numpy.zeros((5,5), dtype=int)
+
+for i in numpy.nditer(b): print i
+
+# <codecell>
+
+#tri = numpy.zeros((10, 10))
+#dm = tri[numpy.triu_indices(10, 1)]
+#dm
+
+#tri[(1,2), (4,5)]
+
+triangolo = matriceSimilSimmetrica(N)
+triangolo
+# listofzeros = [0] * n
+
+# <codecell>
+
+
+# <codecell>
+
 
 # <codecell>
 

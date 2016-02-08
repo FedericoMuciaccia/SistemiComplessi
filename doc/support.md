@@ -66,15 +66,34 @@ https://networkx.github.io/documentation/latest/reference/generated/networkx.lin
 http://stackoverflow.com/questions/29572623/plot-networkx-graph-from-adjacency-matrix-in-csv-file
 http://stackoverflow.com/questions/33773187/efficiently-create-adjacency-matrix-from-network-graph-vice-versa-python-netwo
 http://matplotlib.org/1.5.0/examples/pylab_examples/index.html
-
-
-
 http://matplotlib.org/1.2.1/examples/pylab_examples/histogram_demo.html
 https://plot.ly/matplotlib/histograms/
 http://matplotlib.org/1.3.0/examples/pylab_examples/histogram_demo_extended.html
 https://bespokeblog.wordpress.com/2011/07/11/basic-data-plotting-with-matplotlib-part-3-histograms/
 http://matplotlib.org/examples/statistics/histogram_demo_features.html
 
+
+http://www.parallelpython.com/content/view/17/31/
+http://stackoverflow.com/questions/20548628/how-to-do-parallel-programming-in-python
+https://docs.python.org/2/library/multiprocessing.html
+http://spartanideas.msu.edu/2014/06/20/an-introduction-to-parallel-programming-using-pythons-multiprocessing-module/
+http://blog.dominodatalab.com/simple-parallelization/
+https://pythonhosted.org/joblib/parallel.html
+http://www.davekuhlman.org/python_multiprocessing_01.html
+https://www.google.it/search?client=ubuntu&channel=fs&q=parallel+iter+matrix+python&ie=utf-8&oe=utf-8&gfe_rd=cr&ei=vg25VuChN7Os8weHsIOYDw#channel=fs&q=parallel+iter+numpy+matrix+python
+http://docs.scipy.org/doc/numpy-1.10.0/reference/generated/numpy.nditer.html
+http://docs.scipy.org/doc/numpy-1.10.0/reference/arrays.nditer.html#arrays-nditer
+http://scipy-cookbook.readthedocs.org/items/ParallelProgramming.html
+
+
+http://stackoverflow.com/questions/20055493/numpy-convert-an-array-to-a-triangular-matrix
+http://docs.scipy.org/doc/numpy/reference/generated/numpy.triu_indices.html
+http://docs.scipy.org/doc/numpy-1.10.1/reference/generated/numpy.tril.html
+http://docs.scipy.org/doc/numpy-1.10.0/reference/generated/numpy.triu.html
+http://stackoverflow.com/questions/2572916/numpy-smart-symmetric-matrix
+http://stackoverflow.com/questions/4056768/how-to-declare-array-of-zeros-in-python-or-an-array-of-a-certain-size
+https://www.getdatajoy.com/examples/python-data-analysis/read---write-csv-file-with-numpy
+http://docs.scipy.org/doc/numpy-1.10.0/reference/generated/numpy.savetxt.html
 
 
 
