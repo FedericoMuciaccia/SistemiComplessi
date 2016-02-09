@@ -316,4 +316,50 @@ pyplot.legend(loc = 2)
 
 # <codecell>
 
+adiacenzaEuclidea = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/AdiacenzaEuclidea.csv",delimiter=',',dtype='int')
+
+# <codecell>
+
+import networkx
+grafoRoma = networkx.Graph(adiacenzaEuclidea)
+
+# <codecell>
+
+%matplotlib inline
+networkx.draw_random(grafoRoma)
+
+# <codecell>
+
+grado = grafoRoma.degree().values()
+
+def degreeDistribution(gradi):
+    pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step')
+    pyplot.title('Degree distribution')
+    pyplot.xlabel("Degree")
+    pyplot.ylabel("Frequency")
+    # return
+    # histtype='bar', alpha=0.5
+    # bins=max(grado)-min(grado)
+
+distribuzione = degreeDistribution(grado)
+
+# <codecell>
+
+0 in grado
+
+# <codecell>
+
+def degreeDistribution(gradi):
+    pyplot.hist(numpy.log10(gradi), bins=max(gradi)-min(gradi), histtype='step', log=True)
+    pyplot.title('Degree distribution')
+    pyplot.xlabel("log Degree")
+    pyplot.ylabel("Frequency (log)")
+    # return
+    # histtype='bar', alpha=0.5
+    # bins=max(grado)-min(grado)
+
+distribuzione = degreeDistribution(grado)
+
+# <codecell>
+
 
