@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 # <nbformat>3.0</nbformat>
 
+# <markdowncell>
+
+# ###Importo tutte le librerie necessarie
+
 # <codecell>
 
 import geopy
@@ -10,6 +14,12 @@ import itertools
 import pandas
 import numpy
 from matplotlib import pyplot
+
+# <markdowncell>
+
+# ###Calcolo il raggio medio che definisce Roma entro il raccordo anulare
+# 
+# NB: da verificare che distanza euclidea non crei troppi problemi
 
 # <codecell>
 
@@ -60,9 +70,13 @@ raggiomedio /= len(raggi)
 print raggiomedio
 #print media
 
+# <markdowncell>
+
+# ###Popolo il dataframe e faccio una prima grossa scrematura
+
 # <codecell>
 
-dataframe = pandas.read_csv("../Siscomp_datas/cell_towers.csv")
+dataframe = pandas.read_csv("/home/protoss/Documenti/Siscomp_datas/cell_towers.csv")
 #dataframe = pandas.read_csv("./romaprova.csv")
 #dataframe
 criterioMCC = dataframe.mcc == 222
@@ -72,6 +86,10 @@ italydoitcleaner
 #del italydoitcleaner['index']
 italydoitcleaner = italydoitcleaner.reset_index()
 #print italydoitcleaner
+
+# <markdowncell>
+
+# ###Seleziono le antenne in Roma e faccio dei .csv appositi
 
 # <codecell>
 
@@ -83,21 +101,44 @@ italydoitcleaner = italydoitcleaner.reset_index()
 
 #istruzione che fa selezione alcune righe con criteri su alcune colonne, 
 #ne seleziona alcune e restituisce un array nompy di valori desiderati
+criterioTim = dataframe.net == 1
+criterioWind = dataframe.net == 88
+criterioVoda = dataframe.net == 10
+criterio3 = dataframe.net == 99
 coordinate = dataframe[criterioMCC & criterioMinsamples][['lat', 'lon']].values
+coordinateTim = dataframe[criterioMCC & criterioMinsamples & criterioTim][['lat', 'lon']].values
+coordinateWind = dataframe[criterioMCC & criterioMinsamples & criterioWind][['lat', 'lon']].values
+coordinateVoda = dataframe[criterioMCC & criterioMinsamples & criterioVoda][['lat', 'lon']].values
+coordinate3 = dataframe[criterioMCC & criterioMinsamples & criterio3][['lat', 'lon']].values
 #print coordinate
 
 distanza = []
 distanza = map(geodesicDistance, coordinate)
-print len(distanza)
+distanzaTim = []
+distanzaTim = map(geodesicDistance, coordinateTim)
+distanzaWind = []
+distanzaWind = map(geodesicDistance, coordinateWind)
+distanzaVoda = []
+distanzaVoda = map(geodesicDistance, coordinateVoda)
+distanza3 = []
+distanza3 = map(geodesicDistance, coordinate3)
+#print len(distanza)
 
 #da approfondire
 #italydoitcleaner['distanze'] = italydoitcleaner[['lat', 'lon']].map(lambda x: geodesicDistance())
+
 italydoitcleaner['distanze'] = distanza
-italydoitcleaner
 criterioRaccordo = italydoitcleaner.distanze < raggiomedio
 romacellid = italydoitcleaner[criterioRaccordo]
 romacellid = romacellid.reset_index()
 romacellid.to_csv("../data/roma_towers.csv")
+
+#antenneTim = italydoitcleaner[criterioTim]
+#antenneTim = antenneTim.reset_index()
+#antenneTim['distanze'] = distanza
+#romacellid = antenneTim[criterioRaccordo]
+#romacellid = romacellid.reset_index()
+#romacellid.to_csv("../data/tim_towers.csv")
 
 #distanza = map(geodesicDistance, cell)
 #def isInRome(point):
@@ -119,8 +160,10 @@ romacellid.to_csv("../data/roma_towers.csv")
 
 # <markdowncell>
 
-# Domande su iterazione su panda dataframe e efficienza, un tizio dice che la funzione iterrows è molto poco efficiente e sarebbe molto meglio usare un numpy array. Forse esistono funzioni più efficienti.
-# http://stackoverflow.com/questions/10729210/iterating-row-by-row-through-a-pandas-dataframe
+# Domande su iterazione su panda dataframe e efficienza, un tizio dice che la funzione iterrows è molto poco efficiente e sarebbe molto meglio usare un numpy array. Forse esistono funzioni più efficienti. 
+# 
+# http://stackoverflow.com/questions/10729210/iterating-row-by-row-through-a-pandas-dataframe  
+# 
 # http://stackoverflow.com/questions/7837722/what-is-the-most-efficient-way-to-loop-through-dataframes-with-pandas
 
 # <codecell>
