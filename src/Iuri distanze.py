@@ -403,6 +403,20 @@ def degreeDistribution(gradi):
 
 distribuzione = degreeDistribution(grado)
 
+# <markdowncell>
+
+# TODO
+#  *log binning
+#  soglia percolativa:
+#  *fare grafico dimensioni giant cluster in funzione di rimozione di nodi
+#   *in modo casuale
+#   *cominciando da i nodi più connessi
+#   
+#   Leggere barabasi, jeong 2000 su robustezza reti e altri (nella bibliografia lezione)
+#   
+#   Tesina: parte iniziale su problema robustezza reti, poi test su reti di antenne in roma (rete scale free ma che deve avere una certa robustezza)
+#   veder compagnie separae
+
 # <codecell>
 
 
