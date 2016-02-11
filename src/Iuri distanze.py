@@ -147,19 +147,6 @@ romacellid.to_csv("../data/roma_towers.csv")
 
 # <markdowncell>
 
-# ##TODO:  
-# * Prendere array coordinate                                                           ✔
-# * fare array distanze                                                                  ✔
-# * mettere colonna distanze in dataframe  ✔
-# * selezionare righe con variabile compresa entro raggiomedio                           ✔  
-# * fare un nuovo dataframe  ✔
-# * escludere tutti i nodi con 1 sample solo ✔
-# * fare P(k)
-# 
-# ✔✔ggwpbb
-
-# <markdowncell>
-
 # Domande su iterazione su panda dataframe e efficienza, un tizio dice che la funzione iterrows è molto poco efficiente e sarebbe molto meglio usare un numpy array. Forse esistono funzioni più efficienti. 
 # 
 # http://stackoverflow.com/questions/10729210/iterating-row-by-row-through-a-pandas-dataframe  
@@ -405,14 +392,34 @@ distribuzione = degreeDistribution(grado)
 
 # <markdowncell>
 
-# TODO
-#  *log binning
-#  soglia percolativa:
-#  *fare grafico dimensioni giant cluster in funzione di rimozione di nodi
-#   *in modo casuale
-#   *cominciando da i nodi più connessi
+# ##TODO:  
+# * Prendere array coordinate                                                           ✔
+# * fare array distanze                                                                  ✔
+# * mettere colonna distanze in dataframe  ✔
+# * selezionare righe con variabile compresa entro raggiomedio                           ✔  
+# * fare un nuovo dataframe  ✔
+# * escludere tutti i nodi con 1 sample solo ✔
+# * fare P(k) ✔
+# 
+# ##TODO:
+# * log binning 
+# * FARE GRAFICI MEGLIO 
+# * Soglia percolativa: fare grafico dimensioni giant cluster in funzione di rimozione di nodi
+# * in modo casuale
+# * cominciando da i nodi più connessi  
+# NB giant cluster è cluster che scala con N. E.g., se il giant cluster è composto da N/10 della rete, se raddoppio la rete o la dimezzo deve rimanere composto da 1/10 del totale dei nodi della rete. Idem se è N/100 o N/0.9
+# 
+#   Leggere (materiale lezione su percolazione-attacchi-epidemie):  
+#   http://www.nature.com/nature/journal/v406/n6794/full/406378a0.html  
+#   http://arxiv.org/pdf/cond-mat/0010317.pdf  
+#   http://arxiv.org/pdf/cond-mat/0007048.pdf  
+#   http://arxiv.org/pdf/cond-mat/0010251.pdf  
 #   
-#   Leggere barabasi, jeong 2000 su robustezza reti e altri (nella bibliografia lezione)
+#   Altro materiale forse utile:
+#   http://arxiv.org/pdf/cond-mat/9910332.pdf  
+#   http://arxiv.org/pdf/cond-mat/9907068.pdf  
+#   http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.71.8276&rep=rep1&type=pdf  
+#   
 #   
 #   Tesina: parte iniziale su problema robustezza reti, poi test su reti di antenne in roma (rete scale free ma che deve avere una certa robustezza)
 #   veder compagnie separae
