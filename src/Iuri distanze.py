@@ -193,7 +193,7 @@ for aziende in gestore:
     #%time adiacenzaGeo = matriceSupGeodetic(coordinate, raggio)
     %time adiacenzaEuclid = matriceSupEuclid(coordinate, raggio)
     
-    numpy.savetxt(("/home/protoss/Documenti/SistemiComplessi/data/AdiacenzaEuclidea_{0}.csv".format(aziende)),adiacenzaEuclid, fmt='%d',delimiter=',',newline='\n')
+    numpy.savetxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(aziende)),adiacenzaEuclid, fmt='%d',delimiter=',',newline='\n')
 
 # <markdowncell>
 
@@ -201,23 +201,23 @@ for aziende in gestore:
 
 # <codecell>
 
-adiacenzaRoma = numpy.genfromtxt("/home/protoss/Documenti/SistemiComplessi/data/AdiacenzaEuclidea_Roma.csv",delimiter=',',dtype='int')
+adiacenzaRoma = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Roma.csv",delimiter=',',dtype='int')
 grafoRoma = networkx.Graph(adiacenzaRoma)
 gradoRoma = grafoRoma.degree().values()
 
-adiacenzatim = numpy.genfromtxt("/home/protoss/Documenti/SistemiComplessi/data/AdiacenzaEuclidea_Tim.csv",delimiter=',',dtype='int')
+adiacenzatim = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tim.csv",delimiter=',',dtype='int')
 grafoTim = networkx.Graph(adiacenzatim)
 gradoTim = grafoTim.degree().values()
 
-adiacenzavoda = numpy.genfromtxt("/home/protoss/Documenti/SistemiComplessi/data/AdiacenzaEuclidea_Vodafon.csv",delimiter=',',dtype='int')
+adiacenzavoda = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Vodafon.csv",delimiter=',',dtype='int')
 grafoVoda = networkx.Graph(adiacenzavoda)
 gradoVoda = grafoVoda.degree().values()
 
-adiacenzawind = numpy.genfromtxt("/home/protoss/Documenti/SistemiComplessi/data/AdiacenzaEuclidea_Wind.csv",delimiter=',',dtype='int')
+adiacenzawind = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Wind.csv",delimiter=',',dtype='int')
 grafoWind = networkx.Graph(adiacenzawind)
 gradoWind = grafoWind.degree().values()
 
-adiacenzatre = numpy.genfromtxt("/home/protoss/Documenti/SistemiComplessi/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
+adiacenzatre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
 grafoTre = networkx.Graph(adiacenzatre)
 gradoTre = grafoTre.degree().values()
 
