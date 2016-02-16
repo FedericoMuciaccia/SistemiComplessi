@@ -86,8 +86,8 @@ criterioMinsamples = dataframe.samples > 1
 italydoitcleaner = dataframe[criterioMCC & criterioMinsamples]
 italydoitcleaner
 
-italydoitcleaner = italydoitcleaner.reset_index()
-italydoitcleaner.drop(italydoitcleaner.columns[[0,1,2,4,6,11,12,13,14]], axis = 1, inplace=True)
+italydoitcleaner = italydoitcleaner.reset_index(drop=True)
+italydoitcleaner.drop(italydoitcleaner.columns[[0, 1, 3, 5, 10, 11, 12, 13]], axis = 1, inplace=True)
 #italydoitcleaner
 
 # <markdowncell>
@@ -120,10 +120,9 @@ distanza = map(geodesicDistance, coordinate)
 italydoitcleaner['distanze'] = distanza
 criterioRaccordo = italydoitcleaner.distanze < raggiomedioEuclid
 romaCell = italydoitcleaner[criterioRaccordo]
-romaCell = romaCell.reset_index()
-romaCell.drop(romaCell.columns[[0]], axis = 1, inplace=True)
+romaCell = romaCell.reset_index(drop=True)
 #romacellid
-romaCell.to_csv("../data/roma_towers.csv")
+romaCell.to_csv("../data/Roma_towers.csv")
 
 criterioTim = romaCell.net == 1
 criterioWind = romaCell.net == 88
@@ -132,24 +131,20 @@ criterioTre = romaCell.net == 99
 
 
 timCell = romaCell[criterioTim]
-timCell = timCell.reset_index()
-timCell.drop(timCell.columns[[0]], axis = 1, inplace=True)
-timCell.to_csv("../data/tim_towers.csv")
+timCell = timCell.reset_index(drop=True)
+timCell.to_csv("../data/Tim_towers.csv")
 
 windCell = romaCell[criterioWind]
-windCell = windCell.reset_index()
-windCell.drop(windCell.columns[[0]], axis = 1, inplace=True)
-windCell.to_csv("../data/wind_towers.csv")
+windCell = windCell.reset_index(drop=True)
+windCell.to_csv("../data/Wind_towers.csv")
 
 vodaCell = romaCell[criterioVoda]
-vodaCell = vodaCell.reset_index()
-vodaCell.drop(vodaCell.columns[[0]], axis = 1, inplace=True)
-vodaCell.to_csv("../data/voda_towers.csv")
+vodaCell = vodaCell.reset_index(drop=True)
+vodaCell.to_csv("../data/Vodafon_towers.csv")
 
 treCell = romaCell[criterioTre]
-treCell = treCell.reset_index()
-treCell.drop(treCell.columns[[0]], axis = 1, inplace=True)
-treCell.to_csv("../data/tre_towers.csv")
+treCell = treCell.reset_index(True)
+treCell.to_csv("../data/Tre_towers.csv")
 
 # <markdowncell>
 
@@ -187,9 +182,9 @@ def matriceSupGeodetic(datiCoordinate, datiRaggi):
 
 
 #dataframe = pandas.read_csv("../data/roma_towers.csv")
-compagnie = ["roma", "tim", "wind", "voda", "tre"]
-for gestore in compagnie:
-    dataframe = pandas.read_csv("../data/{0}_towers.csv".format(gestore))
+gestore = ["Roma", "Tim", "Vodafon", "Wind", "Tre"]
+for aziende in gestore:
+    dataframe = pandas.read_csv("../data/{0}_towers.csv".format(aziende))
     coordinate = dataframe[['lat', 'lon']].values
     raggio = dataframe['range'].values
 
@@ -198,14 +193,180 @@ for gestore in compagnie:
     #%time adiacenzaGeo = matriceSupGeodetic(coordinate, raggio)
     %time adiacenzaEuclid = matriceSupEuclid(coordinate, raggio)
     
-    numpy.savetxt(("/home/protoss/Documenti/Siscomp_datas/AdiacenzaEuclidea_{0}.csv".format(gestore)),adiacenzaEuclid, fmt='%d',delimiter=',',newline='\n')
+    numpy.savetxt(("/home/protoss/Documenti/SistemiComplessi/data/AdiacenzaEuclidea_{0}.csv".format(aziende)),adiacenzaEuclid, fmt='%d',delimiter=',',newline='\n')
+
+# <markdowncell>
+
+# ##Faccio disegno grafo e grafico distr grado
+
+# <codecell>
+
+adiacenzaRoma = numpy.genfromtxt("/home/protoss/Documenti/SistemiComplessi/data/AdiacenzaEuclidea_Roma.csv",delimiter=',',dtype='int')
+grafoRoma = networkx.Graph(adiacenzaRoma)
+gradoRoma = grafoRoma.degree().values()
+
+adiacenzatim = numpy.genfromtxt("/home/protoss/Documenti/SistemiComplessi/data/AdiacenzaEuclidea_Tim.csv",delimiter=',',dtype='int')
+grafoTim = networkx.Graph(adiacenzatim)
+gradoTim = grafoTim.degree().values()
+
+adiacenzavoda = numpy.genfromtxt("/home/protoss/Documenti/SistemiComplessi/data/AdiacenzaEuclidea_Vodafon.csv",delimiter=',',dtype='int')
+grafoVoda = networkx.Graph(adiacenzavoda)
+gradoVoda = grafoVoda.degree().values()
+
+adiacenzawind = numpy.genfromtxt("/home/protoss/Documenti/SistemiComplessi/data/AdiacenzaEuclidea_Wind.csv",delimiter=',',dtype='int')
+grafoWind = networkx.Graph(adiacenzawind)
+gradoWind = grafoWind.degree().values()
+
+adiacenzatre = numpy.genfromtxt("/home/protoss/Documenti/SistemiComplessi/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
+grafoTre = networkx.Graph(adiacenzatre)
+gradoTre = grafoTre.degree().values()
+
+# <codecell>
+
+%matplotlib inline
+pyplot.figure(figsize=(16,9))
+pyplot.subplot(222)
+networkx.draw_random(grafoTim)
+
+pyplot.subplot(221)
+networkx.draw_random(grafoVoda)
+
+pyplot.subplot(223)
+networkx.draw_random(grafoWind)
+
+pyplot.subplot(224)
+networkx.draw_random(grafoTre)
+
+pyplot.show()
+
+# <codecell>
+
+colori = ['#4d4d4d', '#004184','#ff3300','#ff8000','#018ECC']
+def degreeDistribution(gradi, azienda, colore):
+    pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore)
+    pyplot.title('Degree distribution')
+    pyplot.xlabel("Degree")
+    pyplot.ylabel("Frequency")
+
+def degreeDistributionLog(gradi, azienda, colore):
+    distribuzioneRange = pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore)
+    pyplot.title('Degree distribution')
+    pyplot.xlabel("Degree")
+    pyplot.ylabel("Frequency")
+
+    pyplot.gca().set_xscale("log")
+    pyplot.gca().set_yscale("log")
+#    pyplot.ylim(1,100)
+    
+pyplot.figure(figsize=(16,9))
+distribuzione = degreeDistributionLog(gradoRoma, gestore[0], colori[0])
+distribuzione = degreeDistributionLog(gradoTim, gestore[1], colori[1])
+distribuzione = degreeDistributionLog(gradoVoda, gestore[2], colori[2])
+distribuzione = degreeDistributionLog(gradoWind, gestore[3], colori[3])
+distribuzione = degreeDistributionLog(gradoTre, gestore[4], colori[4])
+pyplot.xlim(1,1000)
+pyplot.legend()
+pyplot.show()
+
+pyplot.figure(figsize=(16,9))
+distribuzione = degreeDistribution(gradoRoma, gestore[0], colori[0])
+distribuzione = degreeDistribution(gradoTim, gestore[1], colori[1])
+distribuzione = degreeDistribution(gradoVoda, gestore[2], colori[2])
+distribuzione = degreeDistribution(gradoWind, gestore[3], colori[3])
+distribuzione = degreeDistribution(gradoTre, gestore[4], colori[4])
+pyplot.xlim(1,200)
+pyplot.legend()
+pyplot.show()
+
+# <codecell>
+
+pyplot.figure(figsize=(16,9))
+for azienda, colore in zip(gestore,colori):
+    dataframe = pandas.read_csv("../data/{0}_towers.csv".format(azienda))
+    raggio = dataframe['range'].values
+    distribuzione = degreeDistribution(raggio, azienda, colore)
+#    print dataframe[dataframe.range == 0]
+    pyplot.xlim(0,100)
+    pyplot.legend()
+ #   pyplot.show()
+
+# <codecell>
+
+#compagnie = ["roma", "tim", "wind", "voda", "tre"]
+compagnie = ["tim"]
+seaborn.set_style("whitegreed")
+for gestore in compagnie:
+    adiacenzaEuclidea = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/AdiacenzaEuclidea_{0}.csv".format(gestore)),delimiter=',',dtype='int')
+    grafoRoma = networkx.Graph(adiacenzaEuclidea)
+    grado = grafoRoma.degree().values()
+    
+#    distribuzione = degreeDistributionLog(grado)
+#    distribuzione = degreeDistribution(grado)
+    seaborn.kdeplot(grado,bw=0.5)
+    
+#pyplot.show()
+
+#distribuzione = degreeDistribution(grado)
+#pyplot.show()
+
+# <markdowncell>
+
+# NB. num antenne  
+#    * TIM - 1550  
+#    * Vodafone - 1531  
+#    * Wind - 2175   
+#    * 3 - 1315  
+#    
+# Tot antenne: 6571  
+
+# <markdowncell>
+
+# ##TODO:  
+# * Prendere array coordinate                                                           ✔
+# * fare array distanze                                                                  ✔
+# * mettere colonna distanze in dataframe  ✔
+# * selezionare righe con variabile compresa entro raggiomedio                           ✔  
+# * fare un nuovo dataframe  ✔
+# * escludere tutti i nodi con 1 sample solo ✔
+# * fare P(k) ✔
+# 
+# ##TODO:
+# * log binning  ✔ (lo sono già)
+# * FARE GRAFICI MEGLIO 
+# * Soglia percolativa: fare grafico dimensioni giant cluster in funzione di rimozione di nodi
+# * in modo casuale
+# * cominciando da i nodi più connessi  
+# NB giant cluster è cluster che scala con N. E.g., se il giant cluster è composto da N/10 della rete, se raddoppio la rete o la dimezzo deve rimanere composto da 1/10 del totale dei nodi della rete. Idem se è N/100 o N/0.9
+# 
+#   Leggere (materiale lezione su percolazione-attacchi-epidemie):  
+#   http://www.nature.com/nature/journal/v406/n6794/pdf/406378a0.pdf  
+#   http://arxiv.org/pdf/cond-mat/0010317.pdf  
+#   http://arxiv.org/pdf/cond-mat/0007048.pdf  
+#   http://arxiv.org/pdf/cond-mat/0010251.pdf  
+#   
+#   Altro materiale forse utile:
+#   http://arxiv.org/pdf/cond-mat/9910332.pdf  
+#   http://arxiv.org/pdf/cond-mat/9907068.pdf  
+#   http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.71.8276&rep=rep1&type=pdf  
+#   
+#   
+#   Tesina: parte iniziale su problema robustezza reti, poi test su reti di antenne in roma (rete non scale free ma che deve avere una certa robustezza)
+#   veder compagnie separae
+
+# <markdowncell>
+
+# Il primo tentativo è stato di fare la matrice di adiacenza a forza bruta. Con un campione di soli 50 nodi ci metteva pochi microsecondi, quindi abbiamo provato a fare la matrice di adiacenza delle 7000 antenne entro il raccordo anulare, notando che la compilazione durava tanto, facendo le dovute proporzioni abbiamo preventivato 2,5 ore di tempo di calcolo. La prima cosa che abbiamo sistemato è stato ovviamente fare un ciclo che calcolasse soltanto la metà superiore della matrice, dimezzando il tempo di calcolo. 
+# 
+# La prima cosa che abbiamo pensato di fare è stato di diagonalizzare a blocchi la matrice, o fare un ciclo di bassissimo livello che mettesse 0 a tutti gli elementi relativi alle antenne con $\Delta$Latitudine e/o $\Delta$Longitudine maggiori del range massimo del campione di dati. Il problema avuto è che il range delle antenne è tendenzialmente grande, con alcune che arrivano a 10km (con raggioRoma 11km)(e anche tanti samples), quindi non c'era modo di ridurre i calcoli. 
+# 
+# L'unica altra idea che abbiamo avuto è stata di non fare il calcolo complicato con la distanza sul geoide con il metodo vincenty. Primo passo è stato usare il metodo con great circles, l'altro è stato di considerare la porzione di Roma presa come un cerchio piano, calcolando quindi la distanza euclidea tra coordinate geografiche e convertendola in metri. E ci mette MOLTO meno tempo $\sim$10 volte in meno. Con un 
+# preventivo quindi di 10 minuti di tempo di calcolo invece di 1 ora e mezza.
+# 
+# TODO vedere parallelaizazione
 
 # <markdowncell>
 
 # ## Varie note su tempi di calcolo
-
-# <markdowncell>
-
 # 
 # ###Prova preliminare con 50 dati
 # con vincenti 
@@ -320,152 +481,6 @@ pyplot.legend(loc = 2)
 # ###Euclid dist
 # Tempo previsto di calcolo con $\sim$ 7000 dati: $\sim$ 80 sec $\sim$ 1,3 minuti
 
-# <markdowncell>
-
-# ##Faccio disegno grafo e grafico distr grado
-
 # <codecell>
 
-adiacenzaEuclidea = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/AdiacenzaEuclidea_tre.csv",delimiter=',',dtype='int')
-grafoRoma = networkx.Graph(adiacenzaEuclidea)
-
-pyplot.subplot(221)
-networkx.draw_random(grafoRoma)
-
-pyplot.subplot(222)
-networkx.draw_random(grafoRoma)
-
-pyplot.subplot(223)
-networkx.draw_random(grafoRoma)
-
-pyplot.subplot(224)
-networkx.draw_random(grafoRoma)
-
-pyplot.show()
-
-# <codecell>
-
-%matplotlib inline
-
-def degreeDistribution(gradi):
-    pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step')
-    pyplot.title('Degree distribution')
-    pyplot.xlabel("Degree")
-    pyplot.ylabel("Frequency")
-    # pyplot.legend()
-    # return
-    # histtype='bar', alpha=0.5
-    # bins=max(grado)-min(grado)
-
-def degreeDistributionLog(gradi):
-    pyplot.hist(numpy.log10(gradi), bins=max(gradi)-min(gradi), histtype='step', log=True)
-    pyplot.title('Degree distribution')
-    pyplot.xlabel("log Degree")
-    pyplot.ylabel("Frequency (log)")
-    # pyplot.legend()
-    # return
-    # histtype='bar', alpha=0.5
-    # bins=max(grado)-min(grado)
-
-#TODO METTERE IN BOX SOPRA TUTTI I CALCOLI DELLE DISTRIBUZIONI DEL GRADO, CHE QUINDI DEVONO PORTARE IN UN SOLO FOR A DEFINIRE 5 ARRAYS
-#ROMA + 4 COMPAGNIE
-adiacenzaEuclidea = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/AdiacenzaEuclidea_roma.csv",delimiter=',',dtype='int')
-grafoRoma = networkx.Graph(adiacenzaEuclidea)
-grado = grafoRoma.degree().values()
-distribuzione = degreeDistributionLog(grado)
-pyplot.show()
-distribuzione = degreeDistribution(grado)
-pyplot.show()
-    
-compagnie = ["tim", "wind", "voda", "tre"]
-for gestore in compagnie:
-    adiacenzaEuclidea = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/AdiacenzaEuclidea_{0}.csv".format(gestore)),delimiter=',',dtype='int')
-    grafoRoma = networkx.Graph(adiacenzaEuclidea)
-    grado = grafoRoma.degree().values()
-    distribuzione = degreeDistributionLog(grado)
-    
-pyplot.show()    
-    
-for gestore in compagnie:
-    adiacenzaEuclidea = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/AdiacenzaEuclidea_{0}.csv".format(gestore)),delimiter=',',dtype='int')
-    grafoRoma = networkx.Graph(adiacenzaEuclidea)
-    grado = grafoRoma.degree().values()
-    distribuzione = degreeDistribution(grado)
-    
-pyplot.show()
-    #distribuzione = degreeDistribution(grado)
-
-# <codecell>
-
-#compagnie = ["roma", "tim", "wind", "voda", "tre"]
-compagnie = ["tim"]
-seaborn.set_style("whitegreed")
-for gestore in compagnie:
-    adiacenzaEuclidea = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/AdiacenzaEuclidea_{0}.csv".format(gestore)),delimiter=',',dtype='int')
-    grafoRoma = networkx.Graph(adiacenzaEuclidea)
-    grado = grafoRoma.degree().values()
-
-#    distribuzione = degreeDistributionLog(grado)
-#    distribuzione = degreeDistribution(grado)
-    seaborn.kdeplot(grado,bw=0.5)
-    
-#pyplot.show()
-
-#distribuzione = degreeDistribution(grado)
-#pyplot.show()
-
-# <markdowncell>
-
-# NB. num antenne  
-#    * TIM - 1550  
-#    * Vodafone - 1531  
-#    * Wind - 2175   
-#    * 3 - 1315  
-#    
-# Tot antenne: 6571  
-
-# <markdowncell>
-
-# ##TODO:  
-# * Prendere array coordinate                                                           ✔
-# * fare array distanze                                                                  ✔
-# * mettere colonna distanze in dataframe  ✔
-# * selezionare righe con variabile compresa entro raggiomedio                           ✔  
-# * fare un nuovo dataframe  ✔
-# * escludere tutti i nodi con 1 sample solo ✔
-# * fare P(k) ✔
-# 
-# ##TODO:
-# * log binning  ✔ (lo sono già)
-# * FARE GRAFICI MEGLIO 
-# * Soglia percolativa: fare grafico dimensioni giant cluster in funzione di rimozione di nodi
-# * in modo casuale
-# * cominciando da i nodi più connessi  
-# NB giant cluster è cluster che scala con N. E.g., se il giant cluster è composto da N/10 della rete, se raddoppio la rete o la dimezzo deve rimanere composto da 1/10 del totale dei nodi della rete. Idem se è N/100 o N/0.9
-# 
-#   Leggere (materiale lezione su percolazione-attacchi-epidemie):  
-#   http://www.nature.com/nature/journal/v406/n6794/pdf/406378a0.pdf  
-#   http://arxiv.org/pdf/cond-mat/0010317.pdf  
-#   http://arxiv.org/pdf/cond-mat/0007048.pdf  
-#   http://arxiv.org/pdf/cond-mat/0010251.pdf  
-#   
-#   Altro materiale forse utile:
-#   http://arxiv.org/pdf/cond-mat/9910332.pdf  
-#   http://arxiv.org/pdf/cond-mat/9907068.pdf  
-#   http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.71.8276&rep=rep1&type=pdf  
-#   
-#   
-#   Tesina: parte iniziale su problema robustezza reti, poi test su reti di antenne in roma (rete non scale free ma che deve avere una certa robustezza)
-#   veder compagnie separae
-
-# <markdowncell>
-
-# Il primo tentativo è stato di fare la matrice di adiacenza a forza bruta. Con un campione di soli 50 nodi ci metteva pochi microsecondi, quindi abbiamo provato a fare la matrice di adiacenza delle 7000 antenne entro il raccordo anulare, notando che la compilazione durava tanto, facendo le dovute proporzioni abbiamo preventivato 2,5 ore di tempo di calcolo. La prima cosa che abbiamo sistemato è stato ovviamente fare un ciclo che calcolasse soltanto la metà superiore della matrice, dimezzando il tempo di calcolo. 
-# 
-# La prima cosa che abbiamo pensato di fare è stato di diagonalizzare a blocchi la matrice, o fare un ciclo di bassissimo livello che mettesse 0 a tutti gli elementi relativi alle antenne con $\Delta$Latitudine e/o $\Delta$Longitudine maggiori del range massimo del campione di dati. Il problema avuto è che il range delle antenne è tendenzialmente grande, con alcune che arrivano a 10km (con raggioRoma 11km)(e anche tanti samples), quindi non c'era modo di ridurre i calcoli. 
-# 
-# L'unica altra idea che abbiamo avuto è stata di non fare il calcolo complicato con la distanza sul geoide con il metodo vincenty. Primo passo è stato usare il metodo con great circles, l'altro è stato di considerare la porzione di Roma presa come un cerchio piano, calcolando quindi la distanza euclidea tra coordinate geografiche e convertendola in metri. E ci mette MOLTO meno tempo $\sim$10 volte in meno. Con un 
-# preventivo quindi di 10 minuti di tempo di calcolo invece di 1 ora e mezza.
-# 
-# TODO vedere parallelaizazione
 
