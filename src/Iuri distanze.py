@@ -204,22 +204,27 @@ for aziende in gestore:
 adiacenzaRoma = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Roma.csv",delimiter=',',dtype='int')
 grafoRoma = networkx.Graph(adiacenzaRoma)
 gradoRoma = grafoRoma.degree().values()
+numpy.savetxt("../data/DistrGrado_Roma",gradoRoma,fmt='%d',newline='\n')
 
 adiacenzatim = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tim.csv",delimiter=',',dtype='int')
 grafoTim = networkx.Graph(adiacenzatim)
 gradoTim = grafoTim.degree().values()
+numpy.savetxt("../data/DistrGrado_Tim",gradoTim,fmt='%d',newline='\n')
 
 adiacenzavoda = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Vodafon.csv",delimiter=',',dtype='int')
 grafoVoda = networkx.Graph(adiacenzavoda)
 gradoVoda = grafoVoda.degree().values()
+numpy.savetxt("../data/DistrGrado_Vodafon",gradoVoda,fmt='%d',newline='\n')
 
 adiacenzawind = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Wind.csv",delimiter=',',dtype='int')
 grafoWind = networkx.Graph(adiacenzawind)
 gradoWind = grafoWind.degree().values()
+numpy.savetxt("../data/DistrGrado_Wind",gradoWind,fmt='%d',newline='\n')
 
 adiacenzatre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
 grafoTre = networkx.Graph(adiacenzatre)
 gradoTre = grafoTre.degree().values()
+numpy.savetxt("../data/DistrGrado_Tre",gradoTre,fmt='%d',newline='\n')
 
 # <codecell>
 
@@ -241,6 +246,8 @@ pyplot.show()
 
 # <codecell>
 
+%matplotlib inline
+gestore = ["Roma", "Tim", "Vodafon", "Wind", "Tre"]
 colori = ['#4d4d4d', '#004184','#ff3300','#ff8000','#018ECC']
 def degreeDistribution(gradi, azienda, colore):
     pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore)
@@ -264,7 +271,7 @@ distribuzione = degreeDistributionLog(gradoTim, gestore[1], colori[1])
 distribuzione = degreeDistributionLog(gradoVoda, gestore[2], colori[2])
 distribuzione = degreeDistributionLog(gradoWind, gestore[3], colori[3])
 distribuzione = degreeDistributionLog(gradoTre, gestore[4], colori[4])
-pyplot.xlim(1,1000)
+#pyplot.xlim(1,1000)
 pyplot.legend()
 pyplot.show()
 
@@ -274,7 +281,7 @@ distribuzione = degreeDistribution(gradoTim, gestore[1], colori[1])
 distribuzione = degreeDistribution(gradoVoda, gestore[2], colori[2])
 distribuzione = degreeDistribution(gradoWind, gestore[3], colori[3])
 distribuzione = degreeDistribution(gradoTre, gestore[4], colori[4])
-pyplot.xlim(1,200)
+#pyplot.xlim(1,200)
 pyplot.legend()
 pyplot.show()
 
@@ -286,9 +293,19 @@ for azienda, colore in zip(gestore,colori):
     raggio = dataframe['range'].values
     distribuzione = degreeDistribution(raggio, azienda, colore)
 #    print dataframe[dataframe.range == 0]
-    pyplot.xlim(0,100)
+#    pyplot.xlim(0,100)
     pyplot.legend()
- #   pyplot.show()
+pyplot.show()
+    
+pyplot.figure(figsize=(16,9))
+for azienda, colore in zip(gestore,colori):
+    dataframe = pandas.read_csv("../data/{0}_towers.csv".format(azienda))
+    raggio = dataframe['range'].values
+    distribuzione = degreeDistributionLog(raggio, azienda, colore)
+#    print dataframe[dataframe.range == 0]
+#    pyplot.xlim(500,1000)
+    pyplot.legend()
+pyplot.show()
 
 # <codecell>
 
@@ -332,7 +349,9 @@ for gestore in compagnie:
 # 
 # ##TODO:
 # * log binning  ✔ (lo sono già)
-# * FARE GRAFICI MEGLIO 
+# * FARE GRAFICI MEGLIO ✔
+# * Fare grafici un po' meglio
+# * Fare fit con curva che picca a v medio e poi esponenziale, tipo andamento legge di Planck
 # * Soglia percolativa: fare grafico dimensioni giant cluster in funzione di rimozione di nodi
 # * in modo casuale
 # * cominciando da i nodi più connessi  
