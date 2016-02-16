@@ -32,6 +32,12 @@
 [guide](http://matplotlib.org/users/index.html)
 [external toolkits](http://matplotlib.org/mpl_toolkits/index.html)
 
+## Virtualenv
+[user guide](https://virtualenv.readthedocs.org/en/latest/userguide.html)
+
+## Gmaps
+[homepage](https://pypi.python.org/pypi/gmaps)
+
 
 
 altri link vari:
@@ -96,8 +102,14 @@ https://www.getdatajoy.com/examples/python-data-analysis/read---write-csv-file-w
 http://docs.scipy.org/doc/numpy-1.10.0/reference/generated/numpy.savetxt.html
 
 
-
-
+geospatial plotting:
+matplotlib-basemap
+cartopy
+geopy
+geopandas
+OpenStreetMaps API (osmapi)
+gmplot
+gmaps
 
 http://www.damian.oquanta.info/posts/48-themes-for-your-ipython-notebook.html
 https://github.com/ipython/ipython/wiki/Cookbook:-Styling-Notebook
@@ -112,15 +124,14 @@ http://nbviewer.jupyter.org/github/barbagroup/CFDPython/blob/master/lessons/18_B
 http://nbviewer.jupyter.org/gist/jackparmer/8d7e979bc4cec23db057
 
 
-
-
-
-
-
-
-
-
-
+http://tonysyu.github.io/mpltools/auto_examples/style/plot_ggplot.html
+https://www.huyng.com/posts/sane-color-scheme-for-matplotlib
+https://torchbox.com/blog/simple-maps-wagtail-google-and-geopy/
+https://github.com/vgm64/gmplot
+http://pydoc.net/Python/gmplot/1.0.4/gmplot.gmplot/
+https://www.wakari.io/sharing/bundle/krmckelv/How%20to%20Python%20Like%20A%20Boss?has_login=False
+https://developers.google.com/maps/documentation/javascript/examples/layer-kml?csw=1
+https://github.com/googlemaps/google-maps-services-python
 
 
 

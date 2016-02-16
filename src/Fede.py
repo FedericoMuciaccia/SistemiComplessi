@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
-# <nbformat>3.0</nbformat>
 
-# <markdowncell>
+# coding: utf-8
 
 # ## importazione del dataframe dai dati di Mozilla
 # 
@@ -168,8 +166,7 @@
 # IP version 6 has the chance to improve this situation, as the need for private carrier networks and network address translation decreases. But so far this hasn’t made any measurable impact and most traffic is still restricted to IP version 4.
 # 
 # 
-
-# <markdowncell>
+# 
 
 # The data exchange format was created in collaboration with the OpenCellID project.
 # 
@@ -257,43 +254,48 @@
 # > This field is only used by the OpenCellID project and historically has been used as a hint towards the quality of the position estimate.
 # 
 # 
+# 
 
-# <codecell>
+# In[3]:
 
 
-# dato che ci serve matplotlib useremo python 2
-
-# import numpy
+import numpy
 # %pylab
 
 import pandas
+
+# dato che ci serve matplotlib useremo python 2
+from matplotlib import pyplot
+
+get_ipython().magic(u'matplotlib inline')
+
+
+# In[1]:
+
 
 dataframe = pandas.read_csv("../data/cell_towers_diff-2016012100.csv")
 
 # coordinate = dataframe[['lon', 'lat']]
 
-# <codecell>
 
-from matplotlib import pyplot
-
-%matplotlib inline
+# In[2]:
 
 dataframe.plot(kind="scatter", x="lon", y="lat")
 
 # pyplot.show()
 
-# <markdowncell>
 
 # ## golocalizzazione
 
-# <codecell>
+# In[5]:
 
 import math
 
 def euclideanDistace(x,y):
     return sqrt(x**2 + y**2)
 
-# <codecell>
+
+# In[21]:
 
 import geopy # TODO AttributeError: 'module' object has no attribute 'distance'
 from geopy import distance, geocoders
@@ -331,14 +333,76 @@ def isInRome(place):
     raggioRaccordoAnulare = 10000 # in metri
     return geodesicDistance(place) <= raggioRaccordoAnulare
 
-# <codecell>
+
+# In[22]:
 
 name = "Sapienza, Roma"
 
 print(geodesicDistance(geolocate(name)))
 print(isInRome(geolocate(name)))
 
-# <codecell>
+
+# In[34]:
+
+colosseo = geopy.point.Point(41.890183, 12.492369)
+
+# TODO fare map con coordinate nel datagrame
+
+
+# In[9]:
+
+# import mpl_toolkits.basemap
+# from mpl_toolkits.basemap import Basemap
+
+# mappa = Basemap(projection='stere',lat_0=41.890183,lon_0=12.492369,resolution='l')
+# mappa.drawcoastlines(linewidth=0.25)
+# mappa.drawcountries(linewidth=0.25)
+# mappa.fillcontinents(color='coral',lake_color='aqua')
+# mappa.drawmapboundary(fill_color='aqua')
+# mappa.drawmeridians(numpy.arange(0,360,30))
+# mappa.drawparallels(numpy.arange(-90,90,30))
+
+# x, y = map(lons*180./np.pi, lats*180./np.pi)
+# cs = map.contour(x,y,wave+mean,15,linewidths=1.5)
+# plt.title('contour lines over filled continent background')
+# plt.show()
+
+
+
+# In[10]:
+
+# m = Basemap(width=100000,height=100000,projection='lcc',resolution=None,lat_0=41.890183,lon_0=12.492369)
+#m.drawcoastlines()
+#m.drawmapboundary(fill_color='aqua')
+#m.fillcontinents(color='coral',lake_color='aqua')
+# m.bluemarble()
+## m.shadedrelief()
+
+# resolution: c (crude), l (low), i (intermediate), h (high), f (full)
+
+# plt.show()
+
+
+# In[25]:
+
+import gmplot
+from gmplot import GoogleMapPlotter
+
+# gmap = gmplot.from_geocode("San Francisco")
+
+gmap = gmplot.GoogleMapPlotter(37.428, -122.145, 16)
+
+#gmap.plot(latitudes, longitudes, 'cornflowerblue', edge_width=10)
+#gmap.plot((41.890183, 41.891183), (12.492369, 12.493369), 'cornflowerblue', edge_width=10)
+#gmap.scatter(more_lats, more_lngs, '#3B0B39', size=40, marker=False)
+#gmap.scatter(marker_lats, marker_lngs, 'k', marker=True)
+#gmap.heatmap(heat_lats, heat_lngs)
+
+# gmap.draw("mymap.html")
+print a
+
+
+# In[6]:
 
 copertura = dataframe[["range"]]
 
@@ -346,7 +410,6 @@ dataframe.plot(kind="scatter", x="lon", y="lat", s=copertura/1000, alpha=0.5) # 
 
 # pyplot.show()
 
-# <markdowncell>
 
 # ## selezione dei dati
 # 
@@ -359,7 +422,7 @@ dataframe.plot(kind="scatter", x="lon", y="lat", s=copertura/1000, alpha=0.5) # 
 # samples > 1
 # ```
 
-# <codecell>
+# In[7]:
 
 isInItaly = dataframe.mcc == 222
 
@@ -375,13 +438,13 @@ italia = dataframe[isInItaly & isReliable]
 
 # TODO riordinare gli indici levando i buchi
 
-# <codecell>
+
+# In[8]:
 
 italia.plot(kind="scatter", x="lon", y="lat", label="Italy")
 
 # pyplot.show()
 
-# <markdowncell>
 
 # Iuri ha fatto la selezione su Roma e ha creato un nuovo file csv  
 # TODO integrare il suo codice
@@ -402,7 +465,7 @@ italia.plot(kind="scatter", x="lon", y="lat", label="Italy")
 # code_groups[['data']].transform(sum)
 # ```
 
-# <codecell>
+# In[9]:
 
 roma = pandas.read_csv("../data/roma_towers.csv")
 roma.plot(kind="scatter", x="lon", y="lat", label="Roma PRELIMINARE")
@@ -419,7 +482,6 @@ roma.plot(kind="scatter", x="lon", y="lat", label="Roma PRELIMINARE")
 # http://stackoverflow.com/questions/24525111/how-can-i-get-the-output-of-a-matplotlib-plot-as-an-svg
 # https://nickcharlton.net/posts/outputting-matplotlib-plots.html
 
-# <markdowncell>
 
 # ## TODO Capocci
 # 
@@ -431,8 +493,6 @@ roma.plot(kind="scatter", x="lon", y="lat", label="Roma PRELIMINARE")
 # <li><input type="checkbox">dati disaggregati per compagnia, canale radio, ecc</li>
 # <li><input type="checkbox">soglia percolativa</li>
 # </ul>
-
-# <markdowncell>
 
 # ## Creazione del grafo con NetworkX
 # 
@@ -446,8 +506,9 @@ roma.plot(kind="scatter", x="lon", y="lat", label="Roma PRELIMINARE")
 # * provare API grafi per fare grafo delle antenne
 # * aggiungere colonna database per distanze e coperture antenne
 # 
+# 
 
-# <codecell>
+# In[10]:
 
 import networkx
 
@@ -462,7 +523,8 @@ G.add_edge('c','e')
 G.add_edge('c','f')
 G.add_edge('a','d')
 
-# <codecell>
+
+# In[11]:
 
 print(G.nodes())
 print(G.edges())
@@ -474,21 +536,25 @@ networkx.draw_networkx_labels(G,position,font_size=15,font_family='sans-serif')
 
 position
 
-# <codecell>
+
+# In[12]:
 
 H=networkx.path_graph(10)
 networkx.draw_networkx_nodes(G,position,node_size=300)
 
-# <codecell>
+
+# In[13]:
 
 networkx.draw_random(G)
 
-# <codecell>
+
+# In[14]:
 
 dataframePiccolo = italia[0:10]
 dataframePiccolo["cell"]
 
-# <codecell>
+
+# In[15]:
 
 dataframePiccolo = roma[0:10]
 
@@ -498,14 +564,16 @@ grafoPiccolo.add_nodes_from(dataframePiccolo["cell"])
 # grafoPiccolo.add_nodes_from(dataframePiccolo.itertuples())
 networkx.draw(grafoPiccolo)
 
-# <codecell>
+
+# In[16]:
 
 import numpy
 matriceDiAdiacenza = numpy.zeros((10,10), dtype=int)
 # le matrici hanno indici che partono da zero
 matriceDiAdiacenza
 
-# <codecell>
+
+# In[17]:
 
 
 
@@ -560,7 +628,8 @@ print a
 #        if linkVettori(i, j):
 #            a[ridotto["index"],ridotto["index"]] = 1
 
-# <codecell>
+
+# In[18]:
 
 # A = numpy.reshape(numpy.random.random_integers(0,1,size=100),(10,10))
 # D = networkx.DiGraph(A)
@@ -578,7 +647,8 @@ F50 = networkx.Graph(a)
 # networkx.draw_networkx_labels(F50,position,font_size=15,font_family='sans-serif')
 networkx.draw_random(F50)
 
-# <codecell>
+
+# In[19]:
 
 # networkx.degree(F50)
 grado = F50.degree().values()
@@ -594,7 +664,6 @@ def degreeDistribution(gradi):
 
 distribuzione = degreeDistribution(grado)
 
-# <markdowncell>
 
 # ## Distribuzione dei raggi di copertura delle antenne
 # 
@@ -607,7 +676,7 @@ distribuzione = degreeDistribution(grado)
 # 
 # probabilmente questi saranno degli hub se la nostra rete risulterà essere complessa
 
-# <codecell>
+# In[20]:
 
 import numpy
 
@@ -642,7 +711,6 @@ massimoRange
 # TODO vedere se l'antenna di massimo range sta su Monte Mario
 # TODO fare mappa geografica delle antenne di range gigante per vedere dove sono messe
 
-# <markdowncell>
 
 # TODO fare lo scatterplot georeferenziato con  
 # 
@@ -653,13 +721,13 @@ massimoRange
 # http://scitools.org.uk/cartopy/docs/latest/gallery.html
 # 
 # oppure con le API o bindings per OperStreetMaps o Google Maps
-
-# <markdowncell>
+# 
 
 # ## multiprocessing e calcolo parallelo
 # 
+# 
 
-# <codecell>
+# In[21]:
 
 from joblib import Parallel, delayed  
 import multiprocessing
@@ -674,7 +742,8 @@ num_cores = multiprocessing.cpu_count()
 results = Parallel(n_jobs=num_cores)(delayed(processInput)(i) for i in inputs)
 results
 
-# <codecell>
+
+# In[22]:
 
 def matriceSuperiore(datiCoordinate, datiRaggi):
     a = numpy.zeros((datiRaggi.size,datiRaggi.size))
@@ -686,7 +755,8 @@ def matriceSuperiore(datiCoordinate, datiRaggi):
                 a[j+i+1,i] = 1
     return a
 
-# <codecell>
+
+# In[23]:
 
 # iterare su una matrice numpy
 
@@ -708,7 +778,8 @@ b = numpy.zeros((5,5), dtype=int)
 
 for i in numpy.nditer(b): print i
 
-# <codecell>
+
+# In[24]:
 
 #tri = numpy.zeros((10, 10))
 #dm = tri[numpy.triu_indices(10, 1)]
@@ -720,9 +791,13 @@ triangolo = matriceSimilSimmetrica(N)
 triangolo
 # listofzeros = [0] * n
 
-# <codecell>
+
+# In[29]:
 
 
-# <codecell>
+
+
+# In[ ]:
+
 
 
