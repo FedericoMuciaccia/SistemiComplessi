@@ -217,7 +217,6 @@ adiacenzaTre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/Adia
 %time grafoWind = networkx.Graph(adiacenzaWind)
 %time grafoTre = networkx.Graph(adiacenzaTre)
 
-
 # <codecell>
 
 gradoRoma = grafoRoma.degree().values()
@@ -247,24 +246,19 @@ treCell.to_csv("../data/Tre_towers.csv")
 
 # <codecell>
 
-%matplotlib inline
+#%matplotlib qt
 pyplot.figure(figsize=(16,9))
-#pyplot.subplot(222)
-#networkx.draw(grafoTim)
+pyplot.subplot(222)
+networkx.draw_random(grafoTim)
 
-pos=networkx.graphviz_layout(grafoTim,prog="twopi",root=0)
-    # draw nodes, coloring by rtt ping time
-networkx.draw(grafoTim,pos)
+pyplot.subplot(221)
+networkx.draw_random(grafoVoda)
 
+pyplot.subplot(223)
+networkx.draw_random(grafoWind)
 
-#pyplot.subplot(221)
-#networkx.draw_random(grafoVoda)
-
-#pyplot.subplot(223)
-#networkx.draw_random(grafoWind)
-
-#pyplot.subplot(224)
-#networkx.draw_random(grafoTre)
+pyplot.subplot(224)
+networkx.draw_random(grafoTre)
 
 pyplot.show()
 
@@ -378,6 +372,12 @@ diametro = []
 #print grafoTre.nodes(data=False)    
 
 #print diametro
+
+
+# <markdowncell>
+
+# #CON SUBGRAPH SI DOVREBBE POTER FARE!
+# http://stackoverflow.com/questions/17450521/networkx-finding-the-natural-clusters-of-points-on-a-graph
 
 # <markdowncell>
 
