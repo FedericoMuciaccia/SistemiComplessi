@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-# <nbformat>3.0</nbformat>
 
-# <markdowncell>
+# coding: utf-8
 
 # ###Importo tutte le librerie necessarie
 
-# <codecell>
+# In[3]:
 
 import geopy
 from geopy import distance #TODO BUGGONE
@@ -15,13 +13,12 @@ import pandas
 import numpy
 from matplotlib import pyplot
 
-# <markdowncell>
 
 # ###Calcolo il raggio medio che definisce Roma entro il raccordo anulare
 # 
 # NB: da verificare che distanza euclidea non crei troppi problemi
 
-# <codecell>
+# In[4]:
 
 colosseo = (41.890173, 12.492331)
 raccordo = [(41.914456, 12.615807),(41.990672, 12.502714),(41.793883, 12.511297),(41.812566, 12.396628),(41.956277, 12.384611)]
@@ -70,11 +67,10 @@ raggiomedio /= len(raggi)
 print raggiomedio
 #print media
 
-# <markdowncell>
 
 # ###Popolo il dataframe e faccio una prima grossa scrematura
 
-# <codecell>
+# In[6]:
 
 dataframe = pandas.read_csv("/home/protoss/Documenti/Siscomp_datas/cell_towers.csv")
 #dataframe = pandas.read_csv("./romaprova.csv")
@@ -87,11 +83,10 @@ italydoitcleaner
 italydoitcleaner = italydoitcleaner.reset_index()
 #print italydoitcleaner
 
-# <markdowncell>
 
 # ###Seleziono le antenne in Roma e faccio dei .csv appositi
 
-# <codecell>
+# In[10]:
 
 #inroma = pandas.DataFrame([[41.947416, 12.371001],
 #                            [41.899392, 12.397436],
@@ -145,15 +140,15 @@ romacellid.to_csv("../data/roma_towers.csv")
 #    return geodesicDistance(point) <= raggiomedio
 #filter(isInRome, cell)
 
-# <markdowncell>
 
 # Domande su iterazione su panda dataframe e efficienza, un tizio dice che la funzione iterrows è molto poco efficiente e sarebbe molto meglio usare un numpy array. Forse esistono funzioni più efficienti. 
 # 
 # http://stackoverflow.com/questions/10729210/iterating-row-by-row-through-a-pandas-dataframe  
 # 
 # http://stackoverflow.com/questions/7837722/what-is-the-most-efficient-way-to-loop-through-dataframes-with-pandas
+# 
 
-# <codecell>
+# In[118]:
 
 
 #dataframe = pandas.read_csv("../Siscomp_datas/cell_towers.csv")
@@ -202,7 +197,7 @@ def matricetutta(datiCoordinate, datiRaggi):
 
 #%time adiacenzaGeo = matriceSupGeodetic(coordinate, raggio)
 
-%time adiacenzaEuclid = matriceSupEuclid(coordinate, raggio)
+get_ipython().magic(u'time adiacenzaEuclid = matriceSupEuclid(coordinate, raggio)')
 
 #adiacenzaEuclid
 numpy.savetxt('adiacenzaeuclidea.csv',adiacenzaEuclid, fmt='%d',delimiter=',',newline='\n')      
@@ -215,7 +210,6 @@ numpy.savetxt('adiacenzaeuclidea.csv',adiacenzaEuclid, fmt='%d',delimiter=',',ne
 #        if linkVettori(i, j):
 #            a[ridotto["index"],ridotto["index"]] = 1
 
-# <markdowncell>
 
 # Il primo tentativo è stato di fare la matrice di adiacenza a forza bruta. Con un campione di soli 50 nodi ci metteva pochi microsecondi, quindi abbiamo provato a fare la matrice di adiacenza delle 7000 antenne entro il raccordo anulare, notando che la compilazione durava tanto, facendo le dovute proporzioni abbiamo preventivato 2,5 ore di tempo di calcolo. La prima cosa che abbiamo sistemato è stato ovviamente fare un ciclo che calcolasse soltanto la metà superiore della matrice, dimezzando il tempo di calcolo. 
 # 
@@ -225,8 +219,6 @@ numpy.savetxt('adiacenzaeuclidea.csv',adiacenzaEuclid, fmt='%d',delimiter=',',ne
 # preventivo quindi di 10 minuti di tempo di calcolo invece di 1 ora e mezza.
 # 
 # TODO vedere parallelaizazione
-
-# <markdowncell>
 
 # 
 # ###Prova preliminare con 50 dati
@@ -318,14 +310,15 @@ numpy.savetxt('adiacenzaeuclidea.csv',adiacenzaEuclid, fmt='%d',delimiter=',',ne
 # Wall time: 6.65 s
 # 
 # 
+# 
 
-# <codecell>
+# In[94]:
 
 numdati = [50, 100, 500, 1000, 2000]
 tempieuclid = [0.0042575, 0.0192, 0.402, 1.62, 6.545]
 tempigeo = [0.032, 0.128, 3.25, 12.5, 50.35]
 
-%matplotlib inline
+get_ipython().magic(u'matplotlib inline')
 
 
 geo = pyplot.scatter(x=numdati, y=tempigeo, label="Geodesic Dist", c='red')
@@ -336,7 +329,6 @@ pyplot.ylabel("Tempo di calcolo")
 pyplot.legend(loc = 2)
 #roma.plot(kind="scatter", x="lon", y="lat", label="Roma PRELIMINARE")
 
-# <markdowncell>
 
 # ###Geo dist
 # Tempo previsto di calcolo con $\sim$ 7000 dati: $\sim$ 620 sec $\sim$ 10 minuti
@@ -344,21 +336,24 @@ pyplot.legend(loc = 2)
 # ###Euclid dist
 # Tempo previsto di calcolo con $\sim$ 7000 dati: $\sim$ 80 sec $\sim$ 1,3 minuti
 
-# <codecell>
+# In[2]:
 
 adiacenzaEuclidea = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/AdiacenzaEuclidea.csv",delimiter=',',dtype='int')
 
-# <codecell>
+
+# In[4]:
 
 import networkx
 grafoRoma = networkx.Graph(adiacenzaEuclidea)
 
-# <codecell>
 
-%matplotlib inline
+# In[7]:
+
+get_ipython().magic(u'matplotlib inline')
 networkx.draw_random(grafoRoma)
 
-# <codecell>
+
+# In[8]:
 
 grado = grafoRoma.degree().values()
 
@@ -373,11 +368,13 @@ def degreeDistribution(gradi):
 
 distribuzione = degreeDistribution(grado)
 
-# <codecell>
+
+# In[13]:
 
 0 in grado
 
-# <codecell>
+
+# In[16]:
 
 def degreeDistribution(gradi):
     pyplot.hist(numpy.log10(gradi), bins=max(gradi)-min(gradi), histtype='step', log=True)
@@ -390,7 +387,6 @@ def degreeDistribution(gradi):
 
 distribuzione = degreeDistribution(grado)
 
-# <markdowncell>
 
 # ##TODO:  
 # * Prendere array coordinate                                                           ✔
@@ -424,6 +420,7 @@ distribuzione = degreeDistribution(grado)
 #   Tesina: parte iniziale su problema robustezza reti, poi test su reti di antenne in roma (rete scale free ma che deve avere una certa robustezza)
 #   veder compagnie separae
 
-# <codecell>
+# In[ ]:
+
 
 

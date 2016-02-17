@@ -256,7 +256,7 @@
 # 
 # 
 
-# In[3]:
+# In[2]:
 
 
 import numpy
@@ -270,7 +270,7 @@ from matplotlib import pyplot
 get_ipython().magic(u'matplotlib inline')
 
 
-# In[1]:
+# In[3]:
 
 
 dataframe = pandas.read_csv("../data/cell_towers_diff-2016012100.csv")
@@ -278,7 +278,7 @@ dataframe = pandas.read_csv("../data/cell_towers_diff-2016012100.csv")
 # coordinate = dataframe[['lon', 'lat']]
 
 
-# In[2]:
+# In[4]:
 
 dataframe.plot(kind="scatter", x="lon", y="lat")
 
@@ -295,7 +295,7 @@ def euclideanDistace(x,y):
     return sqrt(x**2 + y**2)
 
 
-# In[21]:
+# In[6]:
 
 import geopy # TODO AttributeError: 'module' object has no attribute 'distance'
 from geopy import distance, geocoders
@@ -334,7 +334,7 @@ def isInRome(place):
     return geodesicDistance(place) <= raggioRaccordoAnulare
 
 
-# In[22]:
+# In[7]:
 
 name = "Sapienza, Roma"
 
@@ -342,7 +342,7 @@ print(geodesicDistance(geolocate(name)))
 print(isInRome(geolocate(name)))
 
 
-# In[34]:
+# In[8]:
 
 colosseo = geopy.point.Point(41.890183, 12.492369)
 
@@ -383,7 +383,7 @@ colosseo = geopy.point.Point(41.890183, 12.492369)
 # plt.show()
 
 
-# In[25]:
+# In[11]:
 
 import gmplot
 from gmplot import GoogleMapPlotter
@@ -402,7 +402,7 @@ gmap = gmplot.GoogleMapPlotter(37.428, -122.145, 16)
 print a
 
 
-# In[6]:
+# In[12]:
 
 copertura = dataframe[["range"]]
 
@@ -422,7 +422,7 @@ dataframe.plot(kind="scatter", x="lon", y="lat", s=copertura/1000, alpha=0.5) # 
 # samples > 1
 # ```
 
-# In[7]:
+# In[13]:
 
 isInItaly = dataframe.mcc == 222
 
@@ -439,7 +439,7 @@ italia = dataframe[isInItaly & isReliable]
 # TODO riordinare gli indici levando i buchi
 
 
-# In[8]:
+# In[14]:
 
 italia.plot(kind="scatter", x="lon", y="lat", label="Italy")
 
@@ -465,7 +465,7 @@ italia.plot(kind="scatter", x="lon", y="lat", label="Italy")
 # code_groups[['data']].transform(sum)
 # ```
 
-# In[9]:
+# In[15]:
 
 roma = pandas.read_csv("../data/roma_towers.csv")
 roma.plot(kind="scatter", x="lon", y="lat", label="Roma PRELIMINARE")
@@ -508,7 +508,7 @@ roma.plot(kind="scatter", x="lon", y="lat", label="Roma PRELIMINARE")
 # 
 # 
 
-# In[10]:
+# In[16]:
 
 import networkx
 
@@ -524,7 +524,7 @@ G.add_edge('c','f')
 G.add_edge('a','d')
 
 
-# In[11]:
+# In[17]:
 
 print(G.nodes())
 print(G.edges())
@@ -537,24 +537,24 @@ networkx.draw_networkx_labels(G,position,font_size=15,font_family='sans-serif')
 position
 
 
-# In[12]:
+# In[18]:
 
 H=networkx.path_graph(10)
 networkx.draw_networkx_nodes(G,position,node_size=300)
 
 
-# In[13]:
+# In[19]:
 
 networkx.draw_random(G)
 
 
-# In[14]:
+# In[20]:
 
 dataframePiccolo = italia[0:10]
 dataframePiccolo["cell"]
 
 
-# In[15]:
+# In[21]:
 
 dataframePiccolo = roma[0:10]
 
@@ -565,7 +565,7 @@ grafoPiccolo.add_nodes_from(dataframePiccolo["cell"])
 networkx.draw(grafoPiccolo)
 
 
-# In[16]:
+# In[22]:
 
 import numpy
 matriceDiAdiacenza = numpy.zeros((10,10), dtype=int)
@@ -573,7 +573,7 @@ matriceDiAdiacenza = numpy.zeros((10,10), dtype=int)
 matriceDiAdiacenza
 
 
-# In[17]:
+# In[23]:
 
 
 
@@ -629,7 +629,7 @@ print a
 #            a[ridotto["index"],ridotto["index"]] = 1
 
 
-# In[18]:
+# In[24]:
 
 # A = numpy.reshape(numpy.random.random_integers(0,1,size=100),(10,10))
 # D = networkx.DiGraph(A)
@@ -648,7 +648,7 @@ F50 = networkx.Graph(a)
 networkx.draw_random(F50)
 
 
-# In[19]:
+# In[25]:
 
 # networkx.degree(F50)
 grado = F50.degree().values()
@@ -676,21 +676,25 @@ distribuzione = degreeDistribution(grado)
 # 
 # probabilmente questi saranno degli hub se la nostra rete risulterà essere complessa
 
-# In[20]:
+# In[40]:
 
 import numpy
 
-raggi = roma['range'].values
+# raggi = roma['range'].values
 
-raggiBuoni = roma[roma.range > 1]['range'].values
+raggiPositivi = roma.range >= 1
+
+raggiBuoni = roma[raggiPositivi].range.values
 
 #distribuzioneRange = pyplot.hist(raggi, 100)
 
 #distribuzioneRangeLogLog = pyplot.hist(numpy.log2(raggiBuoni), 100, log=True)
 
+raggi = roma[raggiPositivi].range.values
+
 pyplot.figure(1)
 pyplot.subplot(211)
-distribuzioneRange = pyplot.hist(raggi, 100)
+distribuzioneRange = pyplot.hist(raggi,bins=100)
 pyplot.title('Range distribution')
 pyplot.xlabel("Degree")
 pyplot.ylabel("Frequency")
@@ -727,7 +731,7 @@ massimoRange
 # 
 # 
 
-# In[21]:
+# In[27]:
 
 from joblib import Parallel, delayed  
 import multiprocessing
@@ -743,7 +747,7 @@ results = Parallel(n_jobs=num_cores)(delayed(processInput)(i) for i in inputs)
 results
 
 
-# In[22]:
+# In[28]:
 
 def matriceSuperiore(datiCoordinate, datiRaggi):
     a = numpy.zeros((datiRaggi.size,datiRaggi.size))
@@ -756,7 +760,7 @@ def matriceSuperiore(datiCoordinate, datiRaggi):
     return a
 
 
-# In[23]:
+# In[29]:
 
 # iterare su una matrice numpy
 
@@ -779,7 +783,7 @@ b = numpy.zeros((5,5), dtype=int)
 for i in numpy.nditer(b): print i
 
 
-# In[24]:
+# In[30]:
 
 #tri = numpy.zeros((10, 10))
 #dm = tri[numpy.triu_indices(10, 1)]
@@ -790,11 +794,6 @@ for i in numpy.nditer(b): print i
 triangolo = matriceSimilSimmetrica(N)
 triangolo
 # listofzeros = [0] * n
-
-
-# In[29]:
-
-
 
 
 # In[ ]:

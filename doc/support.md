@@ -38,9 +38,12 @@
 ## Gmaps
 [homepage](https://pypi.python.org/pypi/gmaps)
 
+## HTML
+[HTML color picker](http://www.w3schools.com/colors/colors_picker.asp)
 
 
 altri link vari:
+http://pandas.pydata.org/pandas-docs/stable/10min.html#min
 http://pbpython.com/excel-pandas-comp.html
 http://manishamde.github.io/blog/2013/03/07/pandas-and-python-top-10/
 http://www.gregreda.com/2013/10/26/intro-to-pandas-data-structures/
@@ -132,6 +135,30 @@ http://pydoc.net/Python/gmplot/1.0.4/gmplot.gmplot/
 https://www.wakari.io/sharing/bundle/krmckelv/How%20to%20Python%20Like%20A%20Boss?has_login=False
 https://developers.google.com/maps/documentation/javascript/examples/layer-kml?csw=1
 https://github.com/googlemaps/google-maps-services-python
+http://www.machinalis.com/blog/embedding-interactive-maps-into-an-ipython-nb/
+https://sclelections.com/data-scientists-are-difficult-customers/
+
+
+
+
+
+seaborn:
+http://stackoverflow.com/questions/4150171/how-to-create-a-density-plot-in-matplotlib
+https://stanford.edu/~mwaskom/software/seaborn/tutorial/distributions.html
+
+pandas density plot:
+http://pandas.pydata.org/pandas-docs/stable/visualization.html#density-plot
+
+https://www.chrisstucchio.com/blog/2012/dont_use_scatterplots.html
+http://stackoverflow.com/questions/20105364/how-can-i-make-a-scatter-plot-colored-by-density-in-matplotlib
+http://www.astrobetter.com/blog/2014/02/10/visualization-fun-with-python-2d-histogram-with-1d-histograms-on-axes/
+
+
+
+
+
+
+
 
 
 
