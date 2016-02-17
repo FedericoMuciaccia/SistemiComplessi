@@ -352,9 +352,11 @@ for gestore in compagnie:
 # * FARE GRAFICI MEGLIO ✔
 # * Fare grafici un po' meglio
 # * Fare fit con curva che picca a v medio e poi esponenziale, tipo andamento legge di Planck
-# * Soglia percolativa: fare grafico dimensioni giant cluster in funzione di rimozione di nodi
+# * variazione del diametro con rimozione random o con rimozione preferenziale
+# * Soglia percolativa: fare grafico dimensioni giant cluster (in realtà dimensione relativa, cioè dimensione/ndati totali in quel momento nel cluster) in funzione di rimozione di nodi
 # * in modo casuale
-# * cominciando da i nodi più connessi  
+# * cominciando da i nodi più connessi 
+# * barabasi e albert dicono che andamento giant cluster relativo è indipendente dalla dimensione della rete, non solo per reti scale free (frattali), ma anche per reti esponenziali! (frattali anch'esse?) Verificare sta cosa facendo confronto andamento GC tra rete totale e reti delle varie compagnie
 # NB giant cluster è cluster che scala con N. E.g., se il giant cluster è composto da N/10 della rete, se raddoppio la rete o la dimezzo deve rimanere composto da 1/10 del totale dei nodi della rete. Idem se è N/100 o N/0.9
 # 
 #   Leggere (materiale lezione su percolazione-attacchi-epidemie):  
@@ -371,6 +373,9 @@ for gestore in compagnie:
 #   
 #   Tesina: parte iniziale su problema robustezza reti, poi test su reti di antenne in roma (rete non scale free ma che deve avere una certa robustezza)
 #   veder compagnie separae
+#   
+#   
+#   Federico nota andamento range segua una sorta di legge di zipf, NOTA BENE, I NOSTRI DATI NON SONO DATI UFFICIALI, MA COSTRUITI DA GENTE CHE CAMMINA, QUINDI PROB DI TROVARE NUOVA ANTENNA POTREBBE ESSERE SIMILE A PROB TROVARE NUOVA PAROLA, ma io penso che non c'entri perché noi stiamo vedendo solo le lunghezze delle parole. Che legge regola la prob delle lunghezze delle parole?
 
 # <markdowncell>
 
