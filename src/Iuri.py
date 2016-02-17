@@ -78,7 +78,7 @@ print raggiomedioEuclid
 
 # <codecell>
 
-dataframe = pandas.read_csv("/home/protoss/Documenti/Siscomp_datas/cell_towers.csv")
+dataframe = pandas.read_csv("/home/protoss/Documenti/Siscomp_datas/data/cell_towers.csv")
 #dataframe = pandas.read_csv("/home/protoss/Documenti/SistemiComplessi/data/cell_towers_diff-2016012100.csv")
 #dataframe
 criterioMCC = dataframe.mcc == 222
@@ -140,7 +140,7 @@ windCell.to_csv("../data/Wind_towers.csv")
 
 vodaCell = romaCell[criterioVoda]
 vodaCell = vodaCell.reset_index(drop=True)
-vodaCell.to_csv("../data/Vodafon_towers.csv")
+vodaCell.to_csv("../data/Vodafone_towers.csv")
 
 treCell = romaCell[criterioTre]
 treCell = treCell.reset_index(True)
@@ -182,7 +182,7 @@ def matriceSupGeodetic(datiCoordinate, datiRaggi):
 
 
 #dataframe = pandas.read_csv("../data/roma_towers.csv")
-gestore = ["Roma", "Tim", "Vodafon", "Wind", "Tre"]
+gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
 for aziende in gestore:
     dataframe = pandas.read_csv("../data/{0}_towers.csv".format(aziende))
     coordinate = dataframe[['lat', 'lon']].values
@@ -201,53 +201,77 @@ for aziende in gestore:
 
 # <codecell>
 
+#for azienda in gestore:
+
+#italydoitcleaner['distanze'] = distanza
+#romaCell.to_csv("../data/Roma_towers.csv")
 adiacenzaRoma = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Roma.csv",delimiter=',',dtype='int')
-grafoRoma = networkx.Graph(adiacenzaRoma)
+adiacenzaTim = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tim.csv",delimiter=',',dtype='int')
+adiacenzaVoda = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Vodafone.csv",delimiter=',',dtype='int')
+adiacenzaWind = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Wind.csv",delimiter=',',dtype='int')
+adiacenzaTre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
+
+%time grafoRoma = networkx.Graph(adiacenzaRoma,)
+%time grafoTim = networkx.Graph(adiacenzaTim)
+%time grafoVoda = networkx.Graph(adiacenzaVoda)
+%time grafoWind = networkx.Graph(adiacenzaWind)
+%time grafoTre = networkx.Graph(adiacenzaTre)
+
+
+# <codecell>
+
 gradoRoma = grafoRoma.degree().values()
 numpy.savetxt("../data/DistrGrado_Roma",gradoRoma,fmt='%d',newline='\n')
+romaCell["grado"] = gradoRoma
+romaCell.to_csv("../data/Roma_towers.csv")
 
-adiacenzatim = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tim.csv",delimiter=',',dtype='int')
-grafoTim = networkx.Graph(adiacenzatim)
 gradoTim = grafoTim.degree().values()
 numpy.savetxt("../data/DistrGrado_Tim",gradoTim,fmt='%d',newline='\n')
+timCell["grado"] = gradoTim
+timCell.to_csv("../data/Tim_towers.csv")
 
-adiacenzavoda = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Vodafon.csv",delimiter=',',dtype='int')
-grafoVoda = networkx.Graph(adiacenzavoda)
 gradoVoda = grafoVoda.degree().values()
-numpy.savetxt("../data/DistrGrado_Vodafon",gradoVoda,fmt='%d',newline='\n')
+numpy.savetxt("../data/DistrGrado_Vodafone",gradoVoda,fmt='%d',newline='\n')
+vodaCell["grado"] = gradoVoda
+vodaCell.to_csv("../data/Vodafone_towers.csv")
 
-adiacenzawind = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Wind.csv",delimiter=',',dtype='int')
-grafoWind = networkx.Graph(adiacenzawind)
 gradoWind = grafoWind.degree().values()
 numpy.savetxt("../data/DistrGrado_Wind",gradoWind,fmt='%d',newline='\n')
+windCell["grado"] = gradoWind
+windCell.to_csv("../data/Wind_towers.csv")
 
-adiacenzatre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
-grafoTre = networkx.Graph(adiacenzatre)
 gradoTre = grafoTre.degree().values()
 numpy.savetxt("../data/DistrGrado_Tre",gradoTre,fmt='%d',newline='\n')
+treCell["grado"] = gradoTre
+treCell.to_csv("../data/Tre_towers.csv")
 
 # <codecell>
 
 %matplotlib inline
 pyplot.figure(figsize=(16,9))
-pyplot.subplot(222)
-networkx.draw_random(grafoTim)
+#pyplot.subplot(222)
+#networkx.draw(grafoTim)
 
-pyplot.subplot(221)
-networkx.draw_random(grafoVoda)
+pos=networkx.graphviz_layout(grafoTim,prog="twopi",root=0)
+    # draw nodes, coloring by rtt ping time
+networkx.draw(grafoTim,pos)
 
-pyplot.subplot(223)
-networkx.draw_random(grafoWind)
 
-pyplot.subplot(224)
-networkx.draw_random(grafoTre)
+#pyplot.subplot(221)
+#networkx.draw_random(grafoVoda)
+
+#pyplot.subplot(223)
+#networkx.draw_random(grafoWind)
+
+#pyplot.subplot(224)
+#networkx.draw_random(grafoTre)
 
 pyplot.show()
 
 # <codecell>
 
 %matplotlib inline
-gestore = ["Roma", "Tim", "Vodafon", "Wind", "Tre"]
+gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
 colori = ['#4d4d4d', '#004184','#ff3300','#ff8000','#018ECC']
 def degreeDistribution(gradi, azienda, colore):
     pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore)
@@ -281,9 +305,13 @@ distribuzione = degreeDistribution(gradoTim, gestore[1], colori[1])
 distribuzione = degreeDistribution(gradoVoda, gestore[2], colori[2])
 distribuzione = degreeDistribution(gradoWind, gestore[3], colori[3])
 distribuzione = degreeDistribution(gradoTre, gestore[4], colori[4])
-#pyplot.xlim(1,200)
+pyplot.xlim(1,200)
 pyplot.legend()
 pyplot.show()
+
+# <markdowncell>
+
+# ### Faccio istogramma del raggio delle antenne
 
 # <codecell>
 
@@ -307,24 +335,49 @@ for azienda, colore in zip(gestore,colori):
     pyplot.legend()
 pyplot.show()
 
+# <markdowncell>
+
+# ### Faccio simulazione attacco, andamento diametro e GC in funzione dei nodi rimossi
+
 # <codecell>
 
-#compagnie = ["roma", "tim", "wind", "voda", "tre"]
-compagnie = ["tim"]
-seaborn.set_style("whitegreed")
-for gestore in compagnie:
-    adiacenzaEuclidea = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/AdiacenzaEuclidea_{0}.csv".format(gestore)),delimiter=',',dtype='int')
-    grafoRoma = networkx.Graph(adiacenzaEuclidea)
-    grado = grafoRoma.degree().values()
-    
-#    distribuzione = degreeDistributionLog(grado)
-#    distribuzione = degreeDistribution(grado)
-    seaborn.kdeplot(grado,bw=0.5)
-    
-#pyplot.show()
+##ISTRUZIONI PER RIMANEGGIARE IL GRAFO
 
-#distribuzione = degreeDistribution(grado)
-#pyplot.show()
+#lofaccio
+#adiacenzatre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
+#grafoTre = networkx.Graph(adiacenzatre)
+
+#logrado
+#gradoTre = grafoTre.degree().values()
+#numpy.savetxt("../data/DistrGrado_Tre",gradoTre,fmt='%d',newline='\n')
+
+#lo rilabello
+#celle = pandas.read_csv("../data/Tre_towers.csv")
+#idcell = celle['cell'].values
+#mapping=dict(zip(grafoTre.nodes(),idcell))
+#grafoTre=networkx.relabel_nodes(grafoTre,mapping)
+#print(sorted(grafoTre.nodes()))
+#networkx.draw_random(grafoTre)
+
+#losmonto e loanalizzo
+randomante = numpy.arange(len(grafoTre))
+numpy.random.shuffle(randomante)
+#randomante = numpy.random.random_integers(0, len(grafoTre)-1,len(grafoTre))
+#print randomante
+
+
+diametro = []
+#%time diametro.append(networkx.diameter(grafoTre, e=None))
+#print diametro
+#print grafoTre.nodes(data=False)    
+#for i in range(len(randomante)-100):
+#    grafoTre.remove_node(randomante[i])
+
+#networkx.draw_random(grafoTre)
+#%time diametro.append(networkx.diameter(grafoTre, e=None))
+#print grafoTre.nodes(data=False)    
+
+#print diametro
 
 # <markdowncell>
 
@@ -356,8 +409,10 @@ for gestore in compagnie:
 # * Soglia percolativa: fare grafico dimensioni giant cluster (in realtà dimensione relativa, cioè dimensione/ndati totali in quel momento nel cluster) in funzione di rimozione di nodi
 # * in modo casuale
 # * cominciando da i nodi più connessi 
-# * barabasi e albert dicono che andamento giant cluster relativo è indipendente dalla dimensione della rete, non solo per reti scale free (frattali), ma anche per reti esponenziali! (frattali anch'esse?) Verificare sta cosa facendo confronto andamento GC tra rete totale e reti delle varie compagnie
-# NB giant cluster è cluster che scala con N. E.g., se il giant cluster è composto da N/10 della rete, se raddoppio la rete o la dimezzo deve rimanere composto da 1/10 del totale dei nodi della rete. Idem se è N/100 o N/0.9
+# * barabasi e albert dicono che andamento giant cluster relativo è indipendente dalla dimensione della rete, non solo per reti scale free (frattali), ma anche per reti esponenziali! (frattali anch'esse?) Verificare sta cosa facendo confronto andamento GC tra rete totale e reti delle varie compagnie  
+# NB con gli attacchi random fare tanti attacchi e vedere diametro e GCsize medi, non un solo attacco!   
+# NB giant cluster è cluster che scala con N.   
+# E.g., se il giant cluster è composto da N/10 della rete, se raddoppio la rete o la dimezzo deve rimanere composto da 1/10 del totale dei nodi della rete. Idem se è N/100 o N/0.9
 # 
 #   Leggere (materiale lezione su percolazione-attacchi-epidemie):  
 #   http://www.nature.com/nature/journal/v406/n6794/pdf/406378a0.pdf  
@@ -365,7 +420,8 @@ for gestore in compagnie:
 #   http://arxiv.org/pdf/cond-mat/0007048.pdf  
 #   http://arxiv.org/pdf/cond-mat/0010251.pdf  
 #   
-#   Altro materiale forse utile:
+#   Altro materiale forse utile:  
+#   http://www.renyi.hu/~p_erdos/1959-11.pdf (Erdos e Renyi)  
 #   http://arxiv.org/pdf/cond-mat/9910332.pdf  
 #   http://arxiv.org/pdf/cond-mat/9907068.pdf  
 #   http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.71.8276&rep=rep1&type=pdf  
