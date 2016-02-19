@@ -15,8 +15,8 @@ import pandas
 import numpy
 import networkx
 from matplotlib import pyplot
-#import seaborn
-%matplotlib qt
+import seaborn
+%matplotlib inline
 
 # <markdowncell>
 
@@ -191,7 +191,7 @@ for aziende in gestore:
     numdati = raggio.size
     
     #%time adiacenzaGeo = matriceSupGeodetic(coordinate, raggio)
-    %time adiacenzaEuclid = matriceSupEuclid(coordinate, raggio)
+    adiacenzaEuclid = matriceSupEuclid(coordinate, raggio)
     
     numpy.savetxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(aziende)),adiacenzaEuclid, fmt='%d',delimiter=',',newline='\n')
 
@@ -253,7 +253,8 @@ treCell.to_csv("../data/Tre_towers.csv")
 
 # <codecell>
 
-#%matplotlib qt
+%matplotlib inline
+
 pyplot.figure(figsize=(16,9))
 pyplot.subplot(222)
 networkx.draw_random(grafoTim)
@@ -316,23 +317,42 @@ pyplot.show()
 
 # <codecell>
 
-pyplot.figure(figsize=(16,9))
+gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
+colori = ['#4d4d4d', '#004184','#ff3300','#ff8000','#018ECC']
+def rangeDistribution(gradi, azienda, colore):
+    pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore)
+    pyplot.title('Range distribution')
+    pyplot.xlabel("Range")
+    pyplot.ylabel("Frequency")
+
+def rangeDistributionLog(gradi, azienda, colore):
+    distribuzioneRange = pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore)
+    pyplot.title('Range distribution')
+    pyplot.xlabel("Range")
+    pyplot.ylabel("Frequency")
+
+    pyplot.gca().set_xscale("log")
+    pyplot.gca().set_yscale("log")
+
+pyplot.figure(figsize=(16*1.11,9*1.11))
+#gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
+
 for azienda, colore in zip(gestore,colori):
     dataframe = pandas.read_csv("../data/{0}_towers.csv".format(azienda))
     raggio = dataframe['range'].values
-    distribuzione = degreeDistribution(raggio, azienda, colore)
+    distribuzione = rangeDistribution(raggio, azienda, colore)
 #    print dataframe[dataframe.range == 0]
-#    pyplot.xlim(0,100)
+    pyplot.xlim(0,100)
     pyplot.legend()
 pyplot.show()
     
-pyplot.figure(figsize=(16,9))
+pyplot.figure(figsize=(16*1.11,9*1.11))
 for azienda, colore in zip(gestore,colori):
     dataframe = pandas.read_csv("../data/{0}_towers.csv".format(azienda))
     raggio = dataframe['range'].values
-    distribuzione = degreeDistributionLog(raggio, azienda, colore)
+    distribuzione = rangeDistributionLog(raggio, azienda, colore)
 #    print dataframe[dataframe.range == 0]
-#    pyplot.xlim(500,1000)
+    pyplot.xlim(1,9000)
     pyplot.legend()
 pyplot.show()
 
@@ -348,106 +368,84 @@ pyplot.show()
 
 # <codecell>
 
-
-
-##ISTRUZIONI PER RIMANEGGIARE IL GRAFO
-
-#lofaccio
-#adiacenzatre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
-#grafoTre = networkx.Graph(adiacenzatre)
-
-#logrado
-#gradoTre = grafoTre.degree().values()
-#print gradoTre
-#numpy.savetxt("../data/DistrGrado_Tre",gradoTre,fmt='%d',newline='\n')
-
-#lo rilabello
-#celle = pandas.read_csv("../data/Tre_towers.csv")
-#idcell = celle['cell'].values
-#mapping=dict(zip(grafoTre.nodes(),idcell))
-#grafoTre=networkx.relabel_nodes(grafoTre,mapping)
-#print(sorted(grafoTre.nodes()))
-#networkx.draw_random(grafoTre)
-
-#losmonto e loanalizzo
-#randomante = numpy.arange(len(grafoTre))
-#numpy.random.shuffle(randomante)
-#randomante = numpy.random.random_integers(0, len(grafoTre)-1,len(grafoTre))
-#print randomante
-
-
-#diametro = []
-#%time diametro.append(networkx.diameter(grafoTre, e=None))
-#print diametro
-#print grafoTre.nodes(data=False)    
-#for i in range(len(randomante)-100):
-#    grafoTre.remove_node(randomante[i])
-
-#networkx.draw_random(grafoTre)
-#%time diametro.append(networkx.diameter(grafoTre, e=None))
-#print grafoTre.nodes(data=False)    
-
-#print diametro
-
-
-# <codecell>
-
 #Attacco
 
 #lofaccio
-adiacenzatre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
-grafoTre = networkx.Graph(adiacenzatre)
+compagnia = "Tre"
+adiacenzaFinal = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia)),delimiter=',',dtype='int')
+grafoFinal = networkx.Graph(adiacenzaFinal)
 diametro = [2]
-sizeGC = [networkx.number_of_nodes(grafoTre)]
+relSizeGC = [1]
+sizeGC = [networkx.number_of_nodes(grafoFinal)]
 #logrado
 
+#losmonto e loanalizzo
 
-#DA METTERE TUTTI I "NOMEGRAFO" AL POSTO DI GRAFOTRE, NON SO CHE FARE CON I METODI TIPO GRAFOTRE.DEGREE().ITEMS()!!!
-#def attacco(nomegrafo):
-grandezzaIniziale = networkx.number_of_nodes(grafoTre)
-passo = grandezzaIniziale/100
-while (networkx.number_of_nodes(grafoTre) > passo):
-    gradiFinal = pandas.DataFrame(grafoTre.degree().items(), columns=['index', 'grado'])
+graphSize = networkx.number_of_nodes(grafoFinal)
+passo = networkx.number_of_nodes(grafoFinal)/100
+
+while (networkx.number_of_nodes(grafoFinal) > passo):
+    gradiFinal = pandas.DataFrame(grafoFinal.degree().items(), columns=['index', 'grado'])
     gradiFinal.sort(["grado"], ascending=[False], inplace=True)
     gradiFinal = gradiFinal.reset_index()
     gradiFinal.drop(gradiFinal.columns[[0]], axis = 1, inplace=True)
     sortedIDnode = gradiFinal['index'].values
 
     for identificativo in sortedIDnode:
-        if (networkx.number_of_nodes(grafoTre) > len(sortedIDnode) - passo):
-            grafoTre.remove_node(identificativo)
+        if (networkx.number_of_nodes(grafoFinal) > len(sortedIDnode) - passo):
+            grafoFinal.remove_node(identificativo)
 
-    if (networkx.is_connected(grafoTre) == False):
-        sottografi = networkx.connected_component_subgraphs(grafoTre)
-        grafoTre = sottografi[0]
+    sottografi = networkx.connected_component_subgraphs(grafoFinal)
+    giantCluster = sottografi[0]
 
-    %time diametro.append(networkx.diameter(grafoTre, e=None))
-    sizeGC.append(networkx.number_of_nodes(grafoTre))
-    %matplotlib inline
+    diametro.append(networkx.diameter(giantCluster, e=None))
+    relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
 
-print diametro, sizeGC
-pyplot.figure(figsize=(16,9))
-ascisse = range(len(diametro))
-diam = pyplot.scatter(x=ascisse, y=diametro, label="Diametro", c='red')
+%matplotlib inline
+
+
+
+
+
+datiFinal = pandas.DataFrame()
+
+datiFinal['percent'] = ascisse
+datiFinal['diam'] = diametro
+datiFinal['GC'] = relSizeGC
+datiFinal['Diametro'] = "Diametro"
+datiFinal['Giant Cluster'] = "Dimensione relativa Giant Cluster" 
+
+datiFinal.head()
+
+seaborn.set_context("notebook", font_scale=1.1)
+seaborn.set_style("ticks")
+
+
+sns.lmplot('percent', 'diam',
+           data=datiFinal,
+           fit_reg=False,
+           size = 7,
+           aspect = 1.7778,
+           hue="Diametro",
+           scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Attacco')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
-pyplot.legend(loc = 2)
-#pyplot.legend(loc = 2)
-#pyplot.xlim(0, 22)
-pyplot.show()
+pyplot.xlim(0, 100)
+pyplot.ylim(0,max(diametro)+2)
 
-pyplot.figure(figsize=(16,9))
-ascisse = range(len(diametro))
-dimGC = pyplot.scatter(x=ascisse, y=sizeGC, label="Dimensione GC", c='green')
+sns.lmplot('percent', 'GC',
+           data=datiFinal,
+           fit_reg=False,
+           size = 7,
+           aspect = 1.7778,
+           hue="Giant Cluster",
+           scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Attacco')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
-pyplot.legend(loc = 2)
-#pyplot.legend(loc = 2)
-#pyplot.xlim(0, 22)
-pyplot.show()
-    
+pyplot.xlim(0, 100)
+pyplot.ylim(0,1.1)
 
 #networkx.draw_random(grafoTre)
 
@@ -456,79 +454,85 @@ pyplot.show()
 #Failure
 
 #lofaccio
-adiacenzatre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
-grafoTre = networkx.Graph(adiacenzatre)
+compagnia = "Tre"
+adiacenzaFinal = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia)),delimiter=',',dtype='int')
+grafoFinal = networkx.Graph(adiacenzaFinal)
 diametro = [2]
-sizeGC = [networkx.number_of_nodes(grafoTre)]
+relSizeGC = [1]
+sizeGC = [networkx.number_of_nodes(grafoFinal)]
 #logrado
 
 #losmonto e loanalizzo
 
-grandezzaIniziale = networkx.number_of_nodes(grafoTre)
-passo = networkx.number_of_nodes(grafoTre)/100
+graphSize = networkx.number_of_nodes(grafoFinal)
+passo = networkx.number_of_nodes(grafoFinal)/100
 
-while (networkx.number_of_nodes(grafoTre) > passo):
-    gradiFinal = pandas.DataFrame(grafoTre.degree().items(), columns=['index', 'grado'])
+while (networkx.number_of_nodes(grafoFinal) > passo):
+    gradiFinal = pandas.DataFrame(grafoFinal.degree().items(), columns=['index', 'grado'])
     gradiFinal.reindex(numpy.random.permutation(gradiFinal.index))
     randomante = gradiFinal['index'].values
 #    print len(randomante)
 #    print networkx.number_of_nodes(grafoTre)
     
     for identificativo in randomante:
-        if (networkx.number_of_nodes(grafoTre) > len(randomante) - passo):
-            grafoTre.remove_node(identificativo)
+        if (networkx.number_of_nodes(grafoFinal) > len(randomante) - passo):
+            grafoFinal.remove_node(identificativo)
     
 #    print len(randomante)
 #    print networkx.number_of_nodes(grafoTre)
     
-    if (networkx.is_connected(grafoTre) == False):
-        sottografi = networkx.connected_component_subgraphs(grafoTre)
-        grafoTre = sottografi[0]
-
-    %time diametro.append(networkx.diameter(grafoTre, e=None))
-    sizeGC.append(networkx.number_of_nodes(grafoTre))
-    %matplotlib inline
+#    if (networkx.is_connected(grafoTre) == False):
+    sottografi = networkx.connected_component_subgraphs(grafoFinal)
+        
+    giantCluster = sottografi[0]
     
-print diametro, sizeGC
+    diametro.append(networkx.diameter(giantCluster, e=None))
+    relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
+    sizeGC.append(networkx.number_of_nodes(giantCluster))
 
-pyplot.figure(figsize=(16,9))
-ascisse = range(len(diametro))
-diam = pyplot.scatter(x=ascisse, y=diametro, label="Diametro", c='red')
+%matplotlib inline
+datiFinal = pandas.DataFrame()
+
+datiFinal['percent'] = ascisse
+datiFinal['diam'] = diametro
+datiFinal['GC'] = relSizeGC
+datiFinal['Diametro'] = "Diametro"
+datiFinal['Giant Cluster'] = "Dimensione relativa Giant Cluster" 
+
+datiFinal.head()
+
+seaborn.set_context("notebook", font_scale=1.1)
+seaborn.set_style("ticks")
+
+
+sns.lmplot('percent', 'diam',
+           data=datiFinal,
+           fit_reg=False,
+           size = 7,
+           aspect = 1.7778,
+           hue="Diametro",
+           scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Attacco')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
-pyplot.legend(loc = 2)
-#pyplot.legend(loc = 2)
-#pyplot.xlim(0, 22)
-pyplot.show()
+pyplot.xlim(0, 100)
+pyplot.ylim(0,max(diametro)+2)
 
-pyplot.figure(figsize=(16,9))
-ascisse = range(len(diametro))
-dimGC = pyplot.scatter(x=ascisse, y=sizeGC, label="Dimensione GC", c='green')
+sns.lmplot('percent', 'GC',
+           data=datiFinal,
+           fit_reg=False,
+           size = 7,
+           aspect = 1.7778,
+           hue="Giant Cluster",
+           scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Attacco')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
-pyplot.legend(loc = 2)
-#pyplot.legend(loc = 2)
-#pyplot.xlim(0, 22)
-pyplot.show()
+pyplot.xlim(0, 100)
+pyplot.ylim(0,1.1)
 
 
 #networkx.draw_random(grafoTre)
-
-# <codecell>
-
-adiacenzatre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
-grafoTre = networkx.Graph(adiacenzatre)
-diametro = []
-sizeGC = []
-
-    
-gradiFinal = pandas.DataFrame(grafoTre.degree().items(), columns=['index', 'grado'])
-#gradiFinal.sort(["grado"], ascending=[False], inplace=True)
-#gradiFinal = gradiFinal.reset_index()
-#gradiFinal.drop(gradiFinal.columns[[0]], axis = 1, inplace=True)
-gradiFinal.reindex(numpy.random.permutation(gradiFinal.index))
 
 # <markdowncell>
 
@@ -696,18 +700,45 @@ gradiFinal.reindex(numpy.random.permutation(gradiFinal.index))
 
 # <codecell>
 
+
 numdati = [50, 100, 500, 1000, 2000]
 tempieuclid = [0.0042575, 0.0192, 0.402, 1.62, 6.545]
 tempigeo = [0.032, 0.128, 3.25, 12.5, 50.35]
 
-
-geo = pyplot.scatter(x=numdati, y=tempigeo, label="Geodesic Dist", c='red')
+geo = pyplot.scatter(x=numdati, y=tempigeo, label="Geodesic Dist", c='red', marker = 'o')
 euclid = pyplot.scatter(x=numdati, y=tempieuclid, label="Euclid Dist", c='green')
 pyplot.title('Benchmark')
 pyplot.xlabel("Numero dati")
 pyplot.ylabel("Tempo di calcolo")
 pyplot.legend(loc = 2)
 #roma.plot(kind="scatter", x="lon", y="lat", label="Roma PRELIMINARE")
+
+# <codecell>
+
+print diametro, relSizeGC
+pyplot.figure(figsize=(16,9))
+ascisse = range(len(diametro))
+diam = pyplot.scatter(x=ascisse, y=diametro, label="Diametro", c='red')
+pyplot.title('Attacco')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.legend(loc = 2)
+#pyplot.legend(loc = 2)
+pyplot.xlim(0, 100)
+pyplot.ylim(0,max(diametro)+2)
+pyplot.show()
+
+pyplot.figure(figsize=(16,9))
+ascisse = range(len(diametro))
+dimGC = pyplot.scatter(x=ascisse, y=relSizeGC, label="Dimensione relativa GC", c='green')
+pyplot.title('Attacco')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.legend(loc = 2)
+#pyplot.legend(loc = 2)
+pyplot.xlim(0, 100)
+pyplot.ylim(0,1.1)
+pyplot.show()
 
 # <markdowncell>
 

@@ -1,0 +1,17 @@
+“genotype”,”temperature”,”behavior”,”replicate”,”value”
+“CT”,16,”Backup”,”trial1″,0.804486
+“CT”,29,”Backup”,”trial1″,0.347891
+“HI”,16,”Backup”,”trial1″,0.448769
+“HI”,29,”Backup”,”trial1″,0.128063
+“LxCS”,16,”Backup”,”trial1″,0.429022
+“LxCS”,29,”Backup”,”trial1″,0.071122
+“LxOR”,16,”Backup”,”trial1″,0.43987
+…
+“ORs”,25,”Pivot Center”,”trial12″,0.154344
+“ORs”,25,”Pivot Tail”,”trial12″,0.932944
+“ORs”,25,”Righting”,”trial12″,1.857337
+“ORs”,25,”Stop “,”trial12”,50.227344
+“ORs”,25,”Touch “,”trial12”,2.092398
+“ORs”,25,”Walk “,”trial12”,26.211284
+“ORs”,25,”Wing Extension”,”trial12″,0.273855
+“ORs”,25,”Wing Grooming”,”trial12″,7.987903
