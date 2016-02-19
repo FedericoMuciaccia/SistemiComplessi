@@ -20,7 +20,7 @@ from matplotlib import pyplot
 
 # <markdowncell>
 
-# ##Calcolo matrice adiacenza
+# #Calcolo matrice adiacenza
 # 
 # ###Calcolo il raggio medio che definisce Roma entro il raccordo anulare
 # 
@@ -197,7 +197,7 @@ for aziende in gestore:
 
 # <markdowncell>
 
-# ##Faccio disegno grafo e grafico distr grado
+# #Faccio disegno grafo e grafico distr grado
 
 # <codecell>
 
@@ -219,7 +219,14 @@ adiacenzaTre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/Adia
 
 # <codecell>
 
+print("num gradi Roma", networkx.number_of_nodes(grafoRoma))
+print("num gradi Tim", networkx.number_of_nodes(grafoTim))
+print("num gradi Vodafone", networkx.number_of_nodes(grafoVoda))
+print("num gradi Wind", networkx.number_of_nodes(grafoWind))
+print("num gradi Tre", networkx.number_of_nodes(grafoTre))
+
 gradoRoma = grafoRoma.degree().values()
+#gadoRoma = networkx.degree_histogram(grafoRoma)
 numpy.savetxt("../data/DistrGrado_Roma",gradoRoma,fmt='%d',newline='\n')
 romaCell["grado"] = gradoRoma
 romaCell.to_csv("../data/Roma_towers.csv")
@@ -331,9 +338,17 @@ pyplot.show()
 
 # <markdowncell>
 
-# ### Faccio simulazione attacco, andamento diametro e GC in funzione dei nodi rimossi
+# # Faccio simulazione attacco, andamento diametro e GC in funzione dei nodi rimossi
+
+# <markdowncell>
+
+# #DOMANDA IMPORTANTE
+# Io nei cicli ho levato n nodi, poi ho preso il cluster più grande, ho levato nodi solo da quel cluster, e così via reiterando.
+# Per caso dovevo rimuovere nodi sempre dal totale? Nel caso dell'attacco cambia poco: molto probabilmente i nodi con grado maggiore sono sempre nel GC, ma nell'attacco random cambia tantissimo! Potrei prendere randomicamente i cluster minori dando sopravvivenza molto maggiore al GC. Come si fa in questi casi?
 
 # <codecell>
+
+
 
 ##ISTRUZIONI PER RIMANEGGIARE IL GRAFO
 
@@ -343,6 +358,7 @@ pyplot.show()
 
 #logrado
 #gradoTre = grafoTre.degree().values()
+#print gradoTre
 #numpy.savetxt("../data/DistrGrado_Tre",gradoTre,fmt='%d',newline='\n')
 
 #lo rilabello
@@ -354,13 +370,13 @@ pyplot.show()
 #networkx.draw_random(grafoTre)
 
 #losmonto e loanalizzo
-randomante = numpy.arange(len(grafoTre))
-numpy.random.shuffle(randomante)
+#randomante = numpy.arange(len(grafoTre))
+#numpy.random.shuffle(randomante)
 #randomante = numpy.random.random_integers(0, len(grafoTre)-1,len(grafoTre))
 #print randomante
 
 
-diametro = []
+#diametro = []
 #%time diametro.append(networkx.diameter(grafoTre, e=None))
 #print diametro
 #print grafoTre.nodes(data=False)    
@@ -373,6 +389,146 @@ diametro = []
 
 #print diametro
 
+
+# <codecell>
+
+#Attacco
+
+#lofaccio
+adiacenzatre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
+grafoTre = networkx.Graph(adiacenzatre)
+diametro = [2]
+sizeGC = [networkx.number_of_nodes(grafoTre)]
+#logrado
+
+
+#DA METTERE TUTTI I "NOMEGRAFO" AL POSTO DI GRAFOTRE, NON SO CHE FARE CON I METODI TIPO GRAFOTRE.DEGREE().ITEMS()!!!
+#def attacco(nomegrafo):
+grandezzaIniziale = networkx.number_of_nodes(grafoTre)
+passo = grandezzaIniziale/100
+while (networkx.number_of_nodes(grafoTre) > passo):
+    gradiFinal = pandas.DataFrame(grafoTre.degree().items(), columns=['index', 'grado'])
+    gradiFinal.sort(["grado"], ascending=[False], inplace=True)
+    gradiFinal = gradiFinal.reset_index()
+    gradiFinal.drop(gradiFinal.columns[[0]], axis = 1, inplace=True)
+    sortedIDnode = gradiFinal['index'].values
+
+    for identificativo in sortedIDnode:
+        if (networkx.number_of_nodes(grafoTre) > len(sortedIDnode) - passo):
+            grafoTre.remove_node(identificativo)
+
+    if (networkx.is_connected(grafoTre) == False):
+        sottografi = networkx.connected_component_subgraphs(grafoTre)
+        grafoTre = sottografi[0]
+
+    %time diametro.append(networkx.diameter(grafoTre, e=None))
+    sizeGC.append(networkx.number_of_nodes(grafoTre))
+    %matplotlib inline
+
+print diametro, sizeGC
+pyplot.figure(figsize=(16,9))
+ascisse = range(len(diametro))
+diam = pyplot.scatter(x=ascisse, y=diametro, label="Diametro", c='red')
+pyplot.title('Attacco')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.legend(loc = 2)
+#pyplot.legend(loc = 2)
+#pyplot.xlim(0, 22)
+pyplot.show()
+
+pyplot.figure(figsize=(16,9))
+ascisse = range(len(diametro))
+dimGC = pyplot.scatter(x=ascisse, y=sizeGC, label="Dimensione GC", c='green')
+pyplot.title('Attacco')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.legend(loc = 2)
+#pyplot.legend(loc = 2)
+#pyplot.xlim(0, 22)
+pyplot.show()
+    
+
+#networkx.draw_random(grafoTre)
+
+# <codecell>
+
+#Failure
+
+#lofaccio
+adiacenzatre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
+grafoTre = networkx.Graph(adiacenzatre)
+diametro = [2]
+sizeGC = [networkx.number_of_nodes(grafoTre)]
+#logrado
+
+#losmonto e loanalizzo
+
+grandezzaIniziale = networkx.number_of_nodes(grafoTre)
+passo = networkx.number_of_nodes(grafoTre)/100
+
+while (networkx.number_of_nodes(grafoTre) > passo):
+    gradiFinal = pandas.DataFrame(grafoTre.degree().items(), columns=['index', 'grado'])
+    gradiFinal.reindex(numpy.random.permutation(gradiFinal.index))
+    randomante = gradiFinal['index'].values
+#    print len(randomante)
+#    print networkx.number_of_nodes(grafoTre)
+    
+    for identificativo in randomante:
+        if (networkx.number_of_nodes(grafoTre) > len(randomante) - passo):
+            grafoTre.remove_node(identificativo)
+    
+#    print len(randomante)
+#    print networkx.number_of_nodes(grafoTre)
+    
+    if (networkx.is_connected(grafoTre) == False):
+        sottografi = networkx.connected_component_subgraphs(grafoTre)
+        grafoTre = sottografi[0]
+
+    %time diametro.append(networkx.diameter(grafoTre, e=None))
+    sizeGC.append(networkx.number_of_nodes(grafoTre))
+    %matplotlib inline
+    
+print diametro, sizeGC
+
+pyplot.figure(figsize=(16,9))
+ascisse = range(len(diametro))
+diam = pyplot.scatter(x=ascisse, y=diametro, label="Diametro", c='red')
+pyplot.title('Attacco')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.legend(loc = 2)
+#pyplot.legend(loc = 2)
+#pyplot.xlim(0, 22)
+pyplot.show()
+
+pyplot.figure(figsize=(16,9))
+ascisse = range(len(diametro))
+dimGC = pyplot.scatter(x=ascisse, y=sizeGC, label="Dimensione GC", c='green')
+pyplot.title('Attacco')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.legend(loc = 2)
+#pyplot.legend(loc = 2)
+#pyplot.xlim(0, 22)
+pyplot.show()
+
+
+#networkx.draw_random(grafoTre)
+
+# <codecell>
+
+adiacenzatre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
+grafoTre = networkx.Graph(adiacenzatre)
+diametro = []
+sizeGC = []
+
+    
+gradiFinal = pandas.DataFrame(grafoTre.degree().items(), columns=['index', 'grado'])
+#gradiFinal.sort(["grado"], ascending=[False], inplace=True)
+#gradiFinal = gradiFinal.reset_index()
+#gradiFinal.drop(gradiFinal.columns[[0]], axis = 1, inplace=True)
+gradiFinal.reindex(numpy.random.permutation(gradiFinal.index))
 
 # <markdowncell>
 
