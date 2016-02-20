@@ -371,49 +371,71 @@ pyplot.show()
 #Attacco
 
 #lofaccio
-compagnia = "Tre"
-adiacenzaFinal = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia)),delimiter=',',dtype='int')
-grafoFinal = networkx.Graph(adiacenzaFinal)
-diametro = [2]
-relSizeGC = [1]
-sizeGC = [networkx.number_of_nodes(grafoFinal)]
-#logrado
 
-#losmonto e loanalizzo
+#for aziende in gestore:
+#    dataframe = pandas.read_csv("../data/{0}_towers.csv".format(aziende))
+#    coordinate = dataframe[['lat', 'lon']].values
+#    raggio = dataframe['range'].values
 
-graphSize = networkx.number_of_nodes(grafoFinal)
-passo = networkx.number_of_nodes(grafoFinal)/100
 
-while (networkx.number_of_nodes(grafoFinal) > passo):
-    gradiFinal = pandas.DataFrame(grafoFinal.degree().items(), columns=['index', 'grado'])
-    gradiFinal.sort(["grado"], ascending=[False], inplace=True)
-    gradiFinal = gradiFinal.reset_index()
-    gradiFinal.drop(gradiFinal.columns[[0]], axis = 1, inplace=True)
-    sortedIDnode = gradiFinal['index'].values
+#gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
+#gestore = ["Roma"]
+gestore = ["Tim", "Vodafone", "Wind", "Tre"]
 
-    for identificativo in sortedIDnode:
-        if (networkx.number_of_nodes(grafoFinal) > len(sortedIDnode) - passo):
-            grafoFinal.remove_node(identificativo)
+diametro = []
+relSizeGC = []
+aziendaFinal = []
+ascisse = []
 
-    sottografi = networkx.connected_component_subgraphs(grafoFinal)
-    giantCluster = sottografi[0]
+def attacco(compagnia, step):
+    adiacenzaFinal = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia)),delimiter=',',dtype='int')
+    grafoFinal = networkx.Graph(adiacenzaFinal)
 
-    diametro.append(networkx.diameter(giantCluster, e=None))
-    relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
+    graphSize = networkx.number_of_nodes(grafoFinal)
+    passo = networkx.number_of_nodes(grafoFinal)/step
+    
+    i = 0
+    ascisse.append(i)
+    aziendaFinal.append(compagnia)
+    diametro.append(2)
+    relSizeGC.append(1)
 
+    
+    while (networkx.number_of_nodes(grafoFinal) > passo):
+        gradiFinal = pandas.DataFrame(grafoFinal.degree().items(), columns=['index', 'grado'])
+        gradiFinal.sort(["grado"], ascending=[False], inplace=True)
+        gradiFinal = gradiFinal.reset_index()
+        gradiFinal.drop(gradiFinal.columns[[0]], axis = 1, inplace=True)
+        sortedIDnode = gradiFinal['index'].values
+
+        for identificativo in sortedIDnode:
+            if (networkx.number_of_nodes(grafoFinal) > len(sortedIDnode) - passo):
+                grafoFinal.remove_node(identificativo)
+
+        sottografi = networkx.connected_component_subgraphs(grafoFinal)
+        giantCluster = sottografi[0]
+        
+        i += 1
+        ascisse.append(i)
+        aziendaFinal.append(compagnia)
+
+        
+        diametro.append(networkx.diameter(giantCluster, e=None))
+        relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
+
+    
 %matplotlib inline
 
-
-
+for provider in gestore:
+    %time attacco(provider,100)
 
 
 datiFinal = pandas.DataFrame()
 
 datiFinal['percent'] = ascisse
+datiFinal['Compagnia'] = aziendaFinal
 datiFinal['diam'] = diametro
 datiFinal['GC'] = relSizeGC
-datiFinal['Diametro'] = "Diametro"
-datiFinal['Giant Cluster'] = "Dimensione relativa Giant Cluster" 
 
 datiFinal.head()
 
@@ -421,27 +443,27 @@ seaborn.set_context("notebook", font_scale=1.1)
 seaborn.set_style("ticks")
 
 
-sns.lmplot('percent', 'diam',
+seaborn.lmplot('percent', 'diam',
            data=datiFinal,
            fit_reg=False,
            size = 7,
            aspect = 1.7778,
-           hue="Diametro",
+           hue='Compagnia',
            scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Attacco')
+pyplot.title('Attacco: diametro')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,max(diametro)+2)
 
-sns.lmplot('percent', 'GC',
+seaborn.lmplot('percent', 'GC',
            data=datiFinal,
            fit_reg=False,
            size = 7,
            aspect = 1.7778,
-           hue="Giant Cluster",
+           hue='Compagnia',
            scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Attacco')
+pyplot.title('Attacco: dimensioni relative del GC')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
@@ -453,51 +475,65 @@ pyplot.ylim(0,1.1)
 
 #Failure
 
-#lofaccio
-compagnia = "Tre"
-adiacenzaFinal = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia)),delimiter=',',dtype='int')
-grafoFinal = networkx.Graph(adiacenzaFinal)
-diametro = [2]
-relSizeGC = [1]
-sizeGC = [networkx.number_of_nodes(grafoFinal)]
-#logrado
+gestore = ["Tim", "Vodafone", "Wind", "Tre"]
+#
+#gestore = ["Tre"]
 
-#losmonto e loanalizzo
+diametro = []
+relSizeGC = []
+aziendaFinal = []
+ascisse = []
 
-graphSize = networkx.number_of_nodes(grafoFinal)
-passo = networkx.number_of_nodes(grafoFinal)/100
+def randomFailure(compagnia, step):
+    adiacenzaFinal = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia)),delimiter=',',dtype='int')
+    grafoFinal = networkx.Graph(adiacenzaFinal)
 
-while (networkx.number_of_nodes(grafoFinal) > passo):
-    gradiFinal = pandas.DataFrame(grafoFinal.degree().items(), columns=['index', 'grado'])
-    gradiFinal.reindex(numpy.random.permutation(gradiFinal.index))
-    randomante = gradiFinal['index'].values
-#    print len(randomante)
-#    print networkx.number_of_nodes(grafoTre)
+    graphSize = networkx.number_of_nodes(grafoFinal)
+    passo = networkx.number_of_nodes(grafoFinal)/step
     
-    for identificativo in randomante:
-        if (networkx.number_of_nodes(grafoFinal) > len(randomante) - passo):
-            grafoFinal.remove_node(identificativo)
+    i = 0
+    ascisse.append(i)
+    aziendaFinal.append(compagnia)
+    diametro.append(2)
+    relSizeGC.append(1)
     
-#    print len(randomante)
-#    print networkx.number_of_nodes(grafoTre)
+    while (networkx.number_of_nodes(grafoFinal) > passo):
+        gradiFinal = pandas.DataFrame(grafoFinal.degree().items(), columns=['index', 'grado'])
+        gradiFinal.reindex(numpy.random.permutation(gradiFinal.index))
+        randomante = gradiFinal['index'].values
+    #    print len(randomante)
+    #    print networkx.number_of_nodes(grafoTre)
+
+        for identificativo in randomante:
+            if (networkx.number_of_nodes(grafoFinal) > len(randomante) - passo):
+                grafoFinal.remove_node(identificativo)
     
-#    if (networkx.is_connected(grafoTre) == False):
-    sottografi = networkx.connected_component_subgraphs(grafoFinal)
+
+        sottografi = networkx.connected_component_subgraphs(grafoFinal)
+        giantCluster = sottografi[0]
         
-    giantCluster = sottografi[0]
-    
-    diametro.append(networkx.diameter(giantCluster, e=None))
-    relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
-    sizeGC.append(networkx.number_of_nodes(giantCluster))
+        i += 100/step
+        ascisse.append(i)
+        aziendaFinal.append(compagnia)
+
+        
+        diametro.append(networkx.diameter(giantCluster, e=None))
+        relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
+
+
+
+
+for provider in gestore:
+    %time randomFailure(provider, 20)
 
 %matplotlib inline
+
 datiFinal = pandas.DataFrame()
 
 datiFinal['percent'] = ascisse
+datiFinal['Compagnia'] = aziendaFinal
 datiFinal['diam'] = diametro
 datiFinal['GC'] = relSizeGC
-datiFinal['Diametro'] = "Diametro"
-datiFinal['Giant Cluster'] = "Dimensione relativa Giant Cluster" 
 
 datiFinal.head()
 
@@ -505,39 +541,58 @@ seaborn.set_context("notebook", font_scale=1.1)
 seaborn.set_style("ticks")
 
 
-sns.lmplot('percent', 'diam',
+seaborn.lmplot('percent', 'diam',
            data=datiFinal,
            fit_reg=False,
            size = 7,
            aspect = 1.7778,
-           hue="Diametro",
+           hue='Compagnia',
            scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Attacco')
+pyplot.title('Random failure: diametro')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,max(diametro)+2)
 
-sns.lmplot('percent', 'GC',
+seaborn.lmplot('percent', 'GC',
            data=datiFinal,
            fit_reg=False,
            size = 7,
            aspect = 1.7778,
-           hue="Giant Cluster",
+           hue='Compagnia',
            scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Attacco')
+pyplot.title('Random failure: dimensioni relative del GC')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
 
-
-#networkx.draw_random(grafoTre)
-
 # <markdowncell>
 
-# #CON SUBGRAPH SI DOVREBBE POTER FARE!
-# http://stackoverflow.com/questions/17450521/networkx-finding-the-natural-clusters-of-points-on-a-graph
+# #CALCOLO DEL DIAMETRO DI RETE ROMA IMPOSSIBILE, ANDAMENTO ESPONENZIALE CON L'AUMENTARE DEI NODI
+# 
+# 
+# ####passo di 1/10 per volta
+# CPU times: user 30.2 s, sys: 156 ms, total: 30.4 s  
+# Wall time: 30.1 s  
+# CPU times: user 14.1 s, sys: 56 ms, total: 14.2 s  
+# Wall time: 14.1 s  
+# CPU times: user 1min 7s, sys: 352 ms, total: 1min 7s  
+# Wall time: 1min 6s  
+# CPU times: user 12 s, sys: 72 ms, total: 12.1 s  
+# Wall time: 11.9 s
+# 
+# 
+# ####passo di 1/20 per volta
+# CPU times: user 1min 6s, sys: 368 ms, total: 1min 6s  
+# Wall time: 1min 5s  
+# CPU times: user 29 s, sys: 176 ms, total: 29.2 s  
+# Wall time: 28.9 s  
+# CPU times: user 2min 28s, sys: 848 ms, total: 2min 29s  
+# Wall time: 2min 27s  
+# CPU times: user 25.4 s, sys: 116 ms, total: 25.6 s  
+# Wall time: 25.4 s  
+# 
 
 # <markdowncell>
 
@@ -564,13 +619,17 @@ pyplot.ylim(0,1.1)
 # * log binning  ✔ (lo sono già)
 # * FARE GRAFICI MEGLIO ✔
 # * Fare grafici un po' meglio
-# * Fare fit con curva che picca a v medio e poi esponenziale, tipo andamento legge di Planck
-# * variazione del diametro con rimozione random o con rimozione preferenziale
-# * Soglia percolativa: fare grafico dimensioni giant cluster (in realtà dimensione relativa, cioè dimensione/ndati totali in quel momento nel cluster) in funzione di rimozione di nodi
-# * in modo casuale
-# * cominciando da i nodi più connessi 
-# * barabasi e albert dicono che andamento giant cluster relativo è indipendente dalla dimensione della rete, non solo per reti scale free (frattali), ma anche per reti esponenziali! (frattali anch'esse?) Verificare sta cosa facendo confronto andamento GC tra rete totale e reti delle varie compagnie  
+# * Fare fit con curva che picca a v medio e poi esponenziale, tipo andamento legge di Planck 
+# * variazione del diametro con rimozione random o con rimozione preferenziale ✔
+# * fare grafico dimensioni giant cluster (in realtà dimensione relativa, cioè dimensione/ndati totali in quel momento nel cluster) in funzione di rimozione di nodi ✔
+# * in modo casuale ✔
+# * cominciando da i nodi più connessi ✔
+# * approfondire condizioni di soglia percolativa (v lez prof e articoli)
+# * barabasi e albert dicono che andamento giant cluster relativo è indipendente dalla dimensione della rete, non solo per reti scale free (frattali), ma anche per reti esponenziali! (frattali anch'esse?) Verificare sta cosa facendo confronto andamento GC tra rete totale e reti delle varie compagnie
+# * fare dei grafi barabasi e erdos e aggiungere quei grafi modellizzati a grafici di attacco e failure per fare confronto
+# 
 # NB con gli attacchi random fare tanti attacchi e vedere diametro e GCsize medi, non un solo attacco!   
+# 
 # NB giant cluster è cluster che scala con N.   
 # E.g., se il giant cluster è composto da N/10 della rete, se raddoppio la rete o la dimezzo deve rimanere composto da 1/10 del totale dei nodi della rete. Idem se è N/100 o N/0.9
 # 
@@ -711,6 +770,36 @@ pyplot.title('Benchmark')
 pyplot.xlabel("Numero dati")
 pyplot.ylabel("Tempo di calcolo")
 pyplot.legend(loc = 2)
+
+
+
+datiFinal = pandas.DataFrame()
+datiFinal['x'] = numdati + numdati
+datiFinal['y'] = tempieuclid + tempigeo
+datiFinal['z'] = "geo"
+datiFinal.head()
+
+seaborn.set_context("notebook", font_scale=1.1)
+seaborn.set_style("ticks")
+
+
+euclide = seaborn.lmplot('x', 'y',
+           data=datiFinal,
+           fit_reg=False,
+           size = 7,
+           aspect = 1.7778,
+           #hue="y1",
+           scatter_kws={"marker": "D", "s": 100})
+geoide = pyplot.scatter(x=numdati, y=tempigeo, label="Geodesic Dist", c='red', marker = 'o')
+pyplot.title('Attacco')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+#pyplot.xlim(0, 100)
+#pyplot.ylim(0,max(diametro)+2)
+
+
+
+#graph.plot_joint(plt.scatter, marker='x', c='b', s=50)
 #roma.plot(kind="scatter", x="lon", y="lat", label="Roma PRELIMINARE")
 
 # <codecell>
