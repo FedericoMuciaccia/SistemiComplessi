@@ -186,7 +186,11 @@ for aziende in gestore:
     dataframe = pandas.read_csv("../data/{0}_towers.csv".format(aziende))
     coordinate = dataframe[['lat', 'lon']].values
     raggio = dataframe['range'].values
-
+    
+#    for i in range(len(raggio)):
+#        if(raggio[i] < 500):
+#            raggio[i] = 500
+    
     numdati = raggio.size
     
     #%time adiacenzaGeo = matriceSupGeodetic(coordinate, raggio)
@@ -305,7 +309,7 @@ distribuzione = degreeDistributionLog(gradoTim, gestore[1], colori[1])
 distribuzione = degreeDistributionLog(gradoVoda, gestore[2], colori[2])
 distribuzione = degreeDistributionLog(gradoWind, gestore[3], colori[3])
 distribuzione = degreeDistributionLog(gradoTre, gestore[4], colori[4])
-pyplot.xlim(1,1000)
+#pyplot.xlim(1,1000)
 pyplot.legend()
 pyplot.show()
 
@@ -315,7 +319,7 @@ distribuzione = degreeDistribution(gradoTim, gestore[1], colori[1])
 distribuzione = degreeDistribution(gradoVoda, gestore[2], colori[2])
 distribuzione = degreeDistribution(gradoWind, gestore[3], colori[3])
 distribuzione = degreeDistribution(gradoTre, gestore[4], colori[4])
-pyplot.xlim(1,200)
+pyplot.xlim(1,1000)
 pyplot.legend()
 pyplot.show()
 

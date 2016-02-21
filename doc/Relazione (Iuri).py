@@ -8,11 +8,34 @@
 # <markdowncell>
 
 # ###Sommario
+# 
+# In questa relazione bla bla  
+# ######In paragrafo 1 
+# teoria reti, modelli, proprietà percolative
+# ######In paragrafo 2
+# dati rete antenne cell
+# ######In paragrafo 3
+# simulazione breakdown
 
 # <markdowncell>
 
 # ##1   Reti *scale-free*
+# Reti, reti complesse, come e perché
 # ###1.1  Teoria
+# Proprietà reti, scale-freeness di alcune, etc boh?
+# ####1.1.1 Modelli di rete esponenziale
+# #####Random network
+# Descrizione modello
+# Mettere un grafo e un grafico esemplificativo
+# #####Small World
+# Descrizione modello
+# Mettere un grafo e un grafico esemplificativo
+# ##### Scale-free preferential attachment
+# Descrizione modello
+# Mettere un grafo e un grafico esemplificativo
+# 
+# ####1.1.2
+# 
 # ###1.2  Percolazione
 # ####1.2.1  Soglia percolativa
 
