@@ -15,7 +15,6 @@ import pandas
 import numpy
 import networkx
 from matplotlib import pyplot
-import seaborn
 %matplotlib inline
 
 # <markdowncell>
@@ -226,28 +225,37 @@ print("num gradi Wind", networkx.number_of_nodes(grafoWind))
 print("num gradi Tre", networkx.number_of_nodes(grafoTre))
 
 gradoRoma = grafoRoma.degree().values()
-#gadoRoma = networkx.degree_histogram(grafoRoma)
 numpy.savetxt("../data/DistrGrado_Roma",gradoRoma,fmt='%d',newline='\n')
+istoGradoRoma = networkx.degree_histogram(grafoRoma)
+numpy.savetxt("../data/IstoGrado_Roma",istoGradoRoma,fmt='%d',newline='\n')
 romaCell["grado"] = gradoRoma
 romaCell.to_csv("../data/Roma_towers.csv")
 
 gradoTim = grafoTim.degree().values()
 numpy.savetxt("../data/DistrGrado_Tim",gradoTim,fmt='%d',newline='\n')
+istoGradoTim = networkx.degree_histogram(grafoTim)
+numpy.savetxt("../data/IstoGrado_Tim",istoGradoTim,fmt='%d',newline='\n')
 timCell["grado"] = gradoTim
 timCell.to_csv("../data/Tim_towers.csv")
 
 gradoVoda = grafoVoda.degree().values()
 numpy.savetxt("../data/DistrGrado_Vodafone",gradoVoda,fmt='%d',newline='\n')
+istoGradoVoda = networkx.degree_histogram(grafoVoda)
+numpy.savetxt("../data/IstoGrado_Voda",istoGradoVoda,fmt='%d',newline='\n')
 vodaCell["grado"] = gradoVoda
 vodaCell.to_csv("../data/Vodafone_towers.csv")
 
 gradoWind = grafoWind.degree().values()
 numpy.savetxt("../data/DistrGrado_Wind",gradoWind,fmt='%d',newline='\n')
+istoGradoWind = networkx.degree_histogram(grafoWind)
+numpy.savetxt("../data/IstoGrado_Wind",istoGradoWind,fmt='%d',newline='\n')
 windCell["grado"] = gradoWind
 windCell.to_csv("../data/Wind_towers.csv")
 
 gradoTre = grafoTre.degree().values()
 numpy.savetxt("../data/DistrGrado_Tre",gradoTre,fmt='%d',newline='\n')
+istoGradoTre = networkx.degree_histogram(grafoTre)
+numpy.savetxt("../data/IstoGrado_Tre",istoGradoTre,fmt='%d',newline='\n')
 treCell["grado"] = gradoTre
 treCell.to_csv("../data/Tre_towers.csv")
 
@@ -276,13 +284,13 @@ pyplot.show()
 gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
 colori = ['#4d4d4d', '#004184','#ff3300','#ff8000','#018ECC']
 def degreeDistribution(gradi, azienda, colore):
-    pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore)
+    pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore, linewidth=1.1)
     pyplot.title('Degree distribution')
     pyplot.xlabel("Degree")
     pyplot.ylabel("Frequency")
 
 def degreeDistributionLog(gradi, azienda, colore):
-    distribuzioneRange = pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore)
+    distribuzioneRange = pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore, linewidth=1.1)
     pyplot.title('Degree distribution')
     pyplot.xlabel("Degree")
     pyplot.ylabel("Frequency")
@@ -297,7 +305,7 @@ distribuzione = degreeDistributionLog(gradoTim, gestore[1], colori[1])
 distribuzione = degreeDistributionLog(gradoVoda, gestore[2], colori[2])
 distribuzione = degreeDistributionLog(gradoWind, gestore[3], colori[3])
 distribuzione = degreeDistributionLog(gradoTre, gestore[4], colori[4])
-#pyplot.xlim(1,1000)
+pyplot.xlim(1,1000)
 pyplot.legend()
 pyplot.show()
 
@@ -320,13 +328,13 @@ pyplot.show()
 gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
 colori = ['#4d4d4d', '#004184','#ff3300','#ff8000','#018ECC']
 def rangeDistribution(gradi, azienda, colore):
-    pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore)
+    pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore, linewidth=1.1)
     pyplot.title('Range distribution')
     pyplot.xlabel("Range")
     pyplot.ylabel("Frequency")
 
 def rangeDistributionLog(gradi, azienda, colore):
-    distribuzioneRange = pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore)
+    distribuzioneRange = pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore, linewidth=1.1)
     pyplot.title('Range distribution')
     pyplot.xlabel("Range")
     pyplot.ylabel("Frequency")
@@ -368,6 +376,7 @@ pyplot.show()
 
 # <codecell>
 
+import seaborn
 #Attacco
 
 #lofaccio
@@ -381,18 +390,18 @@ pyplot.show()
 #gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
 #gestore = ["Roma"]
 gestore = ["Tim", "Vodafone", "Wind", "Tre"]
-
+#gestore =["Wind"]
 diametro = []
 relSizeGC = []
 aziendaFinal = []
 ascisse = []
 
-def attacco(compagnia, step):
+def attacco(compagnia, steps):
     adiacenzaFinal = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia)),delimiter=',',dtype='int')
     grafoFinal = networkx.Graph(adiacenzaFinal)
 
     graphSize = networkx.number_of_nodes(grafoFinal)
-    passo = networkx.number_of_nodes(grafoFinal)/step
+    passo = networkx.number_of_nodes(grafoFinal)/steps
     
     i = 0
     ascisse.append(i)
@@ -415,7 +424,7 @@ def attacco(compagnia, step):
         sottografi = networkx.connected_component_subgraphs(grafoFinal)
         giantCluster = sottografi[0]
         
-        i += 1
+        i += 100/steps
         ascisse.append(i)
         aziendaFinal.append(compagnia)
 
@@ -484,12 +493,12 @@ relSizeGC = []
 aziendaFinal = []
 ascisse = []
 
-def randomFailure(compagnia, step):
+def randomFailure(compagnia, steps):
     adiacenzaFinal = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia)),delimiter=',',dtype='int')
     grafoFinal = networkx.Graph(adiacenzaFinal)
 
     graphSize = networkx.number_of_nodes(grafoFinal)
-    passo = networkx.number_of_nodes(grafoFinal)/step
+    passo = networkx.number_of_nodes(grafoFinal)/steps
     
     i = 0
     ascisse.append(i)
@@ -512,7 +521,7 @@ def randomFailure(compagnia, step):
         sottografi = networkx.connected_component_subgraphs(grafoFinal)
         giantCluster = sottografi[0]
         
-        i += 100/step
+        i += 100/steps
         ascisse.append(i)
         aziendaFinal.append(compagnia)
 
@@ -562,6 +571,219 @@ seaborn.lmplot('percent', 'GC',
            hue='Compagnia',
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Random failure: dimensioni relative del GC')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+pyplot.ylim(0,1.1)
+
+# <codecell>
+
+#calcolo attacco con modelli
+
+diametro = []
+relSizeGC = []
+aziendaFinal = []
+ascisse = []
+
+def modelAttack(modello, steps):
+    if(modello == 'Erdos-Renyi'):
+        grafoFinal = networkx.erdos_renyi_graph(1500, 0.05)
+        gradoFinal = grafoFinal.degree().values()
+        #print grado
+        grafico = degreeDistributionLog(gradoFinal, 'Erdos-Renyi', '#4d4d4d')
+    if(modello == 'Barabasi-Abert'):
+        grafoFinal = networkx.barabasi_albert_graph(1500, 2)
+        gradoFinal = grafoFinal.degree().values()
+        #print grado 
+        grafico = degreeDistributionLog(gradoFinal, 'Barabasi', '#ff3300')
+    if(modello == 'Watts-Strogatz'):
+        grafoFinal = networkx.newman_watts_strogatz_graph(1500, 37, 1)
+        gradoFinal = grafoFinal.degree().values()
+        #print grado  
+        grafico = degreeDistributionLog(gradoFinal, 'Watts', '#47d147')
+    
+    
+    graphSize = networkx.number_of_nodes(grafoFinal)
+    passo = networkx.number_of_nodes(grafoFinal)/float(steps)
+
+    i = 0
+    ascisse.append(i)
+    aziendaFinal.append(modello)
+#    diametro.append(2/float(graphSize))
+    diametro.append(2)
+    relSizeGC.append(1)
+
+    
+    while (networkx.number_of_nodes(grafoFinal) > passo):
+        gradiFinal = pandas.DataFrame(grafoFinal.degree().items(), columns=['index', 'grado'])
+        gradiFinal.sort(["grado"], ascending=[False], inplace=True)
+        gradiFinal = gradiFinal.reset_index()
+        gradiFinal.drop(gradiFinal.columns[[0]], axis = 1, inplace=True)
+        sortedIDnode = gradiFinal['index'].values
+
+        for identificativo in sortedIDnode:
+            if (networkx.number_of_nodes(grafoFinal) > len(sortedIDnode) - passo):
+                grafoFinal.remove_node(identificativo)
+
+        sottografi = networkx.connected_component_subgraphs(grafoFinal)
+        giantCluster = sottografi[0]
+        
+        i += 100/steps
+        ascisse.append(i)
+        aziendaFinal.append(modello)
+
+        
+        diametro.append(networkx.diameter(giantCluster, e=None))
+        relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
+
+
+pyplot.figure(figsize=(16,9))       
+modelAttack('Erdos-Renyi', 100)
+modelAttack('Watts-Strogatz', 100)
+modelAttack('Barabasi-Abert', 100)
+pyplot.legend()
+
+datiFinal = pandas.DataFrame()
+
+datiFinal['percent'] = ascisse
+datiFinal['Modello'] = aziendaFinal
+datiFinal['diam'] = diametro
+datiFinal['GC'] = relSizeGC
+
+datiFinal.head()
+
+seaborn.set_context("notebook", font_scale=1.1)
+seaborn.set_style("ticks")
+
+
+seaborn.lmplot('percent', 'diam',
+           data=datiFinal,
+           fit_reg=False,
+           size = 7,
+           aspect = 1.7778,
+           hue='Modello',
+           scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Attacco con i modelli di rete: diametro')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+#pyplot.ylim(0, 1)
+pyplot.ylim(0,max(diametro)+2)
+
+seaborn.lmplot('percent', 'GC',
+           data=datiFinal,
+           fit_reg=False,
+           size = 7,
+           aspect = 1.7778,
+           hue='Modello',
+           scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Attacco con i modelli di rete: dimensioni relative del GC')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+pyplot.ylim(0,1.1)
+
+# <codecell>
+
+#calcolo failure con modelli
+diametro = []
+relSizeGC = []
+aziendaFinal = []
+ascisse = []
+
+def modelFailure(modello, steps):
+    if(modello == 'Erdos-Renyi'):
+        grafoFinal = networkx.erdos_renyi_graph(1500, 0.05)
+        gradoFinal = grafoFinal.degree().values()
+        #print grado
+        grafico = degreeDistributionLog(gradoFinal, 'Erdos-Renyi', '#4d4d4d')
+    if(modello == 'Barabasi-Abert'):
+        grafoFinal = networkx.barabasi_albert_graph(1500, 2)
+        gradoFinal = grafoFinal.degree().values()
+        #print grado 
+        grafico = degreeDistributionLog(gradoFinal, 'Barabasi', '#ff3300')
+    if(modello == 'Watts-Strogatz'):
+        grafoFinal = networkx.newman_watts_strogatz_graph(1500, 37, 1)
+        gradoFinal = grafoFinal.degree().values()
+        #print grado  
+        grafico = degreeDistributionLog(gradoFinal, 'Watts', '#47d147')
+    
+
+    graphSize = networkx.number_of_nodes(grafoFinal)
+    passo = networkx.number_of_nodes(grafoFinal)/float(steps)
+
+    i = 0
+    ascisse.append(i)
+    aziendaFinal.append(modello)
+# diametro.append(2/float(graphSize))
+    diametro.append(2)
+    relSizeGC.append(1)
+
+    while (networkx.number_of_nodes(grafoFinal) > passo):
+        gradiFinal = pandas.DataFrame(grafoFinal.degree().items(), columns=['index', 'grado'])
+        gradiFinal.reindex(numpy.random.permutation(gradiFinal.index))
+        randomante = gradiFinal['index'].values
+    #    print len(randomante)
+    #    print networkx.number_of_nodes(grafoTre)
+
+        for identificativo in randomante:
+            if (networkx.number_of_nodes(grafoFinal) > len(randomante) - passo):
+                grafoFinal.remove_node(identificativo)
+
+
+        sottografi = networkx.connected_component_subgraphs(grafoFinal)
+        giantCluster = sottografi[0]
+
+        i += 100/steps
+        ascisse.append(i)
+        aziendaFinal.append(modello)
+        
+#        gcSize = networkx.number_of_nodes(giantCluster)
+#        diametro.append(networkx.diameter(giantCluster, e=None)/float(gcSize))
+        diametro.append(networkx.diameter(giantCluster, e=None))
+        relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
+
+pyplot.figure(figsize=(16,9))       
+modelFailure('Watts-Strogatz', 50)
+modelFailure('Erdos-Renyi', 50)
+modelFailure('Barabasi-Abert', 50)
+pyplot.legend()
+
+datiFinal = pandas.DataFrame()
+
+datiFinal['percent'] = ascisse
+datiFinal['Modello'] = aziendaFinal
+datiFinal['diam'] = diametro
+datiFinal['GC'] = relSizeGC
+
+datiFinal.head()
+
+seaborn.set_context("notebook", font_scale=1.1)
+seaborn.set_style("ticks")
+
+
+seaborn.lmplot('percent', 'diam',
+           data=datiFinal,
+           fit_reg=False,
+           size = 7,
+           aspect = 1.7778,
+           hue='Modello',
+           scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Random failure con i modelli di rete: diametro')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+#pyplot.ylim(0, 1)
+pyplot.ylim(0,max(diametro)+2)
+
+seaborn.lmplot('percent', 'GC',
+           data=datiFinal,
+           fit_reg=False,
+           size = 7,
+           aspect = 1.7778,
+           hue='Modello',
+           scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Random failure con i modelli di rete: dimensioni relative del GC')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
@@ -641,6 +863,7 @@ pyplot.ylim(0,1.1)
 #   
 #   Altro materiale forse utile:  
 #   http://www.renyi.hu/~p_erdos/1959-11.pdf (Erdos e Renyi)  
+#   http://arxiv.org/pdf/cond-mat/0106096.pdf (Stat mec scale free network)  
 #   http://arxiv.org/pdf/cond-mat/9910332.pdf  
 #   http://arxiv.org/pdf/cond-mat/9907068.pdf  
 #   http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.71.8276&rep=rep1&type=pdf  
@@ -756,78 +979,6 @@ pyplot.ylim(0,1.1)
 # Wall time: 6.65 s
 # 
 # 
-
-# <codecell>
-
-
-numdati = [50, 100, 500, 1000, 2000]
-tempieuclid = [0.0042575, 0.0192, 0.402, 1.62, 6.545]
-tempigeo = [0.032, 0.128, 3.25, 12.5, 50.35]
-
-geo = pyplot.scatter(x=numdati, y=tempigeo, label="Geodesic Dist", c='red', marker = 'o')
-euclid = pyplot.scatter(x=numdati, y=tempieuclid, label="Euclid Dist", c='green')
-pyplot.title('Benchmark')
-pyplot.xlabel("Numero dati")
-pyplot.ylabel("Tempo di calcolo")
-pyplot.legend(loc = 2)
-
-
-
-datiFinal = pandas.DataFrame()
-datiFinal['x'] = numdati + numdati
-datiFinal['y'] = tempieuclid + tempigeo
-datiFinal['z'] = "geo"
-datiFinal.head()
-
-seaborn.set_context("notebook", font_scale=1.1)
-seaborn.set_style("ticks")
-
-
-euclide = seaborn.lmplot('x', 'y',
-           data=datiFinal,
-           fit_reg=False,
-           size = 7,
-           aspect = 1.7778,
-           #hue="y1",
-           scatter_kws={"marker": "D", "s": 100})
-geoide = pyplot.scatter(x=numdati, y=tempigeo, label="Geodesic Dist", c='red', marker = 'o')
-pyplot.title('Attacco')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-#pyplot.xlim(0, 100)
-#pyplot.ylim(0,max(diametro)+2)
-
-
-
-#graph.plot_joint(plt.scatter, marker='x', c='b', s=50)
-#roma.plot(kind="scatter", x="lon", y="lat", label="Roma PRELIMINARE")
-
-# <codecell>
-
-print diametro, relSizeGC
-pyplot.figure(figsize=(16,9))
-ascisse = range(len(diametro))
-diam = pyplot.scatter(x=ascisse, y=diametro, label="Diametro", c='red')
-pyplot.title('Attacco')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.legend(loc = 2)
-#pyplot.legend(loc = 2)
-pyplot.xlim(0, 100)
-pyplot.ylim(0,max(diametro)+2)
-pyplot.show()
-
-pyplot.figure(figsize=(16,9))
-ascisse = range(len(diametro))
-dimGC = pyplot.scatter(x=ascisse, y=relSizeGC, label="Dimensione relativa GC", c='green')
-pyplot.title('Attacco')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.legend(loc = 2)
-#pyplot.legend(loc = 2)
-pyplot.xlim(0, 100)
-pyplot.ylim(0,1.1)
-pyplot.show()
 
 # <markdowncell>
 
