@@ -41,6 +41,11 @@
 ## HTML
 [HTML color picker](http://www.w3schools.com/colors/colors_picker.asp)
 
+## pagina HTML della relazione
+[homepage](http://federicomuciaccia.github.io/SistemiComplessi/)
+
+
+
 
 altri link vari:
 http://pandas.pydata.org/pandas-docs/stable/10min.html#min
@@ -152,6 +157,14 @@ http://pandas.pydata.org/pandas-docs/stable/visualization.html#density-plot
 https://www.chrisstucchio.com/blog/2012/dont_use_scatterplots.html
 http://stackoverflow.com/questions/20105364/how-can-i-make-a-scatter-plot-colored-by-density-in-matplotlib
 http://www.astrobetter.com/blog/2014/02/10/visualization-fun-with-python-2d-histogram-with-1d-histograms-on-axes/
+
+
+https://github.com/huyng/latex-simple-css
+http://tex.stackexchange.com/questions/139067/i-have-a-dream-using-css-to-style-a-tex-document
+http://www.markschenk.com/cssexp/publication/article.xml
+http://alistapart.com/article/boom
+http://thomaspark.co/2015/01/pubcss-formatting-academic-publications-in-html-css/
+
 
 
 

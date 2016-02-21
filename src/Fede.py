@@ -796,6 +796,8 @@ triangolo
 # listofzeros = [0] * n
 
 
+# <img src="https://i.imgflip.com/zjptw.jpg"/>
+
 # In[ ]:
 
 

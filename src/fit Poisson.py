@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[6]:
+# In[59]:
 
 import numpy
 
@@ -12,15 +12,23 @@ import scipy
 from scipy import stats
 from scipy import optimize
 
-matplotlib tk
+# %matplotlib tk
 # %matplotlib notebook #?
 get_ipython().magic(u'matplotlib inline')
 
 
+import math
+
+def poissoniana(x, mu, area):
+    return area * (numpy.exp(-mu) * mu**x)/ (scipy.misc.factorial(x)) # if x >= 0
+
+def esponenziale(x, alpha, mu, nu):
+    return numpy.exp(-alpha*(x-mu))+nu
+
 
 # define unnormalized gaussian
-def generalGaussian(x, mu, sigma, area):
-    return area * scipy.stats.norm.pdf(x, mu, sigma)
+# def generalGaussian(x, mu, sigma, area):
+#     return area * scipy.stats.norm.pdf(x, mu, sigma)
 
 # conversion between x ticks and bin delimiters and viceversa
 def binDelimitersFromX(x):
@@ -60,18 +68,22 @@ def fitHistogram(f, histogramResults, dictAdditionalArguments={}):
 
 
 # function to use in the fit
-f = generalGaussian
+f = esponenziale
 
 # prior parameters
-muPrior = 0
-sigmaPrior = 1
+muPrior = 130
+nuPrior = 0
+alphaPrior = .048
 
-# montecarlo sample generation
-sampleLenght = 1000
-dataSample = numpy.random.normal(muPrior,sigmaPrior,sampleLenght)
+dataSample = numpy.genfromtxt("../data/DistrGrado_Wind",dtype='int') 
+sampleLenght = len(dataSample)
+
+
+
+
 
 # binning
-bins=200
+bins=2000
 # TODO how many bins?
 # vedere come l'accuratezza del fit
 # varia con la grandezza della canalizzazione
@@ -81,11 +93,13 @@ bins=200
 # vedere optimal sampling con analogo discreto
 # della frequenza di Nyquist sui canali
 # vedere numero di canali in funzione del numero di dati che si hanno
+
+
 binDelimiters = numpy.linspace(min(dataSample), max(dataSample), bins)
 binSize = binDelimiters[1] - binDelimiters[0]
 
 area = sampleLenght*binSize
-priorParameters = muPrior, sigmaPrior, area
+priorParameters = [alphaPrior, muPrior, nuPrior]
 
 
 
@@ -104,17 +118,22 @@ histogramResults = matplotlib.pyplot.hist(dataSample, bins=binDelimiters, histty
 # matplotlib.pyplot.axvline(x=max(dataSample))
 
 # generalized fit
-values, covariance = fitHistogram(f, histogramResults, {"p0": [muPrior, sigmaPrior, area]})
+# values, covariance = fitHistogram(f, histogramResults, {"p0": priorParameters})
 # TODO there's a problem in the gaussian fit documentation:
 # muFit, sigmaFit = scipy.stats.norm.fit(dataSample) # area is missing
 
 # plot fit results
+print area
 print values
 print covariance
 
-# create reconstructed curve
-yFit =  f(x, *values)
-matplotlib.pyplot.plot(x, yFit, label="reconstructed")
+## create reconstructed curve
+#yFit =  f(x, *values)
+#matplotlib.pyplot.plot(x, yFit, label="reconstructed")
+
+matplotlib.pyplot.xlim(0, 200)
+matplotlib.pyplot.ylim(0, 100)
+
 
 # set the legend of the figure
 matplotlib.pyplot.legend(loc='best', frameon=False)
@@ -123,6 +142,11 @@ matplotlib.pyplot.legend(loc='best', frameon=False)
 # matplotlib.pyplot.xscale('log')
 # matplotlib.pyplot.yscale('log')
 # la gaussiana è una parabola nel grafico log-log
+
+
+
+# In[ ]:
+
 
 
 
