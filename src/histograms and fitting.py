@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[6]:
+# In[2]:
 
 import numpy
 
@@ -12,8 +12,8 @@ import scipy
 from scipy import stats
 from scipy import optimize
 
-matplotlib tk
-# %matplotlib notebook #?
+# %matplotlib tk
+# %matplotlib notebook ???
 get_ipython().magic(u'matplotlib inline')
 
 

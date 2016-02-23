@@ -3,24 +3,45 @@
 
 # ## logaritmic (base 2) binning in log-log (base 10) plots of integer histograms
 
-# In[1]:
+# In[67]:
 
 import numpy
 
+import matplotlib.pyplot
 
-# In[132]:
+get_ipython().magic(u'matplotlib inline')
 
-# a = range(1, 129)
-a = range(1, 14) # TODO vedere quando non si parte da 1
-# print a
 
-def  integerLogHistogram(integerData):
+# In[114]:
+
+
+DA BUTTARE
+
+
+def  logBinnedStepPlot(histogramResults):
     if 0 in integerData:
         return "error: log2(0) = ?"
 
+# y, binEdges = np.histogram(...)
+
+# plt.bar(bin_edges[:-1], hist, width=1) and plt.xlim(min(bin_edges), max(bin_edges))
+
+# plt.plot(x, y, ls='steps')
+
+values, binEdges, others = histogramResults
+
+
+# In[120]:
+
+
+DA BUTTARE
+
+binEdges = range(1,20)
+print binEdges # TODO vedere quando non si parte da 1
+
 # int arrotonda all'intero inferiore
-linMin = min(a)
-linMax = max(a)
+linMin = min(binEdges)
+linMax = max(binEdges)
 
 print linMin, linMax
 
@@ -38,109 +59,77 @@ print logBins
 
 # 1,2,4,8,16,32,64,128,256,512,1024
 
-
-# In[133]:
-
-nPartialLinBins = 2**logStop - 2**logStart + 1
-
-print nPartialLinBins
-
-a = numpy.ones(nPartialLinBins, dtype=int)
-
-
-# In[134]:
-
-a
-len(a)
-
-
-# In[139]:
-
-
-
-def numberArray(n):
-    return n * numpy.ones(n, dtype=int)
-
-pesi = map(numberArray, logBins)
-
-print pesi
-
-pesi = []
-
-for i in logBins:
-    numpy.append(pesi, numberArray(logBins[i -1]))
-
-# TODO vedere numpy.nditer(logBins)
-
-print pesi
-
-b = logBins.astype(float)
-
-print b
-
-print numberArray(8)
-
-c = 1/b
-
-print c
-
-
-# In[136]:
-
-logWeights = 
-
-
-# In[ ]:
-
-
-
-
-# In[137]:
-
-
 linStart = 2**logStop + 1
 linStop = linMax
 
 print linStart, linStop
 
-nOtherLinBins = linStop - linStart + 1
+nLinBins = linStop - linStart + 1
 
 print nLinBins
 
-linBins = numpy.linspace(linStart, linStop, num=nOtherLinBins, dtype=int)
+linBins = numpy.linspace(linStart, linStop, num=nLinBins, dtype=int)
 
 print linBins
-
-
-# In[138]:
-
-linWeights = numpy.ones(nOtherLinBins, dtype=int)
-
-print linWeights
-
-print len(linBins), len(linWeights)
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[74]:
 
 bins = numpy.append(logBins, linBins)
 
 print bins
 
+print len(bins)
+
+
+# In[121]:
+
+
+DA BUTTARE
+
+
+# uso le proprietà dei logaritmi in base 2:
+# 2^(n+1) - 2^n = 2^n
+divisoriDatiCanalizzatiLog = numpy.delete(logBins, -1)
+
+print divisoriDatiCanalizzatiLog
+
+divisoriDatiCanalizzatiLin = numpy.ones(nLinBins, dtype=int)
+
+print divisoriDatiCanalizzatiLin
+
+print len(divisoriDatiCanalizzatiLin)
+
+divisoriDatiCanalizzati = numpy.append(divisoriDatiCanalizzatiLog, divisoriDatiCanalizzatiLin)
+
+print divisoriDatiCanalizzati
+
+print len(divisoriDatiCanalizzati)
+
+
+# In[113]:
+
+
+x = numpy.concatenate(([0], bins))
+conteggi = values
+y = numpy.concatenate(([0], conteggi, [0]))
+matplotlib.pyplot.plot(x, y)
+
+matplotlib.pyplot.xscale('log')
+matplotlib.pyplot.yscale('log')
+matplotlib.pyplot.step(x, y, where='post') #where = mid OR post
+matplotlib.pyplot.xlim(0,100)
+matplotlib.pyplot.ylim(0,10)
+
+
+# In[86]:
+
+numpy.concatenate([0], conteggi, [0])
+
 
 # In[ ]:
 
-weights = numpy.append(logWeights, linWeights)
 
-print weights
+
+
+# In[ ]:
+
+
 
