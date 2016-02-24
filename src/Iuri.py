@@ -15,6 +15,7 @@ import pandas
 import numpy
 import networkx
 from matplotlib import pyplot
+import seaborn
 %matplotlib inline
 
 # <markdowncell>
@@ -380,26 +381,7 @@ pyplot.show()
 
 # <codecell>
 
-import seaborn
-#Attacco
-
-#lofaccio
-
-#for aziende in gestore:
-#    dataframe = pandas.read_csv("../data/{0}_towers.csv".format(aziende))
-#    coordinate = dataframe[['lat', 'lon']].values
-#    raggio = dataframe['range'].values
-
-
-#gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
-#gestore = ["Roma"]
-gestore = ["Tim", "Vodafone", "Wind", "Tre"]
-#gestore =["Wind"]
-diametro = []
-relSizeGC = []
-aziendaFinal = []
-ascisse = []
-
+#Funzioni
 def attacco(compagnia, steps):
     adiacenzaFinal = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia)),delimiter=',',dtype='int')
     grafoFinal = networkx.Graph(adiacenzaFinal)
@@ -433,69 +415,8 @@ def attacco(compagnia, steps):
         aziendaFinal.append(compagnia)
 
         
-        diametro.append(networkx.diameter(giantCluster, e=None))
+        #diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
-
-    
-%matplotlib inline
-
-for provider in gestore:
-    %time attacco(provider,100)
-
-
-datiFinal = pandas.DataFrame()
-
-datiFinal['percent'] = ascisse
-datiFinal['Compagnia'] = aziendaFinal
-datiFinal['diam'] = diametro
-datiFinal['GC'] = relSizeGC
-
-datiFinal.head()
-
-seaborn.set_context("notebook", font_scale=1.1)
-seaborn.set_style("ticks")
-
-
-seaborn.lmplot('percent', 'diam',
-           data=datiFinal,
-           fit_reg=False,
-           size = 7,
-           aspect = 1.7778,
-           hue='Compagnia',
-           scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Attacco: diametro')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.xlim(0, 100)
-pyplot.ylim(0,max(diametro)+2)
-
-seaborn.lmplot('percent', 'GC',
-           data=datiFinal,
-           fit_reg=False,
-           size = 7,
-           aspect = 1.7778,
-           hue='Compagnia',
-           scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Attacco: dimensioni relative del GC')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.xlim(0, 100)
-pyplot.ylim(0,1.1)
-
-#networkx.draw_random(grafoTre)
-
-# <codecell>
-
-#Failure
-
-gestore = ["Tim", "Vodafone", "Wind", "Tre"]
-#
-#gestore = ["Tre"]
-
-diametro = []
-relSizeGC = []
-aziendaFinal = []
-ascisse = []
 
 def randomFailure(compagnia, steps):
     adiacenzaFinal = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia)),delimiter=',',dtype='int')
@@ -530,65 +451,9 @@ def randomFailure(compagnia, steps):
         aziendaFinal.append(compagnia)
 
         
-        diametro.append(networkx.diameter(giantCluster, e=None))
+        #diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
-
-
-
-
-for provider in gestore:
-    %time randomFailure(provider, 20)
-
-%matplotlib inline
-
-datiFinal = pandas.DataFrame()
-
-datiFinal['percent'] = ascisse
-datiFinal['Compagnia'] = aziendaFinal
-datiFinal['diam'] = diametro
-datiFinal['GC'] = relSizeGC
-
-datiFinal.head()
-
-seaborn.set_context("notebook", font_scale=1.1)
-seaborn.set_style("ticks")
-
-
-seaborn.lmplot('percent', 'diam',
-           data=datiFinal,
-           fit_reg=False,
-           size = 7,
-           aspect = 1.7778,
-           hue='Compagnia',
-           scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Random failure: diametro')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.xlim(0, 100)
-pyplot.ylim(0,max(diametro)+2)
-
-seaborn.lmplot('percent', 'GC',
-           data=datiFinal,
-           fit_reg=False,
-           size = 7,
-           aspect = 1.7778,
-           hue='Compagnia',
-           scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Random failure: dimensioni relative del GC')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.xlim(0, 100)
-pyplot.ylim(0,1.1)
-
-# <codecell>
-
-#calcolo attacco con modelli
-
-diametro = []
-relSizeGC = []
-aziendaFinal = []
-ascisse = []
-
+        
 def modelAttack(modello, steps):
     if(modello == 'Erdos-Renyi'):
         grafoFinal = networkx.erdos_renyi_graph(1500, 0.05)
@@ -613,7 +478,6 @@ def modelAttack(modello, steps):
     i = 0
     ascisse.append(i)
     aziendaFinal.append(modello)
-#    diametro.append(2/float(graphSize))
     diametro.append(2)
     relSizeGC.append(1)
 
@@ -639,7 +503,169 @@ def modelAttack(modello, steps):
         
         diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
+        
+def modelFailure(modello, steps):
+    if(modello == 'Erdos-Renyi'):
+        grafoFinal = networkx.erdos_renyi_graph(1500, 0.0025)
+        gradoFinal = grafoFinal.degree().values()
+        #print grado
+        grafico = degreeDistributionLog(gradoFinal, 'Erdos-Renyi', '#4d4d4d')
+    if(modello == 'Barabasi-Abert'):
+        grafoFinal = networkx.barabasi_albert_graph(1500, 10)
+        gradoFinal = grafoFinal.degree().values()
+        #print grado 
+        grafico = degreeDistributionLog(gradoFinal, 'Barabasi', '#ff3300')
+    if(modello == 'Watts-Strogatz'):
+        grafoFinal = networkx.watts_strogatz_graph(1500, 10, 2)
+        gradoFinal = grafoFinal.degree().values()
+        #print grado  
+        grafico = degreeDistributionLog(gradoFinal, 'Watts', '#47d147')
+    
 
+    graphSize = networkx.number_of_nodes(grafoFinal)
+    passo = networkx.number_of_nodes(grafoFinal)/float(steps)
+
+    i = 0
+    ascisse.append(i)
+    aziendaFinal.append(modello)
+# diametro.append(2/float(graphSize))
+    diametro.append(2)
+    relSizeGC.append(1)
+
+    while (networkx.number_of_nodes(grafoFinal) > passo):
+        gradiFinal = pandas.DataFrame(grafoFinal.degree().items(), columns=['index', 'grado'])
+        gradiFinal.reindex(numpy.random.permutation(gradiFinal.index))
+        randomante = gradiFinal['index'].values
+    #    print len(randomante)
+    #    print networkx.number_of_nodes(grafoTre)
+
+        for identificativo in randomante:
+            if (networkx.number_of_nodes(grafoFinal) > len(randomante) - passo):
+                grafoFinal.remove_node(identificativo)
+
+
+        sottografi = networkx.connected_component_subgraphs(grafoFinal)
+        giantCluster = sottografi[0]
+
+        i += 100/steps
+        ascisse.append(i)
+        aziendaFinal.append(modello)
+        
+        diametro.append(networkx.diameter(giantCluster, e=None))
+        relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
+        
+colori = ['#004184','#ff3300','#ff8000','#018ECC', '#4d4d4d']
+
+# <codecell>
+
+import seaborn
+#Attacco
+
+gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
+
+diametro = []
+relSizeGC = []
+aziendaFinal = []
+ascisse = []
+    
+%matplotlib inline
+
+for provider in gestore:
+    %time attacco(provider,100)
+#    attacco(provider, 20)
+
+datiFinal = pandas.DataFrame()
+
+datiFinal['percent'] = ascisse
+datiFinal['Compagnia'] = aziendaFinal
+#datiFinal['diam'] = diametro
+datiFinal['GC'] = relSizeGC
+
+datiFinal.head()
+
+seaborn.set_context("notebook", font_scale=1.1)
+seaborn.set_style("ticks")
+
+#seaborn.lmplot('percent', 'diam', data=datiFinal, fit_reg=False, 
+#               size = 7, aspect = 1.7778,  
+#               hue='Compagnia', palette = colori, 
+#                scatter_kws={"marker": "D", "s": 100})
+#pyplot.title('Attacco: diametro')
+#pyplot.xlabel("%")
+#pyplot.ylabel("Valore")
+#pyplot.xlim(0, 100)
+#pyplot.ylim(0,max(diametro)+2)
+#pyplot.savefig('../img/AttackD_Final', format='eps', dpi=1000)
+
+seaborn.lmplot('percent', 'GC', data=datiFinal, fit_reg=False,
+           size = 7, aspect = 1.7778,
+           hue='Compagnia', palette = colori,
+           scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Attacco: dimensioni relative del GC')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+pyplot.ylim(0,1.1)
+pyplot.savefig('../img/AttackGC_Final', format='eps', dpi=1000)
+
+# <codecell>
+
+#Failure
+
+gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
+
+diametro = []
+relSizeGC = []
+aziendaFinal = []
+ascisse = []
+
+for provider in gestore:
+    %time randomFailure(provider, 100)
+
+%matplotlib inline
+
+datiFinal = pandas.DataFrame()
+
+datiFinal['percent'] = ascisse
+datiFinal['Compagnia'] = aziendaFinal
+#datiFinal['diam'] = diametro
+datiFinal['GC'] = relSizeGC
+
+datiFinal.head()
+
+seaborn.set_context("notebook", font_scale=1.1)
+seaborn.set_style("ticks")
+
+
+#seaborn.lmplot('percent', 'diam', data=datiFinal, fit_reg=False,
+#           size = 7, aspect = 1.7778,
+#           hue='Compagnia', palette = colori,
+#           scatter_kws={"marker": "D", "s": 100})
+#pyplot.title('Random failure: diametro')
+#pyplot.xlabel("%")
+#pyplot.ylabel("Valore")
+#pyplot.xlim(0, 100)
+#pyplot.ylim(0,max(diametro)+2)
+
+seaborn.lmplot('percent', 'GC', data=datiFinal, fit_reg=False,
+           size = 7, aspect = 1.7778,
+           hue='Compagnia', palette = colori,
+           scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Random failure: dimensioni relative del GC')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+pyplot.ylim(0,1.1)
+pyplot.savefig('../img/FailureGC_Final', format='eps', dpi=1000)
+
+# <codecell>
+
+#calcolo attacco con modelli
+
+diametro = []
+relSizeGC = []
+aziendaFinal = []
+ascisse = []
 
 pyplot.figure(figsize=(16,9))       
 modelAttack('Erdos-Renyi', 100)
@@ -659,7 +685,7 @@ datiFinal.head()
 seaborn.set_context("notebook", font_scale=1.1)
 seaborn.set_style("ticks")
 
-
+#PLOTS
 seaborn.lmplot('percent', 'diam',
            data=datiFinal,
            fit_reg=False,
@@ -695,63 +721,56 @@ relSizeGC = []
 aziendaFinal = []
 ascisse = []
 
-def modelFailure(modello, steps):
-    if(modello == 'Erdos-Renyi'):
-        grafoFinal = networkx.erdos_renyi_graph(1500, 0.05)
-        gradoFinal = grafoFinal.degree().values()
-        #print grado
-        grafico = degreeDistributionLog(gradoFinal, 'Erdos-Renyi', '#4d4d4d')
-    if(modello == 'Barabasi-Abert'):
-        grafoFinal = networkx.barabasi_albert_graph(1500, 2)
-        gradoFinal = grafoFinal.degree().values()
-        #print grado 
-        grafico = degreeDistributionLog(gradoFinal, 'Barabasi', '#ff3300')
-    if(modello == 'Watts-Strogatz'):
-        grafoFinal = networkx.newman_watts_strogatz_graph(1500, 37, 1)
-        gradoFinal = grafoFinal.degree().values()
-        #print grado  
-        grafico = degreeDistributionLog(gradoFinal, 'Watts', '#47d147')
-    
-
-    graphSize = networkx.number_of_nodes(grafoFinal)
-    passo = networkx.number_of_nodes(grafoFinal)/float(steps)
-
-    i = 0
-    ascisse.append(i)
-    aziendaFinal.append(modello)
-# diametro.append(2/float(graphSize))
-    diametro.append(2)
-    relSizeGC.append(1)
-
-    while (networkx.number_of_nodes(grafoFinal) > passo):
-        gradiFinal = pandas.DataFrame(grafoFinal.degree().items(), columns=['index', 'grado'])
-        gradiFinal.reindex(numpy.random.permutation(gradiFinal.index))
-        randomante = gradiFinal['index'].values
-    #    print len(randomante)
-    #    print networkx.number_of_nodes(grafoTre)
-
-        for identificativo in randomante:
-            if (networkx.number_of_nodes(grafoFinal) > len(randomante) - passo):
-                grafoFinal.remove_node(identificativo)
-
-
-        sottografi = networkx.connected_component_subgraphs(grafoFinal)
-        giantCluster = sottografi[0]
-
-        i += 100/steps
-        ascisse.append(i)
-        aziendaFinal.append(modello)
-        
-#        gcSize = networkx.number_of_nodes(giantCluster)
-#        diametro.append(networkx.diameter(giantCluster, e=None)/float(gcSize))
-        diametro.append(networkx.diameter(giantCluster, e=None))
-        relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
-
 pyplot.figure(figsize=(16,9))       
-modelFailure('Watts-Strogatz', 50)
-modelFailure('Erdos-Renyi', 50)
-modelFailure('Barabasi-Abert', 50)
+modelFailure('Watts-Strogatz', 20)
+modelFailure('Erdos-Renyi', 20)
+modelFailure('Barabasi-Abert', 20)
 pyplot.legend()
+
+datiFinal = pandas.DataFrame()
+
+datiFinal['percent'] = ascisse
+datiFinal['Modello'] = aziendaFinal
+#datiFinal['diam'] = diametro
+datiFinal['GC'] = relSizeGC
+
+datiFinal.head()
+
+seaborn.set_context("notebook", font_scale=1.1)
+seaborn.set_style("ticks")
+
+
+#seaborn.lmplot('percent', 'diam',
+#           data=datiFinal,
+#           fit_reg=False,
+#           size = 7,
+#           aspect = 1.7778,
+#           hue='Modello',
+#           scatter_kws={"marker": "D", "s": 100})
+#pyplot.title('Random failure con i modelli di rete: diametro')
+#pyplot.xlabel("%")
+#pyplot.ylabel("Valore")
+#pyplot.xlim(0, 100)
+##pyplot.ylim(0, 1)
+#pyplot.ylim(0,max(diametro)+2)
+
+seaborn.lmplot('percent', 'GC',
+           data=datiFinal,
+           fit_reg=False,
+           size = 7,
+           aspect = 1.7778,
+           hue='Modello',
+           scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Random failure con i modelli di rete: dimensioni relative del GC')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+pyplot.ylim(0,1.1)
+pyplot.savefig('destination_path.eps', format='eps', dpi=1000)
+
+# <codecell>
+
+import seaborn
 
 datiFinal = pandas.DataFrame()
 
@@ -991,6 +1010,26 @@ pyplot.ylim(0,1.1)
 # 
 # ###Euclid dist
 # Tempo previsto di calcolo con $\sim$ 7000 dati: $\sim$ 80 sec $\sim$ 1,3 minuti
+
+# <codecell>
+
+colori = ['#4d4d4d', '#004184','#ff3300','#ff8000','#018ECC']
+paletta = seaborn.color_palette(palette = colori)
+seaborn.palplot(paletta)
+paletta = seaborn.color_palette(palette = 'muted')
+seaborn.palplot(paletta)
+paletta = seaborn.color_palette(palette = 'bright')
+seaborn.palplot(paletta)
+paletta = seaborn.color_palette(palette = 'pastel')
+seaborn.palplot(paletta)
+paletta = seaborn.color_palette(palette = 'dark')
+seaborn.palplot(paletta)
+paletta = seaborn.color_palette(palette = 'colorblind')
+seaborn.palplot(paletta)
+
+
+paletta = seaborn.color_palette
+print paletta
 
 # <codecell>
 
