@@ -98,6 +98,17 @@ https://www.google.it/search?client=ubuntu&channel=fs&q=parallel+iter+matrix+pyt
 http://docs.scipy.org/doc/numpy-1.10.0/reference/generated/numpy.nditer.html
 http://docs.scipy.org/doc/numpy-1.10.0/reference/arrays.nditer.html#arrays-nditer
 http://scipy-cookbook.readthedocs.org/items/ParallelProgramming.html
+http://www.parallelpython.com/
+https://docs.python.org/2/library/multiprocessing.html
+https://ipython.org/ipython-doc/3/parallel/parallel_multiengine.html
+http://gael-varoquaux.info/programming/writing-parallel-code-in-a-readable-way.html
+https://pypi.python.org/pypi/futures/
+https://wiki.python.org/moin/ParallelProcessing
+http://www.mblondel.org/journal/2009/11/27/easy-parallelization-with-data-decomposition/
+https://docs.python.org/3/library/concurrent.futures.html
+
+
+
 
 
 http://stackoverflow.com/questions/20055493/numpy-convert-an-array-to-a-triangular-matrix

@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-# <nbformat>3.0</nbformat>
 
-# <markdowncell>
+# coding: utf-8
 
 # ###Importo tutte le librerie necessarie
 
-# <codecell>
+# In[1]:
 
 import geopy
 from geopy import distance #TODO BUGGONE
@@ -15,9 +13,8 @@ import pandas
 import numpy
 import networkx
 from matplotlib import pyplot
-%matplotlib inline
+get_ipython().magic(u'matplotlib inline')
 
-# <markdowncell>
 
 # #Calcolo matrice adiacenza
 # 
@@ -25,7 +22,7 @@ from matplotlib import pyplot
 # 
 # NB: da verificare che distanza euclidea non crei troppi problemi
 
-# <codecell>
+# In[2]:
 
 colosseo = (41.890173, 12.492331)
 raccordo = [(41.914456, 12.615807),(41.990672, 12.502714),(41.793883, 12.511297),(41.812566, 12.396628),(41.956277, 12.384611)]
@@ -71,11 +68,10 @@ raggiomedioEuclid /= len(raggi1)
 print raggiomedioGeo
 print raggiomedioEuclid
 
-# <markdowncell>
 
 # ###Popolo il dataframe e faccio una prima grossa scrematura
 
-# <codecell>
+# In[3]:
 
 dataframe = pandas.read_csv("/home/protoss/Documenti/Siscomp_datas/data/cell_towers.csv")
 #dataframe = pandas.read_csv("/home/protoss/Documenti/SistemiComplessi/data/cell_towers_diff-2016012100.csv")
@@ -89,11 +85,10 @@ italydoitcleaner = italydoitcleaner.reset_index(drop=True)
 italydoitcleaner.drop(italydoitcleaner.columns[[0, 1, 3, 5, 10, 11, 12, 13]], axis = 1, inplace=True)
 #italydoitcleaner
 
-# <markdowncell>
 
 # ###Seleziono le antenne in Roma e faccio dei .csv appositi
 
-# <codecell>
+# In[4]:
 
 #inroma = pandas.DataFrame([[41.947416, 12.371001],
 #                            [41.899392, 12.397436],
@@ -145,19 +140,17 @@ treCell = romaCell[criterioTre]
 treCell = treCell.reset_index(True)
 treCell.to_csv("../data/Tre_towers.csv")
 
-# <markdowncell>
 
 # Domande su iterazione su panda dataframe e efficienza, un tizio dice che la funzione iterrows è molto poco efficiente e sarebbe molto meglio usare un numpy array. Forse esistono funzioni più efficienti. 
 # 
 # http://stackoverflow.com/questions/10729210/iterating-row-by-row-through-a-pandas-dataframe  
 # 
 # http://stackoverflow.com/questions/7837722/what-is-the-most-efficient-way-to-loop-through-dataframes-with-pandas
-
-# <markdowncell>
+# 
 
 # ### Prendo le antenne di Roma e faccio matrice adiacenza
 
-# <codecell>
+# In[14]:
 
 #definisco la funzione che mi calcola la matrice di adiacenza
 def matriceSupEuclid(datiCoordinate, datiRaggi):
@@ -198,11 +191,10 @@ for aziende in gestore:
     
     numpy.savetxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(aziende)),adiacenzaEuclid, fmt='%d',delimiter=',',newline='\n')
 
-# <markdowncell>
 
 # #Faccio disegno grafo e grafico distr grado
 
-# <codecell>
+# In[15]:
 
 #for azienda in gestore:
 
@@ -214,13 +206,14 @@ adiacenzaVoda = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/Adi
 adiacenzaWind = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Wind.csv",delimiter=',',dtype='int')
 adiacenzaTre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
 
-%time grafoRoma = networkx.Graph(adiacenzaRoma,)
-%time grafoTim = networkx.Graph(adiacenzaTim)
-%time grafoVoda = networkx.Graph(adiacenzaVoda)
-%time grafoWind = networkx.Graph(adiacenzaWind)
-%time grafoTre = networkx.Graph(adiacenzaTre)
+get_ipython().magic(u'time grafoRoma = networkx.Graph(adiacenzaRoma,)')
+get_ipython().magic(u'time grafoTim = networkx.Graph(adiacenzaTim)')
+get_ipython().magic(u'time grafoVoda = networkx.Graph(adiacenzaVoda)')
+get_ipython().magic(u'time grafoWind = networkx.Graph(adiacenzaWind)')
+get_ipython().magic(u'time grafoTre = networkx.Graph(adiacenzaTre)')
 
-# <codecell>
+
+# In[16]:
 
 print("num gradi Roma", networkx.number_of_nodes(grafoRoma))
 print("num gradi Tim", networkx.number_of_nodes(grafoTim))
@@ -263,9 +256,10 @@ numpy.savetxt("../data/IstoGrado_Tre",istoGradoTre,fmt='%d',newline='\n')
 treCell["grado"] = gradoTre
 treCell.to_csv("../data/Tre_towers.csv")
 
-# <codecell>
 
-%matplotlib inline
+# In[9]:
+
+get_ipython().magic(u'matplotlib inline')
 
 pyplot.figure(figsize=(16,9))
 pyplot.subplot(222)
@@ -282,9 +276,10 @@ networkx.draw_random(grafoTre)
 
 pyplot.show()
 
-# <codecell>
 
-%matplotlib inline
+# In[17]:
+
+get_ipython().magic(u'matplotlib inline')
 gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
 colori = ['#4d4d4d', '#004184','#ff3300','#ff8000','#018ECC']
 def degreeDistribution(gradi, azienda, colore):
@@ -323,11 +318,10 @@ pyplot.xlim(1,1000)
 pyplot.legend()
 pyplot.show()
 
-# <markdowncell>
 
 # ### Faccio istogramma del raggio delle antenne
 
-# <codecell>
+# In[18]:
 
 gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
 colori = ['#4d4d4d', '#004184','#ff3300','#ff8000','#018ECC']
@@ -368,17 +362,14 @@ for azienda, colore in zip(gestore,colori):
     pyplot.legend()
 pyplot.show()
 
-# <markdowncell>
 
 # # Faccio simulazione attacco, andamento diametro e GC in funzione dei nodi rimossi
-
-# <markdowncell>
 
 # #DOMANDA IMPORTANTE
 # Io nei cicli ho levato n nodi, poi ho preso il cluster più grande, ho levato nodi solo da quel cluster, e così via reiterando.
 # Per caso dovevo rimuovere nodi sempre dal totale? Nel caso dell'attacco cambia poco: molto probabilmente i nodi con grado maggiore sono sempre nel GC, ma nell'attacco random cambia tantissimo! Potrei prendere randomicamente i cluster minori dando sopravvivenza molto maggiore al GC. Come si fa in questi casi?
 
-# <codecell>
+# In[19]:
 
 import seaborn
 #Attacco
@@ -437,10 +428,10 @@ def attacco(compagnia, steps):
         relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
 
     
-%matplotlib inline
+get_ipython().magic(u'matplotlib inline')
 
 for provider in gestore:
-    %time attacco(provider,100)
+    get_ipython().magic(u'time attacco(provider,100)')
 
 
 datiFinal = pandas.DataFrame()
@@ -484,7 +475,8 @@ pyplot.ylim(0,1.1)
 
 #networkx.draw_random(grafoTre)
 
-# <codecell>
+
+# In[20]:
 
 #Failure
 
@@ -537,9 +529,9 @@ def randomFailure(compagnia, steps):
 
 
 for provider in gestore:
-    %time randomFailure(provider, 20)
+    get_ipython().magic(u'time randomFailure(provider, 20)')
 
-%matplotlib inline
+get_ipython().magic(u'matplotlib inline')
 
 datiFinal = pandas.DataFrame()
 
@@ -580,7 +572,8 @@ pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
 
-# <codecell>
+
+# In[140]:
 
 #calcolo attacco con modelli
 
@@ -687,7 +680,8 @@ pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
 
-# <codecell>
+
+# In[142]:
 
 #calcolo failure con modelli
 diametro = []
@@ -793,7 +787,6 @@ pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
 
-# <markdowncell>
 
 # #CALCOLO DEL DIAMETRO DI RETE ROMA IMPOSSIBILE, ANDAMENTO ESPONENZIALE CON L'AUMENTARE DEI NODI
 # 
@@ -819,8 +812,7 @@ pyplot.ylim(0,1.1)
 # CPU times: user 25.4 s, sys: 116 ms, total: 25.6 s  
 # Wall time: 25.4 s  
 # 
-
-# <markdowncell>
+# 
 
 # NB. num antenne  
 #    * TIM - 1550  
@@ -829,8 +821,6 @@ pyplot.ylim(0,1.1)
 #    * 3 - 1315  
 #    
 # Tot antenne: 6571  
-
-# <markdowncell>
 
 # ##TODO:  
 # * Prendere array coordinate                                                           ✔
@@ -879,8 +869,6 @@ pyplot.ylim(0,1.1)
 #   
 #   Federico nota andamento range segua una sorta di legge di zipf, NOTA BENE, I NOSTRI DATI NON SONO DATI UFFICIALI, MA COSTRUITI DA GENTE CHE CAMMINA, QUINDI PROB DI TROVARE NUOVA ANTENNA POTREBBE ESSERE SIMILE A PROB TROVARE NUOVA PAROLA, ma io penso che non c'entri perché noi stiamo vedendo solo le lunghezze delle parole. Che legge regola la prob delle lunghezze delle parole?
 
-# <markdowncell>
-
 # Il primo tentativo è stato di fare la matrice di adiacenza a forza bruta. Con un campione di soli 50 nodi ci metteva pochi microsecondi, quindi abbiamo provato a fare la matrice di adiacenza delle 7000 antenne entro il raccordo anulare, notando che la compilazione durava tanto, facendo le dovute proporzioni abbiamo preventivato 2,5 ore di tempo di calcolo. La prima cosa che abbiamo sistemato è stato ovviamente fare un ciclo che calcolasse soltanto la metà superiore della matrice, dimezzando il tempo di calcolo. 
 # 
 # La prima cosa che abbiamo pensato di fare è stato di diagonalizzare a blocchi la matrice, o fare un ciclo di bassissimo livello che mettesse 0 a tutti gli elementi relativi alle antenne con $\Delta$Latitudine e/o $\Delta$Longitudine maggiori del range massimo del campione di dati. Il problema avuto è che il range delle antenne è tendenzialmente grande, con alcune che arrivano a 10km (con raggioRoma 11km)(e anche tanti samples), quindi non c'era modo di ridurre i calcoli. 
@@ -889,8 +877,6 @@ pyplot.ylim(0,1.1)
 # preventivo quindi di 10 minuti di tempo di calcolo invece di 1 ora e mezza.
 # 
 # TODO vedere parallelaizazione
-
-# <markdowncell>
 
 # ## Varie note su tempi di calcolo
 # 
@@ -983,8 +969,7 @@ pyplot.ylim(0,1.1)
 # Wall time: 6.65 s
 # 
 # 
-
-# <markdowncell>
+# 
 
 # ###Geo dist
 # Tempo previsto di calcolo con $\sim$ 7000 dati: $\sim$ 620 sec $\sim$ 10 minuti
@@ -992,6 +977,7 @@ pyplot.ylim(0,1.1)
 # ###Euclid dist
 # Tempo previsto di calcolo con $\sim$ 7000 dati: $\sim$ 80 sec $\sim$ 1,3 minuti
 
-# <codecell>
+# In[ ]:
+
 
 
