@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[2]:
+# In[15]:
 
 import numpy
 
@@ -71,7 +71,7 @@ sampleLenght = 1000
 dataSample = numpy.random.normal(muPrior,sigmaPrior,sampleLenght)
 
 # binning
-bins=200
+bins=100
 # TODO how many bins?
 # vedere come l'accuratezza del fit
 # varia con la grandezza della canalizzazione
@@ -122,7 +122,7 @@ matplotlib.pyplot.legend(loc='best', frameon=False)
 
 # matplotlib.pyplot.xscale('log')
 # matplotlib.pyplot.yscale('log')
-# la gaussiana è una parabola nel grafico log-log
+# la gaussiana (con media lontano da 0) è una parabola nel grafico log-log
 
 
 
