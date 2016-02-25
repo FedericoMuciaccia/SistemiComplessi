@@ -44,6 +44,13 @@
 ## pagina HTML della relazione
 [homepage](http://federicomuciaccia.github.io/SistemiComplessi/)
 
+## graph-tool (ANCORA DA PROVARE)
+[quick start](https://graph-tool.skewed.de/static/doc/quickstart.html)
+[performance comparison](http://graph-tool.skewed.de/performance)
+[documentation](http://graph-tool.skewed.de/static/doc/index.html)
+[homepage](http://graph-tool.skewed.de/)
+[installation](http://graph-tool.skewed.de/download)
+[animations](http://graph-tool.skewed.de/static/doc/demos/animation.html)
 
 
 
@@ -106,7 +113,7 @@ https://pypi.python.org/pypi/futures/
 https://wiki.python.org/moin/ParallelProcessing
 http://www.mblondel.org/journal/2009/11/27/easy-parallelization-with-data-decomposition/
 https://docs.python.org/3/library/concurrent.futures.html
-
+https://en.wikipedia.org/wiki/Template_metaprogramming
 
 
 

@@ -490,8 +490,8 @@ roma.plot(kind="scatter", x="lon", y="lat", label="Roma PRELIMINARE")
 # <li><input type="checkbox" checked>filtro Roma</li>
 # <li><input type="checkbox" checked>grafo</li>
 # <li><input type="checkbox" checked>distribuzione del grado P(k)</li>
-# <li><input type="checkbox">dati disaggregati per compagnia, canale radio, ecc</li>
-# <li><input type="checkbox">soglia percolativa</li>
+# <li><input type="checkbox" checked>dati disaggregati per compagnia, canale radio, ecc</li>
+# <li><input type="checkbox" checked>soglia percolativa</li>
 # </ul>
 
 # ## Creazione del grafo con NetworkX
