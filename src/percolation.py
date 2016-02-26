@@ -3,20 +3,20 @@
 
 # # Percolation
 
-# In[102]:
+# In[26]:
 
 
-import numpy, networkx, pandas, matplotlib, seaborn
+import numpy, networkx, pandas
 
 # import graph_tool
 # from graph_tool.all import *
 
-from matplotlib import pyplot
+# from matplotlib import pyplot
 
-get_ipython().magic(u'matplotlib inline')
+# %matplotlib inline
 
 
-# In[103]:
+# In[2]:
 
 
 # simple parallelization
@@ -29,7 +29,7 @@ get_ipython().magic(u'matplotlib inline')
 
 # ## Random failure
 
-# In[104]:
+# In[3]:
 
 
 def randomFailure(graph, steps=101):
@@ -68,103 +68,9 @@ def randomFailure(graph, steps=101):
     return failureDataframe
 
 
-# In[109]:
-
-
-# calculating
-
-gestore = ["Tim", "Vodafone", "Wind", "Tre"]
-#
-gestore = ["Tre"]
-
-    
-
-# TODO parallelizzare
-for provider in gestore:
-    adiacenza = numpy.genfromtxt(("/home/federico/dati Iuri/AdiacenzaEuclidea_{0}.csv".format(provider)),                                 delimiter=',',                                 dtype='int')
-    providerGraph = networkx.Graph(adiacenza)
-    print "random failure:"
-    get_ipython().magic(u'time failureResults = randomFailure(providerGraph, steps=101) # 101')
-
-
-# TODO fare diametro relativo e scatterplot di correlazione tra diametro relativo e relativeGiantClusterSize
-
-
-# In[118]:
-
-
-# plotting
-
-failureResults.plot(kind = 'scatter',
-                   x = 'percentuale',
-                   y = 'diameter',
-                   s = 90,
-                   title = 'Random failure',
-                   xlim = (0, 101),
-                   ylim = (0, max(failureResults.diameter)+1),
-                   figsize = (16,12),
-                   grid = False,
-                   alpha = 0.8,
-                   label = 'Tre',
-                   antialiased = True)
-
-pyplot.xlabel("Percentuale")
-pyplot.ylabel("Diametro")
-pyplot.savefig('../img/randomFailure_diameter.eps', format='eps', dpi=600)
-
-failureResults.plot(kind = 'scatter',
-                   x = 'percentuale',
-                   y = 'relativeGiantClusterSize',
-                   s = 90,
-                   title = 'Random failure',
-                   xlim = (0, 101),
-                   ylim = (0, 1.02),
-                   figsize = (16,12),
-                   grid = False,
-                   alpha = 0.8,
-                   label = 'Tre',
-                   antialiased = True)
-
-pyplot.xlabel("Percentuale")
-pyplot.ylabel("Dimensione relativa del giant cluster")
-pyplot.savefig('../img/randomFailure_relativeGiantClusterSize.eps', format='eps', dpi=600)
-
-
-#seaborn.set_context("notebook", font_scale=1.1)
-#seaborn.set_style("ticks")
-#
-#seaborn.lmplot('percentuale', 'diameter',
-#           data=failureResults,
-#           fit_reg=False,
-#           size = 7,
-#           aspect = 1.7778,
-#           # hue='Compagnia', # TODO
-#           scatter_kws={"marker": "D", "s": 100})
-#pyplot.title('Random failure')
-#pyplot.xlabel("Percentuale")
-#pyplot.ylabel("Diametro")
-#pyplot.xlim(0, 101)
-#pyplot.ylim(0, max(failureResults.diameter)+1)
-#pyplot.savefig('../img/randomFailure_diameter.eps', format='eps', dpi=600)
-#
-#seaborn.lmplot('percentuale', 'relativeGiantClusterSize',
-#           data=failureResults,
-#           fit_reg=False,
-#           size = 7,
-#           aspect = 1.7778,
-#           # hue='Compagnia', # TODO
-#           scatter_kws={"marker": "D", "s": 100})
-#pyplot.title('Random failure')
-#pyplot.xlabel("Percentuale")
-#pyplot.ylabel("Dimensione relativa del giant cluster")
-#pyplot.xlim(0, 101)
-#pyplot.ylim(0, 1.02)
-#pyplot.savefig('../img/randomFailure_relativeGiantClusterSize.eps', format='eps', dpi=600)
-
-
 # ## Intentional attack
 
-# In[112]:
+# In[4]:
 
 
 def intentionalAttack(graph, steps=101):
@@ -173,15 +79,11 @@ def intentionalAttack(graph, steps=101):
     numbersOfNodesToRemove = numpy.linspace(0, initialGraphSize, num=steps, dtype='int')
     initialNodes = initialGraph.nodes()
     
-    
     initialDegrees = initialGraph.degree()
     degreeDataframe = pandas.DataFrame(initialDegrees.items(), columns=['index', 'degree'])
-    degreeDataframe.sort(["degree"], ascending=[False], inplace=True) # TODO
+    degreeDataframe.sort(["degree"], ascending=[False], inplace=True) # TODO vedere se si può fare a meno di una colonna
     degreeDataframe = degreeDataframe.reset_index(drop=True) # TODO
-    
     sortedNodes = degreeDataframe['index'].values # TODO degreeDataframe.index
-    
-    # TODO vedere se ritornare pure i degree ordinati da mettere come sfondo al grafico di matplotlib
     
     def analyzeSingleGraph(index):
         # TODO vedere se si possono agevolmente parallelizzare le list comprehension
@@ -212,147 +114,44 @@ def intentionalAttack(graph, steps=101):
     return attackDataframe
 
 
-# In[113]:
+# In[5]:
 
 
-# calculating
+# gestori = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
+# colori = ['#004184','#ff3300','#ff8000','#018ECC', '#4d4d4d']
 
-gestore = ["Tim", "Vodafone", "Wind", "Tre"]
-#
-gestore = ["Tre"]
+gestori = ["Tim", "Tre"]
+colori = ['#004184','#018ECC']
 
+
+# In[71]:
+
+
+# data reading, calculations, data writing
 
 # TODO parallelizzare
-for provider in gestore:
-    adiacenza = numpy.genfromtxt(("/home/federico/dati Iuri/AdiacenzaEuclidea_{0}.csv".format(provider)),                                 delimiter=',',                                 dtype='int')
-    providerGraph = networkx.Graph(adiacenza)
-    print "intentional attack:"
-    get_ipython().magic(u'time attackResults = intentionalAttack(providerGraph, steps=101)')
-# TODO fare diametro relativo e scatterplot di correlazione tra diametro relativo e relativeGiantClusterSize
-
-
-# In[119]:
-
-
-# plotting
-
-attackResults.plot(kind = 'scatter',
-                   x = 'percentuale',
-                   y = 'diameter',
-                   s = 90,
-                   title = 'Intentional attack',
-                   xlim = (0, 101),
-                   ylim = (0, max(attackResults.diameter)+1),
-                   figsize = (16,12),
-                   grid = False,
-                   alpha = 0.8,
-                   label = 'Tre',
-                   antialiased = True)
-
-pyplot.xlabel("Percentuale")
-pyplot.ylabel("Diametro")
-pyplot.savefig('../img/intentionalAttack_diameter.eps', format='eps', dpi=600)
-
-
-attackResults.plot(kind = 'scatter',
-                   x = 'percentuale',
-                   y = 'relativeGiantClusterSize',
-                   s = 90,
-                   title = 'Intentional attack',
-                   xlim = (0, 101),
-                   ylim = (0, 1.02),
-                   figsize = (16,12),
-                   grid = False,
-                   alpha = 0.8,
-                   label = 'Tre',
-                   antialiased = True)
-
-pyplot.xlabel("Percentuale")
-pyplot.ylabel("Dimensione relativa del giant cluster")
-pyplot.savefig('../img/intentionalAttack_relativeGiantClusterSize.eps', format='eps', dpi=600)
-
-
-
-# pyplot.figure(1)
-# pyplot.subplot(211)
-# ...
-# pyplot.subplot(212)
-# ...
-
-# x : label or position, default None
-# y : label or position, default None
-# subplots=True
-# sharex=True
-# layout=    tuple (rows, columns)
-# legend=      False/True/’reverse’
-#style : list or dict
-#    matplotlib line style per column
-#logx : boolean, default False
-#    Use log scaling on x axis
-#logy : boolean, default False
-#    Use log scaling on y axis
-#loglog : boolean, default False
-#    Use log scaling on both x and y axes
-#fontsize : int, default None
-#    Font size for xticks and yticks
-#colormap : str or matplotlib colormap object, default None
-#    Colormap to select colors from. If string, load colormap with that name from matplotlib.
-#colorbar : boolean, optional
-#    If True, plot colorbar (only relevant for ‘scatter’ and ‘hexbin’ plots)
-#table : boolean, Series or DataFrame, default False
-#    If True, draw a table using the data in the DataFrame and the data will be transposed to meet matplotlib’s default layout. If a Series or DataFrame is passed, use passed data to draw a table.
-#sort_columns : boolean, default False
-#    Sort column names to determine plot ordering
-#secondary_y : boolean or sequence, default False
-#    Whether to plot on the secondary y-axis If a list/tuple, which columns to plot on secondary y-axis
-#kwds : keywords
-#    Options to pass to matplotlib plotting method
-
+for provider in gestori:
+    
+    # read data
+    adjacencyMatrix = numpy.genfromtxt(("../data/graphs/adiacenzaEuclidea_{0}.csv".format(provider)),
+                                 delimiter=',',
+                                 dtype='int')
+    providerGraph = networkx.Graph(adjacencyMatrix)
+    
+    # calculate results
+    print provider, "random failure:"
+    get_ipython().magic(u'time failureResults = randomFailure(providerGraph, steps=11) # default: steps=101')
+    print provider, "intentional attack:"
+    get_ipython().magic(u'time attackResults = intentionalAttack(providerGraph, steps=11)')
+    
+    # write on file
+    failureResults.to_csv('../data/percolation/randomFailure_{0}.csv'.format(provider), index=False)
+    attackResults.to_csv('../data/percolation/intentionalAttack_{0}.csv'.format(provider), index=False)
 
 
 # In[ ]:
 
-# TODO mettere colori corretti e fare plot con tutti
-# TODO levare l'asse superiore e l'asse destro
 
-
-# In[123]:
-
-
-# correlazione
-
-failureResults.plot(kind = 'scatter',
-                   x = 'diameter',
-                   y = 'relativeGiantClusterSize',
-                   s = 90,
-                   title = 'Correlation (random failure)',
-                   xlim = (0, max(failureResults.diameter)+1),
-                   ylim = (0,1.02),
-                   figsize = (16,12),
-                   grid = False,
-                   alpha = 0.8,
-                   label = 'Tre',
-                   antialiased = True)
-
-pyplot.xlabel("Diametro")
-pyplot.ylabel("Dimensione relativa del giant cluster")
-
-
-attackResults.plot(kind = 'scatter',
-                   x = 'diameter',
-                   y = 'relativeGiantClusterSize',
-                   s = 90,
-                   title = 'Correlation (intentional attack)',
-                   xlim = (0, max(attackResults.diameter)+1),
-                   ylim = (0,1.02),
-                   figsize = (16,12),
-                   grid = False,
-                   alpha = 0.8,
-                   label = 'Tre',
-                   antialiased = True)
-
-pyplot.xlabel("Diametro")
-pyplot.ylabel("Dimensione relativa del giant cluster")
 
 
 # In[ ]:
