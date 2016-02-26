@@ -414,7 +414,7 @@ def attacco(compagnia, steps):
         ascisse.append(i)
         aziendaFinal.append(compagnia)
 
-        
+        graphSize = networkx.number_of_nodes(grafoFinal)
         #diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
 
@@ -450,8 +450,8 @@ def randomFailure(compagnia, steps):
         ascisse.append(i)
         aziendaFinal.append(compagnia)
 
-        
-        #diametro.append(networkx.diameter(giantCluster, e=None))
+        graphSize = networkx.number_of_nodes(grafoFinal)
+        diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
         
 def modelAttack(modello, steps):
@@ -461,7 +461,7 @@ def modelAttack(modello, steps):
         #print grado
         grafico = degreeDistributionLog(gradoFinal, 'Erdos-Renyi', '#4d4d4d')
     if(modello == 'Barabasi-Abert'):
-        grafoFinal = networkx.barabasi_albert_graph(1500, 2)
+        grafoFinal = networkx.barabasi_albert_graph(1500, 40)
         gradoFinal = grafoFinal.degree().values()
         #print grado 
         grafico = degreeDistributionLog(gradoFinal, 'Barabasi', '#ff3300')
@@ -500,23 +500,23 @@ def modelAttack(modello, steps):
         ascisse.append(i)
         aziendaFinal.append(modello)
 
-        
-        diametro.append(networkx.diameter(giantCluster, e=None))
+        graphSize = networkx.number_of_nodes(grafoFinal)
+#        diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
         
 def modelFailure(modello, steps):
     if(modello == 'Erdos-Renyi'):
-        grafoFinal = networkx.erdos_renyi_graph(1500, 0.0025)
+        grafoFinal = networkx.erdos_renyi_graph(1500, 0.05)
         gradoFinal = grafoFinal.degree().values()
         #print grado
         grafico = degreeDistributionLog(gradoFinal, 'Erdos-Renyi', '#4d4d4d')
     if(modello == 'Barabasi-Abert'):
-        grafoFinal = networkx.barabasi_albert_graph(1500, 10)
+        grafoFinal = networkx.barabasi_albert_graph(1500, 40)
         gradoFinal = grafoFinal.degree().values()
         #print grado 
         grafico = degreeDistributionLog(gradoFinal, 'Barabasi', '#ff3300')
     if(modello == 'Watts-Strogatz'):
-        grafoFinal = networkx.watts_strogatz_graph(1500, 10, 2)
+        grafoFinal = networkx.watts_strogatz_graph(1500, 37, 1)
         gradoFinal = grafoFinal.degree().values()
         #print grado  
         grafico = degreeDistributionLog(gradoFinal, 'Watts', '#47d147')
@@ -551,6 +551,7 @@ def modelFailure(modello, steps):
         ascisse.append(i)
         aziendaFinal.append(modello)
         
+        graphSize = networkx.number_of_nodes(grafoFinal)
         diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
         
@@ -561,7 +562,8 @@ colori = ['#004184','#ff3300','#ff8000','#018ECC', '#4d4d4d']
 import seaborn
 #Attacco
 
-gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
+#gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
+gestore = ["Tre"]
 
 diametro = []
 relSizeGC = []
@@ -571,8 +573,8 @@ ascisse = []
 %matplotlib inline
 
 for provider in gestore:
-    %time attacco(provider,100)
-#    attacco(provider, 20)
+#    %time attacco(provider,100)
+    attacco(provider, 20)
 
 datiFinal = pandas.DataFrame()
 
@@ -612,7 +614,8 @@ pyplot.savefig('../img/AttackGC_Final', format='eps', dpi=1000)
 
 #Failure
 
-gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
+#gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
+gestore = ["Tre"]
 
 diametro = []
 relSizeGC = []
@@ -628,7 +631,7 @@ datiFinal = pandas.DataFrame()
 
 datiFinal['percent'] = ascisse
 datiFinal['Compagnia'] = aziendaFinal
-#datiFinal['diam'] = diametro
+datiFinal['diam'] = diametro
 datiFinal['GC'] = relSizeGC
 
 datiFinal.head()
@@ -637,15 +640,15 @@ seaborn.set_context("notebook", font_scale=1.1)
 seaborn.set_style("ticks")
 
 
-#seaborn.lmplot('percent', 'diam', data=datiFinal, fit_reg=False,
-#           size = 7, aspect = 1.7778,
-#           hue='Compagnia', palette = colori,
-#           scatter_kws={"marker": "D", "s": 100})
-#pyplot.title('Random failure: diametro')
-#pyplot.xlabel("%")
-#pyplot.ylabel("Valore")
-#pyplot.xlim(0, 100)
-#pyplot.ylim(0,max(diametro)+2)
+seaborn.lmplot('percent', 'diam', data=datiFinal, fit_reg=False,
+           size = 7, aspect = 1.7778,
+           hue='Compagnia', palette = colori,
+           scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Random failure: diametro')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+pyplot.ylim(0,max(diametro)+2)
 
 seaborn.lmplot('percent', 'GC', data=datiFinal, fit_reg=False,
            size = 7, aspect = 1.7778,
@@ -811,6 +814,11 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
+
+# <markdowncell>
+
+# # USARE GRAPH TOOL
+# # VALUTARE USO METODI SPETTRALI TIPO PAGE RANK / BETWEENNESS; CERCARE SE SI DISCOSTANO DA DISTR GRADO NEL NOSTRO CASO DI RETE NON DIRETTA
 
 # <markdowncell>
 
