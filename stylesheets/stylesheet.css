@@ -97,6 +97,10 @@ p {
   margin: 10px 0 15px 0;
 }
 
+header p {
+  color: #f2f2f2;
+}
+
 footer p {
   color: #f2f2f2;
 }
@@ -281,7 +285,7 @@ Full-Width Styles
   color: #fff;
   background: url('../images/blacktocat.png') #0090ff no-repeat 95% 50%;
   font-weight: 700;
-  box-shadow: 0 0 10px rgba(0,0,0,.5);
+  box-shadow: 0 0 3px rgba(0,0,0,.5);
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
 }
