@@ -58,6 +58,7 @@ TODO mettere heatmap interattiva in HTML
 
 Dalla mappa si capisce bene quanto sia fitta le rete di antenne Romana.
 
+TODO creare il notebook ordinato "data selection"
 
 
 
