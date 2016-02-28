@@ -256,7 +256,7 @@
 # 
 # 
 
-# In[2]:
+# In[1]:
 
 
 import numpy
@@ -289,10 +289,10 @@ dataframe.plot(kind="scatter", x="lon", y="lat")
 
 # In[5]:
 
-import math
+# import math
 
 def euclideanDistace(x,y):
-    return sqrt(x**2 + y**2)
+    return numpy.sqrt(numpy.square(x) + numpy.square(y))
 
 
 # In[6]:
@@ -415,7 +415,7 @@ dataframe.plot(kind="scatter", x="lon", y="lat", s=copertura/1000, alpha=0.5) # 
 # 
 # il filtraggio viene inizialmente fatto per mobile country code (Italy)
 # ```python
-# mcc = 222
+# mcc == 222
 # ```
 # e successivamente vengono scartati i valori ritenuti inaffidabili, ovvero con soltanto una rilevazione
 # ```python
