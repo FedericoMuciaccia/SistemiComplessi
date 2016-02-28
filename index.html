@@ -41,6 +41,112 @@ Docente: Vittorio Loreto. Tutor: Antrea Capocci
 
 <p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here <a href="https://guides.github.com/features/mastering-markdown/">using GitHub Flavored Markdown</a>, select a template crafted by a designer, and publish. After your page is generated, you can check out the new <code>gh-pages</code> branch locally. If you’re using GitHub Desktop, simply sync your repository and you’ll see the new branch.</p>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INIZIO PROVA LAYOUT
+
+<h2>Selezione dei dati</h2>
+
+<p>TODO scrivere cosa sono Mozilla Location Server ed OpenCellID</p>
+
+<p>Una volta scaricati i dati aggregati dalla pagina web <a href="https://location.services.mozilla.com/downloads">https://location.services.mozilla.com/downloads</a> si sono cominciate le operazioni di selezione dei dati.</p>
+
+<p>Il data sample riguarda tutti i continenti e risulta molto grosso (un file csv di circa 650 MB), per cui è necessario ridurlo il più possibile per poterlo maneggiare col nostro limitato quantitativo di RAM.</p>
+
+<p>Una prima grossolana ma efficiente scrematura riguarda i dati caratterizzati da un mobile county code non italiano, si è pertanto imposta la condizione
+<pre><code>
+mcc == 222
+</code></pre></p>
+
+<p>Successivamente vengono scartati i dati ritenuti inaffidabili, ovvero con soltanto una rivelazione da parte degli utenti
+<pre><code>
+samples &gt; 1
+</code></pre></p>
+
+<p>Adesso che il datasample si è ridotto molto possiamo effettuare delle operazioni computazionalmente un po' più pesanti: vogliamo eliminare tutte le rilevazioni al di fuori del Grande Raccordo Anulare, che per semplicità è stato schematizzato come una circonferenza di raggio 10 km con centro esattamente nol Colosseo.</p>
+
+<p>Per far questo serve definire una nozione di distanza. Dato che i nostri sono dati geolocalizzati sarebbe naturale introdurre una distanza geodesica. A tal fine abbiamo usato la libreria <code>geopy</code>, che contiene due definizioni differenti:</p>
+
+<ul>
+<li>Grat circe distance: la distanza geodesica su una sfera. Per due punti non agli antipodi passa sempre una circonferenza di raggio massimo lungo cui scorre la geodesica, ovvero il cammino di minima distanza.</li>
+<li>Vincenty distance: la distanza geodesica su un ellissoide oblato. Tale distanza tiene in conto che la Terra non è una sfera perfetta ma è invece leggermente schiacciata ai poli. Delle due è quella più accurata, ma anche quella più difficile da calcolare numericamente.</li>
+</ul>
+
+<p>L'ulteriore condizione da soddisfare per i dati risulta dunque
+<pre><code>
+geodesicDistance(place) &lt;= raggioRaccordoAnulare
+</code></pre></p>
+
+<p>Si sono fatte differenti prove sia con <code>vincenty</code> (più lenta) che con <code>great_circle</code> (leggermente più veloce), ma i tempi di calcolo risultavano comunque spropositati. Pertanto abbiamo fatto una approssimazione: dato che la città di Roma sottende un angolo solido minuscolo rispetto alla totalità del pianeta, abbiamo ritenuto accettabile usare una distanza euclidea, ovviamente trasformando in metri le coordinate angolari di latitudine e longitudine con i relativi fattori di scala, dettati dal raggio terrestre.</p>
+
+<p>La distanza euclidea coinvolge solo quadrati è radici quadrate, per cui è molto più veloce delle altre due concorrenti. Il prezzo da pagare è una leggerissima imprecisione, del tutto trascurabile alle nostre scale.</p>
+
+<p>La funzione utilizzata è pertanto
+<pre><code>
+def euclideanDistace(x,y):
+    return numpy.sqrt(numpy.square(x) + numpy.square(y))
+</code></pre>
+da notare il fatto che per il calcolo algebrico è stata utilizzata la libreria <code>numpy</code> invece che la libreria <code>math</code> builtin in Python, poiché è più veloce (è scritta in C) e supporta le operazioni direttamente su vettori di coordinate.</p>
+
+<p>I dati sono stati importati in un dataframe tabulare usando la libreria <code>pandas</code>. Questo che ci ha permesso di effettuare facilmente tutte le query necessarie per il filtraggio dei dati.</p>
+
+<p>A questo punto abbiamo finalmente il nostro datasample della città di Roma: circa 7000 antenne in un file csv agevolmente maneggiabile di circa 1MB.</p>
+
+<p>TODO inserire scatterplot preliminare dei dati di Roma (notebook Fede)</p>
+
+<p>Per visualizzare agevolmente i nostri dati serve una mappa georeferenziata, preferibilmente interattiva. A tal fine abbiamo usato la libreria <code>gmaps</code>, che dà semplice accesso alle mappe di Google Maps dando la possibilità di creare una heatmap.
+<pre><code>
+roma = pandas.read_csv("../data/Roma_towers.csv")
+coordinate = roma[['lat', 'lon']].values
+gmaps.heatmap(coordinate)
+</code></pre>
+(per scrivere questo paio di linee di codice c'è voluto un'intero pomeriggio!)</p>
+
+<p>TODO mettere heatmap interattiva in HTML</p>
+
+<p>Dalla mappa si capisce bene quanto sia fitta le rete di antenne Romana.</p>
+
+<p>TODO creare il notebook ordinato "data selection"</p>
+
+FINE PROVA LAYOUT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <h3>
 <a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Designer Templates</h3>
 
