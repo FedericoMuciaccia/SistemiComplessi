@@ -3,7 +3,7 @@
 
 # ### Importo tutte le librerie necessarie
 
-# In[53]:
+# In[15]:
 
 import geopy
 from geopy import distance #TODO BUGGONE
@@ -23,7 +23,7 @@ get_ipython().magic(u'matplotlib inline')
 # 
 # NB: da verificare che distanza euclidea non crei troppi problemi
 
-# In[54]:
+# In[2]:
 
 colosseo = (41.890173, 12.492331)
 raccordo = [(41.914456, 12.615807),(41.990672, 12.502714),(41.793883, 12.511297),(41.812566, 12.396628),(41.956277, 12.384611)]
@@ -72,7 +72,7 @@ print raggiomedioEuclid
 
 # ### Popolo il dataframe e faccio una prima grossa scrematura
 
-# In[55]:
+# In[3]:
 
 dataframe = pandas.read_csv("/home/protoss/Documenti/Siscomp_datas/data/cell_towers.csv")
 #dataframe = pandas.read_csv("/home/protoss/Documenti/SistemiComplessi/data/cell_towers_diff-2016012100.csv")
@@ -370,16 +370,16 @@ pyplot.show()
 # Io nei cicli ho levato n nodi, poi ho preso il cluster più grande, ho levato nodi solo da quel cluster, e così via reiterando.
 # Per caso dovevo rimuovere nodi sempre dal totale? Nel caso dell'attacco cambia poco: molto probabilmente i nodi con grado maggiore sono sempre nel GC, ma nell'attacco random cambia tantissimo! Potrei prendere randomicamente i cluster minori dando sopravvivenza molto maggiore al GC. Come si fa in questi casi?
 
-# In[63]:
+# In[52]:
 
 #Funzioni
-def attacco(compagnia, steps):
+def attacco(compagnia):
     adiacenzaFinal = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia)),delimiter=',',dtype='int')
     grafoFinal = networkx.Graph(adiacenzaFinal)
 
     graphSize = networkx.number_of_nodes(grafoFinal)
-    passo = networkx.number_of_nodes(grafoFinal)/steps
-    
+    steps = graphSize
+    passo = 1
     i = 0
     ascisse.append(i)
     aziendaFinal.append(compagnia)
@@ -391,26 +391,58 @@ def attacco(compagnia, steps):
         gradiFinal.sort(["grado"], ascending=[False], inplace=True)
         sortedIDnode = gradiFinal['index'].values
 
-        for identificativo in sortedIDnode:
-            if (networkx.number_of_nodes(grafoFinal) > len(sortedIDnode) - passo):
-                grafoFinal.remove_node(identificativo)
+        grafoFinal.remove_node(sortedIDnode[0])
 
         giantCluster = max(networkx.connected_component_subgraphs(grafoFinal), key = len)
         
-        i += 100/steps
+        i += 100/float(steps)
+        ascisse.append(i)
+        aziendaFinal.append(compagnia)
+
+        newGraphSize = networkx.number_of_nodes(grafoFinal)
+#        diametro.append(networkx.diameter(giantCluster, e=None))
+        relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(newGraphSize)))
+    
+def attaccopercent(compagnia, steps):
+    adiacenzaFinal = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia)),delimiter=',',dtype='int')
+    grafoFinal = networkx.Graph(adiacenzaFinal)
+
+    graphSize = networkx.number_of_nodes(grafoFinal)
+    passo = networkx.number_of_nodes(grafoFinal)/steps
+
+    i = 0
+    ascisse.append(i)
+    aziendaFinal.append(compagnia)
+    diametro.append(2)
+    relSizeGC.append(1)
+
+    while (networkx.number_of_nodes(grafoFinal) > passo):
+        gradiFinal = pandas.DataFrame(grafoFinal.degree().items(), columns=['index', 'grado'])
+        gradiFinal.sort(["grado"], ascending=[False], inplace=True)
+        sortedIDnode = gradiFinal['index'].values
+
+#        grafoFinal.remove_nodes_from(sortedIDnode[0:passo])
+        for identificativo in sortedIDnode:
+            if (networkx.number_of_nodes(grafoFinal) > len(sortedIDnode) - passo):
+                   grafoFinal.remove_node(identificativo)
+
+        giantCluster = max(networkx.connected_component_subgraphs(grafoFinal), key = len)
+        
+        i += 100/float(steps)
         ascisse.append(i)
         aziendaFinal.append(compagnia)
 
         graphSize = networkx.number_of_nodes(grafoFinal)
-        diametro.append(networkx.diameter(giantCluster, e=None))
+#        diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
+
 
 def randomFailure(compagnia, steps):
     adiacenzaFinal = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia)),delimiter=',',dtype='int')
     grafoFinal = networkx.Graph(adiacenzaFinal)
 
     graphSize = networkx.number_of_nodes(grafoFinal)
-    passo = networkx.number_of_nodes(grafoFinal)/steps
+    passo = networkx.number_of_nodes(grafoFinal)/float(steps)
     
     i = 0
     ascisse.append(i)
@@ -437,18 +469,18 @@ def randomFailure(compagnia, steps):
         diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
         
-colori = ['#004184','#ff3300','#ff8000','#018ECC', '#4d4d4d']
+colori = ['#4d4d4d','#004184','#ff3300','#ff8000','#018ECC']
 
 
-# In[46]:
+# In[55]:
 
 #Attacco
 
 #gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
-gestore = ["Tim", "Vodafone", "Wind", "Tre"]
-#gestore = ["Tre"]
+#gestore = ["Tim", "Vodafone", "Wind", "Tre"]
+gestore = ["Roma"]
 
-diametro = []
+#diametro = []
 relSizeGC = []
 aziendaFinal = []
 ascisse = []
@@ -456,15 +488,17 @@ ascisse = []
 get_ipython().magic(u'matplotlib inline')
 
 for provider in gestore:
-    get_ipython().magic(u'time attacco(provider, 100)')
-
+#    %time attacco(provider)
+    get_ipython().magic(u'time attaccopercent(provider, 100)')
+    
 datiFinal = pandas.DataFrame()
 
 datiFinal['percent'] = ascisse
 datiFinal['Compagnia'] = aziendaFinal
-datiFinal['diam'] = diametro
+#datiFinal['diam'] = diametro
 datiFinal['GC'] = relSizeGC
-datiFinal.to_csv("../data/Iuri/AttackDataForSeaborn.csv")
+datiFinal.to_csv("/home/protoss/Documenti/SistemiComplessi/data/Iuri/AttackDataForSeaborn.csv")
+#datiFinal.to_csv("../data/Iuri/AttackDataForSeaborn.csv")
 datiFinal.head()
 
 
@@ -494,31 +528,31 @@ datiFinal['diam'] = diametro
 datiFinal['GC'] = relSizeGC
 datiFinal.to_csv("../data/Iuri/FailureDataForSeaborn.csv")
 #datiFinal.to_csv("../data/Iuri/FailureTim.csv")
-datiFinal.head()
+datiFinal
 
 
 # ### Faccio i grafici
 
-# In[64]:
+# In[54]:
 
 import seaborn
 
-datiFinal = pandas.read_csv('../data/Iuri/AttackDataForSeaborn.csv')
+datiFinal = pandas.read_csv('/home/protoss/Documenti/SistemiComplessi/data/Iuri/AttackDataForSeaborn.csv')
 
 seaborn.set_context("notebook", font_scale=1.1)
 seaborn.set_style("ticks")
 
 
-seaborn.lmplot('percent', 'diam', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
-           hue='Compagnia', palette = colori,
-           scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Attacco: diametro')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.xlim(0, 100)
-pyplot.ylim(0, 60)
-pyplot.savefig('../img/iuri/AttackD_Final', format='eps', dpi=1000)
+#seaborn.lmplot('percent', 'diam', data=datiFinal, fit_reg=False,
+#           size = 7, aspect = 1.7778,
+#           hue='Compagnia', palette = colori,
+#           scatter_kws={"marker": "D", "s": 100})
+#pyplot.title('Attacco: diametro')
+#pyplot.xlabel("%")
+#pyplot.ylabel("Valore")
+#pyplot.xlim(0, 100)
+#pyplot.ylim(0, 60)
+#pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/AttD', format='eps', dpi=1000)
 
 seaborn.lmplot('percent', 'GC', data=datiFinal, fit_reg=False,
            size = 7, aspect = 1.7778,
@@ -529,7 +563,7 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
-pyplot.savefig('../img/iuri/AttackGC_Final', format='eps', dpi=1000)
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/AttGC', format='eps', dpi=1000)
 
 
 # In[65]:

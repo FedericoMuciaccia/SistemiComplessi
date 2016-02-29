@@ -218,13 +218,16 @@ pyplot.legend(loc='best', frameon=False)
 
 # # GRAFICI seabornosi
 
-# In[48]:
+# In[12]:
 
+import pandas
+from matplotlib import pyplot
 gestori = ["Tim", "Vodafone", "Wind", "Tre"]
 colori = ['#004184','#ff3300','#ff8000','#018ECC']
+get_ipython().magic(u'matplotlib inline')
 
 
-# In[49]:
+# In[13]:
 
 failureFrames = []
 attackFrames = []
@@ -241,7 +244,7 @@ failureFinal = pandas.concat(failureFrames)
 attackFinal = pandas.concat(attackFrames)
 
 
-# In[53]:
+# In[14]:
 
 import seaborn
 #grafici attack
@@ -276,7 +279,7 @@ pyplot.ylim(0,1.1)
 pyplot.savefig('../img/federico/attackGC_Final', format='eps', dpi=1000)
 
 
-# In[54]:
+# In[15]:
 
 #grafici failure
 failureFinal.head()
@@ -308,4 +311,9 @@ pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
 pyplot.savefig('../img/federico/failureGC_Final', format='eps', dpi=1000)
+
+
+# In[ ]:
+
+
 

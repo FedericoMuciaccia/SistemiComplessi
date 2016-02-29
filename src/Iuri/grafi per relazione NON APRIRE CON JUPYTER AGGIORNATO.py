@@ -141,12 +141,12 @@ pyplot.legend()
 
 # <codecell>
 
-g = graph_tool.generation.price_network(2000, m=1, c= 1, gamma = 1, directed=False)
+g = graph_tool.generation.price_network(10000, m=2, c= -0.9, gamma = 1, directed=False)
 
 pos = graph_tool.draw.sfdp_layout(g)
 graph_draw(g, pos = pos, output_size=(1000, 1000), 
            vertex_color=[1,1,1,0], vertex_size=4, edge_pen_width=1.2,
-           vcmap=matplotlib.cm.gist_heat_r, output="InitialAttr.png")
+           vcmap=matplotlib.cm.gist_heat_r, output="InitialAttr.pdf")
 
 #pos=graph_tool.draw.sfdp_layout(g, cooling_step=0.99)
 #graph_draw(g, pos=pos, output_size=(1000, 1000),
@@ -158,6 +158,7 @@ graph_draw(g, pos = pos, output_size=(1000, 1000),
 
 # <codecell>
 
+%matplotlib inline
 # We will need some things from several places
 from __future__ import division, absolute_import, print_function
 import sys

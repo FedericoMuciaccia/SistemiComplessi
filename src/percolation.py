@@ -3,7 +3,7 @@
 
 # # Percolation
 
-# In[5]:
+# In[6]:
 
 
 import numpy, networkx, pandas
@@ -29,7 +29,7 @@ import numpy, networkx, pandas
 
 # ## Random failure
 
-# In[12]:
+# In[11]:
 
 
 def randomFailure(graph, steps=101):
@@ -51,7 +51,8 @@ def randomFailure(graph, steps=101):
             giantCluster = subgraphs[0]
             giantClusterSize = networkx.number_of_nodes(giantCluster)
             relativeGiantClusterSize = numpy.true_divide(giantClusterSize, newGraphSize)
-            diameter = networkx.diameter(giantCluster, e=None)
+#            diameter = networkx.diameter(giantCluster, e=None)
+            diameter = 0
         except:
             giantCluster = networkx.empty_graph()
             giantClusterSize = 0
@@ -70,7 +71,7 @@ def randomFailure(graph, steps=101):
 
 # ## Intentional attack
 
-# In[13]:
+# In[12]:
 
 
 def intentionalAttack(graph, steps=101):
@@ -99,7 +100,8 @@ def intentionalAttack(graph, steps=101):
             # giantCluster = subgraphs[0]
             giantClusterSize = networkx.number_of_nodes(giantCluster)
             relativeGiantClusterSize = numpy.true_divide(giantClusterSize, newGraphSize)
-            diameter = networkx.diameter(giantCluster, e=None)
+#            diameter = networkx.diameter(giantCluster, e=None)
+            diameter = 0
         except:
             giantCluster = networkx.empty_graph()
             giantClusterSize = 0
@@ -116,20 +118,20 @@ def intentionalAttack(graph, steps=101):
     return attackDataframe
 
 
-# In[14]:
+# In[17]:
 
 
 #gestori = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
 #colori = ['#004184','#ff3300','#ff8000','#018ECC', '#4d4d4d']
 
-gestori = ["Tim", "Vodafone", "Wind", "Tre"]
-colori = ['#004184','#ff3300','#ff8000','#018ECC']
+#gestori = ["Tim", "Vodafone", "Wind", "Tre"]
+#colori = ['#004184','#ff3300','#ff8000','#018ECC']
 
-#gestori = ["Tim", "Tre"]
-#colori = ['#004184','#018ECC']
+gestori = ["Roma"]
+colori = ['#004184']
 
 
-# In[15]:
+# In[ ]:
 
 
 # data reading, calculations, data writing
@@ -144,13 +146,13 @@ for provider in gestori:
     providerGraph = networkx.Graph(adjacencyMatrix)
     
     # calculate results
-    print provider, "random failure:"
-    get_ipython().magic(u'time failureResults = randomFailure(providerGraph, steps=101) # default: steps=101')
+#    print provider, "random failure:"
+#    %time failureResults = randomFailure(providerGraph, steps=101) # default: steps=101
     print provider, "intentional attack:"
-    get_ipython().magic(u'time attackResults = intentionalAttack(providerGraph, steps=101)')
+    get_ipython().magic(u'time attackResults = intentionalAttack(providerGraph, steps=11)')
     
     # write on file
-    failureResults.to_csv('../data/percolation/randomFailure_{0}.csv'.format(provider), index=False)
+#    failureResults.to_csv('../data/percolation/randomFailure_{0}.csv'.format(provider), index=False)
     attackResults.to_csv('../data/percolation/intentionalAttack_{0}.csv'.format(provider), index=False)
 
 
