@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[ ]:
+# In[3]:
 
 import numpy, networkx, pandas
 
@@ -28,13 +28,13 @@ get_ipython().magic(u'matplotlib inline')
 
 
 
-# In[ ]:
+# In[2]:
 
 gestori = ["Tim", "Tre"]
 colori = ['#004184','#018ECC']
 
 
-# In[ ]:
+# In[3]:
 
 
 # plotting
@@ -214,4 +214,98 @@ pyplot.xlabel("Percentuale")
 pyplot.ylabel("Diametro")
 pyplot.legend(loc='best', frameon=False)
 #pyplot.savefig('../img/percolation/randomFailure_diameter.eps', format='eps', dpi=600)
+
+
+# # GRAFICI seabornosi
+
+# In[48]:
+
+gestori = ["Tim", "Vodafone", "Wind", "Tre"]
+colori = ['#004184','#ff3300','#ff8000','#018ECC']
+
+
+# In[49]:
+
+failureFrames = []
+attackFrames = []
+
+for provider in gestori:
+    failureResults = pandas.read_csv('../data/percolation/randomFailure_{0}.csv'.format(provider))
+    attackResults = pandas.read_csv('../data/percolation/intentionalAttack_{0}.csv'.format(provider))
+    failureResults['Compagnia'] = provider
+    attackResults['Compagnia'] = provider
+    failureFrames.append(failureResults)
+    attackFrames.append(attackResults)
+    
+failureFinal = pandas.concat(failureFrames)
+attackFinal = pandas.concat(attackFrames)
+
+
+# In[53]:
+
+import seaborn
+#grafici attack
+attackFinal.head()
+
+seaborn.set_context("notebook", font_scale=1.1)
+seaborn.set_style("ticks")
+
+#grafico andamento D
+seaborn.lmplot('percentuale', 'diameter', data=attackFinal, fit_reg=False, 
+               size = 7, aspect = 1.7778,  
+               hue='Compagnia', palette = colori, 
+                scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Attacco: diametro')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+pyplot.ylim(0,60)
+pyplot.savefig('../img/federico/attackD_Final', format='eps', dpi=1000)
+
+
+#grafico andamento GC
+seaborn.lmplot('percentuale', 'relativeGiantClusterSize', data=attackFinal, fit_reg=False,
+           size = 7, aspect = 1.7778,
+           hue='Compagnia', palette = colori,
+           scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Attacco: dimensioni relative del GC')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+pyplot.ylim(0,1.1)
+pyplot.savefig('../img/federico/attackGC_Final', format='eps', dpi=1000)
+
+
+# In[54]:
+
+#grafici failure
+failureFinal.head()
+
+seaborn.set_context("notebook", font_scale=1.1)
+seaborn.set_style("ticks")
+
+#grafico andamento D
+seaborn.lmplot('percentuale', 'diameter', data=failureFinal, fit_reg=False, 
+               size = 7, aspect = 1.7778,  
+               hue='Compagnia', palette = colori, 
+                scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Random failure: diametro')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+#pyplot.ylim(0,max(diametro)+2)
+pyplot.savefig('../img//federico/failureD_Final', format='eps', dpi=1000)
+
+
+#grafico andamento GC
+seaborn.lmplot('percentuale', 'relativeGiantClusterSize', data=failureFinal, fit_reg=False,
+           size = 7, aspect = 1.7778,
+           hue='Compagnia', palette = colori,
+           scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Random failure: dimensioni relative del GC')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+pyplot.ylim(0,1.1)
+pyplot.savefig('../img/federico/failureGC_Final', format='eps', dpi=1000)
 

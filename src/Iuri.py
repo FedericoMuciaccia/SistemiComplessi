@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-# <nbformat>3.0</nbformat>
 
-# <markdowncell>
+# coding: utf-8
 
-# ###Importo tutte le librerie necessarie
+# ### Importo tutte le librerie necessarie
 
-# <codecell>
+# In[53]:
 
 import geopy
 from geopy import distance #TODO BUGGONE
@@ -16,17 +14,16 @@ import numpy
 import networkx
 from matplotlib import pyplot
 import seaborn
-%matplotlib inline
+get_ipython().magic(u'matplotlib inline')
 
-# <markdowncell>
 
-# #Calcolo matrice adiacenza
+# # Calcolo matrice adiacenza
 # 
-# ###Calcolo il raggio medio che definisce Roma entro il raccordo anulare
+# ### Calcolo il raggio medio che definisce Roma entro il raccordo anulare
 # 
 # NB: da verificare che distanza euclidea non crei troppi problemi
 
-# <codecell>
+# In[54]:
 
 colosseo = (41.890173, 12.492331)
 raccordo = [(41.914456, 12.615807),(41.990672, 12.502714),(41.793883, 12.511297),(41.812566, 12.396628),(41.956277, 12.384611)]
@@ -72,11 +69,10 @@ raggiomedioEuclid /= len(raggi1)
 print raggiomedioGeo
 print raggiomedioEuclid
 
-# <markdowncell>
 
-# ###Popolo il dataframe e faccio una prima grossa scrematura
+# ### Popolo il dataframe e faccio una prima grossa scrematura
 
-# <codecell>
+# In[55]:
 
 dataframe = pandas.read_csv("/home/protoss/Documenti/Siscomp_datas/data/cell_towers.csv")
 #dataframe = pandas.read_csv("/home/protoss/Documenti/SistemiComplessi/data/cell_towers_diff-2016012100.csv")
@@ -90,11 +86,10 @@ italydoitcleaner = italydoitcleaner.reset_index(drop=True)
 italydoitcleaner.drop(italydoitcleaner.columns[[0, 1, 3, 5, 10, 11, 12, 13]], axis = 1, inplace=True)
 #italydoitcleaner
 
-# <markdowncell>
 
-# ###Seleziono le antenne in Roma e faccio dei .csv appositi
+# ### Seleziono le antenne in Roma e faccio dei .csv appositi
 
-# <codecell>
+# In[56]:
 
 #inroma = pandas.DataFrame([[41.947416, 12.371001],
 #                            [41.899392, 12.397436],
@@ -146,19 +141,17 @@ treCell = romaCell[criterioTre]
 treCell = treCell.reset_index(True)
 treCell.to_csv("../data/Tre_towers.csv")
 
-# <markdowncell>
 
 # Domande su iterazione su panda dataframe e efficienza, un tizio dice che la funzione iterrows è molto poco efficiente e sarebbe molto meglio usare un numpy array. Forse esistono funzioni più efficienti. 
 # 
 # http://stackoverflow.com/questions/10729210/iterating-row-by-row-through-a-pandas-dataframe  
 # 
 # http://stackoverflow.com/questions/7837722/what-is-the-most-efficient-way-to-loop-through-dataframes-with-pandas
-
-# <markdowncell>
+# 
 
 # ### Prendo le antenne di Roma e faccio matrice adiacenza
 
-# <codecell>
+# In[57]:
 
 #definisco la funzione che mi calcola la matrice di adiacenza
 def matriceSupEuclid(datiCoordinate, datiRaggi):
@@ -195,15 +188,14 @@ for aziende in gestore:
     numdati = raggio.size
     
     #%time adiacenzaGeo = matriceSupGeodetic(coordinate, raggio)
-    adiacenzaEuclid = matriceSupEuclid(coordinate, raggio)
+    get_ipython().magic(u'time adiacenzaEuclid = matriceSupEuclid(coordinate, raggio)')
     
     numpy.savetxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(aziende)),adiacenzaEuclid, fmt='%d',delimiter=',',newline='\n')
 
-# <markdowncell>
 
-# #Faccio disegno grafo e grafico distr grado
+# ## Faccio disegno grafo e grafico distr grado
 
-# <codecell>
+# In[58]:
 
 #for azienda in gestore:
 
@@ -215,13 +207,14 @@ adiacenzaVoda = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/Adi
 adiacenzaWind = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Wind.csv",delimiter=',',dtype='int')
 adiacenzaTre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
 
-%time grafoRoma = networkx.Graph(adiacenzaRoma,)
-%time grafoTim = networkx.Graph(adiacenzaTim)
-%time grafoVoda = networkx.Graph(adiacenzaVoda)
-%time grafoWind = networkx.Graph(adiacenzaWind)
-%time grafoTre = networkx.Graph(adiacenzaTre)
+get_ipython().magic(u'time grafoRoma = networkx.Graph(adiacenzaRoma)')
+get_ipython().magic(u'time grafoTim = networkx.Graph(adiacenzaTim)')
+get_ipython().magic(u'time grafoVoda = networkx.Graph(adiacenzaVoda)')
+get_ipython().magic(u'time grafoWind = networkx.Graph(adiacenzaWind)')
+get_ipython().magic(u'time grafoTre = networkx.Graph(adiacenzaTre)')
 
-# <codecell>
+
+# In[59]:
 
 print("num gradi Roma", networkx.number_of_nodes(grafoRoma))
 print("num gradi Tim", networkx.number_of_nodes(grafoTim))
@@ -264,9 +257,10 @@ numpy.savetxt("../data/IstoGrado_Tre",istoGradoTre,fmt='%d',newline='\n')
 treCell["grado"] = gradoTre
 treCell.to_csv("../data/Tre_towers.csv")
 
-# <codecell>
 
-%matplotlib inline
+# In[9]:
+
+get_ipython().magic(u'matplotlib inline')
 
 pyplot.figure(figsize=(16,9))
 pyplot.subplot(222)
@@ -283,9 +277,10 @@ networkx.draw_random(grafoTre)
 
 pyplot.show()
 
-# <codecell>
 
-%matplotlib inline
+# In[60]:
+
+get_ipython().magic(u'matplotlib inline')
 gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
 colori = ['#4d4d4d', '#004184','#ff3300','#ff8000','#018ECC']
 def degreeDistribution(gradi, azienda, colore):
@@ -324,11 +319,10 @@ pyplot.xlim(1,1000)
 pyplot.legend()
 pyplot.show()
 
-# <markdowncell>
 
 # ### Faccio istogramma del raggio delle antenne
 
-# <codecell>
+# In[61]:
 
 gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
 colori = ['#4d4d4d', '#004184','#ff3300','#ff8000','#018ECC']
@@ -369,17 +363,14 @@ for azienda, colore in zip(gestore,colori):
     pyplot.legend()
 pyplot.show()
 
-# <markdowncell>
 
 # # Faccio simulazione attacco, andamento diametro e GC in funzione dei nodi rimossi
-
-# <markdowncell>
 
 # #DOMANDA IMPORTANTE
 # Io nei cicli ho levato n nodi, poi ho preso il cluster più grande, ho levato nodi solo da quel cluster, e così via reiterando.
 # Per caso dovevo rimuovere nodi sempre dal totale? Nel caso dell'attacco cambia poco: molto probabilmente i nodi con grado maggiore sono sempre nel GC, ma nell'attacco random cambia tantissimo! Potrei prendere randomicamente i cluster minori dando sopravvivenza molto maggiore al GC. Come si fa in questi casi?
 
-# <codecell>
+# In[63]:
 
 #Funzioni
 def attacco(compagnia, steps):
@@ -395,28 +386,24 @@ def attacco(compagnia, steps):
     diametro.append(2)
     relSizeGC.append(1)
 
-    
     while (networkx.number_of_nodes(grafoFinal) > passo):
         gradiFinal = pandas.DataFrame(grafoFinal.degree().items(), columns=['index', 'grado'])
         gradiFinal.sort(["grado"], ascending=[False], inplace=True)
-        gradiFinal = gradiFinal.reset_index()
-        gradiFinal.drop(gradiFinal.columns[[0]], axis = 1, inplace=True)
         sortedIDnode = gradiFinal['index'].values
 
         for identificativo in sortedIDnode:
             if (networkx.number_of_nodes(grafoFinal) > len(sortedIDnode) - passo):
                 grafoFinal.remove_node(identificativo)
 
-        sottografi = networkx.connected_component_subgraphs(grafoFinal)
-        giantCluster = sottografi[0]
+        giantCluster = max(networkx.connected_component_subgraphs(grafoFinal), key = len)
         
         i += 100/steps
         ascisse.append(i)
         aziendaFinal.append(compagnia)
 
         graphSize = networkx.number_of_nodes(grafoFinal)
-        #diametro.append(networkx.diameter(giantCluster, e=None))
-        relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
+        diametro.append(networkx.diameter(giantCluster, e=None))
+        relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
 
 def randomFailure(compagnia, steps):
     adiacenzaFinal = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia)),delimiter=',',dtype='int')
@@ -433,27 +420,156 @@ def randomFailure(compagnia, steps):
     
     while (networkx.number_of_nodes(grafoFinal) > passo):
         gradiFinal = pandas.DataFrame(grafoFinal.degree().items(), columns=['index', 'grado'])
-        gradiFinal.reindex(numpy.random.permutation(gradiFinal.index))
         randomante = gradiFinal['index'].values
-    #    print len(randomante)
-    #    print networkx.number_of_nodes(grafoTre)
+        randomante = numpy.random.permutation(randomante)
 
         for identificativo in randomante:
             if (networkx.number_of_nodes(grafoFinal) > len(randomante) - passo):
                 grafoFinal.remove_node(identificativo)
     
-
-        sottografi = networkx.connected_component_subgraphs(grafoFinal)
-        giantCluster = sottografi[0]
-        
+        giantCluster = max(networkx.connected_component_subgraphs(grafoFinal), key = len)
+                            
         i += 100/steps
         ascisse.append(i)
         aziendaFinal.append(compagnia)
 
         graphSize = networkx.number_of_nodes(grafoFinal)
         diametro.append(networkx.diameter(giantCluster, e=None))
-        relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
+        relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
         
+colori = ['#004184','#ff3300','#ff8000','#018ECC', '#4d4d4d']
+
+
+# In[46]:
+
+#Attacco
+
+#gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
+gestore = ["Tim", "Vodafone", "Wind", "Tre"]
+#gestore = ["Tre"]
+
+diametro = []
+relSizeGC = []
+aziendaFinal = []
+ascisse = []
+    
+get_ipython().magic(u'matplotlib inline')
+
+for provider in gestore:
+    get_ipython().magic(u'time attacco(provider, 100)')
+
+datiFinal = pandas.DataFrame()
+
+datiFinal['percent'] = ascisse
+datiFinal['Compagnia'] = aziendaFinal
+datiFinal['diam'] = diametro
+datiFinal['GC'] = relSizeGC
+datiFinal.to_csv("../data/Iuri/AttackDataForSeaborn.csv")
+datiFinal.head()
+
+
+# In[47]:
+
+#Failure
+
+#gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
+#gestore = ["Tre"]
+gestore = ["Tim", "Vodafone", "Wind", "Tre"]
+
+diametro = []
+relSizeGC = []
+aziendaFinal = []
+ascisse = []
+
+for provider in gestore:
+    get_ipython().magic(u'time randomFailure(provider, 100)')
+
+get_ipython().magic(u'matplotlib inline')
+
+datiFinal = pandas.DataFrame()
+
+datiFinal['percent'] = ascisse
+datiFinal['Compagnia'] = aziendaFinal
+datiFinal['diam'] = diametro
+datiFinal['GC'] = relSizeGC
+datiFinal.to_csv("../data/Iuri/FailureDataForSeaborn.csv")
+#datiFinal.to_csv("../data/Iuri/FailureTim.csv")
+datiFinal.head()
+
+
+# ### Faccio i grafici
+
+# In[64]:
+
+import seaborn
+
+datiFinal = pandas.read_csv('../data/Iuri/AttackDataForSeaborn.csv')
+
+seaborn.set_context("notebook", font_scale=1.1)
+seaborn.set_style("ticks")
+
+
+seaborn.lmplot('percent', 'diam', data=datiFinal, fit_reg=False,
+           size = 7, aspect = 1.7778,
+           hue='Compagnia', palette = colori,
+           scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Attacco: diametro')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+pyplot.ylim(0, 60)
+pyplot.savefig('../img/iuri/AttackD_Final', format='eps', dpi=1000)
+
+seaborn.lmplot('percent', 'GC', data=datiFinal, fit_reg=False,
+           size = 7, aspect = 1.7778,
+           hue='Compagnia', palette = colori,
+           scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Attacco: dimensioni relative del GC')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+pyplot.ylim(0,1.1)
+pyplot.savefig('../img/iuri/AttackGC_Final', format='eps', dpi=1000)
+
+
+# In[65]:
+
+import seaborn
+
+datiFinal = pandas.read_csv('../data/Iuri/FailureDataForSeaborn.csv')
+#datiFinal = pandas.read_csv('../data/Iuri/FailureTim.csv')
+
+seaborn.set_context("notebook", font_scale=1.1)
+seaborn.set_style("ticks")
+
+
+seaborn.lmplot('percent', 'diam', data=datiFinal, fit_reg=False,
+           size = 7, aspect = 1.7778,
+           hue='Compagnia', palette = colori,
+           scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Random failure: diametro')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+pyplot.ylim(0, 10)
+pyplot.savefig('../img/iuri/FailureD_Final', format='eps', dpi=1000)
+
+seaborn.lmplot('percent', 'GC', data=datiFinal, fit_reg=False,
+           size = 7, aspect = 1.7778,
+           hue='Compagnia', palette = colori,
+           scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Random failure: dimensioni relative del GC')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+pyplot.ylim(0,1.1)
+pyplot.savefig('../img/iuri/failtimGC', format='eps', dpi=1000)
+
+
+# ### Comparazione con i modelli
+
+# In[73]:
+
 def modelAttack(modello, steps):
     if(modello == 'Erdos-Renyi'):
         grafoFinal = networkx.erdos_renyi_graph(1500, 0.05)
@@ -466,11 +582,10 @@ def modelAttack(modello, steps):
         #print grado 
         grafico = degreeDistributionLog(gradoFinal, 'Barabasi', '#ff3300')
     if(modello == 'Watts-Strogatz'):
-        grafoFinal = networkx.newman_watts_strogatz_graph(1500, 37, 1)
+        grafoFinal = networkx.watts_strogatz_graph(1500, 37, 1)
         gradoFinal = grafoFinal.degree().values()
         #print grado  
         grafico = degreeDistributionLog(gradoFinal, 'Watts', '#47d147')
-    
     
     graphSize = networkx.number_of_nodes(grafoFinal)
     passo = networkx.number_of_nodes(grafoFinal)/float(steps)
@@ -485,16 +600,13 @@ def modelAttack(modello, steps):
     while (networkx.number_of_nodes(grafoFinal) > passo):
         gradiFinal = pandas.DataFrame(grafoFinal.degree().items(), columns=['index', 'grado'])
         gradiFinal.sort(["grado"], ascending=[False], inplace=True)
-        gradiFinal = gradiFinal.reset_index()
-        gradiFinal.drop(gradiFinal.columns[[0]], axis = 1, inplace=True)
         sortedIDnode = gradiFinal['index'].values
 
         for identificativo in sortedIDnode:
             if (networkx.number_of_nodes(grafoFinal) > len(sortedIDnode) - passo):
                 grafoFinal.remove_node(identificativo)
 
-        sottografi = networkx.connected_component_subgraphs(grafoFinal)
-        giantCluster = sottografi[0]
+        giantCluster = max(networkx.connected_component_subgraphs(grafoFinal), key = len)
         
         i += 100/steps
         ascisse.append(i)
@@ -534,134 +646,25 @@ def modelFailure(modello, steps):
 
     while (networkx.number_of_nodes(grafoFinal) > passo):
         gradiFinal = pandas.DataFrame(grafoFinal.degree().items(), columns=['index', 'grado'])
-        gradiFinal.reindex(numpy.random.permutation(gradiFinal.index))
         randomante = gradiFinal['index'].values
-    #    print len(randomante)
-    #    print networkx.number_of_nodes(grafoTre)
+        randomante = numpy.random.permutation(randomante)
 
         for identificativo in randomante:
             if (networkx.number_of_nodes(grafoFinal) > len(randomante) - passo):
                 grafoFinal.remove_node(identificativo)
 
-
-        sottografi = networkx.connected_component_subgraphs(grafoFinal)
-        giantCluster = sottografi[0]
+        giantCluster = max(networkx.connected_component_subgraphs(grafoFinal), key = len)
 
         i += 100/steps
         ascisse.append(i)
         aziendaFinal.append(modello)
         
         graphSize = networkx.number_of_nodes(grafoFinal)
-        diametro.append(networkx.diameter(giantCluster, e=None))
+#        diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
-        
-colori = ['#004184','#ff3300','#ff8000','#018ECC', '#4d4d4d']
-
-# <codecell>
-
-import seaborn
-#Attacco
-
-#gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
-gestore = ["Tre"]
-
-diametro = []
-relSizeGC = []
-aziendaFinal = []
-ascisse = []
-    
-%matplotlib inline
-
-for provider in gestore:
-#    %time attacco(provider,100)
-    attacco(provider, 20)
-
-datiFinal = pandas.DataFrame()
-
-datiFinal['percent'] = ascisse
-datiFinal['Compagnia'] = aziendaFinal
-#datiFinal['diam'] = diametro
-datiFinal['GC'] = relSizeGC
-
-datiFinal.head()
-
-seaborn.set_context("notebook", font_scale=1.1)
-seaborn.set_style("ticks")
-
-#seaborn.lmplot('percent', 'diam', data=datiFinal, fit_reg=False, 
-#               size = 7, aspect = 1.7778,  
-#               hue='Compagnia', palette = colori, 
-#                scatter_kws={"marker": "D", "s": 100})
-#pyplot.title('Attacco: diametro')
-#pyplot.xlabel("%")
-#pyplot.ylabel("Valore")
-#pyplot.xlim(0, 100)
-#pyplot.ylim(0,max(diametro)+2)
-#pyplot.savefig('../img/AttackD_Final', format='eps', dpi=1000)
-
-seaborn.lmplot('percent', 'GC', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
-           hue='Compagnia', palette = colori,
-           scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Attacco: dimensioni relative del GC')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.xlim(0, 100)
-pyplot.ylim(0,1.1)
-pyplot.savefig('../img/AttackGC_Final', format='eps', dpi=1000)
-
-# <codecell>
-
-#Failure
-
-#gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
-gestore = ["Tre"]
-
-diametro = []
-relSizeGC = []
-aziendaFinal = []
-ascisse = []
-
-for provider in gestore:
-    %time randomFailure(provider, 100)
-
-%matplotlib inline
-
-datiFinal = pandas.DataFrame()
-
-datiFinal['percent'] = ascisse
-datiFinal['Compagnia'] = aziendaFinal
-datiFinal['diam'] = diametro
-datiFinal['GC'] = relSizeGC
-
-datiFinal.head()
-
-seaborn.set_context("notebook", font_scale=1.1)
-seaborn.set_style("ticks")
 
 
-seaborn.lmplot('percent', 'diam', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
-           hue='Compagnia', palette = colori,
-           scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Random failure: diametro')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.xlim(0, 100)
-pyplot.ylim(0,max(diametro)+2)
-
-seaborn.lmplot('percent', 'GC', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
-           hue='Compagnia', palette = colori,
-           scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Random failure: dimensioni relative del GC')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.xlim(0, 100)
-pyplot.ylim(0,1.1)
-pyplot.savefig('../img/FailureGC_Final', format='eps', dpi=1000)
-
-# <codecell>
+# In[70]:
 
 #calcolo attacco con modelli
 
@@ -680,7 +683,7 @@ datiFinal = pandas.DataFrame()
 
 datiFinal['percent'] = ascisse
 datiFinal['Modello'] = aziendaFinal
-datiFinal['diam'] = diametro
+#datiFinal['diam'] = diametro
 datiFinal['GC'] = relSizeGC
 
 datiFinal.head()
@@ -689,19 +692,19 @@ seaborn.set_context("notebook", font_scale=1.1)
 seaborn.set_style("ticks")
 
 #PLOTS
-seaborn.lmplot('percent', 'diam',
-           data=datiFinal,
-           fit_reg=False,
-           size = 7,
-           aspect = 1.7778,
-           hue='Modello',
-           scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Attacco con i modelli di rete: diametro')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.xlim(0, 100)
+#seaborn.lmplot('percent', 'diam',
+#           data=datiFinal,
+#           fit_reg=False,
+#           size = 7,
+#           aspect = 1.7778,
+#           hue='Modello',
+#           scatter_kws={"marker": "D", "s": 100})
+#pyplot.title('Attacco con i modelli di rete: diametro')
+#pyplot.xlabel("%")
+#pyplot.ylabel("Valore")
+#pyplot.xlim(0, 100)
 #pyplot.ylim(0, 1)
-pyplot.ylim(0,max(diametro)+2)
+#pyplot.ylim(0,max(diametro)+2)
 
 seaborn.lmplot('percent', 'GC',
            data=datiFinal,
@@ -716,7 +719,8 @@ pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
 
-# <codecell>
+
+# In[75]:
 
 #calcolo failure con modelli
 diametro = []
@@ -725,9 +729,9 @@ aziendaFinal = []
 ascisse = []
 
 pyplot.figure(figsize=(16,9))       
-modelFailure('Watts-Strogatz', 20)
-modelFailure('Erdos-Renyi', 20)
-modelFailure('Barabasi-Abert', 20)
+modelFailure('Watts-Strogatz', 100)
+modelFailure('Erdos-Renyi', 100)
+modelFailure('Barabasi-Abert', 100)
 pyplot.legend()
 
 datiFinal = pandas.DataFrame()
@@ -771,61 +775,15 @@ pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
 pyplot.savefig('destination_path.eps', format='eps', dpi=1000)
 
-# <codecell>
-
-import seaborn
-
-datiFinal = pandas.DataFrame()
-
-datiFinal['percent'] = ascisse
-datiFinal['Modello'] = aziendaFinal
-datiFinal['diam'] = diametro
-datiFinal['GC'] = relSizeGC
-
-datiFinal.head()
-
-seaborn.set_context("notebook", font_scale=1.1)
-seaborn.set_style("ticks")
-
-
-seaborn.lmplot('percent', 'diam',
-           data=datiFinal,
-           fit_reg=False,
-           size = 7,
-           aspect = 1.7778,
-           hue='Modello',
-           scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Random failure con i modelli di rete: diametro')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.xlim(0, 100)
-#pyplot.ylim(0, 1)
-pyplot.ylim(0,max(diametro)+2)
-
-seaborn.lmplot('percent', 'GC',
-           data=datiFinal,
-           fit_reg=False,
-           size = 7,
-           aspect = 1.7778,
-           hue='Modello',
-           scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Random failure con i modelli di rete: dimensioni relative del GC')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.xlim(0, 100)
-pyplot.ylim(0,1.1)
-
-# <markdowncell>
 
 # # USARE GRAPH TOOL
 # # VALUTARE USO METODI SPETTRALI TIPO PAGE RANK / BETWEENNESS; CERCARE SE SI DISCOSTANO DA DISTR GRADO NEL NOSTRO CASO DI RETE NON DIRETTA
 
-# <markdowncell>
-
 # #CALCOLO DEL DIAMETRO DI RETE ROMA IMPOSSIBILE, ANDAMENTO ESPONENZIALE CON L'AUMENTARE DEI NODI
 # 
 # 
-# ####passo di 1/10 per volta
+# ###passo di 1/10 per volta
+# 
 # CPU times: user 30.2 s, sys: 156 ms, total: 30.4 s  
 # Wall time: 30.1 s  
 # CPU times: user 14.1 s, sys: 56 ms, total: 14.2 s  
@@ -836,7 +794,8 @@ pyplot.ylim(0,1.1)
 # Wall time: 11.9 s
 # 
 # 
-# ####passo di 1/20 per volta
+# 20 steps
+# 
 # CPU times: user 1min 6s, sys: 368 ms, total: 1min 6s  
 # Wall time: 1min 5s  
 # CPU times: user 29 s, sys: 176 ms, total: 29.2 s  
@@ -846,8 +805,7 @@ pyplot.ylim(0,1.1)
 # CPU times: user 25.4 s, sys: 116 ms, total: 25.6 s  
 # Wall time: 25.4 s  
 # 
-
-# <markdowncell>
+# 
 
 # NB. num antenne  
 #    * TIM - 1550  
@@ -856,8 +814,6 @@ pyplot.ylim(0,1.1)
 #    * 3 - 1315  
 #    
 # Tot antenne: 6571  
-
-# <markdowncell>
 
 # ##TODO:  
 # * Prendere array coordinate                                                           ✔
@@ -906,8 +862,6 @@ pyplot.ylim(0,1.1)
 #   
 #   Federico nota andamento range segua una sorta di legge di zipf, NOTA BENE, I NOSTRI DATI NON SONO DATI UFFICIALI, MA COSTRUITI DA GENTE CHE CAMMINA, QUINDI PROB DI TROVARE NUOVA ANTENNA POTREBBE ESSERE SIMILE A PROB TROVARE NUOVA PAROLA, ma io penso che non c'entri perché noi stiamo vedendo solo le lunghezze delle parole. Che legge regola la prob delle lunghezze delle parole?
 
-# <markdowncell>
-
 # Il primo tentativo è stato di fare la matrice di adiacenza a forza bruta. Con un campione di soli 50 nodi ci metteva pochi microsecondi, quindi abbiamo provato a fare la matrice di adiacenza delle 7000 antenne entro il raccordo anulare, notando che la compilazione durava tanto, facendo le dovute proporzioni abbiamo preventivato 2,5 ore di tempo di calcolo. La prima cosa che abbiamo sistemato è stato ovviamente fare un ciclo che calcolasse soltanto la metà superiore della matrice, dimezzando il tempo di calcolo. 
 # 
 # La prima cosa che abbiamo pensato di fare è stato di diagonalizzare a blocchi la matrice, o fare un ciclo di bassissimo livello che mettesse 0 a tutti gli elementi relativi alle antenne con $\Delta$Latitudine e/o $\Delta$Longitudine maggiori del range massimo del campione di dati. Il problema avuto è che il range delle antenne è tendenzialmente grande, con alcune che arrivano a 10km (con raggioRoma 11km)(e anche tanti samples), quindi non c'era modo di ridurre i calcoli. 
@@ -916,8 +870,6 @@ pyplot.ylim(0,1.1)
 # preventivo quindi di 10 minuti di tempo di calcolo invece di 1 ora e mezza.
 # 
 # TODO vedere parallelaizazione
-
-# <markdowncell>
 
 # ## Varie note su tempi di calcolo
 # 
@@ -1010,8 +962,7 @@ pyplot.ylim(0,1.1)
 # Wall time: 6.65 s
 # 
 # 
-
-# <markdowncell>
+# 
 
 # ###Geo dist
 # Tempo previsto di calcolo con $\sim$ 7000 dati: $\sim$ 620 sec $\sim$ 10 minuti
@@ -1019,7 +970,7 @@ pyplot.ylim(0,1.1)
 # ###Euclid dist
 # Tempo previsto di calcolo con $\sim$ 7000 dati: $\sim$ 80 sec $\sim$ 1,3 minuti
 
-# <codecell>
+# In[24]:
 
 colori = ['#4d4d4d', '#004184','#ff3300','#ff8000','#018ECC']
 paletta = seaborn.color_palette(palette = colori)
@@ -1039,6 +990,8 @@ seaborn.palplot(paletta)
 paletta = seaborn.color_palette
 print paletta
 
-# <codecell>
+
+# In[ ]:
+
 
 
