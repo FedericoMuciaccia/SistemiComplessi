@@ -3,7 +3,7 @@
 
 # # Percolation
 
-# In[26]:
+# In[5]:
 
 
 import numpy, networkx, pandas
@@ -29,7 +29,7 @@ import numpy, networkx, pandas
 
 # ## Random failure
 
-# In[3]:
+# In[12]:
 
 
 def randomFailure(graph, steps=101):
@@ -46,7 +46,7 @@ def randomFailure(graph, steps=101):
         newGraph.remove_nodes_from(randomizedNodes[0:index])
         newGraphSize = networkx.number_of_nodes(newGraph)
         grado = newGraph.degree().items()
-        subgraphs = networkx.connected_component_subgraphs(newGraph)
+        subgraphs = sorted(networkx.connected_component_subgraphs(newGraph), key = len, reverse=True)
         try:
             giantCluster = subgraphs[0]
             giantClusterSize = networkx.number_of_nodes(giantCluster)
@@ -70,7 +70,7 @@ def randomFailure(graph, steps=101):
 
 # ## Intentional attack
 
-# In[4]:
+# In[13]:
 
 
 def intentionalAttack(graph, steps=101):
@@ -80,9 +80,9 @@ def intentionalAttack(graph, steps=101):
     initialNodes = initialGraph.nodes()
     
     initialDegrees = initialGraph.degree()
-    degreeDataframe = pandas.DataFrame(initialDegrees.items(), columns=['index', 'degree'])
+    degreeDataframe = pandas.DataFrame(initialDegrees.items(), columns=['index', 'degree']) # TODO index -> ID
     degreeDataframe.sort(["degree"], ascending=[False], inplace=True) # TODO vedere se si può fare a meno di una colonna
-    degreeDataframe = degreeDataframe.reset_index(drop=True) # TODO
+    # degreeDataframe = degreeDataframe.reset_index(drop=True)
     sortedNodes = degreeDataframe['index'].values # TODO degreeDataframe.index
     
     def analyzeSingleGraph(index):
@@ -92,9 +92,11 @@ def intentionalAttack(graph, steps=101):
         newGraph.remove_nodes_from(sortedNodes[0:index]) # TODO vedere ordinamento più veloce
         newGraphSize = networkx.number_of_nodes(newGraph)
         grado = newGraph.degree().items()
+        # subgraphs = sorted(networkx.connected_component_subgraphs(newGraph), key = len, reverse=True)
         subgraphs = networkx.connected_component_subgraphs(newGraph)
         try:
-            giantCluster = subgraphs[0]
+            giantCluster = max(subgraphs, key = len)
+            # giantCluster = subgraphs[0]
             giantClusterSize = networkx.number_of_nodes(giantCluster)
             relativeGiantClusterSize = numpy.true_divide(giantClusterSize, newGraphSize)
             diameter = networkx.diameter(giantCluster, e=None)
@@ -114,17 +116,20 @@ def intentionalAttack(graph, steps=101):
     return attackDataframe
 
 
-# In[5]:
+# In[14]:
 
 
-# gestori = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
-# colori = ['#004184','#ff3300','#ff8000','#018ECC', '#4d4d4d']
+#gestori = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
+#colori = ['#004184','#ff3300','#ff8000','#018ECC', '#4d4d4d']
 
-gestori = ["Tim", "Tre"]
-colori = ['#004184','#018ECC']
+gestori = ["Tim", "Vodafone", "Wind", "Tre"]
+colori = ['#004184','#ff3300','#ff8000','#018ECC']
+
+#gestori = ["Tim", "Tre"]
+#colori = ['#004184','#018ECC']
 
 
-# In[71]:
+# In[15]:
 
 
 # data reading, calculations, data writing
@@ -140,9 +145,9 @@ for provider in gestori:
     
     # calculate results
     print provider, "random failure:"
-    get_ipython().magic(u'time failureResults = randomFailure(providerGraph, steps=11) # default: steps=101')
+    get_ipython().magic(u'time failureResults = randomFailure(providerGraph, steps=101) # default: steps=101')
     print provider, "intentional attack:"
-    get_ipython().magic(u'time attackResults = intentionalAttack(providerGraph, steps=11)')
+    get_ipython().magic(u'time attackResults = intentionalAttack(providerGraph, steps=101)')
     
     # write on file
     failureResults.to_csv('../data/percolation/randomFailure_{0}.csv'.format(provider), index=False)
