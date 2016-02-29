@@ -46,9 +46,11 @@ def randomFailure(graph, steps=101):
         newGraph.remove_nodes_from(randomizedNodes[0:index])
         newGraphSize = networkx.number_of_nodes(newGraph)
         grado = newGraph.degree().items()
-        subgraphs = sorted(networkx.connected_component_subgraphs(newGraph), key = len, reverse=True)
+        # subgraphs = sorted(networkx.connected_component_subgraphs(newGraph), key = len, reverse=True)
+        subgraphs = networkx.connected_component_subgraphs(newGraph)
         try:
-            giantCluster = subgraphs[0]
+            # giantCluster = subgraphs[0]
+            giantCluster = max(subgraphs, key = networkx.number_of_nodes)
             giantClusterSize = networkx.number_of_nodes(giantCluster)
             relativeGiantClusterSize = numpy.true_divide(giantClusterSize, newGraphSize)
             diameter = networkx.diameter(giantCluster, e=None)
@@ -80,23 +82,23 @@ def intentionalAttack(graph, steps=101):
     initialNodes = initialGraph.nodes()
     
     initialDegrees = initialGraph.degree()
-    degreeDataframe = pandas.DataFrame(initialDegrees.items(), columns=['index', 'degree']) # TODO index -> ID
+    degreeDataframe = pandas.DataFrame(initialDegrees.items(), columns=['ID', 'degree'])
     degreeDataframe.sort(["degree"], ascending=[False], inplace=True) # TODO vedere se si può fare a meno di una colonna
     # degreeDataframe = degreeDataframe.reset_index(drop=True)
-    sortedNodes = degreeDataframe['index'].values # TODO degreeDataframe.index
+    sortedNodes = degreeDataframe['ID'].values # TODO degreeDataframe.ID
     
-    def analyzeSingleGraph(index):
+    def analyzeSingleGraph(number):
         # TODO vedere se si possono agevolmente parallelizzare le list comprehension
         # che sono molto più scorrevoli da usare ripetto a map() 
         newGraph = initialGraph.copy()
-        newGraph.remove_nodes_from(sortedNodes[0:index]) # TODO vedere ordinamento più veloce
+        newGraph.remove_nodes_from(sortedNodes[0:number]) # TODO vedere ordinamento più veloce
         newGraphSize = networkx.number_of_nodes(newGraph)
         grado = newGraph.degree().items()
         # subgraphs = sorted(networkx.connected_component_subgraphs(newGraph), key = len, reverse=True)
         subgraphs = networkx.connected_component_subgraphs(newGraph)
         try:
-            giantCluster = max(subgraphs, key = len)
             # giantCluster = subgraphs[0]
+            giantCluster = max(subgraphs, key = networkx.number_of_nodes)
             giantClusterSize = networkx.number_of_nodes(giantCluster)
             relativeGiantClusterSize = numpy.true_divide(giantClusterSize, newGraphSize)
             diameter = networkx.diameter(giantCluster, e=None)
