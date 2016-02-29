@@ -8,6 +8,8 @@ import networkx
 import matplotlib
 from matplotlib import pyplot
 import numpy
+import pandas
+import math
 
 # <codecell>
 
@@ -64,6 +66,10 @@ pos = graph_tool.draw.sfdp_layout(g)
 graph_draw(g, pos=pos, output_size=(2000, 2000), vertex_color=[1,1,1,0],
            vertex_size=2, edge_pen_width=0.8,
            vcmap=matplotlib.cm.gist_heat_r, output="provaTre.png")
+
+# <markdowncell>
+
+# ## Conversioni modelli reti da networkx a graph-tool
 
 # <codecell>
 
@@ -124,6 +130,77 @@ grafico = degreeDistributionLog(gradoErdos, 'Erdos-Renyi', '#4d4d4d')
 grafico = degreeDistributionLog(gradoWatts, 'Watts', '#47d147')
 grafico = degreeDistributionLog(gradoBarabasi, 'Barabasi', '#ff3300')
 pyplot.legend()
+
+# <markdowncell>
+
+# ## Generazione modelli reti direttamente con graph tool
+
+# <markdowncell>
+
+# ### Barabasi Albert con *initial attractiveness*
+
+# <codecell>
+
+g = graph_tool.generation.price_network(2000, m=1, c= 1, gamma = 1, directed=False)
+
+pos = graph_tool.draw.sfdp_layout(g)
+graph_draw(g, pos = pos, output_size=(1000, 1000), 
+           vertex_color=[1,1,1,0], vertex_size=4, edge_pen_width=1.2,
+           vcmap=matplotlib.cm.gist_heat_r, output="InitialAttr.png")
+
+#pos=graph_tool.draw.sfdp_layout(g, cooling_step=0.99)
+#graph_draw(g, pos=pos, output_size=(1000, 1000),
+#              vertex_fill_color=g.vertex_index, vertex_size=2,
+#              edge_pen_width=1.0, output="initialAttractiv.png")
+
+#todo mettere gradi minimi sempre più grandi e provare initial attrattivness
+#fare in un box a parte per lavorare solo con distr grado
+
+# <codecell>
+
+# We will need some things from several places
+from __future__ import division, absolute_import, print_function
+import sys
+if sys.version_info < (3,):
+    range = xrange
+import os
+from pylab import *  # for plotting
+from numpy.random import *  # for random sampling
+seed(42)
+
+# We need to import the graph_tool module itself
+from graph_tool.all import *
+
+in_hist = vertex_hist(g, "out")
+
+y = in_hist[0]
+err = sqrt(in_hist[0])
+err[err >= y] = y[err >= y] - 1e-2
+
+figure(figsize=(8,5))
+errorbar(in_hist[1][:-1], in_hist[0], fmt="o", yerr=err,
+        label="in")
+gca().set_yscale("log")
+gca().set_xscale("log")
+gca().set_ylim(1, 1e4)
+#gca().set_xlim(10, 1e3)
+subplots_adjust(left=0.2, bottom=0.2)
+xlabel("$k$")
+ylabel("$P(k)$")
+tight_layout()
+savefig("price-deg-dist.pdf")
+savefig("price-deg-dist.png")
+
+# <markdowncell>
+
+# ##Documentazione graph-tool
+# 
+# * [Quick Start](https://graph-tool.skewed.de/static/doc/quickstart.html)
+# * [Graph generators](https://graph-tool.skewed.de/static/doc/generation.html#graph_tool.generation.price_network)
+# * [Topologia (diametro etc)](https://graph-tool.skewed.de/static/doc/topology.html)
+# * [Statistica (gradi etc)](https://graph-tool.skewed.de/static/doc/stats.html)
+# * [Draw e layouts](https://graph-tool.skewed.de/static/doc/draw.html#graph_tool.draw.arf_layout)
+# * [Animazioni](http://graph-tool.skewed.de/static/doc/demos/animation.html)
 
 # <codecell>
 
