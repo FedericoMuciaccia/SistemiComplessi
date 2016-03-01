@@ -3,7 +3,7 @@
 
 # # Percolation
 
-# In[6]:
+# In[1]:
 
 
 import numpy, networkx, pandas
@@ -29,7 +29,7 @@ import numpy, networkx, pandas
 
 # ## Random failure
 
-# In[11]:
+# In[2]:
 
 
 def randomFailure(graph, steps=101):
@@ -71,7 +71,7 @@ def randomFailure(graph, steps=101):
 
 # ## Intentional attack
 
-# In[12]:
+# In[3]:
 
 
 def intentionalAttack(graph, steps=101):
@@ -118,7 +118,7 @@ def intentionalAttack(graph, steps=101):
     return attackDataframe
 
 
-# In[17]:
+# In[6]:
 
 
 #gestori = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
@@ -131,7 +131,7 @@ gestori = ["Roma"]
 colori = ['#004184']
 
 
-# In[ ]:
+# In[8]:
 
 
 # data reading, calculations, data writing
@@ -149,7 +149,7 @@ for provider in gestori:
 #    print provider, "random failure:"
 #    %time failureResults = randomFailure(providerGraph, steps=101) # default: steps=101
     print provider, "intentional attack:"
-    get_ipython().magic(u'time attackResults = intentionalAttack(providerGraph, steps=11)')
+    get_ipython().magic(u'time attackResults = intentionalAttack(providerGraph, steps=101)')
     
     # write on file
 #    failureResults.to_csv('../data/percolation/randomFailure_{0}.csv'.format(provider), index=False)

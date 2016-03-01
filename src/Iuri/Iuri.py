@@ -3,7 +3,7 @@
 
 # ### Importo tutte le librerie necessarie
 
-# In[15]:
+# In[1]:
 
 import geopy
 from geopy import distance #TODO BUGGONE
@@ -370,7 +370,7 @@ pyplot.show()
 # Io nei cicli ho levato n nodi, poi ho preso il cluster più grande, ho levato nodi solo da quel cluster, e così via reiterando.
 # Per caso dovevo rimuovere nodi sempre dal totale? Nel caso dell'attacco cambia poco: molto probabilmente i nodi con grado maggiore sono sempre nel GC, ma nell'attacco random cambia tantissimo! Potrei prendere randomicamente i cluster minori dando sopravvivenza molto maggiore al GC. Come si fa in questi casi?
 
-# In[52]:
+# In[3]:
 
 #Funzioni
 def attacco(compagnia):
@@ -533,11 +533,12 @@ datiFinal
 
 # ### Faccio i grafici
 
-# In[54]:
+# In[7]:
 
 import seaborn
 
-datiFinal = pandas.read_csv('/home/protoss/Documenti/SistemiComplessi/data/Iuri/AttackDataForSeaborn.csv')
+#datiFinal = pandas.read_csv('/home/protoss/Documenti/SistemiComplessi/data/Iuri/AttackDataForSeaborn.csv')
+datiFinal = pandas.read_csv('/home/protoss/Documenti/SistemiComplessi/data/Iuri/comparazioneAttacchi.csv')
 
 seaborn.set_context("notebook", font_scale=1.1)
 seaborn.set_style("ticks")
@@ -556,13 +557,22 @@ seaborn.set_style("ticks")
 
 seaborn.lmplot('percent', 'GC', data=datiFinal, fit_reg=False,
            size = 7, aspect = 1.7778,
-           hue='Compagnia', palette = colori,
+           hue='Strategia', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Attacco: dimensioni relative del GC')
+pyplot.title('Attacco a Roma: dimensioni relative del GC')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
+#seaborn.lmplot('percent', 'GC', data=datiFinal, fit_reg=False,
+#           size = 7, aspect = 1.7778,
+#           hue='Compagnia', palette = colori,
+#           scatter_kws={"marker": "D", "s": 100})
+#pyplot.title('Attacco: dimensioni relative del GC')
+#pyplot.xlabel("%")
+#pyplot.ylabel("Valore")
+#pyplot.xlim(0, 100)
+#pyplot.ylim(0,1.1)
 pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/AttGC', format='eps', dpi=1000)
 
 
