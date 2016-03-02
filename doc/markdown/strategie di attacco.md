@@ -13,9 +13,17 @@ In altre parole: è questa una strategia *ottimale*?
 La risposta è no!
 la strategia ottimale è quella che, a parità di risultato, coinvolge il minor numero di antenne fatte eplodere, anche per minimizzare il rischio di essere scoperto nella notte mentre piazza l'esplosivo in giro per la città.
 
-Tale strategia può essere evidenziata solo da una simulazione **sequenziale**, fatta facendo evolvere la rete passo per passo, secondo una strategia di *steepest descent*. Inoltre la simulazione di attacco non deve essere campionata (all'1%), ma eseguita nodo per nodo.  
-Questo garantisce di trovare la strategia ottimale, soprattutto se vengono inclusi anche gli effetti a cascata dovuti all'overload e alla saturazione di banda, ma al prezzo di un costo computazionale abbastanza più elevato.
+Tale strategia può essere evidenziata solo da una simulazione **sequenziale**, fatta facendo evolvere la rete passo per passo, secondo una strategia di *steepest descent*. Questo garantisce di trovare la strategia ottimale, soprattutto se vengono inclusi anche gli effetti a cascata dovuti all'overload e alla saturazione di banda. Dal grafico sottostante si evince comunque che non c'è molta differenza tra procedere con un campionamento all'1% o eseguire una simulazione di attacco nodo per nodo, per cui ad ogni modo il costo computazionale complessivo non risulta eccessivo.
+
+TODO inserire grafico di confronto per "Roma totale" tra parallelo 1%, sequenziale 1% e sequenziale step-by-step
+
+TODO in futuro inserire nel plot anche gli affetti a cascata, per far vedere che la curva crolla prima
 
 Nel caso di random failure (escludendo gli effetti di saturazione a cascata) non c'è invece alcuna differenza tra l'approccio sequenziale e quello **parallelo**, rendendo il secondo algorimo preferibile nel caso si voglia sfruttare tutta la potenza delle moderne cpu multicore.
+
+Riassumendo:
+* Nel caso di intentional attack è doveroso usare un approccio sequenziale.
+* Nel caso di random failure è consigliabile utilizzare un approccio parallelo.
+
 
 

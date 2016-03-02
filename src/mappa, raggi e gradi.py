@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[27]:
+# In[1]:
 
 import numpy
 import pandas
@@ -21,23 +21,24 @@ import gmaps
 # invece che uno scatterplot con dei raggi, la libreria ci consente solo di fare una heatmap (eventualmente pesata)
 # 
 
-# In[3]:
+# In[2]:
 
 roma = pandas.read_csv("../data/Roma_towers.csv")
 coordinate = roma[['lat', 'lon']].values
 
 
-# In[305]:
+# In[3]:
 
-gmaps.heatmap(coordinate)
+heatmap = gmaps.heatmap(coordinate)
+gmaps.display(heatmap)
 
 # TODO scrivere che dietro queste due semplici linee ci sta un pomeriggio intero di smadonnamenti
 
 
 # ## Analisi del raggio di copertura delle antenne
 # 
-# dato che ci servirà fare un grafico con scale logaritmiche eliminiamo i dati con
-# > range = 0
+# dato che ci servirà fare un grafico con scale logaritmiche teniamo solo i dati con
+# > range =! 0
 
 # In[4]:
 
@@ -56,20 +57,114 @@ raggi = romaFiltrato.range
 print max(raggi)
 
 
+# In[11]:
+
+
+# logaritmic (base 2) binning in log-log (base 10) plots of integer histograms
+
+def logBinnedHist(histogramResults):
+    """
+    histogramResults = numpy.histogram(...)
+        OR matplotlib.pyplot.hist(...)
+    
+    returns x, y
+    to be used with matplotlib.pyplot.step(x, y, where='post')
+    """
+    
+    values, binEdges, others = histogramResults
+    
+    # print binEdges
+    
+    # TODO
+    # if 0 in binEdges:
+    #     return "error: log2(0) = ?"
+    
+    # print len(values), len(binEdges)
+    
+    # print binEdges # TODO vedere quando non si parte da 1
+    
+    # int arrotonda all'intero inferiore
+    linMin = min(binEdges)
+    linMax = max(binEdges)
+    
+    # print linMin, linMax
+    
+    logStart = int(numpy.log2(linMin))
+    logStop = int(numpy.log2(linMax))
+    
+    # print logStart, logStop
+    
+    nLogBins = logStop - logStart + 1
+    
+    # print nLogBins
+    
+    logBins = numpy.logspace(logStart, logStop, num=nLogBins, base=2, dtype=int)
+    # print logBins
+    
+    # 1,2,4,8,16,32,64,128,256,512,1024
+    
+    ######################
+    
+    linStart = 2**logStop + 1
+    linStop = linMax
+    
+    # print linStart, linStop
+    
+    nLinBins = linStop - linStart + 1
+    
+    # print nLinBins
+    
+    linBins = numpy.linspace(linStart, linStop, num=nLinBins, dtype=int)
+    
+    # print linBins
+    
+    ######################
+    
+    bins = numpy.append(logBins, linBins)
+    
+    # print bins
+    
+    # print len(bins)
+    
+    totalValues, binEdges, otherBinNumbers = scipy.stats.binned_statistic(raggi.values,
+                                                                         raggi.values,
+                                                                         statistic='count',
+                                                                         bins=bins)
+    
+    # print totalValues
+    # print len(totalValues)
+    
+    # uso le proprietà dei logaritmi in base 2:
+    # 2^(n+1) - 2^n = 2^n
+    correzioniDatiCanalizzatiLog = numpy.delete(logBins, -1)
+    
+    # print correzioniDatiCanalizzatiLog
+    
+    # print len(correzioniDatiCanalizzatiLog)
+    
+    correzioniDatiCanalizzatiLin = numpy.ones(nLinBins, dtype=int)
+    
+    # print correzioniDatiCanalizzatiLin
+    
+    # print len(correzioniDatiCanalizzatiLin)
+    
+    correzioniDatiCanalizzati = numpy.append(correzioniDatiCanalizzatiLog, correzioniDatiCanalizzatiLin)
+    
+    # print correzioniDatiCanalizzati
+    
+    # print len(correzioniDatiCanalizzati)
+    
+    x = numpy.concatenate(([0], bins))
+    conteggi = totalValues/correzioniDatiCanalizzati
+    y = numpy.concatenate(([0], conteggi, [0]))
+    
+    return x, y
+
+
+# In[17]:
+
+
 # creazione di un istogramma log-log per la distribuzione del raggio di copertura
-
-# In[5]:
-
-
-pyplot.figure(figsize=(20,8)) # dimensioni in pollici
-distribuzioneRange = pyplot.hist(raggi.values,                                 bins=max(raggi)-min(raggi),                                 histtype='step',                                 color='#0066ff')
-pyplot.title('Distribuzione della copertura')
-pyplot.ylabel("Numero di antenne")
-pyplot.xlabel("Copertura [m]")
-# pyplot.gca().set_xscale("log")
-# pyplot.gca().set_yscale("log")
-pyplot.xscale("log")
-pyplot.yscale("log")
 
 # TODO provare a raggruppare le code
 # esempio: con bins=100
@@ -85,186 +180,37 @@ pyplot.yscale("log")
 # TODO scrivere funzione che fa grafici logaritmici con canali
 # equispaziati nel plot logaritmico (canali pesati)
 
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# ## logaritmic (base 2) binning in log-log (base 10) plots of integer histograms
-
-# In[65]:
-
-values, binEdges, others = distribuzioneRange # histogramResults = numpy.histogram(...)
-
-
-# In[66]:
-
-print binEdges
-
-# TODO
-if 0 in binEdges:
-    return "error: log2(0) = ?"
-
-print len(values), len(binEdges)
-
-
-# In[67]:
-
-print binEdges # TODO vedere quando non si parte da 1
-
-
-
-
-# int arrotonda all'intero inferiore
-linMin = min(binEdges)
-linMax = max(binEdges)
-
-print linMin, linMax
-
-logStart = int(numpy.log2(linMin))
-logStop = int(numpy.log2(linMax))
-
-print logStart, logStop
-
-nLogBins = logStop - logStart + 1
-
-print nLogBins
-
-logBins = numpy.logspace(logStart, logStop, num=nLogBins, base=2, dtype=int)
-print logBins
-
-# 1,2,4,8,16,32,64,128,256,512,1024
-
-######################
-
-linStart = 2**logStop + 1
-linStop = linMax
-
-print linStart, linStop
-
-nLinBins = linStop - linStart + 1
-
-print nLinBins
-
-linBins = numpy.linspace(linStart, linStop, num=nLinBins, dtype=int)
-
-print linBins
-
-######################
-
-bins = numpy.append(logBins, linBins)
-
-print bins
-
-print len(bins)
-
-
-# In[68]:
-
-totalValues, binEdges, otherBinNumbers = scipy.stats.binned_statistic(raggi.values,                                                                     raggi.values,                                                                     statistic='count',                                                                     bins=bins)
-
-print totalValues
-print len(totalValues)
-
-
-# In[ ]:
-
-
-
-
-# In[72]:
-
-
-# uso le proprietà dei logaritmi in base 2:
-# 2^(n+1) - 2^n = 2^n
-correzioniDatiCanalizzatiLog = numpy.delete(logBins, -1)
-
-print correzioniDatiCanalizzatiLog
-
-print len(correzioniDatiCanalizzatiLog)
-
-correzioniDatiCanalizzatiLin = numpy.ones(nLinBins, dtype=int)
-
-print correzioniDatiCanalizzatiLin
-
-print len(correzioniDatiCanalizzatiLin)
-
-correzioniDatiCanalizzati = numpy.append(correzioniDatiCanalizzatiLog, correzioniDatiCanalizzatiLin)
-
-print correzioniDatiCanalizzati
-
-print len(correzioniDatiCanalizzati)
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[81]:
-
-x = numpy.concatenate(([0], bins))
-conteggi = totalValues/correzioniDatiCanalizzati
-y = numpy.concatenate(([0], conteggi, [0]))
-
-pyplot.figure(figsize=(20,8))
-matplotlib.pyplot.plot(x, y)
-matplotlib.pyplot.xscale('log')
-matplotlib.pyplot.yscale('log')
-matplotlib.pyplot.step(x, y, where='post') #where = mid OR post
+# impostazioni plot complessivo
+pyplot.figure(figsize=(20,8)) # dimensioni in pollici
 matplotlib.pyplot.xlim(10**0,10**5)
 matplotlib.pyplot.ylim(10**0,10**2)
+pyplot.title('Distribuzione del raggio di copertura')
+pyplot.ylabel("Numero di antenne")
+pyplot.xlabel("Copertura [m]")
+# pyplot.gca().set_xscale("log")
+# pyplot.gca().set_yscale("log")
+pyplot.xscale("log")
+pyplot.yscale("log")
+
+# lin binning
+distribuzioneRange = pyplot.hist(raggi.values,
+                                bins=max(raggi)-min(raggi),
+                                histtype='step',
+                                color='#0066ff',
+                                label='lin binning')
+
+# log_2 binning
+x, y = logBinnedHist(distribuzioneRange)
+matplotlib.pyplot.step(x, y, where='post', color='#ff3300', linewidth=2.5, label='log_2 binning') #where = mid OR post
+# matplotlib.pyplot.plot(x, y)
+
+# linea verticale ad indicare il massimo grado
+pyplot.axvline(x=max(raggi), color='#808080', linestyle='dotted', label='max range')
+
+# legenda e salvataggio
+pyplot.legend(loc='best', frameon=False)
+pyplot.savefig('../img/range/range_distribution.eps', format='eps', dpi=600)
+
 
 
 # In[ ]:
