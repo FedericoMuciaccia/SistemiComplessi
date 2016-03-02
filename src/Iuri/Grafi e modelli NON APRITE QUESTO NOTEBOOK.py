@@ -14,10 +14,10 @@ import math
 # <codecell>
 
 def degreeDistributionLog(gradi, azienda, colore):
-    distribuzioneRange = pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore, linewidth=1.1)
-    pyplot.title('Degree distribution')
-    pyplot.xlabel("Degree")
-    pyplot.ylabel("Frequency")
+    distribuzioneRange = pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore, linewidth=2.2)
+    pyplot.title('Comparazione distribuzioni del grado')
+    pyplot.xlabel("Grado")
+    pyplot.ylabel("Frequenza")
 
     pyplot.gca().set_xscale("log")
     pyplot.gca().set_yscale("log")
@@ -69,67 +69,117 @@ graph_draw(g, pos=pos, output_size=(2000, 2000), vertex_color=[1,1,1,0],
 
 # <markdowncell>
 
+# ## Grafi semplici con networkx
+
+# <codecell>
+
+#    if(modello == 'Erdos-Renyi'):
+%matplotlib inline
+pyplot.figure(figsize=(16,9))
+simpleErdos = networkx.erdos_renyi_graph(80, 0.04)
+networkx.draw_random(simpleErdos, node_size=80,
+                     with_labels = False,
+                     node_color=simpleErdos.degree().values(),
+                     cmap=pyplot.cm.Reds_r)
+pyplot.show()
+
+pyplot.figure(figsize=(9,9))
+simpleWatts = networkx.watts_strogatz_graph(80, 2, 0.0)
+#simpleWatts = networkx.watts_strogatz_graph(100, 10, 1)
+networkx.draw_circular(simpleWatts, node_size=80,
+                       with_labels = False,
+                       #node_color=simpleWatts.degree().values(),
+                       cmap=pyplot.cm.Reds_r)
+#pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/random-smallworld', format='eps', dpi=1000)
+#pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/smallworld', format='eps', dpi=1000)
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/ringnet', format='eps', dpi=1000)
+pyplot.show()
+
+pyplot.figure(figsize=(16,9))
+simpleBara = networkx.barabasi_albert_graph(100, 1)
+networkx.draw_random(simpleBara, node_size=80,
+                     with_labels = False,
+                     node_color=simpleBara.degree().values(),
+                     cmap=pyplot.cm.Reds_r)
+pyplot.show()
+
+# <markdowncell>
+
+# NB: Quando si hanno pochi nodi, una connessione tra soli primi vicini e poca probabilità di avere un rewire, il grafo può essere tracciato come un cerchio con le corde, quando però si aumentano nodi, connessioni tra vicini, e sopratutto probabilità di rewire, la rete è assolutamente indistinguibile sia nel grafo, sia come distribuzione del grado, a una rete random di Erdos-Renyi.
+
+# <markdowncell>
+
 # ## Conversioni modelli reti da networkx a graph-tool
 
 # <codecell>
 
 #    if(modello == 'Erdos-Renyi'):
-grafoErdos = networkx.erdos_renyi_graph(1000, 0.004)
-gradoErdos = grafoErdos.degree().values()
-adiacenzaErdos = networkx.to_numpy_matrix(grafoErdos)
+#grafoErdos = networkx.erdos_renyi_graph(3000, 0.018)
+#gradoErdos = grafoErdos.degree().values()
+#adiacenzaErdos = networkx.to_numpy_matrix(grafoErdos)
 #adiacenzaErdos
-gToolGrafoErdos = graph_tool.Graph(directed = False)
-%time conversione(gToolGrafoErdos, adiacenzaErdos)
+#gToolGrafoErdos = graph_tool.Graph(directed = False)
+#%time conversione(gToolGrafoErdos, adiacenzaErdos)
 
-pos = graph_tool.draw.arf_layout(gToolGrafoErdos)
-#pos = graph_tool.draw.radial_tree_layout(gToolGrafoErdos, gToolGrafoErdos.vertex(0))
-graph_draw(gToolGrafoErdos, pos = pos, output_size=(1000, 1000), 
-           vertex_color=[1,1,1,0], vertex_size=4, edge_pen_width=1.2,
-           vcmap=matplotlib.cm.gist_heat_r, output="Erdosmodel.png")
-
-# <codecell>
 
 #    if(modello == 'Watts-Strogatz'):
-grafoWatts = networkx.watts_strogatz_graph(1000, 4, 0.6)
+grafoWatts = networkx.watts_strogatz_graph(1800, 54, 10)
 gradoWatts = grafoWatts.degree().values()
-adiacenzaWatts = networkx.to_numpy_matrix(grafoWatts)
+#adiacenzaWatts = networkx.to_numpy_matrix(grafoWatts)
 #adiacenzaWatts
-print "check"
-gToolGrafoWatts = graph_tool.Graph(directed = False)
-print "check"
-%time conversione(gToolGrafoWatts, adiacenzaWatts)
+#gToolGrafoWatts = graph_tool.Graph(directed = False)
+#%time conversione(gToolGrafoWatts, adiacenzaWatts)
 
-#pos = graph_tool.draw.radial_tree_layout(gToolGrafoWatts, gToolGrafoWatts.vertex(0))
-pos = graph_tool.draw.arf_layout(gToolGrafoWatts)
-#pos = graph_tool.draw.sfdp_layout(gToolGrafoWatts)
-graph_draw(gToolGrafoWatts, pos = pos, output_size=(1000, 1000),
-           vertex_color=[1,1,1,0], vertex_size=4, edge_pen_width=1.2,
-           vcmap=matplotlib.cm.gist_heat_r, output="Wattsmodel.png")
-
-# <codecell>
 
 #    if(modello == 'Barabasi-Abert'):
-grafoBarabasi = networkx.barabasi_albert_graph(2000, 1)
-gradoBarabasi = grafoBarabasi.degree().values()
-adiacenzaBarabasi = networkx.to_numpy_matrix(grafoBarabasi)
+#grafoBarabasi = networkx.barabasi_albert_graph(2500, 1)
+#gradoBarabasi = grafoBarabasi.degree().values()
+#adiacenzaBarabasi = networkx.to_numpy_matrix(grafoBarabasi)
 #adiacenzaBarabasi
-gToolGrafoBarabasi = graph_tool.Graph(directed = False)
-%time conversione(gToolGrafoBarabasi, adiacenzaBarabasi)
+#gToolGrafoBarabasi = graph_tool.Graph(directed = False)
+#%time conversione(gToolGrafoBarabasi, adiacenzaBarabasi)
 
-pos = graph_tool.draw.sfdp_layout(gToolGrafoBarabasi)
-#pos = graph_tool.draw.radial_tree_layout(gToolGrafoBarabasi, gToolGrafoBarabasi.vertex(0))
-graph_draw(gToolGrafoBarabasi, pos = pos, output_size=(1000, 1000), 
-           vertex_color=[1,1,1,0], vertex_size=4, edge_pen_width=1.2,
-           vcmap=matplotlib.cm.gist_heat_r, output="Barabasimodel.png")
+# <markdowncell>
+
+# ## Plotting grafi con graphtool e distr grado dei modelli
 
 # <codecell>
 
 %matplotlib inline
 pyplot.figure(figsize=(16,9)) 
-grafico = degreeDistributionLog(gradoErdos, 'Erdos-Renyi', '#4d4d4d')
-grafico = degreeDistributionLog(gradoWatts, 'Watts', '#47d147')
-grafico = degreeDistributionLog(gradoBarabasi, 'Barabasi', '#ff3300')
+grafico = degreeDistributionLog(gradoErdos, 'Erdos-Renyi', '#699534')
+grafico = degreeDistributionLog(gradoWatts, 'Watts-Strogatz', '#3D5A92')
+grafico = degreeDistributionLog(gradoBarabasi, 'Barabasi-Albert', '#FD6266')
+pyplot.ylim(1,2500)
+pyplot.xlim(1,100)
 pyplot.legend()
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/ComparGradeModel_Final', format='eps', dpi=1000)
+
+# <codecell>
+
+
+#grafo erdos
+pos = graph_tool.draw.arf_layout(gToolGrafoErdos)
+#pos = graph_tool.draw.radial_tree_layout(gToolGrafoErdos, gToolGrafoErdos.vertex(0))
+graph_draw(gToolGrafoErdos, pos = pos, output_size=(1000, 1000), 
+           vertex_color=[1,1,1,0], vertex_size=4, edge_pen_width=1.2,
+           vcmap=matplotlib.cm.gist_heat_r, output="Erdosmodel.eps")
+
+
+#grafo watts
+#pos = graph_tool.draw.radial_tree_layout(gToolGrafoWatts, gToolGrafoWatts.vertex(0))
+pos = graph_tool.draw.arf_layout(gToolGrafoWatts)
+#pos = graph_tool.draw.sfdp_layout(gToolGrafoWatts)
+graph_draw(gToolGrafoWatts, pos = pos, output_size=(1000, 1000),
+           vertex_color=[1,1,1,0], vertex_size=4, edge_pen_width=1.2,
+           vcmap=matplotlib.cm.gist_heat_r, output="Wattsmodel.eps")
+
+#grafo barabasi
+pos = graph_tool.draw.sfdp_layout(gToolGrafoBarabasi)
+#pos = graph_tool.draw.radial_tree_layout(gToolGrafoBarabasi, gToolGrafoBarabasi.vertex(0))
+graph_draw(gToolGrafoBarabasi, pos = pos, output_size=(1000, 1000), 
+           vertex_color=[1,1,1,0], vertex_size=4, edge_pen_width=1.2,
+           vcmap=matplotlib.cm.gist_heat_r, output="Barabasimodel.eps")
 
 # <markdowncell>
 
@@ -141,20 +191,13 @@ pyplot.legend()
 
 # <codecell>
 
-g = graph_tool.generation.price_network(10000, m=2, c= -0.9, gamma = 1, directed=False)
-
+#g = graph_tool.generation.price_network(10000, m=1, gamma = 1, directed=False)
+initial = 10
+%time g = graph_tool.generation.price_network(1000, m=2, c=initial, gamma = 1, directed=False)
 pos = graph_tool.draw.sfdp_layout(g)
 graph_draw(g, pos = pos, output_size=(1000, 1000), 
-           vertex_color=[1,1,1,0], vertex_size=4, edge_pen_width=1.2,
-           vcmap=matplotlib.cm.gist_heat_r, output="InitialAttr.pdf")
-
-#pos=graph_tool.draw.sfdp_layout(g, cooling_step=0.99)
-#graph_draw(g, pos=pos, output_size=(1000, 1000),
-#              vertex_fill_color=g.vertex_index, vertex_size=2,
-#              edge_pen_width=1.0, output="initialAttractiv.png")
-
-#todo mettere gradi minimi sempre più grandi e provare initial attrattivness
-#fare in un box a parte per lavorare solo con distr grado
+           vertex_color=[1,1,1,0], vertex_size=5, edge_pen_width=1.2,
+           vcmap=matplotlib.cm.gist_heat_r, output=("c = {0}.png".format(initial)))
 
 # <codecell>
 
@@ -175,6 +218,7 @@ from graph_tool.all import *
 in_hist = vertex_hist(g, "out")
 
 y = in_hist[0]
+
 err = sqrt(in_hist[0])
 err[err >= y] = y[err >= y] - 1e-2
 
@@ -183,14 +227,16 @@ errorbar(in_hist[1][:-1], in_hist[0], fmt="o", yerr=err,
         label="in")
 gca().set_yscale("log")
 gca().set_xscale("log")
-gca().set_ylim(1, 1e4)
-#gca().set_xlim(10, 1e3)
+gca().set_ylim(1, 1000)
+gca().set_xlim(2, 60)
 subplots_adjust(left=0.2, bottom=0.2)
 xlabel("$k$")
 ylabel("$P(k)$")
 tight_layout()
-savefig("price-deg-dist.pdf")
-savefig("price-deg-dist.png")
+#savefig("price-deg-dist.pdf")
+savefig(("grado c = {0}.png").format(initial))
+gradoBarabasi = gradiFinal = pandas.DataFrame(in_hist[0], columns=['grado'])
+gradoBarabasi.to_csv(("c = {0}.csv".format(initial)))
 
 # <markdowncell>
 
