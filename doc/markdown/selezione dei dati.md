@@ -50,9 +50,10 @@ Per visualizzare agevolmente i nostri dati serve una mappa georeferenziata, pref
 ```
 roma = pandas.read_csv("../data/Roma_towers.csv")
 coordinate = roma[['lat', 'lon']].values
-gmaps.heatmap(coordinate)
+heatmap = gmaps.heatmap(coordinate)
+gmaps.display(heatmap)
 ```
-(per scrivere questo paio di linee di codice c'è voluto un'intero pomeriggio!)
+(per scrivere queste poche linee di codice c'è voluto un'intero pomeriggio!)
 
 TODO mettere heatmap interattiva in HTML
 
