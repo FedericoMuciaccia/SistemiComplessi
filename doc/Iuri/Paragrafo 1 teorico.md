@@ -35,18 +35,29 @@ Nel caso di un grafo di Erdos e Renyi queste sono:
 * la distribuzione del grado ha una forma di distribuzione binomiale, la quale tende a una poissoniana per $p$ piccole, e a una gaussiana per $\langle k \rangle$ grandi.
 * il diametro tende a essere piccolo, come l'average path length. Con $p$ non troppo piccolo il numero di nodi che abbiano una certa distanza $l$ si può approssimare a $\langle k\rangle^l$; uguagliandolo a $N$ deriva che sia diametro che average path length scalano con buona approssimazione con il logaritmo di N (quindi lentamente), secondo la relazione
 $$l \sim \frac{ln(N)}{ln(\langle k \rangle)}.$$ 
-Molte reti reali presentano simili caratteristiche nei gradi di separazione, che hanno portato alla definizione del concetto di small-world.
+Molte reti reali presentano simili caratteristiche nei gradi di separazione, che hanno portato alla definizione del termine "small world" per esse.
 * il clustering di una rete ramdom tende a essere molto basso. Infatti, preso un nodo e i suoi primi vicini, la probabilità una coppia di essi sia connessa è $p$. Pertanto su tutto il grafo, il coefficiente di clustering medio è proprio $p$, il quale di solito è abbastanza minore di 1 (con $p = 0.1$ un grafo random diventa già molto connesso, per esempio con $10^4$ nodi avrebbe $\langle k\rangle = 10^3$). Questo fatto, al contrario del diametro, si pone in contrasto con le reti reali, le quali hanno quasi sempre un $\langle C \rangle$; sensibilmente più alto.
 <!--Mettere un grafo-->
 
 #### 1.2.2 Small World
-Effetto small world
-Descrizione modello
-Mettere un grafo e un grafico grado (e eventualmente altre grandezze) esemplificativo
-nb come le reti random *ma* un clustering sensibilmente più elevato
-da Wikipedia
+Come abbiamo visto il modello di Erdos e Renyi descrive bene il piccolo diametro delle reti reali, ma non il loro elevato grado di clusterizzazione. Inoltre il coefficiente di clustering di esse è simile per reti con numero di nodi molto diverso. Notando per primi ciò, Watts e Strogatz hanno formulato un modello che meglio si adattasse alle caratteristiche reali delle reti. 
+Il fatto che il coefficiente di clustering non dipende dal numero di nodi è caratteristico dei reticoli, pertanto il punto di partenza del modello di Watts e Strogatz è un reticolo con condizioni al contorno cicliche, i cui $N$ nodi sono collegati ai primi $n$ vicini. Se poniamo, per esempio, $n = 2$, in modo da avere probabil, si configura così un anello del tipo:
+
+<!-- Mettere grafo anello e/con zoom a reticolo -->
+
+Successivamente si procede a riarrangiare in maniera random i link tra i nodi, con una probabilità $p$ per ogni link di venire modificato. In questo modo si hanno un certo numero di link (in media $pnN$) che invece di essere tra nodi in prossimità, saranno tra nodi più lontani, come nel grafo:
+
+<!-- Mettere grafo small world-->
+
+Con questo metodo, a seguito del *rewiring* si ha il rischio che il grafo non sia più connesso. Ponendo $n>1$ ciò può essere evitato, portando la probabilità di avere un grafo non connesso quasi a zero già con $n=2$.
+Con $p \rightarrow 1$ il grafo diventa simile a quello di una rete di Erdos-Renyi con :
+
+<!-- Mettere grafo anello random e ridiculograph watts-->
+
+Per avere una rete tipica che abbia un numero di connessioni non troppo elevato, ma non così poco da rischiare da avere un grafo non connesso a seguito dell'operazione di rewiring, possono essere considerati degli $N$ e $n$ tali che $N>>n>>ln(N)>>1$. Con queste condizioni la distribuzione del grado ha una forma gaussiana, con $\sigma$ più piccole per $p$ basse, tendente a una delta di Dirac per $p \rightarrow 0$.
+
+
 (A graph is considered small-world, if its average local clustering coefficient \bar{C} is significantly higher than a random graph constructed on the same vertex set, and if the graph has approximately the same mean-shortest path length as its corresponding random graph.)
-ecco spiegato perché distribuzione grado ha sigma più piccola in watts strogatz che erdos renyi
 
 ### 1.3 Reti scale-free
 Proprietà frattali, distr grado con powerlaw tra due e tre (tre probabilmente non compreso?). Grado medio idealmente infinito a causa di gran numero di nodi con grado alto?

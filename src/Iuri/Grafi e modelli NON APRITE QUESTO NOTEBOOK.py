@@ -14,7 +14,8 @@ import math
 # <codecell>
 
 def degreeDistributionLog(gradi, azienda, colore):
-    distribuzioneRange = pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore, linewidth=2.2)
+    distribuzioneRange = pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, 
+                                     color=colore, alpha= 0.7, linewidth=3)
     pyplot.title('Comparazione distribuzioni del grado')
     pyplot.xlabel("Grado")
     pyplot.ylabel("Frequenza")
@@ -74,7 +75,7 @@ graph_draw(g, pos=pos, output_size=(2000, 2000), vertex_color=[1,1,1,0],
 # <codecell>
 
 pyplot.figure(figsize=(9,9))
-simpleWatts = networkx.watts_strogatz_graph(80, 4, 1)
+simpleWatts = networkx.watts_strogatz_graph(1500, 4, 0.1)
 #simpleWatts = networkx.watts_strogatz_graph(100, 10, 1)
 networkx.draw_circular(simpleWatts, node_size=80,
                        with_labels = False,
@@ -119,33 +120,29 @@ pyplot.show()
 # <codecell>
 
 #    if(modello == 'Erdos-Renyi'):
-#grafoErdos = networkx.erdos_renyi_graph(3000, 0.018)
-#gradoErdos = grafoErdos.degree().values()
+grafoErdos = networkx.erdos_renyi_graph(3000, 0.01687)
+gradoErdos = grafoErdos.degree().values()
 #adiacenzaErdos = networkx.to_numpy_matrix(grafoErdos)
 #adiacenzaErdos
 #gToolGrafoErdos = graph_tool.Graph(directed = False)
 #%time conversione(gToolGrafoErdos, adiacenzaErdos)
 
 #    if(modello == 'Watts-Strogatz'):
-grafoWatts = networkx.watts_strogatz_graph(80, 4, 0.00)
-gradoWatts = grafoWatts.degree().values()
-adiacenzaWatts = networkx.to_numpy_matrix(grafoWatts)
+#grafoWatts = networkx.watts_strogatz_graph(3000, 50, 0.48)
+#gradoWatts = grafoWatts.degree().values()
+#adiacenzaWatts = networkx.to_numpy_matrix(grafoWatts)
 #adiacenzaWatts
-gToolGrafoWatts = graph_tool.Graph(directed = False)
-%time conversione(gToolGrafoWatts, adiacenzaWatts)
+#gToolGrafoWatts = graph_tool.Graph(directed = False)
+#%time conversione(gToolGrafoWatts, adiacenzaWatts)
 
 
 #    if(modello == 'Barabasi-Abert'):
-#grafoBarabasi = networkx.barabasi_albert_graph(2500, 1)
+#grafoBarabasi = networkx.barabasi_albert_graph(3000, 1)
 #gradoBarabasi = grafoBarabasi.degree().values()
 #adiacenzaBarabasi = networkx.to_numpy_matrix(grafoBarabasi)
 #adiacenzaBarabasi
 #gToolGrafoBarabasi = graph_tool.Graph(directed = False)
 #%time conversione(gToolGrafoBarabasi, adiacenzaBarabasi)
-
-# <markdowncell>
-
-# ## Plotting grafi con graphtool e distr grado dei modelli
 
 # <codecell>
 
@@ -154,7 +151,7 @@ pyplot.figure(figsize=(16,9))
 grafico = degreeDistributionLog(gradoErdos, 'Erdos-Renyi', '#699534')
 grafico = degreeDistributionLog(gradoWatts, 'Watts-Strogatz', '#3D5A92')
 grafico = degreeDistributionLog(gradoBarabasi, 'Barabasi-Albert', '#FD6266')
-pyplot.ylim(1,2500)
+pyplot.ylim(0.9,2500)
 pyplot.xlim(1,100)
 pyplot.legend()
 pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/ComparGradeModel_Final', format='eps', dpi=1000)
@@ -162,14 +159,14 @@ pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/ComparGradeMod
 # <codecell>
 
 #grafo watts
-
+%matplotlib inline
 #pos = graph_tool.draw.radial_tree_layout(gToolGrafoWatts, gToolGrafoWatts.vertex(0))
-gToolGrafoWatts = graph_tool.generation.circular_graph(80, 2)
-pos = graph_tool.draw.sfdp_layout(gToolGrafoWatts, cooling_step=0.95)
-#pos = graph_tool.draw.arf_layout(gToolGrafoWatts)
+#gToolGrafoWatts = graph_tool.generation.circular_graph(80, 2)
+#pos = graph_tool.draw.sfdp_layout(gToolGrafoWatts, cooling_step=0.95)
+pos = graph_tool.draw.arf_layout(gToolGrafoWatts)
 #pos = graph_tool.draw.sfdp_layout(gToolGrafoWatts)
 graph_draw(gToolGrafoWatts, pos = pos, output_size=(1000, 1000),
-           vertex_color=[1,1,1,0], vertex_size=10, edge_pen_width=1.2,
+           vertex_color=[1,1,1,0], vertex_size=5, edge_pen_width=1.2,
            vcmap=matplotlib.cm.gist_heat_r, output="zoomring.eps")
 
 # <codecell>
