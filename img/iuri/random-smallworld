@@ -1,7 +1,7 @@
 %!PS-Adobe-3.0 EPSF-3.0
 %%Title: /home/protoss/Documenti/SistemiComplessi/img/iuri/random-smallworld
 %%Creator: matplotlib version 1.4.2, http://matplotlib.org/
-%%CreationDate: Tue Mar  1 22:50:27 2016
+%%CreationDate: Thu Mar  3 14:00:12 2016
 %%Orientation: portrait
 %%BoundingBox: -18 72 630 720
 %%EndComments
@@ -43,481 +43,961 @@ grestore
 newpath
 translate
 555.429 324 m
-136.77 460.03 l
+552.579 360.203 l
 } bind def
 /p0_1 {
 newpath
 translate
 555.429 324 m
-287.797 552.579 l
+511.23 460.03 l
 } bind def
 /p0_2 {
 newpath
 translate
-554.715 342.158 m
-378.026 549.034 l
+555.429 324 m
+160.355 160.355 l
 } bind def
 /p0_3 {
 newpath
 translate
 554.715 342.158 m
-160.355 160.355 l
+521.325 203.079 l
 } bind def
 /p0_4 {
+newpath
+translate
+554.715 342.158 m
+342.158 93.2849 l
+} bind def
+/p0_5 {
+newpath
+translate
+552.579 360.203 m
+395.515 103.898 l
+} bind def
+/p0_6 {
 newpath
 translate
 552.579 360.203 m
 537.812 235.436 l
 } bind def
-/p0_5 {
-newpath
-translate
-549.034 378.026 m
-269.974 98.9658 l
-} bind def
-/p0_6 {
-newpath
-translate
-549.034 378.026 m
-412.564 110.188 l
-} bind def
 /p0_7 {
 newpath
 translate
-544.102 395.515 m
-203.079 521.325 l
+549.034 378.026 m
+93.2849 305.842 l
 } bind def
 /p0_8 {
 newpath
 translate
-537.812 412.564 m
-98.9658 269.974 l
+549.034 378.026 m
+544.102 395.515 l
 } bind def
 /p0_9 {
 newpath
 translate
-537.812 412.564 m
-148.02 474.301 l
+549.034 378.026 m
+103.898 395.515 l
 } bind def
 /p0_a {
+newpath
+translate
+544.102 395.515 m
+537.812 412.564 l
+} bind def
+/p0_b {
+newpath
+translate
+544.102 395.515 m
+93.2849 305.842 l
+} bind def
+/p0_c {
+newpath
+translate
+544.102 395.515 m
+98.9658 269.974 l
+} bind def
+/p0_d {
+newpath
+translate
+544.102 395.515 m
+378.026 549.034 l
+} bind def
+/p0_e {
+newpath
+translate
+537.812 412.564 m
+460.03 511.23 l
+} bind def
+/p0_f {
+newpath
+translate
+537.812 412.564 m
+530.204 429.066 l
+} bind def
+/p0_10 {
+newpath
+translate
+537.812 412.564 m
+93.2848 342.158 l
+} bind def
+/p0_11 {
+newpath
+translate
+530.204 429.066 m
+499.98 173.699 l
+} bind def
+/p0_12 {
 newpath
 translate
 530.204 429.066 m
 511.23 460.03 l
 } bind def
-/p0_b {
-newpath
-translate
-530.204 429.066 m
-544.102 252.485 l
-} bind def
-/p0_c {
-newpath
-translate
-530.204 429.066 m
-342.158 93.2849 l
-} bind def
-/p0_d {
-newpath
-translate
-521.325 444.921 m
-429.066 117.796 l
-} bind def
-/p0_e {
-newpath
-translate
-521.325 444.921 m
-499.98 173.699 l
-} bind def
-/p0_f {
-newpath
-translate
-521.325 444.921 m
-110.188 235.436 l
-} bind def
-/p0_10 {
-newpath
-translate
-521.325 444.921 m
-342.158 554.715 l
-} bind def
-/p0_11 {
-newpath
-translate
-511.23 460.03 m
-203.079 126.675 l
-} bind def
-/p0_12 {
-newpath
-translate
-499.98 474.301 m
-287.797 95.4207 l
-} bind def
 /p0_13 {
 newpath
 translate
-487.645 487.645 m
-487.645 160.355 l
+530.204 429.066 m
+530.204 218.934 l
 } bind def
 /p0_14 {
 newpath
 translate
-474.301 499.98 m
-126.675 444.921 l
+530.204 429.066 m
+552.579 287.797 l
 } bind def
 /p0_15 {
 newpath
 translate
-474.301 499.98 m
-360.203 552.579 l
+530.204 429.066 m
+378.026 549.034 l
 } bind def
 /p0_16 {
 newpath
 translate
-474.301 499.98 m
-173.699 148.02 l
+530.204 429.066 m
+360.203 552.579 l
 } bind def
 /p0_17 {
 newpath
 translate
-474.301 499.98 m
-412.564 537.812 l
+521.325 444.921 m
+511.23 460.03 l
 } bind def
 /p0_18 {
 newpath
 translate
-460.03 511.23 m
-136.77 187.97 l
+521.325 444.921 m
+378.026 549.034 l
 } bind def
 /p0_19 {
 newpath
 translate
-460.03 511.23 m
-117.796 218.934 l
+521.325 444.921 m
+218.934 530.204 l
 } bind def
 /p0_1a {
 newpath
 translate
-444.921 521.325 m
-93.2849 305.842 l
+511.23 460.03 m
+342.158 93.2849 l
 } bind def
 /p0_1b {
 newpath
 translate
-429.066 530.204 m
-554.715 305.842 l
+511.23 460.03 m
+324 555.429 l
 } bind def
 /p0_1c {
+newpath
+translate
+511.23 460.03 m
+218.934 117.796 l
+} bind def
+/p0_1d {
+newpath
+translate
+511.23 460.03 m
+530.204 218.934 l
+} bind def
+/p0_1e {
+newpath
+translate
+499.98 474.301 m
+173.699 148.02 l
+} bind def
+/p0_1f {
+newpath
+translate
+499.98 474.301 m
+287.797 552.579 l
+} bind def
+/p0_20 {
+newpath
+translate
+487.645 487.645 m
+287.797 95.4207 l
+} bind def
+/p0_21 {
+newpath
+translate
+487.645 487.645 m
+474.301 499.98 l
+} bind def
+/p0_22 {
+newpath
+translate
+487.645 487.645 m
+460.03 511.23 l
+} bind def
+/p0_23 {
+newpath
+translate
+474.301 499.98 m
+460.03 511.23 l
+} bind def
+/p0_24 {
+newpath
+translate
+474.301 499.98 m
+305.842 554.715 l
+} bind def
+/p0_25 {
+newpath
+translate
+474.301 499.98 m
+148.02 474.301 l
+} bind def
+/p0_26 {
+newpath
+translate
+460.03 511.23 m
+93.2848 342.158 l
+} bind def
+/p0_27 {
+newpath
+translate
+460.03 511.23 m
+521.325 203.079 l
+} bind def
+/p0_28 {
+newpath
+translate
+460.03 511.23 m
+444.921 521.325 l
+} bind def
+/p0_29 {
+newpath
+translate
+460.03 511.23 m
+554.715 305.842 l
+} bind def
+/p0_2a {
+newpath
+translate
+444.921 521.325 m
+126.675 444.921 l
+} bind def
+/p0_2b {
+newpath
+translate
+444.921 521.325 m
+429.066 530.204 l
+} bind def
+/p0_2c {
+newpath
+translate
+444.921 521.325 m
+412.564 537.812 l
+} bind def
+/p0_2d {
+newpath
+translate
+429.066 530.204 m
+252.485 544.102 l
+} bind def
+/p0_2e {
+newpath
+translate
+429.066 530.204 m
+98.9658 269.974 l
+} bind def
+/p0_2f {
 newpath
 translate
 412.564 537.812 m
 395.515 544.102 l
 } bind def
-/p0_1d {
-newpath
-translate
-395.515 544.102 m
-148.02 173.699 l
-} bind def
-/p0_1e {
-newpath
-translate
-395.515 544.102 m
-269.974 549.034 l
-} bind def
-/p0_1f {
-newpath
-translate
-395.515 544.102 m
-187.97 136.77 l
-} bind def
-/p0_20 {
-newpath
-translate
-395.515 544.102 m
-95.4207 360.203 l
-} bind def
-/p0_21 {
-newpath
-translate
-378.026 549.034 m
-444.921 126.675 l
-} bind def
-/p0_22 {
-newpath
-translate
-378.026 549.034 m
-98.9658 269.974 l
-} bind def
-/p0_23 {
-newpath
-translate
-360.203 552.579 m
-324 92.5714 l
-} bind def
-/p0_24 {
-newpath
-translate
-342.158 554.715 m
-395.515 103.898 l
-} bind def
-/p0_25 {
-newpath
-translate
-324 555.429 m
-269.974 98.9658 l
-} bind def
-/p0_26 {
-newpath
-translate
-324 555.429 m
-530.204 218.934 l
-} bind def
-/p0_27 {
-newpath
-translate
-324 555.429 m
-173.699 499.98 l
-} bind def
-/p0_28 {
-newpath
-translate
-305.842 554.715 m
-305.842 93.2849 l
-} bind def
-/p0_29 {
-newpath
-translate
-305.842 554.715 m
-203.079 126.675 l
-} bind def
-/p0_2a {
-newpath
-translate
-287.797 552.579 m
-235.436 537.812 l
-} bind def
-/p0_2b {
-newpath
-translate
-287.797 552.579 m
-218.934 530.204 l
-} bind def
-/p0_2c {
-newpath
-translate
-287.797 552.579 m
-360.203 95.4207 l
-} bind def
-/p0_2d {
-newpath
-translate
-269.974 549.034 m
-521.325 203.079 l
-} bind def
-/p0_2e {
-newpath
-translate
-252.485 544.102 m
-552.579 287.797 l
-} bind def
-/p0_2f {
-newpath
-translate
-252.485 544.102 m
-117.796 218.934 l
-} bind def
 /p0_30 {
 newpath
 translate
-252.485 544.102 m
-218.934 117.796 l
+412.564 537.812 m
+378.026 549.034 l
 } bind def
 /p0_31 {
 newpath
 translate
-252.485 544.102 m
-252.485 103.898 l
+395.515 544.102 m
+269.974 98.9658 l
 } bind def
 /p0_32 {
 newpath
 translate
-218.934 530.204 m
-549.034 269.974 l
+395.515 544.102 m
+360.203 552.579 l
 } bind def
 /p0_33 {
 newpath
 translate
-203.079 521.325 m
-487.645 160.355 l
+378.026 549.034 m
+360.203 552.579 l
 } bind def
 /p0_34 {
 newpath
 translate
-187.97 511.23 m
-305.842 93.2849 l
+378.026 549.034 m
+218.934 530.204 l
 } bind def
 /p0_35 {
 newpath
 translate
-173.699 499.98 m
-160.355 487.645 l
+378.026 549.034 m
+342.158 93.2849 l
 } bind def
 /p0_36 {
 newpath
 translate
-160.355 487.645 m
-554.715 305.842 l
+360.203 552.579 m
+342.158 554.715 l
 } bind def
 /p0_37 {
 newpath
 translate
-148.02 474.301 m
-324 92.5714 l
+342.158 554.715 m
+487.645 160.355 l
 } bind def
 /p0_38 {
 newpath
 translate
-136.77 460.03 m
-549.034 269.974 l
+342.158 554.715 m
+305.842 554.715 l
 } bind def
 /p0_39 {
 newpath
 translate
-126.675 444.921 m
-252.485 103.898 l
+342.158 554.715 m
+287.797 552.579 l
 } bind def
 /p0_3a {
 newpath
 translate
-117.796 429.066 m
-460.03 136.77 l
+324 555.429 m
+98.9658 378.026 l
 } bind def
 /p0_3b {
 newpath
 translate
-110.188 412.564 m
-92.5714 324 l
+324 555.429 m
+287.797 552.579 l
 } bind def
 /p0_3c {
 newpath
 translate
-103.898 395.515 m
-203.079 126.675 l
+305.842 554.715 m
+287.797 552.579 l
 } bind def
 /p0_3d {
 newpath
 translate
-98.9658 378.026 m
-460.03 136.77 l
+287.797 552.579 m
+117.796 429.066 l
 } bind def
 /p0_3e {
 newpath
 translate
-98.9658 378.026 m
-474.301 148.02 l
+287.797 552.579 m
+487.645 160.355 l
 } bind def
 /p0_3f {
 newpath
 translate
-93.2848 342.158 m
-429.066 117.796 l
+287.797 552.579 m
+203.079 521.325 l
 } bind def
 /p0_40 {
 newpath
 translate
-92.5714 324 m
-287.797 95.4207 l
+287.797 552.579 m
+187.97 511.23 l
 } bind def
 /p0_41 {
 newpath
 translate
-93.2849 305.842 m
-252.485 103.898 l
+269.974 549.034 m
+252.485 544.102 l
 } bind def
 /p0_42 {
 newpath
 translate
-93.2849 305.842 m
-324 92.5714 l
+269.974 549.034 m
+92.5714 324 l
 } bind def
 /p0_43 {
 newpath
 translate
-93.2849 305.842 m
-126.675 203.079 l
+269.974 549.034 m
+110.188 235.436 l
 } bind def
 /p0_44 {
 newpath
 translate
-95.4207 287.797 m
-554.715 305.842 l
+252.485 544.102 m
+412.564 110.188 l
 } bind def
 /p0_45 {
 newpath
 translate
-103.898 252.485 m
-378.026 98.9658 l
+252.485 544.102 m
+173.699 148.02 l
 } bind def
 /p0_46 {
 newpath
 translate
-110.188 235.436 m
-378.026 98.9658 l
+252.485 544.102 m
+235.436 537.812 l
 } bind def
 /p0_47 {
 newpath
 translate
-117.796 218.934 m
-342.158 93.2849 l
+235.436 537.812 m
+160.355 160.355 l
 } bind def
 /p0_48 {
 newpath
 translate
-148.02 173.699 m
-511.23 187.97 l
+235.436 537.812 m
+203.079 521.325 l
 } bind def
 /p0_49 {
 newpath
 translate
-235.436 110.188 m
-552.579 287.797 l
+235.436 537.812 m
+126.675 203.079 l
 } bind def
 /p0_4a {
 newpath
 translate
-269.974 98.9658 m
-537.812 235.436 l
+203.079 521.325 m
+173.699 499.98 l
 } bind def
 /p0_4b {
 newpath
 translate
-269.974 98.9658 m
-530.204 218.934 l
+187.97 511.23 m
+537.812 235.436 l
 } bind def
 /p0_4c {
 newpath
 translate
-287.797 95.4207 m
-552.579 287.797 l
+187.97 511.23 m
+378.026 98.9658 l
 } bind def
 /p0_4d {
 newpath
 translate
-378.026 98.9658 m
-530.204 218.934 l
+173.699 499.98 m
+412.564 110.188 l
 } bind def
 /p0_4e {
 newpath
 translate
-460.03 136.77 m
-521.325 203.079 l
+173.699 499.98 m
+160.355 160.355 l
 } bind def
 /p0_4f {
 newpath
 translate
-487.645 160.355 m
+160.355 487.645 m
+136.77 460.03 l
+} bind def
+/p0_50 {
+newpath
+translate
+160.355 487.645 m
+173.699 148.02 l
+} bind def
+/p0_51 {
+newpath
+translate
+160.355 487.645 m
+148.02 474.301 l
+} bind def
+/p0_52 {
+newpath
+translate
+148.02 474.301 m
+136.77 460.03 l
+} bind def
+/p0_53 {
+newpath
+translate
+148.02 474.301 m
+126.675 444.921 l
+} bind def
+/p0_54 {
+newpath
+translate
+136.77 460.03 m
+126.675 444.921 l
+} bind def
+/p0_55 {
+newpath
+translate
+136.77 460.03 m
+117.796 429.066 l
+} bind def
+/p0_56 {
+newpath
+translate
+136.77 460.03 m
+103.898 252.485 l
+} bind def
+/p0_57 {
+newpath
+translate
+136.77 460.03 m
 544.102 252.485 l
+} bind def
+/p0_58 {
+newpath
+translate
+136.77 460.03 m
+554.715 305.842 l
+} bind def
+/p0_59 {
+newpath
+translate
+126.675 444.921 m
+110.188 412.564 l
+} bind def
+/p0_5a {
+newpath
+translate
+117.796 429.066 m
+93.2848 342.158 l
+} bind def
+/p0_5b {
+newpath
+translate
+117.796 429.066 m
+92.5714 324 l
+} bind def
+/p0_5c {
+newpath
+translate
+117.796 429.066 m
+235.436 110.188 l
+} bind def
+/p0_5d {
+newpath
+translate
+110.188 412.564 m
+103.898 395.515 l
+} bind def
+/p0_5e {
+newpath
+translate
+110.188 412.564 m
+487.645 160.355 l
+} bind def
+/p0_5f {
+newpath
+translate
+103.898 395.515 m
+117.796 218.934 l
+} bind def
+/p0_60 {
+newpath
+translate
+98.9658 378.026 m
+511.23 187.97 l
+} bind def
+/p0_61 {
+newpath
+translate
+98.9658 378.026 m
+537.812 235.436 l
+} bind def
+/p0_62 {
+newpath
+translate
+95.4207 360.203 m
+92.5714 324 l
+} bind def
+/p0_63 {
+newpath
+translate
+95.4207 360.203 m
+93.2848 342.158 l
+} bind def
+/p0_64 {
+newpath
+translate
+93.2848 342.158 m
+93.2849 305.842 l
+} bind def
+/p0_65 {
+newpath
+translate
+92.5714 324 m
+429.066 117.796 l
+} bind def
+/p0_66 {
+newpath
+translate
+93.2849 305.842 m
+98.9658 269.974 l
+} bind def
+/p0_67 {
+newpath
+translate
+95.4207 287.797 m
+103.898 252.485 l
+} bind def
+/p0_68 {
+newpath
+translate
+95.4207 287.797 m
+552.579 287.797 l
+} bind def
+/p0_69 {
+newpath
+translate
+95.4207 287.797 m
+378.026 98.9658 l
+} bind def
+/p0_6a {
+newpath
+translate
+98.9658 269.974 m
+110.188 235.436 l
+} bind def
+/p0_6b {
+newpath
+translate
+98.9658 269.974 m
+269.974 98.9658 l
+} bind def
+/p0_6c {
+newpath
+translate
+103.898 252.485 m
+487.645 160.355 l
+} bind def
+/p0_6d {
+newpath
+translate
+103.898 252.485 m
+117.796 218.934 l
+} bind def
+/p0_6e {
+newpath
+translate
+103.898 252.485 m
+148.02 173.699 l
+} bind def
+/p0_6f {
+newpath
+translate
+110.188 235.436 m
+395.515 103.898 l
+} bind def
+/p0_70 {
+newpath
+translate
+110.188 235.436 m
+474.301 148.02 l
+} bind def
+/p0_71 {
+newpath
+translate
+110.188 235.436 m
+126.675 203.079 l
+} bind def
+/p0_72 {
+newpath
+translate
+117.796 218.934 m
+136.77 187.97 l
+} bind def
+/p0_73 {
+newpath
+translate
+117.796 218.934 m
+126.675 203.079 l
+} bind def
+/p0_74 {
+newpath
+translate
+126.675 203.079 m
+136.77 187.97 l
+} bind def
+/p0_75 {
+newpath
+translate
+126.675 203.079 m
+324 92.5714 l
+} bind def
+/p0_76 {
+newpath
+translate
+136.77 187.97 m
+148.02 173.699 l
+} bind def
+/p0_77 {
+newpath
+translate
+136.77 187.97 m
+460.03 136.77 l
+} bind def
+/p0_78 {
+newpath
+translate
+148.02 173.699 m
+269.974 98.9658 l
+} bind def
+/p0_79 {
+newpath
+translate
+160.355 160.355 m
+395.515 103.898 l
+} bind def
+/p0_7a {
+newpath
+translate
+173.699 148.02 m
+203.079 126.675 l
+} bind def
+/p0_7b {
+newpath
+translate
+187.97 136.77 m
+203.079 126.675 l
+} bind def
+/p0_7c {
+newpath
+translate
+187.97 136.77 m
+218.934 117.796 l
+} bind def
+/p0_7d {
+newpath
+translate
+203.079 126.675 m
+218.934 117.796 l
+} bind def
+/p0_7e {
+newpath
+translate
+203.079 126.675 m
+235.436 110.188 l
+} bind def
+/p0_7f {
+newpath
+translate
+218.934 117.796 m
+252.485 103.898 l
+} bind def
+/p0_80 {
+newpath
+translate
+218.934 117.796 m
+235.436 110.188 l
+} bind def
+/p0_81 {
+newpath
+translate
+235.436 110.188 m
+429.066 117.796 l
+} bind def
+/p0_82 {
+newpath
+translate
+235.436 110.188 m
+269.974 98.9658 l
+} bind def
+/p0_83 {
+newpath
+translate
+252.485 103.898 m
+287.797 95.4207 l
+} bind def
+/p0_84 {
+newpath
+translate
+252.485 103.898 m
+499.98 173.699 l
+} bind def
+/p0_85 {
+newpath
+translate
+269.974 98.9658 m
+305.842 93.2849 l
+} bind def
+/p0_86 {
+newpath
+translate
+287.797 95.4207 m
+324 92.5714 l
+} bind def
+/p0_87 {
+newpath
+translate
+305.842 93.2849 m
+324 92.5714 l
+} bind def
+/p0_88 {
+newpath
+translate
+305.842 93.2849 m
+342.158 93.2849 l
+} bind def
+/p0_89 {
+newpath
+translate
+324 92.5714 m
+342.158 93.2849 l
+} bind def
+/p0_8a {
+newpath
+translate
+342.158 93.2849 m
+474.301 148.02 l
+} bind def
+/p0_8b {
+newpath
+translate
+360.203 95.4207 m
+429.066 117.796 l
+} bind def
+/p0_8c {
+newpath
+translate
+360.203 95.4207 m
+444.921 126.675 l
+} bind def
+/p0_8d {
+newpath
+translate
+360.203 95.4207 m
+378.026 98.9658 l
+} bind def
+/p0_8e {
+newpath
+translate
+378.026 98.9658 m
+412.564 110.188 l
+} bind def
+/p0_8f {
+newpath
+translate
+378.026 98.9658 m
+444.921 126.675 l
+} bind def
+/p0_90 {
+newpath
+translate
+395.515 103.898 m
+412.564 110.188 l
+} bind def
+/p0_91 {
+newpath
+translate
+412.564 110.188 m
+429.066 117.796 l
+} bind def
+/p0_92 {
+newpath
+translate
+429.066 117.796 m
+444.921 126.675 l
+} bind def
+/p0_93 {
+newpath
+translate
+444.921 126.675 m
+460.03 136.77 l
+} bind def
+/p0_94 {
+newpath
+translate
+460.03 136.77 m
+474.301 148.02 l
+} bind def
+/p0_95 {
+newpath
+translate
+460.03 136.77 m
+487.645 160.355 l
+} bind def
+/p0_96 {
+newpath
+translate
+474.301 148.02 m
+499.98 173.699 l
+} bind def
+/p0_97 {
+newpath
+translate
+499.98 173.699 m
+511.23 187.97 l
+} bind def
+/p0_98 {
+newpath
+translate
+511.23 187.97 m
+521.325 203.079 l
+} bind def
+/p0_99 {
+newpath
+translate
+511.23 187.97 m
+530.204 218.934 l
+} bind def
+/p0_9a {
+newpath
+translate
+521.325 203.079 m
+530.204 218.934 l
+} bind def
+/p0_9b {
+newpath
+translate
+537.812 235.436 m
+549.034 269.974 l
+} bind def
+/p0_9c {
+newpath
+translate
+537.812 235.436 m
+552.579 287.797 l
+} bind def
+/p0_9d {
+newpath
+translate
+544.102 252.485 m
+552.579 287.797 l
+} bind def
+/p0_9e {
+newpath
+translate
+549.034 269.974 m
+552.579 287.797 l
+} bind def
+/p0_9f {
+newpath
+translate
+549.034 269.974 m
+554.715 305.842 l
 } bind def
 1.000 setlinewidth
 1 setlinejoin
@@ -922,6 +1402,406 @@ grestore
 gsave
 648 648 0 0 clipbox
 0 0 p0_4f
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_50
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_51
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_52
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_53
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_54
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_55
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_56
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_57
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_58
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_59
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_5a
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_5b
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_5c
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_5d
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_5e
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_5f
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_60
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_61
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_62
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_63
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_64
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_65
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_66
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_67
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_68
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_69
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_6a
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_6b
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_6c
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_6d
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_6e
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_6f
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_70
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_71
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_72
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_73
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_74
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_75
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_76
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_77
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_78
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_79
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_7a
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_7b
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_7c
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_7d
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_7e
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_7f
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_80
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_81
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_82
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_83
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_84
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_85
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_86
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_87
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_88
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_89
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_8a
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_8b
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_8c
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_8d
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_8e
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_8f
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_90
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_91
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_92
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_93
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_94
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_95
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_96
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_97
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_98
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_99
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_9a
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_9b
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_9c
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_9d
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_9e
+stroke
+grestore
+gsave
+648 648 0 0 clipbox
+0 0 p0_9f
 stroke
 grestore
 gsave

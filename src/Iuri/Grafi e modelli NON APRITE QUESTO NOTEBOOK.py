@@ -73,6 +73,21 @@ graph_draw(g, pos=pos, output_size=(2000, 2000), vertex_color=[1,1,1,0],
 
 # <codecell>
 
+pyplot.figure(figsize=(9,9))
+simpleWatts = networkx.watts_strogatz_graph(80, 4, 1)
+#simpleWatts = networkx.watts_strogatz_graph(100, 10, 1)
+networkx.draw_circular(simpleWatts, node_size=80,
+                       with_labels = False,
+                       #node_color=simpleWatts.degree().values(),
+                       cmap=pyplot.cm.Reds_r)
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/totalrandomwatts', format='eps', dpi=1000)
+#pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/random-smallworld', format='eps', dpi=1000)
+#pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/smallworld', format='eps', dpi=1000)
+#pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/ringnet', format='eps', dpi=1000)
+pyplot.show()
+
+# <codecell>
+
 #    if(modello == 'Erdos-Renyi'):
 %matplotlib inline
 pyplot.figure(figsize=(16,9))
@@ -81,19 +96,9 @@ networkx.draw_random(simpleErdos, node_size=80,
                      with_labels = False,
                      node_color=simpleErdos.degree().values(),
                      cmap=pyplot.cm.Reds_r)
-pyplot.show()
+#pyplot.show()
 
-pyplot.figure(figsize=(9,9))
-simpleWatts = networkx.watts_strogatz_graph(80, 2, 0.0)
-#simpleWatts = networkx.watts_strogatz_graph(100, 10, 1)
-networkx.draw_circular(simpleWatts, node_size=80,
-                       with_labels = False,
-                       #node_color=simpleWatts.degree().values(),
-                       cmap=pyplot.cm.Reds_r)
-#pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/random-smallworld', format='eps', dpi=1000)
-#pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/smallworld', format='eps', dpi=1000)
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/ringnet', format='eps', dpi=1000)
-pyplot.show()
+
 
 pyplot.figure(figsize=(16,9))
 simpleBara = networkx.barabasi_albert_graph(100, 1)
@@ -121,14 +126,13 @@ pyplot.show()
 #gToolGrafoErdos = graph_tool.Graph(directed = False)
 #%time conversione(gToolGrafoErdos, adiacenzaErdos)
 
-
 #    if(modello == 'Watts-Strogatz'):
-grafoWatts = networkx.watts_strogatz_graph(1800, 54, 10)
+grafoWatts = networkx.watts_strogatz_graph(80, 4, 0.00)
 gradoWatts = grafoWatts.degree().values()
-#adiacenzaWatts = networkx.to_numpy_matrix(grafoWatts)
+adiacenzaWatts = networkx.to_numpy_matrix(grafoWatts)
 #adiacenzaWatts
-#gToolGrafoWatts = graph_tool.Graph(directed = False)
-#%time conversione(gToolGrafoWatts, adiacenzaWatts)
+gToolGrafoWatts = graph_tool.Graph(directed = False)
+%time conversione(gToolGrafoWatts, adiacenzaWatts)
 
 
 #    if(modello == 'Barabasi-Abert'):
@@ -157,6 +161,19 @@ pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/ComparGradeMod
 
 # <codecell>
 
+#grafo watts
+
+#pos = graph_tool.draw.radial_tree_layout(gToolGrafoWatts, gToolGrafoWatts.vertex(0))
+gToolGrafoWatts = graph_tool.generation.circular_graph(80, 2)
+pos = graph_tool.draw.sfdp_layout(gToolGrafoWatts, cooling_step=0.95)
+#pos = graph_tool.draw.arf_layout(gToolGrafoWatts)
+#pos = graph_tool.draw.sfdp_layout(gToolGrafoWatts)
+graph_draw(gToolGrafoWatts, pos = pos, output_size=(1000, 1000),
+           vertex_color=[1,1,1,0], vertex_size=10, edge_pen_width=1.2,
+           vcmap=matplotlib.cm.gist_heat_r, output="zoomring.eps")
+
+# <codecell>
+
 
 #grafo erdos
 pos = graph_tool.draw.arf_layout(gToolGrafoErdos)
@@ -166,13 +183,6 @@ graph_draw(gToolGrafoErdos, pos = pos, output_size=(1000, 1000),
            vcmap=matplotlib.cm.gist_heat_r, output="Erdosmodel.eps")
 
 
-#grafo watts
-#pos = graph_tool.draw.radial_tree_layout(gToolGrafoWatts, gToolGrafoWatts.vertex(0))
-pos = graph_tool.draw.arf_layout(gToolGrafoWatts)
-#pos = graph_tool.draw.sfdp_layout(gToolGrafoWatts)
-graph_draw(gToolGrafoWatts, pos = pos, output_size=(1000, 1000),
-           vertex_color=[1,1,1,0], vertex_size=4, edge_pen_width=1.2,
-           vcmap=matplotlib.cm.gist_heat_r, output="Wattsmodel.eps")
 
 #grafo barabasi
 pos = graph_tool.draw.sfdp_layout(gToolGrafoBarabasi)
