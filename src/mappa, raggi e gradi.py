@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[2]:
 
 import numpy
 import pandas
@@ -21,7 +21,7 @@ import gmaps
 # invece che uno scatterplot con dei raggi, la libreria ci consente solo di fare una heatmap (eventualmente pesata)
 # 
 
-# In[2]:
+# In[3]:
 
 roma = pandas.read_csv("../data/Roma_towers.csv")
 coordinate = roma[['lat', 'lon']].values
@@ -57,7 +57,7 @@ raggi = romaFiltrato.range
 print max(raggi)
 
 
-# In[11]:
+# In[16]:
 
 
 # logaritmic (base 2) binning in log-log (base 10) plots of integer histograms
@@ -154,8 +154,17 @@ def logBinnedHist(histogramResults):
     
     # print len(correzioniDatiCanalizzati)
     
+    
+    
+    
     x = numpy.concatenate(([0], bins))
     conteggi = totalValues/correzioniDatiCanalizzati
+    
+    # TODO caso speciale per il grafico di sotto
+    # (per non fare vedere la parte oltre l'ultima potenza di 2)
+    l = len(correzioniDatiCanalizzatiLin)
+    conteggi[-l:] = numpy.zeros(l, dtype='int')
+    
     y = numpy.concatenate(([0], conteggi, [0]))
     
     return x, y
@@ -181,9 +190,10 @@ def logBinnedHist(histogramResults):
 # equispaziati nel plot logaritmico (canali pesati)
 
 # impostazioni plot complessivo
-pyplot.figure(figsize=(20,8)) # dimensioni in pollici
+# pyplot.figure(figsize=(20,8)) # dimensioni in pollici
+pyplot.figure(figsize=(15,15))
 matplotlib.pyplot.xlim(10**0,10**5)
-matplotlib.pyplot.ylim(10**0,10**2)
+matplotlib.pyplot.ylim(10**-3,10**2)
 pyplot.title('Distribuzione del raggio di copertura')
 pyplot.ylabel("Numero di antenne")
 pyplot.xlabel("Copertura [m]")
@@ -196,19 +206,19 @@ pyplot.yscale("log")
 distribuzioneRange = pyplot.hist(raggi.values,
                                 bins=max(raggi)-min(raggi),
                                 histtype='step',
-                                color='#0066ff',
+                                color='#3385ff',
                                 label='lin binning')
 
 # log_2 binning
 x, y = logBinnedHist(distribuzioneRange)
-matplotlib.pyplot.step(x, y, where='post', color='#ff3300', linewidth=2.5, label='log_2 binning') #where = mid OR post
+matplotlib.pyplot.step(x, y, where='post', color='#ff3300', linewidth=2, label='log_2 weighted binning') #where = mid OR post
 # matplotlib.pyplot.plot(x, y)
 
 # linea verticale ad indicare il massimo grado
-pyplot.axvline(x=max(raggi), color='#808080', linestyle='dotted', label='max range')
+pyplot.axvline(x=max(raggi), color='#808080', linestyle='dotted', label='max range (20341m)')
 
 # legenda e salvataggio
-pyplot.legend(loc='best', frameon=False)
+pyplot.legend(loc='lower left', frameon=False)
 pyplot.savefig('../img/range/range_distribution.eps', format='eps', dpi=600)
 
 
@@ -220,7 +230,7 @@ pyplot.savefig('../img/range/range_distribution.eps', format='eps', dpi=600)
 
 # In[ ]:
 
-
+# TODO fare funzione cumulativa di Capocci e anche altra cosa (vedere foglietti)
 
 
 # In[ ]:
