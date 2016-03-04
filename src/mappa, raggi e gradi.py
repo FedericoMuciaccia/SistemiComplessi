@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[2]:
+# In[1]:
 
 import numpy
 import pandas
@@ -21,7 +21,7 @@ import gmaps
 # invece che uno scatterplot con dei raggi, la libreria ci consente solo di fare una heatmap (eventualmente pesata)
 # 
 
-# In[3]:
+# In[2]:
 
 roma = pandas.read_csv("../data/Roma_towers.csv")
 coordinate = roma[['lat', 'lon']].values
@@ -40,7 +40,7 @@ gmaps.display(heatmap)
 # dato che ci servirà fare un grafico con scale logaritmiche teniamo solo i dati con
 # > range =! 0
 
-# In[4]:
+# In[3]:
 
 
 # condizioni di filtro
@@ -57,7 +57,7 @@ raggi = romaFiltrato.range
 print max(raggi)
 
 
-# In[16]:
+# In[4]:
 
 
 # logaritmic (base 2) binning in log-log (base 10) plots of integer histograms
@@ -71,6 +71,8 @@ def logBinnedHist(histogramResults):
     to be used with matplotlib.pyplot.step(x, y, where='post')
     """
     
+    # TODO così funziona solo con l'istogramma di pyplot;
+    # quello di numpy restituisce solo la tupla (values, binEdges)
     values, binEdges, others = histogramResults
     
     # print binEdges
@@ -170,7 +172,7 @@ def logBinnedHist(histogramResults):
     return x, y
 
 
-# In[17]:
+# In[52]:
 
 
 # creazione di un istogramma log-log per la distribuzione del raggio di copertura
@@ -210,9 +212,9 @@ distribuzioneRange = pyplot.hist(raggi.values,
                                 label='lin binning')
 
 # log_2 binning
-x, y = logBinnedHist(distribuzioneRange)
-matplotlib.pyplot.step(x, y, where='post', color='#ff3300', linewidth=2, label='log_2 weighted binning') #where = mid OR post
-# matplotlib.pyplot.plot(x, y)
+xLog2, yLog2 = logBinnedHist(distribuzioneRange)
+matplotlib.pyplot.step(xLog2, yLog2, where='post', color='#ff3300', linewidth=2, label='log_2 weighted binning') #where = mid OR post
+# matplotlib.pyplot.plot(xLog2, yLog2)
 
 # linea verticale ad indicare il massimo grado
 pyplot.axvline(x=max(raggi), color='#808080', linestyle='dotted', label='max range (20341m)')
@@ -228,9 +230,179 @@ pyplot.savefig('../img/range/range_distribution.eps', format='eps', dpi=600)
 
 
 
+# In[159]:
+
+get_ipython().magic(u'pinfo numpy.all')
+
+
 # In[ ]:
 
-# TODO fare funzione cumulativa di Capocci e anche altra cosa (vedere foglietti)
+
+
+
+# In[ ]:
+
+# frequency-rank
+
+
+# In[131]:
+
+# istogramma sugli interi
+unique, counts = numpy.unique(raggi.values, return_counts=True)
+# print numpy.asarray((unique, counts)).T
+rank = numpy.arange(1,len(unique)+1)
+frequency = numpy.array(sorted(counts, reverse=True))
+
+
+# In[133]:
+
+# TODO fare il ranking in modo da garantire la monotonia delle frequenze
+
+# frequencyRank = pandas.DataFrame(zip(unique, counts), columns=['raggio','frequency'])
+# frequencyRank.sort(["frequency"], ascending=[False], inplace=True)
+# frequencyRank = frequencyRank.reset_index(drop=True)
+    # sortedNodes = degreeDataframe['ID'].values # TODO degreeDataframe.ID
+
+#frequencyRank
+# frequency
+# rank
+
+
+# In[156]:
+
+matplotlib.pyplot.step(x=rank, y=frequency, where='post', color='#3385ff')
+pyplot.xscale("log")
+pyplot.yscale("log")
+matplotlib.pyplot.xlim(10**0,10**4)
+matplotlib.pyplot.ylim(10**0,10**2)
+
+
+# In[114]:
+
+print counts
+print frequency
+
+
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
+
+
+# In[161]:
+
+matplotlib.pyplot.step(x=rank, y=frequency, where='post')
+
+matplotlib.pyplot.scatter(x=unique, y=counts, marker='.', color='#3385ff')
+matplotlib.pyplot.step(xLog2, yLog2, where='post', color='#ff3300')
+pyplot.xscale("log")
+pyplot.yscale("log")
+matplotlib.pyplot.xlim(10**0,10**4)
+matplotlib.pyplot.ylim(10**0,10**2)
+
+
+# In[ ]:
+
+# cumulative histogram
+
+# the cumulative distribution function cdf(x) is the
+# probability that a real-valued random variable X
+# will take a value less than or equal to x
+
+
+# In[34]:
+
+conteggi, binEdges = numpy.histogram(raggi.values,
+                                bins=max(raggi)-min(raggi))
+
+
+# In[38]:
+
+conteggiCumulativi = numpy.cumsum(conteggi)
+valoriRaggi = numpy.delete(binEdges, -1)
+
+
+# In[40]:
+
+len(conteggi), len(valoriRaggi), len(conteggiCumulativi)
+
+
+# In[158]:
+
+matplotlib.pyplot.step(x=valoriRaggi, y=conteggiCumulativi, where='post')
+pyplot.axhline(y=len(raggi.values), color='#808080', linestyle='dotted')
+
+# TODO plottare 1 - cumulativa
+
+pyplot.xscale("log")
+pyplot.yscale("log")
+
+
+# In[ ]:
+
+# TODO fare fit a mano e controllare le relazioni tra i vari esponenti
+
+
+# In[ ]:
+
+
+
+
+# In[162]:
+
+a = numpy.arange(10)
+
+
+# In[164]:
+
+10 - a
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+# TODO funzione diff per la correlazione connessa
+
+
+# In[61]:
+
+raggi.values
+
+
+# In[62]:
+
+numpy.diff(raggi.values)
+
+
+# In[64]:
+
+a = numpy.arange(10)
+numpy.diff(a)
+
+
+# In[65]:
+
+numpy.diff([0,4,6,2,8,9,7,0,1])
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
 
 
 # In[ ]:

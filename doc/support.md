@@ -162,7 +162,14 @@ http://www.machinalis.com/blog/embedding-interactive-maps-into-an-ipython-nb/
 https://sclelections.com/data-scientists-are-difficult-customers/
 
 
+https://en.wikipedia.org/wiki/Stretched_exponential_function
+https://en.wikipedia.org/wiki/Parabolic_fractal_distribution
+http://stackoverflow.com/questions/10640759/how-to-get-the-cumulative-distribution-function-with-numpy
 
+
+http://docs.scipy.org/doc/numpy/reference/generated/numpy.bincount.html
+http://stackoverflow.com/questions/10741346/numpy-most-efficient-frequency-counts-for-unique-values-in-an-array
+http://stackoverflow.com/questions/10640759/how-to-get-the-cumulative-distribution-function-with-numpy
 
 
 seaborn:
