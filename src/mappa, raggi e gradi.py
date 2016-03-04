@@ -172,7 +172,7 @@ def logBinnedHist(histogramResults):
     return x, y
 
 
-# In[52]:
+# In[5]:
 
 
 # creazione di un istogramma log-log per la distribuzione del raggio di copertura
@@ -230,7 +230,7 @@ pyplot.savefig('../img/range/range_distribution.eps', format='eps', dpi=600)
 
 
 
-# In[159]:
+# In[6]:
 
 get_ipython().magic(u'pinfo numpy.all')
 
@@ -240,12 +240,12 @@ get_ipython().magic(u'pinfo numpy.all')
 
 
 
-# In[ ]:
+# In[7]:
 
 # frequency-rank
 
 
-# In[131]:
+# In[8]:
 
 # istogramma sugli interi
 unique, counts = numpy.unique(raggi.values, return_counts=True)
@@ -254,7 +254,7 @@ rank = numpy.arange(1,len(unique)+1)
 frequency = numpy.array(sorted(counts, reverse=True))
 
 
-# In[133]:
+# In[9]:
 
 # TODO fare il ranking in modo da garantire la monotonia delle frequenze
 
@@ -268,13 +268,15 @@ frequency = numpy.array(sorted(counts, reverse=True))
 # rank
 
 
-# In[156]:
+# In[12]:
 
 matplotlib.pyplot.step(x=rank, y=frequency, where='post', color='#3385ff')
 pyplot.xscale("log")
 pyplot.yscale("log")
 matplotlib.pyplot.xlim(10**0,10**4)
 matplotlib.pyplot.ylim(10**0,10**2)
+
+# pyplot.savefig('../img/range/frequency-rank.svg', format='svg', dpi=600)
 
 
 # In[114]:
