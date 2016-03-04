@@ -7,7 +7,7 @@ tutor: Andrea Capocci
 
 -----------------------------
 
-
+PARTE DUPLICATA PER PROVE SUL README DI DEFAULT
 
 ## Selezione dei dati
 
@@ -72,8 +72,6 @@ Dalla mappa si capisce bene quanto sia fitta le rete di antenne Romana.
 TODO creare il notebook ordinato "data selection"
 
 
--------------------------
-
 
 ## Analisi del raggio di copertura delle antenne
 
@@ -87,7 +85,7 @@ TODO forse spostare questa considerazione a quando si è spiegato il criterio di
 TODO spiegare la possibile casa di questi valori di raggi così bassi
 
 Facciamo un istogramma log-log per la distribusione del raggio di copertura, sia con la canalizzazione lineare sugli interi, sia con una canalizzazione logaritmica in base 2, per ridurre il rumore sulla coda.
-<img src="./img/range/frequency-rank.svg"/>
+![Frequency-Rank](img/range/frequency-rank.svg)
 TODO inserire figura con entrambe le canalizzazioni, con quella logaritmica in risalto, più spessa ed evidente, con inoltra una linea tenue che segna il valore massimo.
 TODO mettere caption nell'html della figura
 In figura si può vedere come l'andamento sia inaspettatamente abbastanza power-law su diverse decadi.
@@ -102,6 +100,8 @@ TODO fare frequency-rank e cumulata
 
 
 
+
+-------------------------
 
 
 

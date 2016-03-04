@@ -172,6 +172,14 @@ http://stackoverflow.com/questions/10741346/numpy-most-efficient-frequency-count
 http://stackoverflow.com/questions/10640759/how-to-get-the-cumulative-distribution-function-with-numpy
 
 
+immagini svg in github readme:
+http://stackoverflow.com/questions/13808020/include-an-svg-hosted-on-github-in-markdown
+https://developer.mozilla.org/en-US/docs/Web/SVG/Element/image
+
+
+
+
+
 seaborn:
 http://stackoverflow.com/questions/4150171/how-to-create-a-density-plot-in-matplotlib
 https://stanford.edu/~mwaskom/software/seaborn/tutorial/distributions.html
