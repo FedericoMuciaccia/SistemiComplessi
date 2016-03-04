@@ -120,7 +120,7 @@ pyplot.show()
 # <codecell>
 
 #    if(modello == 'Erdos-Renyi'):
-grafoErdos = networkx.erdos_renyi_graph(3000, 0.01687)
+grafoErdos = networkx.erdos_renyi_graph(50, 0.1)
 gradoErdos = grafoErdos.degree().values()
 adiacenzaErdos = networkx.to_numpy_matrix(grafoErdos)
 #adiacenzaErdos
@@ -128,7 +128,7 @@ gToolGrafoErdos = graph_tool.Graph(directed = False)
 %time conversione(gToolGrafoErdos, adiacenzaErdos)
 
 #    if(modello == 'Watts-Strogatz'):
-grafoWatts = networkx.watts_strogatz_graph(3000, 50, 0.48)
+grafoWatts = networkx.watts_strogatz_graph(100, 10, 0.48)
 gradoWatts = grafoWatts.degree().values()
 adiacenzaWatts = networkx.to_numpy_matrix(grafoWatts)
 #adiacenzaWatts
@@ -137,7 +137,7 @@ gToolGrafoWatts = graph_tool.Graph(directed = False)
 
 
 #    if(modello == 'Barabasi-Abert'):
-grafoBarabasi = networkx.barabasi_albert_graph(3000, 1)
+grafoBarabasi = networkx.barabasi_albert_graph(100, 1)
 gradoBarabasi = grafoBarabasi.degree().values()
 adiacenzaBarabasi = networkx.to_numpy_matrix(grafoBarabasi)
 #adiacenzaBarabasi
@@ -198,13 +198,15 @@ graph_draw(gToolGrafoBarabasi, pos = pos, output_size=(1000, 1000),
 
 # <codecell>
 
-#g = graph_tool.generation.price_network(10000, m=1, gamma = 1, directed=False)
 initial = 10
-%time g = graph_tool.generation.price_network(1000, m=2, c=initial, gamma = 1, directed=False)
+g = graph_tool.generation.price_network(2000, m=40, c=initial, gamma = 1,
+                                              seed_graph = gToolGrafoErdos,
+                                              directed=False)
 pos = graph_tool.draw.sfdp_layout(g)
 graph_draw(g, pos = pos, output_size=(1000, 1000), 
            vertex_color=[1,1,1,0], vertex_size=5, edge_pen_width=1.2,
-           vcmap=matplotlib.cm.gist_heat_r, output=("c = {0}.png".format(initial)))
+           vcmap=matplotlib.cm.gist_heat_r, 
+           output=("c = {0}.png".format(initial)))
 
 # <codecell>
 
@@ -234,8 +236,8 @@ errorbar(in_hist[1][:-1], in_hist[0], fmt="o", yerr=err,
         label="in")
 gca().set_yscale("log")
 gca().set_xscale("log")
-gca().set_ylim(1, 1000)
-gca().set_xlim(2, 60)
+gca().set_ylim(1, 300)
+gca().set_xlim(40, 600)
 subplots_adjust(left=0.2, bottom=0.2)
 xlabel("$k$")
 ylabel("$P(k)$")
@@ -243,7 +245,7 @@ tight_layout()
 #savefig("price-deg-dist.pdf")
 savefig(("grado c = {0}.png").format(initial))
 gradoBarabasi = gradiFinal = pandas.DataFrame(in_hist[0], columns=['grado'])
-gradoBarabasi.to_csv(("c = {0}.csv".format(initial)))
+#gradoBarabasi.to_csv(("c = {0}.csv".format(initial)))
 
 # <markdowncell>
 

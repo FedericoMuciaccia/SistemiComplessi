@@ -75,10 +75,11 @@ Molte importanti reti reali di grandi dimensioni hanno la notevole caratteristic
 ), le reti small-world riproducono bene le proprietà di clustering e cammini medi, ma non possono portare a $P(k)$ power-law. Serve pertanto un modello che riproduca piccoli diametri, grandi clustering e $P(k)$ a legge di potenza.
 I modelli di Erdos-Renyi e Watts-Strogatz partono da una configurazione di nodi e poi distribuiscono o riarrangiano i link con una certa probabilità **uniforme** per tutti i link. Le reti reali, tuttavia, spesso partono da un certo numero piccolo di nodi e successivamente crescono. Il primo punto chiave del modello formulato da Barabasi e Albert nel 1999
 <!--TODO mettere riferimento bibliografico-->
-è proprio il concetto di crescita. Il secondo riguarda il fatto che la probabilità di *attachment* di un nuovo nodo a quelli esistenti non è uniforme su tutti i nodi ma preferenziale: il *preferential attachment* dà quindi una maggiore probabilità $\Pi(k_i)$ di collegamento di un nodo nuovo a un certo nodo $i$ in maniera proporzionale al suo grado, secondo la formula
+è proprio il concetto di crescita: la rete parte a $t=0$ con $m_0$ nodi e a ogni step temporale si aggiunge alla rete un nodo con un certo numero $m < m_0$ di link da assegnare agli altri nodi esistenti. Il secondo riguarda il fatto che la probabilità di *attachment* di un nuovo nodo agli altri non è uniforme su tutti i nodi ma preferenziale: il *preferential attachment* dà quindi una maggiore probabilità $\Pi (k_i)$ di collegamento di un nodo nuovo a un certo nodo $i$ in maniera proporzionale al suo grado, secondo la formula
 $$ \Pi (k_i) = \frac{k_i}{\Sigma_j k_j}.$$
-Dato quindi che la costruzione della rete avviene in modo dinamico. Partendo da una configurazione a tempo $t=t_0$, il grado di un nodo $i$ appena aggiunto sarà funzione crescente del suo tempo di vita nella rete, e quindi anche la sua probabilità. Pertanto, con l'andare del tempo il grado di $i$ auementerà sempre più velocemente. Infatti:
+La costruzione della rete avviene in modo dinamico, pertanto la distribuzione dei gradi e le probabilità di attachment dei nodi si evolveranno con il tempo. Partendo da una configurazione a tempo $t=t_0$, il grado di un nodo $i$ appena aggiunto sarà funzione crescente del suo tempo di vita nella rete, e quindi anche la sua probabilità. Pertanto, con l'andare del tempo il grado di $i$ auementerà sempre più velocemente.
 FORMULE
+Ovviamente se il grado di un nodo è funzione di $t$, anche la P(k) lo sarà. Derivando P(k, t) si ottiene l'esponente 
 Grado medio idealmente infinito a causa di gran numero di nodi con grado alto?
 
 #### 1.3.1 Preferential attachment
