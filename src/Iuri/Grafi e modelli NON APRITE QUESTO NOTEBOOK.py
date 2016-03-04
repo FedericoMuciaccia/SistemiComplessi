@@ -122,39 +122,39 @@ pyplot.show()
 #    if(modello == 'Erdos-Renyi'):
 grafoErdos = networkx.erdos_renyi_graph(3000, 0.01687)
 gradoErdos = grafoErdos.degree().values()
-#adiacenzaErdos = networkx.to_numpy_matrix(grafoErdos)
+adiacenzaErdos = networkx.to_numpy_matrix(grafoErdos)
 #adiacenzaErdos
-#gToolGrafoErdos = graph_tool.Graph(directed = False)
-#%time conversione(gToolGrafoErdos, adiacenzaErdos)
+gToolGrafoErdos = graph_tool.Graph(directed = False)
+%time conversione(gToolGrafoErdos, adiacenzaErdos)
 
 #    if(modello == 'Watts-Strogatz'):
-#grafoWatts = networkx.watts_strogatz_graph(3000, 50, 0.48)
-#gradoWatts = grafoWatts.degree().values()
-#adiacenzaWatts = networkx.to_numpy_matrix(grafoWatts)
+grafoWatts = networkx.watts_strogatz_graph(3000, 50, 0.48)
+gradoWatts = grafoWatts.degree().values()
+adiacenzaWatts = networkx.to_numpy_matrix(grafoWatts)
 #adiacenzaWatts
-#gToolGrafoWatts = graph_tool.Graph(directed = False)
-#%time conversione(gToolGrafoWatts, adiacenzaWatts)
+gToolGrafoWatts = graph_tool.Graph(directed = False)
+%time conversione(gToolGrafoWatts, adiacenzaWatts)
 
 
 #    if(modello == 'Barabasi-Abert'):
-#grafoBarabasi = networkx.barabasi_albert_graph(3000, 1)
-#gradoBarabasi = grafoBarabasi.degree().values()
-#adiacenzaBarabasi = networkx.to_numpy_matrix(grafoBarabasi)
+grafoBarabasi = networkx.barabasi_albert_graph(3000, 1)
+gradoBarabasi = grafoBarabasi.degree().values()
+adiacenzaBarabasi = networkx.to_numpy_matrix(grafoBarabasi)
 #adiacenzaBarabasi
-#gToolGrafoBarabasi = graph_tool.Graph(directed = False)
-#%time conversione(gToolGrafoBarabasi, adiacenzaBarabasi)
+gToolGrafoBarabasi = graph_tool.Graph(directed = False)
+%time conversione(gToolGrafoBarabasi, adiacenzaBarabasi)
 
 # <codecell>
 
 %matplotlib inline
-pyplot.figure(figsize=(16,9)) 
+pyplot.figure(figsize=(12,9)) 
 grafico = degreeDistributionLog(gradoErdos, 'Erdos-Renyi', '#699534')
 grafico = degreeDistributionLog(gradoWatts, 'Watts-Strogatz', '#3D5A92')
 grafico = degreeDistributionLog(gradoBarabasi, 'Barabasi-Albert', '#FD6266')
 pyplot.ylim(0.9,2500)
 pyplot.xlim(1,100)
 pyplot.legend()
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/ComparGradeModel_Final', format='eps', dpi=1000)
+#pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/ComparGradeModel_Final', format='eps', dpi=1000)
 
 # <codecell>
 
