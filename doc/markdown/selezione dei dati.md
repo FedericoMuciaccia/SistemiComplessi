@@ -44,7 +44,7 @@ I dati sono stati importati in un dataframe tabulare usando la libreria `pandas`
 
 A questo punto abbiamo finalmente il nostro datasample della città di Roma: circa 7000 antenne in un file csv agevolmente maneggiabile di circa 1MB.
 
-TODO inserire scatterplot preliminare dei dati di Roma (notebook Fede)
+<img src="../../img/ma/Roma_non_georeferenziata.svg"/>
 
 Per visualizzare agevolmente i nostri dati serve una mappa georeferenziata, preferibilmente interattiva. A tal fine abbiamo usato la libreria `gmaps`, che dà semplice accesso alle mappe di Google Maps dando la possibilità di creare una heatmap.
 ```
