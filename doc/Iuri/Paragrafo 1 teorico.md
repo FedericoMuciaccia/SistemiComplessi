@@ -70,7 +70,17 @@ con $C(0) \sim 0.75$ per $N$ grande. Ricordando che per il modello di Erdos-Reny
 Concludendo, un grafo è considerato small-world se ha contemporaneamente piccole distanze medie e, a differenza dei grafi random,  una clusterizzazione relativamente elevata. Pertanto il modello di Watts e Strogatz descrive in maniera soddisfacente reti che abbiano queste caratteristiche, purché non siano scale-free.
 
 ### 1.3 Reti scale-free
-Proprietà frattali, distr grado con powerlaw tra due e tre (tre probabilmente non compreso?). Grado medio idealmente infinito a causa di gran numero di nodi con grado alto?
+Molte importanti reti reali di grandi dimensioni hanno la notevole caratteristica di avere un certo livello di invarianza di scala. Questa è manifestata da una distribuzione del grado che segue una funzione a legge di potenza $P(k)\sim k^{-\gamma}$, con $\gamma$ compreso quasi sempre tra 2 e 3, in maniera sempre più esatta al crescere di $k$. Mentre le reti random possono riprodurre una $P(k)$ arbitrario, e quindi anche una \emph{power-law}, ma non riescono a generare grafi connessi e con $\langle l \rangle$ non definibile (Albert, Barabasi, 2001 
+<!--TODO mettere riferimento bibliografico-->
+), le reti small-world riproducono bene le proprietà di clustering e cammini medi, ma non possono portare a $P(k)$ power-law. Serve pertanto un modello che riproduca piccoli diametri, grandi clustering e $P(k)$ a legge di potenza.
+I modelli di Erdos-Renyi e Watts-Strogatz partono da una configurazione di nodi e poi distribuiscono o riarrangiano i link con una certa probabilità **uniforme** per tutti i link. Le reti reali, tuttavia, spesso partono da un certo numero piccolo di nodi e successivamente crescono. Il primo punto chiave del modello formulato da Barabasi e Albert nel 1999
+<!--TODO mettere riferimento bibliografico-->
+è proprio il concetto di crescita: la rete parte a $t=0$ con $m_0$ nodi e a ogni step temporale si aggiunge alla rete un nodo con un certo numero $m < m_0$ di link da assegnare agli altri nodi esistenti. Il secondo riguarda il fatto che la probabilità di *attachment* di un nuovo nodo agli altri non è uniforme su tutti i nodi ma preferenziale: il *preferential attachment* dà quindi una maggiore probabilità $\Pi (k_i)$ di collegamento di un nodo nuovo a un certo nodo $i$ in maniera proporzionale al suo grado, secondo la formula
+$$ \Pi (k_i) = \frac{k_i}{\Sigma_j k_j}.$$
+La costruzione della rete avviene in modo dinamico, pertanto la distribuzione dei gradi e le probabilità di attachment dei nodi si evolveranno con il tempo. Partendo da una configurazione a tempo $t=t_0$, il grado di un nodo $i$ appena aggiunto sarà funzione crescente del suo tempo di vita nella rete, e quindi anche la sua probabilità. Pertanto, con l'andare del tempo il grado di $i$ auementerà sempre più velocemente.
+FORMULE
+Ovviamente se il grado di un nodo è funzione di $t$, anche la P(k) lo sarà. Derivando P(k, t) si ottiene l'esponente 
+Grado medio idealmente infinito a causa di gran numero di nodi con grado alto?
 
 #### 1.3.1 Preferential attachment
 Descrizione modello
