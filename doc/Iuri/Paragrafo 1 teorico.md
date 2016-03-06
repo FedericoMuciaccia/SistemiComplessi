@@ -77,16 +77,17 @@ I modelli di Erdos-Renyi e Watts-Strogatz partono da una configurazione di nodi 
 <!--TODO mettere riferimento bibliografico-->
 è proprio il concetto di crescita: la rete parte a $t=0$ con $m_0$ nodi e a ogni step temporale si aggiunge alla rete un nodo con un certo numero $m < m_0$ di link da assegnare agli altri nodi esistenti. Il secondo riguarda il fatto che la probabilità di *attachment* di un nuovo nodo agli altri non è uniforme su tutti i nodi ma preferenziale: il *preferential attachment* dà quindi una maggiore probabilità $\Pi (k_i)$ di collegamento di un nodo nuovo a un certo nodo $i$ in maniera proporzionale al suo grado, secondo la formula
 $$ \Pi (k_i) = \frac{k_i}{\Sigma_j k_j}.$$
-La costruzione della rete avviene in modo dinamico, pertanto la distribuzione dei gradi e le probabilità di attachment dei nodi si evolveranno con il tempo. Partendo da una configurazione a tempo $t=t_0$, il grado di un nodo $i$ appena aggiunto sarà funzione crescente del suo tempo di vita nella rete, e quindi anche la sua probabilità. Pertanto, con l'andare del tempo il grado di $i$ auementerà sempre più velocemente.
-FORMULE
-Ovviamente se il grado di un nodo è funzione di $t$, anche la P(k) lo sarà. Derivando P(k, t) si ottiene l'esponente 
-Grado medio idealmente infinito a causa di gran numero di nodi con grado alto?
+La costruzione della rete avviene in modo dinamico, pertanto il grado di un nodo $i$ sarà funzione crescente del suo tempo di vita nella rete, con una probabilità di attachment dei nuovi nodi a $i$ anch'essa dipendente da $t$. Pertanto, con l'andare del tempo il grado di $i$ aumenterà sempre più velocemente. Approssimando $k_i$ a una variabile continua per $t$ grandi, dato che 
+$$ \frac{dk_i}{dt} = m \Pi (k_i) = m \frac{k_i}{\Sigma_{j=1}^{N-1} k_j} = m \frac{k_i}{2mt - m} = \frac{k_i}{2t - 1} \sim \frac{k_i}{2t},$$
+dove m è il numero di link aggiunti per iterazione, ponendo quindi la condizione iniziale per il nodo $i$ k_i(t_i) = m
+$$\Rightarrow k_i(t) = m (\frac{t}{t_i})^\frac{1}{2}$$
+Ovviamente se il grado di un nodo è funzione di $t$, anche la P(k) lo sarà. Definendo $P(k_i(t)<k)$ la probabilità che un nodo $i$ abbia un grado minore di un certo valore $k$, la distribuzione del grado $P(k)$ può essere derivata ponendola uguale a $dP(k_i(t)<k)/dk$, ottenendo per $t\rightarrow \infty$
+$$P(k)\sim 2m^2 k^{-3}$$
 
-#### 1.3.1 Preferential attachment
-Descrizione modello
-Mettere un grafo e un grafico esemplificativo
+Il modello di Barabasi e Albert è un modello minimale, importantissimo perché il primo in grado di riprodurre un grafo che mostrasse un'invarianza di scala, ma che in alcuni aspetti mal si accorda con quelle reti reali con caratteristiche scale-free. Per incominciare la distribuzione del grado è una legge di potenza con esponente 3,ma le reti scale-free solitamente hanno un esponente inferiore, seppur maggiore di 2. Inoltre il cammino medio risulta sottostimato rispetto alle reti reali; infine il coefficiente di clustering non è costante con l'aumentare di $N$ come per le reti reali ma diminuisce, anche se più lentamente di una rete random. Per questo motivo il modello iniziale è stato integrato e reso più complesso.  
+<!--TODO mettere immagini belle per m= 1 e m= 2-->
 
-#### 1.3.2 Random scale-free?
+<!-- TODO fare qui studio su esponente della power law a variare di m e N? o farlo quando si vede che non appatta nulla nell'attacco?-->
 
 ### 1.4  Percolazione
 Cosa si intende per percolazione, teoria. Differenza punto di vista di percolazione in formazione di rete e percolazione in distruzione di rete?
