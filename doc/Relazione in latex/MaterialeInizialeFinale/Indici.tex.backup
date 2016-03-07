@@ -1,0 +1,34 @@
+% !TEX encoding = UTF-8
+% !TEX TS-program = pdflatex
+% !TEX root = ../Articolo.tex
+% !TEX spellcheck = it-IT
+
+%*******************************************************
+% Indici
+%*******************************************************
+\pdfbookmark{\contentsname}{tableofcontents}
+\setcounter{tocdepth}{2}
+\tableofcontents
+\markboth{\contentsname}{\contentsname} 
+\clearpage
+%*******************************************************
+% Elenco delle figure
+%*******************************************************    
+\phantomsection
+\pdfbookmark{\listfigurename}{lof}
+\listoffigures
+% \clearpage
+%*******************************************************
+% Elenco delle tabelle
+%*******************************************************
+\phantomsection
+\pdfbookmark{\listtablename}{lot}
+\listoftables
+\clearpage
+%*******************************************************
+% Elenco dei codici
+%*******************************************************
+\phantomsection
+\pdfbookmark{\lstlistlistingname}{lot}
+\lstlistoflistings
+        

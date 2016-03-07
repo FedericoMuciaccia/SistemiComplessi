@@ -1,0 +1,29 @@
+@book{Knoll,
+	author = {Knoll, G. F.},
+	publisher = {Wiley},
+	title = {Radiation Detection and Measurement},
+	year = {2000}
+}
+
+
+@book{Giorcelli,
+	author = {P. Gaglione, F. Giorcelli},
+	publisher = {Edizioni Minerva Medica},
+	title = {L'impiego della spettrometria gamma nelle misure di radioattività},
+	year = {1975}
+}
+
+
+@online{Nuclear Data Search,
+	organization = {LBNL, Berkeley, USA and Department of Physics,Lund University, Sweden},
+	title = {The Lund/LBNL Nuclear Data Search},
+	year = {1999},
+	url = {http://nucleardata.nuclear.lu.se/toi/}
+}
+
+@online{xlbl,
+	organization = {Lawrence Berkeley National Laboratory},
+	title = {X-ray Data Booklet},
+	year = {2009},
+	url = {http://xdb.lbl.gov}
+}

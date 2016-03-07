@@ -1,0 +1,98 @@
+% I seguenti commenti speciali impostano:
+% 1. utf8 come codifica di input,
+% 2. PDFLaTeX come motore di composizione;
+% 3. Articolo.tex come documento principale;
+% 4. il controllo ortografico italiano per l'editor.
+
+% !TEX encoding = UTF-8
+% !TEX TS-program = pdflatex
+% !TEX root = Articolo.tex
+% !TEX spellcheck = it-IT
+
+\documentclass[12pt,%                       % corpo del font principale
+               a4paper,%                    % carta A4
+               oneside,%                    % solo fronte
+%  \={a}            twoside,%                    % fronte-retro
+               ]{article}                  % classe report di KOMA-Script;
+               
+\usepackage[T1]{fontenc}                    % codifica dei font:
+                                            % NOTA BENE! richiede una distribuzione *completa* di LaTeX,
+                                            % per esempio TeXLive o MiKTeX *complete*
+
+\usepackage[utf8]{inputenc}                 % codifica di input; anche [latin1] va bene
+                                            % NOTA BENE! va accordata con le preferenze dell'editor
+
+\usepackage[english,italian]{babel}         % per scrivere in italiano e in inglese;
+
+
+\usepackage[binding=5mm]{layaureo}          % margini ottimizzati per l'A4; rilegatura di 5 mm
+
+\usepackage{indentfirst}                    % rientra il primo capoverso di ogni sezione
+\usepackage{booktabs}                       % tabelle
+\usepackage{tabularx}                       % tabelle di larghezza prefissata
+\usepackage{multirow}
+\usepackage{graphicx}                       % immagini
+\usepackage{subfig}                         % sottofigure, sottotabelle
+\usepackage{pslatex}
+\usepackage{wrapfig}
+\usepackage{epsfig}
+\usepackage{epstopdf}
+\usepackage{textcomp}
+% \usepackage{microtype}
+\usepackage{caption}                        % didascalie
+\usepackage{listings}                       % codici
+\usepackage[font=small]{quoting}            % citazioni
+
+\usepackage{amsmath,amssymb,amsthm}         % matematica
+
+\usepackage[italian]{varioref}              % riferimenti completi della pagina
+
+\usepackage{mparhack,fixltx2e,relsize}      % finezze tipografiche
+\usepackage{braket}
+
+\usepackage[backend=biber,style=numeric]{biblatex}
+                                            % eccellente pacchetto per la bibliografia;
+                                            % produce uno stile di citazione autore-anno; 
+                                            % lo stile "numeric-comp" produce riferimenti numerici
+                                          
+\bibliography{Bibliografia}                 % database di biblatex 
+                                          
+\usepackage[svgnames]{xcolor}             % colori
+
+\usepackage{hyperref}                       % collegamenti ipertestuali
+
+\usepackage{bookmark}                       % segnalibri
+
+\usepackage{xinttools}% for expandable and non-expandable loops
+\usepackage[scaled]{beramono}
+\usepackage{chngpage}
+% \usepackage{tgheros}
+
+\input{impostazioni-articolo}               % file con le impostazioni personali
+\begin{document}
+\pagestyle{headings}
+%******************************************************************
+% Materiale iniziale
+%******************************************************************
+% \input{MaterialeInizialeFinale/Frontespizio}
+\newpage
+\input{MaterialeInizialeFinale/Sommario+Abstract}
+\newpage
+\input{MaterialeInizialeFinale/Indici}
+\newpage
+
+
+%******************************************************************
+% Materiale principale
+%******************************************************************
+\input{Paragrafi/Teoria}
+\input{Paragrafi/Dati}
+\input{Paragrafi/Attack}
+\input{Paragrafi/Conclusioni}
+
+% *****************************************************************
+% Materiale finale
+%******************************************************************
+\clearpage
+\input{MaterialeInizialeFinale/Bibliografia}
+\end{document}

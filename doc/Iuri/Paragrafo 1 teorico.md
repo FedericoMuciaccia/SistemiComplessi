@@ -84,7 +84,7 @@ $$\Rightarrow k_i(t) = m (\frac{t}{t_i})^\frac{1}{2}$$
 Ovviamente se il grado di un nodo è funzione di $t$, anche la P(k) lo sarà. Definendo $P(k_i(t)<k)$ la probabilità che un nodo $i$ abbia un grado minore di un certo valore $k$, la distribuzione del grado $P(k)$ può essere derivata ponendola uguale a $dP(k_i(t)<k)/dk$, ottenendo per $t\rightarrow \infty$
 $$P(k)\sim 2m^2 k^{-3}$$
 
-Il modello di Barabasi e Albert è un modello minimale, importantissimo perché il primo in grado di riprodurre un grafo che mostrasse un'invarianza di scala, ma che in alcuni aspetti mal si accorda con quelle reti reali con caratteristiche scale-free. Per incominciare la distribuzione del grado è una legge di potenza con esponente 3,ma le reti scale-free solitamente hanno un esponente inferiore, seppur maggiore di 2. Inoltre il cammino medio risulta sottostimato rispetto alle reti reali; infine il coefficiente di clustering non è costante con l'aumentare di $N$ come per le reti reali ma diminuisce, anche se più lentamente di una rete random. Per questo motivo il modello iniziale è stato integrato e reso più complesso.  
+Il modello di Barabasi e Albert è un modello minimale, importantissimo perché il primo in grado di riprodurre un grafo che mostrasse un'invarianza di scala, ma che in alcuni aspetti mal si accorda con quelle reti reali con caratteristiche scale-free. Per incominciare la distribuzione del grado è una legge di potenza con esponente 3,ma le reti scale-free solitamente hanno un esponente inferiore, seppur maggiore di 2. Inoltre il cammino medio risulta sottostimato rispetto alle reti reali; infine il coefficiente di clustering non è costante con l'aumentare di $N$ come per le reti reali ma diminuisce, anche se più lentamente di una rete random \footnote{Benché non sia possibile calcolare in modo analitico \braket{l} e C per una rete di Barabasi-Albert, da simulazioni numeriche è possibile ottenerne quantità caratteristiche}. Per questo motivo il modello iniziale è stato integrato e reso più complesso.  
 <!--TODO mettere immagini belle per m= 1 e m= 2-->
 
 <!-- TODO fare qui studio su esponente della power law a variare di m e N? o farlo quando si vede che non appatta nulla nell'attacco?-->
@@ -92,5 +92,5 @@ Il modello di Barabasi e Albert è un modello minimale, importantissimo perché 
 ### 1.4  Percolazione
 Cosa si intende per percolazione, teoria. Differenza punto di vista di percolazione in formazione di rete e percolazione in distruzione di rete?
 
-#### 1.3.1  Soglia percolativa
+#### 1.4.1  Soglia percolativa
 Vedere le due pubblicazioni di cohen e erez

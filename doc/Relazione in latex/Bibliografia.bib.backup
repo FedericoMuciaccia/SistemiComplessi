@@ -1,0 +1,110 @@
+@book{kittel,
+	author = "Kittel, C. and Kroemer, H.",
+	publisher = "Freeman",
+	title = "{Thermal Physics}",
+	year = "1980"
+}
+
+@book{carrol,
+	author = "Carrol, B. W. and Ostlie, D. A.",
+	publisher = "Pearson",
+	title = "{An Introduction to Modern Astrophysics}",
+	year = "2007"
+}
+
+@book{frank,
+	author = "Frank, J., King, A. and Raine,  D.",
+	publisher = "Cambridge University Press",
+	title = "{Accretion Power in Astrophysics}",
+	year = "2002"
+}
+
+@article{Giacconi1962,
+	author = "Giacconi, R. and others",
+	title = "{Evidence for x Rays From Sources Outside the Solar System}",
+	journaltitle = "Physical Review Letters",
+	pages = "439--443",
+	volume = "9",
+	year = "1962"
+}
+
+@article{lattimer2004,
+  title="{The physics of neutron stars}",
+  author= "Lattimer, J. M. and Prakash, M",
+  journaltitle="Science",
+  volume="304",
+  number="5670",
+  pages="536--542",
+  year="2004",
+}
+
+@article{Bradt1983,
+	author = "{Bradt}, H. V. D. and {McClintock}, J. E.",
+	title = "{The optical counterparts of compact galactic X-ray sources}",
+	journaltitle = "Annual Review of Astronomy and Astrophysics",
+	pages = "13--66",
+	volume = "21",
+	year = "1983"
+}
+
+@article{Hillebrandt2000,
+	author = "{Hillebrandt}, W. and {Niemeyer}, J.~C.",
+	title = "{Type IA Supernova Explosion Models}",
+	journaltitle = "Annual Review of Astronomy and Astrophysics",
+	pages = "191--230",
+	volume = "38",
+	year = "2000"
+}
+
+@article{Kalogera1996,
+	author = "Kalogera, V. and Baym, G.",
+	title = "{The Maximum Mass of a Neutron Star}",
+	journaltitle = "The Astrophysical Journal Letters",
+	pages = "L61",
+	volume = "470",
+	year = "1996"
+}
+
+@article{Muno2002,
+	author = "Muno, M. P., Remillard, R. A. and Chakrabarty, D",
+	title = "{How Do Z and Atoll X-Ray Binaries Differ?}",
+	journaltitle = "The Astrophysical Journal Letters",
+	pages = "L35",
+	volume = "568",
+	year = "2002"
+}
+
+@article{mcclintock2006spin,
+  title=" {The spin of the near-extreme Kerr black hole GRS 1915+ 105}",
+  author="McClintock, J. E. and Shafee, R. and Narayan, R. and others",
+  journaltitle="The Astrophysical Journal",
+  volume="652",
+  number="1",
+  pages="518",
+  year="2006",
+}
+
+@article{mcclintock2007,
+	author = "McClintock, J. E. and Narayan, R. and Shafee, R.",
+	journaltitle = "Black Holes",
+	title = "{Estimating the spins of stellar-mass black holes}",
+	volume = "707",
+	year = "2007"
+}
+
+@article{mcclintock2013,
+	author = "McClintock, J. E. and Narayan, R. and Steiner, J. F.",
+	journaltitle = "Space Science Reviews",
+	title = "{Black Hole Spin via Continuum Fitting and the Role of Spin in Powering Transient Jets}",
+	pages = "1--28",
+	year = "2013"
+}
+
+@online{CMBR,
+	author = "NASA",
+	title = "{FIRAS CMB Monopole Spectrum}",
+	year = "1992",
+	url = "http://lambda.gsfc.nasa.gov/product/cobe/firas_monopole_get.cfm",
+	label = "CMBR"
+}
+
