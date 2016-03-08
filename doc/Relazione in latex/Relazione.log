@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.11.21)  7 MAR 2016 14:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.11.21)  9 MAR 2016 00:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -887,7 +887,7 @@ Package biblatex Info: ... file 'blx-dm.def' found.
 
 (/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-dm.def)
 Package biblatex Info: Trying to load biblatex style data model...
-Package biblatex Info: ... file 'numeric.dbx' not found.
+Package biblatex Info: ... file 'authoryear.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
 \c@afterword=\count176
@@ -981,11 +981,11 @@ File: biblatex.def
 \c@biburllcpenalty=\count279
 \c@smartand=\count280
 )
-Package biblatex Info: Trying to load bibliography style 'numeric'...
-Package biblatex Info: ... file 'numeric.bbx' found.
+Package biblatex Info: Trying to load bibliography style 'authoryear'...
+Package biblatex Info: ... file 'authoryear.bbx' found.
 
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
-File: numeric.bbx 2015/04/19 v3.0 biblatex bibliography style (PK/JW/AB)
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/authoryear.bbx
+File: authoryear.bbx 2015/04/19 v3.0 biblatex bibliography style (PK/JW/AB)
 Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
 
@@ -994,22 +994,18 @@ File: standard.bbx 2015/04/19 v3.0 biblatex bibliography style (PK/JW/AB)
 \c@bbx:relatedcount=\count281
 \c@bbx:relatedtotal=\count282
 ))
-Package biblatex Info: Trying to load citation style 'numeric'...
-Package biblatex Info: ... file 'numeric.cbx' found.
+Package biblatex Info: Trying to load citation style 'authoryear'...
+Package biblatex Info: ... file 'authoryear.cbx' found.
 
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
-File: numeric.cbx 2015/04/19 v3.0 biblatex citation style (PK/JW/AB)
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/authoryear.cbx
+File: authoryear.cbx 2015/04/19 v3.0 biblatex citation style (PK/JW/AB)
 Package biblatex Info: Redefining '\cite'.
 Package biblatex Info: Redefining '\parencite'.
 Package biblatex Info: Redefining '\footcite'.
 Package biblatex Info: Redefining '\footcitetext'.
 Package biblatex Info: Redefining '\smartcite'.
-Package biblatex Info: Redefining '\supercite'.
 Package biblatex Info: Redefining '\textcite'.
 Package biblatex Info: Redefining '\textcites'.
-Package biblatex Info: Redefining '\cites'.
-Package biblatex Info: Redefining '\parencites'.
-Package biblatex Info: Redefining '\smartcites'.
 )
 Package biblatex Info: Trying to load configuration file...
 Package biblatex Info: ... file 'biblatex.cfg' found.
@@ -1200,7 +1196,17 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 
 \@quotelevel=\count300
 \@quotereset=\count301
-(./Relazione.aux)
+(./Relazione.aux
+
+LaTeX Warning: Label `fig:ring' multiply defined.
+
+
+LaTeX Warning: Label `fig:ring' multiply defined.
+
+
+LaTeX Warning: Label `fig:barabalbero' multiply defined.
+
+)
 \openout1 = `Relazione.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
@@ -1373,63 +1379,291 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <17.28> not available
 (Font)              Font shape `T1/ptm/b/it' tried instead on input line 7.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 14.
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 24.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 16.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 26.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [4] [5] [6]
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 93.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 93.
+) [4] [5]
+Package epstopdf Info: Source file: <./Immagini/Par1/zoomring.eps>
+(epstopdf)                    date: 2016-03-03 13:41:25
+(epstopdf)                    size: 644228 bytes
+(epstopdf)             Output file: <./Immagini/Par1/zoomring-eps-converted-to.
+pdf>
+(epstopdf)                    date: 2016-03-08 17:11:58
+(epstopdf)                    size: 561693 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/zoomring-e
+ps-converted-to.pdf ./Immagini/Par1/zoomring.eps>
+(epstopdf)             \includegraphics on input line 87.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Immagini/Par1/zoomring-eps-converted-to.pdf, id=76, 951.555pt x 897.3525pt>
+File: ./Immagini/Par1/zoomring-eps-converted-to.pdf Graphic file (type pdf)
+
+<use ./Immagini/Par1/zoomring-eps-converted-to.pdf>
+Package pdftex.def Info: ./Immagini/Par1/zoomring-eps-converted-to.pdf used on 
+input line 87.
+(pdftex.def)             Requested size: 210.0pt x 198.03432pt.
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 88.
+Package epstopdf Info: Source file: <./Immagini/Par1/ringnet.eps>
+(epstopdf)                    date: 2016-03-03 13:46:52
+(epstopdf)                    size: 22710 bytes
+(epstopdf)             Output file: <./Immagini/Par1/ringnet-eps-converted-to.p
+df>
+(epstopdf)                    date: 2016-03-08 16:54:45
+(epstopdf)                    size: 13320 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/ringnet-ep
+s-converted-to.pdf ./Immagini/Par1/ringnet.eps>
+(epstopdf)             \includegraphics on input line 97.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Immagini/Par1/ringnet-eps-converted-to.pdf, id=77, 650.43pt x 650.43pt>
+File: ./Immagini/Par1/ringnet-eps-converted-to.pdf Graphic file (type pdf)
+
+<use ./Immagini/Par1/ringnet-eps-converted-to.pdf>
+Package pdftex.def Info: ./Immagini/Par1/ringnet-eps-converted-to.pdf used on i
+nput line 97.
+(pdftex.def)             Requested size: 167.99744pt x 167.99623pt.
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 97.
+Package epstopdf Info: Source file: <./Immagini/Par1/smallworld.eps>
+(epstopdf)                    date: 2016-03-03 13:44:10
+(epstopdf)                    size: 22718 bytes
+(epstopdf)             Output file: <./Immagini/Par1/smallworld-eps-converted-t
+o.pdf>
+(epstopdf)                    date: 2016-03-08 18:16:49
+(epstopdf)                    size: 13331 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/smallworld
+-eps-converted-to.pdf ./Immagini/Par1/smallworld.eps>
+(epstopdf)             \includegraphics on input line 100.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Immagini/Par1/smallworld-eps-converted-to.pdf, id=78, 650.43pt x 650.43pt>
+File: ./Immagini/Par1/smallworld-eps-converted-to.pdf Graphic file (type pdf)
+
+<use ./Immagini/Par1/smallworld-eps-converted-to.pdf>
+Package pdftex.def Info: ./Immagini/Par1/smallworld-eps-converted-to.pdf used o
+n input line 100.
+(pdftex.def)             Requested size: 167.99744pt x 167.99623pt.
+Package epstopdf Info: Source file: <./Immagini/Par1/random-smallworld.eps>
+(epstopdf)                    date: 2016-03-08 17:38:12
+(epstopdf)                    size: 28172 bytes
+(epstopdf)             Output file: <./Immagini/Par1/random-smallworld-eps-conv
+erted-to.pdf>
+(epstopdf)                    date: 2016-03-08 18:16:49
+(epstopdf)                    size: 16435 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/random-sma
+llworld-eps-converted-to.pdf ./Immagini/Par1/random-smallworld.eps>
+(epstopdf)             \includegraphics on input line 103.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Immagini/Par1/random-smallworld-eps-converted-to.pdf, id=79, 650.43pt x 650.
+43pt>
+File: ./Immagini/Par1/random-smallworld-eps-converted-to.pdf Graphic file (type
+ pdf)
+ <use ./Immagini/Par1/random-smallworld-eps-converted-to.pdf>
+Package pdftex.def Info: ./Immagini/Par1/random-smallworld-eps-converted-to.pdf
+ used on input line 103.
+(pdftex.def)             Requested size: 167.99744pt x 167.99623pt.
+Package epstopdf Info: Source file: <./Immagini/Par1/totalrandomwatts.eps>
+(epstopdf)                    date: 2016-03-08 17:31:18
+(epstopdf)                    size: 28151 bytes
+(epstopdf)             Output file: <./Immagini/Par1/totalrandomwatts-eps-conve
+rted-to.pdf>
+(epstopdf)                    date: 2016-03-08 18:18:19
+(epstopdf)                    size: 16495 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/totalrando
+mwatts-eps-converted-to.pdf ./Immagini/Par1/totalrandomwatts.eps>
+(epstopdf)             \includegraphics on input line 106.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Immagini/Par1/totalrandomwatts-eps-converted-to.pdf, id=80, 650.43pt x 650.4
+3pt>
+File: ./Immagini/Par1/totalrandomwatts-eps-converted-to.pdf Graphic file (type 
+pdf)
+ <use ./Immagini/Par1/totalrandomwatts-eps-converted-to.pdf>
+Package pdftex.def Info: ./Immagini/Par1/totalrandomwatts-eps-converted-to.pdf 
+used on input line 106.
+(pdftex.def)             Requested size: 167.99744pt x 167.99623pt.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 107.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 107.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 93.
- [7]
-[8]) (./Paragrafi/Dati.tex) (./Paragrafi/Attack.tex)
-(./Paragrafi/Conclusioni.tex [9]) (./MaterialeInizialeFinale/Bibliografia.tex)
-LaTeX Font Info:    Try loading font information for T1+fvm on input line 10.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 107.
+Package epstopdf Info: Source file: <./Immagini/Par1/Erdosmodel.eps>
+(epstopdf)                    date: 2016-03-08 17:56:20
+(epstopdf)                    size: 3350287 bytes
+(epstopdf)             Output file: <./Immagini/Par1/Erdosmodel-eps-converted-t
+o.pdf>
+(epstopdf)                    date: 2016-03-08 18:16:51
+(epstopdf)                    size: 3610076 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/Erdosmodel
+-eps-converted-to.pdf ./Immagini/Par1/Erdosmodel.eps>
+(epstopdf)             \includegraphics on input line 117.
+Package epstopdf Info: Output file is already uptodate.
 
-(/usr/share/texlive/texmf-dist/tex/latex/bera/t1fvm.fd
-File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
-)
-LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 10.79993pt on input line 10.
- [10
+<./Immagini/Par1/Erdosmodel-eps-converted-to.pdf, id=81, 889.3225pt x 953.5625p
+t>
+File: ./Immagini/Par1/Erdosmodel-eps-converted-to.pdf Graphic file (type pdf)
+ <use ./Immagini/Par1/Erdosmodel-eps-converted-to.pdf>
+Package pdftex.def Info: ./Immagini/Par1/Erdosmodel-eps-converted-to.pdf used o
+n input line 117.
+(pdftex.def)             Requested size: 126.00128pt x 135.09836pt.
+Package epstopdf Info: Source file: <./Immagini/Par1/Wattsmodel.eps>
+(epstopdf)                    date: 2016-03-08 17:56:20
+(epstopdf)                    size: 3171365 bytes
+(epstopdf)             Output file: <./Immagini/Par1/Wattsmodel-eps-converted-t
+o.pdf>
+(epstopdf)                    date: 2016-03-08 18:16:53
+(epstopdf)                    size: 3406077 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/Wattsmodel
+-eps-converted-to.pdf ./Immagini/Par1/Wattsmodel.eps>
+(epstopdf)             \includegraphics on input line 120.
+Package epstopdf Info: Output file is already uptodate.
 
-]
+<./Immagini/Par1/Wattsmodel-eps-converted-to.pdf, id=82, 953.5625pt x 949.5475p
+t>
+File: ./Immagini/Par1/Wattsmodel-eps-converted-to.pdf Graphic file (type pdf)
+ <use ./Immagini/Par1/Wattsmodel-eps-converted-to.pdf>
+Package pdftex.def Info: ./Immagini/Par1/Wattsmodel-eps-converted-to.pdf used o
+n input line 120.
+(pdftex.def)             Requested size: 126.00128pt x 125.45946pt.
+Package epstopdf Info: Source file: <./Immagini/Par1/ComparGradeModel.eps>
+(epstopdf)                    date: 2016-03-08 17:57:32
+(epstopdf)                    size: 31301 bytes
+(epstopdf)             Output file: <./Immagini/Par1/ComparGradeModel-eps-conve
+rted-to.pdf>
+(epstopdf)                    date: 2016-03-08 18:17:18
+(epstopdf)                    size: 17167 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/ComparGrad
+eModel-eps-converted-to.pdf ./Immagini/Par1/ComparGradeModel.eps>
+(epstopdf)             \includegraphics on input line 123.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Immagini/Par1/ComparGradeModel-eps-converted-to.pdf, id=83, 867.24pt x 650.4
+3pt>
+File: ./Immagini/Par1/ComparGradeModel-eps-converted-to.pdf Graphic file (type 
+pdf)
+ <use ./Immagini/Par1/ComparGradeModel-eps-converted-to.pdf>
+Package pdftex.def Info: ./Immagini/Par1/ComparGradeModel-eps-converted-to.pdf 
+used on input line 123.
+(pdftex.def)             Requested size: 336.00128pt x 251.99931pt.
+ [6]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 132.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 132.
+ [7 <./Immagini/Par1/zoomring-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <./Immagini/Par1/confrontoC.eps>
+(epstopdf)                    date: 2016-03-08 18:11:15
+(epstopdf)                    size: 8210 bytes
+(epstopdf)             Output file: <./Immagini/Par1/confrontoC-eps-converted-t
+o.pdf>
+(epstopdf)                    date: 2016-03-08 20:15:00
+(epstopdf)                    size: 7135 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/confrontoC
+-eps-converted-to.pdf ./Immagini/Par1/confrontoC.eps>
+(epstopdf)             \includegraphics on input line 140.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Immagini/Par1/confrontoC-eps-converted-to.pdf, id=485, 569.12625pt x 426.593
+75pt>
+File: ./Immagini/Par1/confrontoC-eps-converted-to.pdf Graphic file (type pdf)
+ <use ./Immagini/Par1/confrontoC-eps-converted-to.pdf>
+Package pdftex.def Info: ./Immagini/Par1/confrontoC-eps-converted-to.pdf used o
+n input line 140.
+(pdftex.def)             Requested size: 252.00256pt x 188.89302pt.
+ [8 <./Immagini/Par1/ringnet-eps-converted-to.pdf> <./Immagini/Par1/smallworld-
+eps-converted-to.pdf> <./Immagini/Par1/random-smallworld-eps-converted-to.pdf> 
+<./Immagini/Par1/totalrandomwatts-eps-converted-to.pdf>] [9 <./Immagini/Par1/Er
+dosmodel-eps-converted-to.pdf> <./Immagini/Par1/Wattsmodel-eps-converted-to.pdf
+> <./Immagini/Par1/ComparGradeModel-eps-converted-to.pdf>]
+<./Immagini/Par1/Barabalbert1.pdf, id=592, 1003.75pt x 1003.75pt>
+File: ./Immagini/Par1/Barabalbert1.pdf Graphic file (type pdf)
+
+<use ./Immagini/Par1/Barabalbert1.pdf>
+Package pdftex.def Info: ./Immagini/Par1/Barabalbert1.pdf used on input line 16
+7.
+(pdftex.def)             Requested size: 377.99744pt x 377.99818pt.
+ [10 <./Immagini/Par1/confrontoC-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <./Immagini/Par1/compareSameN.eps>
+(epstopdf)                    date: 2016-03-08 21:14:14
+(epstopdf)                    size: 51299 bytes
+(epstopdf)             Output file: <./Immagini/Par1/compareSameN-eps-converted
+-to.pdf>
+(epstopdf)                    date: 2016-03-08 21:14:23
+(epstopdf)                    size: 19608 bytes
+(epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/compareSam
+eN-eps-converted-to.pdf ./Immagini/Par1/compareSameN.eps>
+(epstopdf)             \includegraphics on input line 178.
+Package epstopdf Info: Output file is already uptodate.
+
+<./Immagini/Par1/compareSameN-eps-converted-to.pdf, id=604, 934.49126pt x 548.0
+475pt>
+File: ./Immagini/Par1/compareSameN-eps-converted-to.pdf Graphic file (type pdf)
+
+ <use ./Immagini/Par1/compareSameN-eps-converted-to.pdf>
+Package pdftex.def Info: ./Immagini/Par1/compareSameN-eps-converted-to.pdf used
+ on input line 178.
+(pdftex.def)             Requested size: 377.99744pt x 221.68205pt.
+ [11 <./Immagini/Par1/Barabalbert1.pdf>] [12 <./Immagini/Par1/compareSameN-eps-
+converted-to.pdf>]) (./Paragrafi/Dati.tex) (./Paragrafi/Attack.tex) (./Paragraf
+i/Conclusioni.tex [13
+
+]) (./MaterialeInizialeFinale/Bibliografia.tex)
+
+LaTeX Warning: Empty bibliography on input line 10.
+
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 98.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 98.
- (./Relazione.aux)
+(./Relazione.aux
+
+Package mparhack Warning: Marginpars may have changed.
+(mparhack)                Rerun to get them right.
+
+)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 98.
 Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 98.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                Relazione
+(biblatex)                and rerun LaTeX afterwards.
+
 Package logreq Info: Writing requests to 'Relazione.run.xml'.
 \openout1 = `Relazione.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 17976 strings out of 493085
- 278914 string characters out of 6136916
- 727638 words of memory out of 5000000
- 21032 multiletter control sequences out of 15000+600000
- 73133 words of font info for 112 fonts, out of 8000000 for 9000
+ 17925 strings out of 493085
+ 279158 string characters out of 6136916
+ 733517 words of memory out of 5000000
+ 20951 multiletter control sequences out of 15000+600000
+ 83914 words of font info for 134 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 44i,8n,67p,1154b,1203s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,10n,67p,1205b,1203s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/bera/fvmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symb
-ol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
-times/utmri8a.pfb>
-Output written on Relazione.pdf (10 pages, 124450 bytes).
+type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
+tmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/urw/times/utmri8a.pfb>
+Output written on Relazione.pdf (13 pages, 17726557 bytes).
 PDF statistics:
- 199 PDF objects out of 1000 (max. 8388607)
- 174 compressed objects within 2 object streams
- 45 named destinations out of 1000 (max. 500000)
- 97 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 91301 PDF objects out of 95282 (max. 8388607)
+ 60204 compressed objects within 603 object streams
+ 49 named destinations out of 1000 (max. 500000)
+ 144 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -7,7 +7,9 @@
 \section{Reti \emph{scale-free}}
 \label{sec:teoria}
 %%%%%%%%%%%%%%%%%%%%%%%
-Le reti sono insiemi di oggetti per i quali è possibile una connessione. Gli ultimi 60 anni hanno visto un crescente interesse per esse, perché con le reti è possibile descrivere sistemi dei più disparati tipi nei campi più vari, dalla biologia all'economia, passando per reti elettriche, informatiche, ecosistemi,  e altro ancora. Ancora più importante, negli ultimi vent'anni è stato scoperto che una classe di reti ha proprietà del tutto comuni nonostante l'intrinseca diversità tra sistemi; la modellizzazione di queste reti, come crescita con caratteristiche preferenziali, è dovuta a Barabasi e Albert (1999), e vengono dette scale-free.
+Le reti sono insiemi di oggetti per i quali è possibile una connessione. Gli ultimi 60 anni hanno visto un crescente interesse per esse, perché con le reti è possibile descrivere sistemi dei più disparati tipi nei campi più vari, dalla biologia all'economia, passando per reti elettriche, informatiche, ecosistemi,  e altro ancora. Ancora più importante, negli ultimi vent'anni è stato scoperto che una classe di reti ha proprietà del tutto comuni nonostante l'intrinseca diversità tra sistemi; la modellizzazione di queste reti, come crescita con caratteristiche preferenziali, è dovuta a Barabasi e Albert (1999)
+%TODO METTERE REF BIBLIOGRAFICO SISTEMATO
+, e vengono dette scale-free.
 
 Per maggior semplicità, nell'esposizione del lavoro svolto verrà sempre assunto che le reti siano dirette e non pesate.
 
@@ -22,8 +24,8 @@ Prima di procedere alla descrizione dei modelli di rete sopracitati, è utile el
 	\item[Distanze] alla base di ogni topologia c'è il concetto di distanza. La distanza tra due nodi di un grafo è definita come il numero di link che li separa nel più piccolo cammino possibile lungo la rete. Altre quantità topologiche importanti sono:
 	\begin{itemize}
 		\item l'\textbf{eccentricità di un nodo}, è la massima delle distanze tra un nodo scelto e tutti gli altri nodi della rete;
-		\item il \textbf{diametro}, cio\`e è la massima eccentricità tra quelle di tutti i nodi del grafo; detto in termini più generali, il diametro è il minor cammino più grande tra tutte le possibili coppie di nodi della rete;
-		\item **average path length**, cioè la distanza media tra tutte le possibili coppie di nodi della rete.
+		\item il \textbf{diametro} è la massima eccentricità tra quelle di tutti i nodi del grafo; detto in termini più generali, il diametro è il minor cammino più grande tra tutte le possibili coppie di nodi della rete;
+		\item \textbf{average path length}, cio\`e la distanza media tra tutte le possibili coppie di nodi della rete.
 	\end{itemize} 
 %TODO (correlazione con diametro?)-->
 	
@@ -43,7 +45,7 @@ Prima di procedere alla descrizione dei modelli di rete sopracitati, è utile el
 
 \subsection{Modelli di rete esponenziale }
 Lo studio delle reti random nasce nel 1959 dai (polacchi?) Erdős e Rényi, i quali per primi modellizzarono la definizione di una rete usando criteri probabilistici. Nel corso dei 30 anni successivi è stato osservato che molte reti reali, a dispetto delle dimensioni, avessero un diametro molto piccolo, portando alla definizione del concetto di *small-worlds* e nel 1987 al modello di Watts e Strogatz.
-
+%TODO mettere biblioref
 In entrambi i casi si parte da una configurazione iniziale di nodi per poi randomizzare i link tra essi. Per questo motivo la distribuzione del grado segue una Poissoniana, con una coda destra caratteristica di forma esponenziale; con un numero sufficiente di nodi e link, la distribuzione del grado si approssima a una gaussiana con un grado medio ben definito.
 
 \subsubsection{1.2.1 Random network}
@@ -53,7 +55,7 @@ configurazioni equiprobabili tra le quali può esserne presa una in maniera rand
 %VALUTARE SE TENERE SOLO QUESTA DEFINIZIONE-->
 Il punto più importante di un approccio probabilistico alle reti è lo studio di proprietà dei grafi: ponendo $N \rightarrow \infty$, se la probabilità che una certa proprietà si verifichi tende a 1, si osserva che per reti limitate quella proprietà si verifica con probabilità significativa anche con pochi nodi. Ciò si verifica per molte proprietà, e questo fatto permette di poter trattare le reti per categorie secondo le loro proprietà peculiari.
 
-Nel caso di un grafo di Erd \h{o} s e Renyi queste sono:
+Nel caso di un grafo di Erdős e Renyi queste sono:
 
 \begin{itemize}
 	\item la distribuzione del grado ha una forma di distribuzione binomiale, la quale tende a una poissoniana per $p$ piccole, e a una gaussiana per $\langle k \rangle$ grandi. Questo implica che la topologia della rete è abbastanza omogenea, con molti nodi che hanno approssimativamente lo stesso grado;
@@ -68,35 +70,77 @@ Nel caso di un grafo di Erd \h{o} s e Renyi queste sono:
 	\item il clustering di una rete ramdom tende a essere molto basso. Infatti, preso un nodo e i suoi primi vicini, la probabilità una coppia di essi sia connessa è $p$. Pertanto su tutto il grafo, il coefficiente di clustering medio è proprio $p$, il quale di solito è abbastanza minore di 1 (con $p = 0.1$ un grafo random diventa già molto connesso, per esempio con $10^4$ nodi avrebbe $\langle k\rangle = 10^3$). Questo fatto, al contrario del diametro, si pone in contrasto con le reti reali, le quali hanno quasi sempre un $\langle C \rangle$ sensibilmente più alto;
 \end{itemize}
 
-% TODO Mettere un grafo-->
+% \begin{wrapfloat}{figure}{I}{0pt}
+% 	\centering
+% 	\includegraphics[width=0.48\textwidth]{./Immagini/figureSpettro/fluoFe2}
+% 	\caption[Emissione X del ferro]{Particolare dello spettro acquisito che mostra il fit con doppia gaussiana del picco studiato, ipoteticamente X del Fe.}
+% 	\label{fig:fluoXFe}
+% \end{wrapfloat}
 
 \subsubsection{Small World}
-Come abbiamo visto il modello di Erd \h{o} s e Renyi descrive bene il piccolo diametro delle reti reali, ma non il loro elevato grado di clusterizzazione. Inoltre il coefficiente di clustering di esse è simile per reti con numero di nodi molto diverso. Notando per primi ciò, Watts e Strogatz hanno formulato un modello che meglio si adattasse alle caratteristiche reali delle reti. 
+Come abbiamo visto il modello di Erdős e Renyi descrive bene il piccolo diametro delle reti reali, ma non il loro elevato grado di clusterizzazione. Inoltre il coefficiente di clustering di esse è simile per reti con numero di nodi molto diverso. Notando per primi ciò, Watts e Strogatz hanno formulato un modello che meglio si adattasse alle caratteristiche reali delle reti. 
 
 Il fatto che il coefficiente di clustering non dipende dal numero di nodi è caratteristico dei reticoli, pertanto il punto di partenza del modello di Watts e Strogatz è un reticolo con condizioni al contorno cicliche, i cui $N$ nodi sono collegati ai primi $n$ vicini. Se poniamo, per esempio, $n = 2$, si configura così un anello del tipo:
 
-% TODO Mettere grafo anello e/con zoom a reticolo -->
+\begin{figure}[t!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./Immagini/Par1/zoomring}
+	\caption{Il punto di partenza del modello Watts-Strogatz: un reticolo con condizioni al contorno cicliche.}
+	\label{fig:ring}
+\end{figure}
 
 Successivamente si procede a riarrangiare in maniera random i link tra i nodi, con una probabilità $p$ per ogni link di venire modificato. In questo modo si hanno un certo numero di link (in media $pnN$) che invece di essere tra nodi in prossimità, saranno tra nodi più lontani, come nel grafo:
 
-% TODO Mettere grafo small world-->
+\begin{figure}[t!]
+	\centering
+	\subfloat[p = 0]
+	{\includegraphics[width=0.4\textwidth]{./Immagini/Par1/ringnet}}
+	$\;$
+	\subfloat[p = 0.03]
+	{\includegraphics[width=0.4\textwidth]{./Immagini/Par1/smallworld}}
+	\\
+	\subfloat[p = 0.3]
+	{\includegraphics[width=0.4\textwidth]{./Immagini/Par1/random-smallworld}}
+	$\;$
+	\subfloat[p = 1]
+	{\includegraphics[width=0.4\textwidth]{./Immagini/Par1/totalrandomwatts}}
+	\caption{Generazione di grafi con il modello Watts-Strogatz a differenti $p$ di rewiring.}
+	\label{fig:ring}
+\end{figure}
 
 Con questo metodo, a seguito del *rewiring* si ha il rischio che il grafo non sia più connesso. Ponendo $n>1$ ciò può essere evitato, portando la probabilità di avere un grafo non connesso quasi a zero già con $n=2$.
-Con $p \rightarrow 1$ il grafo diventa simile a quello di una rete di Erd\h{o}s-Renyi con :
+Con $p \rightarrow 1$ il grafo diventa simile a quello di una rete di Erdős-Renyi:
 
-% TODO Mettere grafo anello random e ridiculograph watts-->
+\begin{figure}[t!]
+	\centering
+	\subfloat[Grafo random]
+	{\includegraphics[width=0.3\textwidth]{./Immagini/Par1/Erdosmodel}}
+	$\;$
+	\subfloat[Grafo small-world]
+	{\includegraphics[width=0.3\textwidth]{./Immagini/Par1/Wattsmodel}}
+	\\
+	\subfloat
+	{\includegraphics[width=0.8\textwidth]{./Immagini/Par1/ComparGradeModel}}
+	\caption{Confronto tra due grafi da 100 nodi: uno generato con il modello Erdos-Renyi ($p=7\%$) e uno con il modello Watts-Strogatz partendo da un reticolo con nodi connessi ai primi 3 vicini e il 100\% di probabilit\`a di rewiring. A parte la somiglianza dei grafi, le distribuzioni del grado hanno simile comportamento.}
+	\label{fig:}
+\end{figure}
 
 Per avere una rete tipica che abbia un numero di connessioni non troppo elevato, ma non così poco da rischiare da avere un grafo non connesso a seguito dell'operazione di rewiring, possono essere considerati degli $N$ e $n$ tali che $N>>n>>ln(N)>>1$. Con queste condizioni la distribuzione del grado $P(k)$ ha una forma gaussiana la cui media coincide con $n$, con $\sigma$ più piccole per $p$ basse, tendente a una delta di Dirac per $p \rightarrow 0$. Infatti, mentre con $p=0$ si ha un reticolo con grado uguale per ogni nodo, l'operazione random di rewiring introduce una casualità sulla $P(K)$ ben descritta da una gaussiana per $N$ grandi, che però ha una larghezza sensibilmente inferiore a quella di una rete random, portando a una rete ancora più omogenea.  
 
-Valori tipici di $\langle l \rangle$ per le reti reali sono ben descritti dal modello di Erd\h{o}s e Renyi secondo l'equazione \ref{eq:lunghezze} (Albert, Barabasi 2001 pg 13),
+Valori tipici di $\langle l \rangle$ per le reti reali sono ben descritti dal modello di Erdős e Renyi secondo l'equazione \ref{eq:lunghezze} (Albert, Barabasi 2001 pg 13),
 % TODO sistemare questo riferimento bibliografico e anche gli altri-->
 cioè ci si aspetta scali in modo logaritmico fissato $\langle k \rangle$. In una rete generata secondo il modello di Watts-Strogatz le lunghezze dei cammini, fissato $n \equiv \langle k \rangle$, scalano in media in modo diverso al variare di $p$. Per $p$ molto basse ($p << 1/nN$) le lunghezze caratteristiche sono proporzionali alla dimensione del grafo, il quale è ancora molto simile a una reticolo; abbastanza presto, per $p >> 1/nN$, \footnote{$p >> 10^(-4)$ per una rete con $10^3$ nodi e $P(k)$ centrata in 10} vi è invece un largo intervallo di $p$ che vede già verificarsi il fenomeno small-world, con le lunghezze dei cammini che scalano come $ln(N)$ in accordo con le reti reali.  
 
 L'altra caratteristica fondamentale di uno small-world è che abbia un clustering abbastanza alto in relazione a una rete puramente random. Per $p = 0$ il reticolo ha un $C(0)$ costante al variare di $N$; all'aumentare di $p$, presa una tripletta chiusa, la probabilità che tutti e tre i link rimangano inalterati è $(1-p)^3$  e i suoi due primi vicini hanno probabilità $p^3$ di vedere almeno uno dei loro link riarrangiato. Dato che $C=N_\triangle/N_\wedge$ e che $N_\wedge$ rimane costante con il rewiring, si può porre 
 \[C(p) \propto N_\triangle (p) \Rightarrow C(p) \sim C(0)(1-p)^3, \]
-con $C(0) \sim 0.75$ per $N$ grande. Ricordando che per il modello di Erd\h{o}s-Renyi $C_{ER}=p$, e che per modellizzare una rete reale $p$ solitamente è abbastanza piccola dato che $\langle k \rangle = Np$, risulta che per valori di $p \lesssim 0.25$ si hanno velocemente $C_{WS}$ sensibilmente maggiori di $C_{ER}$.
+con $C(0) \sim 0.75$ per $N$ grande. Ricordando che per il modello di Erdős-Renyi $C_{ER}=p$, e che per modellizzare una rete reale $p$ solitamente è abbastanza piccola dato che $\langle k \rangle = Np$, risulta che per valori di $p \lesssim 0.25$ si hanno velocemente $C_{WS}$ sensibilmente maggiori di $C_{ER}$.
 
-% mettere grafico con plottino di C_ER e C_WS-->
+\begin{figure}[t!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./Immagini/Par1/confrontoC}
+	\caption{Confronto tra i coefficienti di clustering dei due modelli, al variare del rispettivo parametro $p$.}
+	\label{fig:ring}
+\end{figure}
 
 Concludendo, un grafo è considerato small-world se ha contemporaneamente piccole distanze medie e, a differenza dei grafi random,  una clusterizzazione relativamente elevata. Pertanto il modello di Watts e Strogatz descrive in maniera soddisfacente reti che abbiano queste caratteristiche, purché non siano scale-free.
 
@@ -105,7 +149,7 @@ Molte importanti reti reali di grandi dimensioni hanno la notevole caratteristic
 %TODO mettere riferimento bibliografico-->
 ), le reti small-world riproducono bene le proprietà di clustering e cammini medi, ma non possono portare a $P(k)$ power-law. Serve pertanto un modello che riproduca piccoli diametri, grandi clustering e $P(k)$ a legge di potenza.
 
-I modelli di Erd\h{o}s-Renyi e Watts-Strogatz partono da una configurazione di nodi e poi distribuiscono o riarrangiano i link con una certa probabilità \emph{uniforme} per tutti i link. Le reti reali, tuttavia, spesso partono da un certo numero piccolo di nodi e successivamente crescono. Il primo punto chiave del modello formulato da Barabasi e Albert nel 1999
+I modelli di Erdős-Renyi e Watts-Strogatz partono da una configurazione di nodi e poi distribuiscono o riarrangiano i link con una certa probabilità \emph{uniforme} per tutti i link. Le reti reali, tuttavia, spesso partono da un certo numero piccolo di nodi e successivamente crescono. Il primo punto chiave del modello formulato da Barabasi e Albert nel 1999
 %TODO mettere riferimento bibliografico-->
 è proprio il concetto di crescita: la rete parte a $t=0$ con $m_0$ nodi e a ogni step temporale si aggiunge alla rete un nodo con un certo numero $m < m_0$ di link da assegnare agli altri nodi esistenti. Il secondo riguarda il fatto che la probabilità di *attachment* di un nuovo nodo agli altri non è uniforme su tutti i nodi ma preferenziale: il *preferential attachment* dà quindi una maggiore probabilità $\Pi (k_i)$ di collegamento di un nodo nuovo a un certo nodo $i$ in maniera proporzionale al suo grado, secondo la formula
 \[\Pi (k_i) = \frac{k_i}{\Sigma_j k_j}.\]
@@ -118,10 +162,22 @@ dove $m$ è il numero di link aggiunti per iterazione, ponendo quindi la condizi
 Ovviamente se il grado di un nodo è funzione di $t$, anche la P(k) lo sarà. Definendo $P(k_i(t)<k)$ la probabilità che un nodo $i$ abbia un grado minore di un certo valore $k$, la distribuzione del grado $P(k)$ può essere derivata ponendola uguale a $dP(k_i(t)<k)/dk$, ottenendo per $t\rightarrow \infty$:
 \[ P(k)\sim 2m^2 k^{-3}. \]
 
-Il modello di Barabasi e Albert è un modello minimale, importantissimo perché il primo in grado di riprodurre un grafo che mostrasse un'invarianza di scala, ma che in alcuni aspetti mal si accorda con quelle reti reali con caratteristiche scale-free. Per cominciare la distribuzione del grado è una legge di potenza con esponente $3$,ma le reti scale-free solitamente hanno un esponente inferiore, seppur maggiore di $2$. Inoltre il cammino medio risulta sottostimato rispetto alle reti reali; infine il coefficiente di clustering non è costante con l'aumentare di $N$ come per le reti reali ma diminuisce, anche se più lentamente di una rete random \footnote{Benché non sia possibile calcolare in modo analitico $\braket{l}$ e $C$ per una rete di Barabasi-Albert, da simulazioni numeriche è possibile ottenerne quantità caratteristiche}. Per questo motivo il modello iniziale è stato integrato e reso più complesso.  
+\begin{figure}[t!]
+	\centering
+	\subfloat[Grafo random]
+	{\includegraphics[width=0.3\textwidth]{./Immagini/Par1/BigBarabasi}}
+	$\;$
+	\subfloat[Grafo small-world]
+	{\includegraphics[width=0.3\textwidth]{./Immagini/Par1/Wattsmodel}}
+	\caption{Esempio di grafi generato con il modello di Barabasi-Albert. Con $m=1$ \`e evidente la struttura frattale, ma essendo un grafo ad albero il clustering \`e nullo. }
+	\label{fig:}
+\end{figure}
+
+Il modello di Barabasi e Albert è un modello minimale, importantissimo perché il primo in grado di riprodurre un grafo che mostrasse un'invarianza di scala, ma che in alcuni aspetti mal si accorda con quelle reti reali con caratteristiche scale-free. Per cominciare la distribuzione del grado è una legge di potenza con esponente $3$,ma le reti scale-free solitamente hanno un esponente inferiore, seppur maggiore di $2$. Benché non sia possibile calcolare in modo analitico $\braket{l}$ e $C$ per una rete di Barabasi-Albert, da simulazioni numeriche è possibile ottenerne quantità caratteristiche. Il cammino medio risulta sottostimato rispetto alle reti reali e il coefficiente di clustering non è costante con l'aumentare di $N$ come per le reti reali ma diminuisce, anche se più lentamente di una rete random \footnote{Ovviamente il coefficiente di clustering dipende dal numero $m$ di link generati per ogni nuovo nodo. Con $m = 1$ il clustering \`e nullo dato che il grafo \`e un albero, mentre $C \neq 0$ per $m>1$ e cresce all'aumentare di $m$, mantenendosi comunque al di sotto dei valori di reti reali con parametri simili.}
+%TODO METTERE RIF BIBLIOGRAFI
+. Per questo motivo il modello iniziale è stato integrato e reso più complesso.  
 %TODO mettere immagini belle per m= 1 e m= 2-->
 
-% TODO fare qui studio su esponente della power law a variare di m e N? o farlo quando si vede che non appatta nulla nell'attacco?-->
 
 \subsection{Percolazione} 
 Cosa si intende per percolazione, teoria. Differenza punto di vista di percolazione in formazione di rete e percolazione in distruzione di rete?

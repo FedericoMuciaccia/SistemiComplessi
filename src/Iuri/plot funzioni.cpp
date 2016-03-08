@@ -62,15 +62,18 @@ void graficifit(const char* input)	//macro uguale alla precedente ma che popola 
 
 	TF1 *retta = new TF1("retta", "x", -0.1, 1);	// definisco funzione di fitting: retta
 	retta->SetLineColor(kGreen-6);
-	retta->SetLineWidth(3);
-	retta->Draw("SAME");
+	retta->SetLineWidth(2.8);
+
 	
 	TF1 *curva = new TF1("curva", "0.75*(1-x)**3", -0.1, 1);	// definisco funzione di fitting: retta
 	curva->SetLineColor(kBlue-7);
-	curva->SetLineWidth(3);
-	curva->Draw("SAME");
+	curva->SetLineWidth(2.8);
 	
+
+	curva->Draw("SAME");
+	retta->Draw("SAME");	
 	grafico->Draw("PSAME");		
+
 	
 	legenda = new TLegend(0.957,0.955,0.785,0.825);
 	legenda->SetFillColor(0);
