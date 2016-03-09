@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[53]:
 
 import numpy
 import pandas
@@ -21,7 +21,7 @@ import gmaps
 # invece che uno scatterplot con dei raggi, la libreria ci consente solo di fare una heatmap (eventualmente pesata)
 # 
 
-# In[2]:
+# In[54]:
 
 roma = pandas.read_csv("../data/Roma_towers.csv")
 coordinate = roma[['lat', 'lon']].values
@@ -34,6 +34,54 @@ gmaps.display(heatmap)
 
 # TODO scrivere che dietro queste due semplici linee ci sta un pomeriggio intero di smadonnamenti
 
+
+# In[25]:
+
+colosseo = (41.890183, 12.492369)
+
+
+# In[61]:
+
+import gmplot
+from gmplot import GoogleMapPlotter
+
+# gmap = gmplot.from_geocode("San Francisco")
+
+mappa = gmplot.GoogleMapPlotter(41.890183, 12.492369, 12)
+
+#gmap.plot(latitudes, longitudes, 'cornflowerblue', edge_width=10)
+#gmap.plot((41.890183, 41.891183), (12.492369, 12.493369), 'cornflowerblue', edge_width=10)
+#gmap.scatter(more_lats, more_lngs, '#3B0B39', size=40, marker=False)
+#gmap.scatter(marker_lats, marker_lngs, 'k', marker=True)
+#gmap.heatmap(heat_lats, heat_lngs)
+
+#mappa.scatter((41.890183, 41.891183), (12.492369, 12.493369), color='#3B0B39', size=40, marker=False)
+
+#mappa.scatter(roma.lat.values,
+#              roma.lon.values,
+#              color='#3333ff',
+#              size=0,
+#              marker=False)
+
+mappa.heatmap(roma.lat.values,roma.lon.values)
+
+mappa.draw("../doc/mappa.html")
+#print a
+
+
+# ### NOTE guardando la mappa
+# 
+# Sembrano esserci dei problemi con la posizione delle antenne: ci sono antenne sul tevere, su ponte Sisto, dentro il parchetto di Castel Sant'Angelo, in mezzo al pratone della Sapienza, in cima al dipartimento di Fisica...
+# 
+# Inoltre sembra esserci una strana clusterizzazione lungo le vie di traffico principali. Questo è ragionevole nell'ottica di garantire la copertura in una città con grossi flussi turistici come Roma, ma probabilmente non a tal punto da rendere plausibile la presenza di 7 antenne attorno a piazza Panteon. Probabilmente sono artefatti di riostruzione.
+# 
+# Probabilmente l'algoitmo di ricostruzione di Mozilla ha diversi problemi. Se questa è la situazione delle antenne non oso pensare alla situazione dei router wifi.
+# 
+# Queste misure e queste ricostruzioni devono essere precise, perché è su queste che si poggerà il loro futuro servizio di geolocalizzazione.
+# 
+# Bisognerebbe farglielo presente (magari ci prendono a lavorare da loro :-) )
+# 
+# 
 
 # ## Analisi del raggio di copertura delle antenne
 # 

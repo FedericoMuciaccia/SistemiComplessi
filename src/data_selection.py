@@ -12,6 +12,11 @@ get_ipython().magic(u'matplotlib inline')
 
 # ## Esempio di dati tabulati
 
+# In[ ]:
+
+# esempio di tabella da inserire in HTML nella relazione
+
+
 # In[13]:
 
 dataframe = pandas.read_csv("../data/cell_towers_diff-2016012100.csv")
