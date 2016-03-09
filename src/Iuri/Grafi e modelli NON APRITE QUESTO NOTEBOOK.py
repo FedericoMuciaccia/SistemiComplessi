@@ -119,16 +119,16 @@ pyplot.show()
 # <codecell>
 
 #    if(modello == 'Erdos-Renyi'):
-grafoErdos = networkx.erdos_renyi_graph(1000, 0.0201)
+grafoErdos = networkx.erdos_renyi_graph(1000, 0.0801)
 gradoErdos = grafoErdos.degree().values()
-#adiacenzaErdos = networkx.to_numpy_matrix(grafoErdos)
-#adiacenzaErdos
-#gToolGrafoErdos = graph_tool.Graph(directed = False)
-#%time conversione(gToolGrafoErdos, adiacenzaErdos)
+adiacenzaErdos = networkx.to_numpy_matrix(grafoErdos)
+adiacenzaErdos
+gToolGrafoErdos = graph_tool.Graph(directed = False)
+%time conversione(gToolGrafoErdos, adiacenzaErdos)
 
 #    if(modello == 'Watts-Strogatz'):
-grafoWatts = networkx.watts_strogatz_graph(10000, 100, 0.2)
-gradoWatts = grafoWatts.degree().values()
+#grafoWatts = networkx.watts_strogatz_graph(10000, 100, 0.2)
+#gradoWatts = grafoWatts.degree().values()
 #adiacenzaWatts = networkx.to_numpy_matrix(grafoWatts)
 #adiacenzaWatts
 #gToolGrafoWatts = graph_tool.Graph(directed = False)
@@ -136,8 +136,8 @@ gradoWatts = grafoWatts.degree().values()
 
 
 #    if(modello == 'Barabasi-Abert'):
-grafoBarabasi = networkx.barabasi_albert_graph(10000, 100)
-gradoBarabasi = grafoBarabasi.degree().values()
+#grafoBarabasi = networkx.barabasi_albert_graph(10000, 100)
+#gradoBarabasi = grafoBarabasi.degree().values()
 #adiacenzaBarabasi = networkx.to_numpy_matrix(grafoBarabasi)
 #adiacenzaBarabasi
 #gToolGrafoBarabasi = graph_tool.Graph(directed = False)
@@ -204,14 +204,14 @@ graph_draw(gToolGrafoBarabasi, pos = pos, output_size=(1000, 1000),
 # <codecell>
 
 #initial = 0
-g = graph_tool.generation.price_network(10000, m=1, gamma = 1,
+g = graph_tool.generation.price_network(10000, m=100, gamma = 1,
                                               seed_graph = gToolGrafoErdos,
                                               directed=False)
-pos = graph_tool.draw.sfdp_layout(g)
-graph_draw(g, pos = pos, output_size=(1000, 1000), 
-           vertex_color=[1,1,1,0], vertex_size=3, edge_pen_width=1,
-           vcmap=matplotlib.cm.gist_heat_r, 
-           output=("barabalbert1.svg"))
+#pos = graph_tool.draw.sfdp_layout(g)
+#graph_draw(g, pos = pos, output_size=(1000, 1000), 
+#           vertex_color=[1,1,1,0], vertex_size=3, edge_pen_width=1,
+#           vcmap=matplotlib.cm.gist_heat_r, 
+#           output=("barabalbert1.svg"))
 
 # <codecell>
 
