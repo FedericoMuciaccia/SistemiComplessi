@@ -119,16 +119,16 @@ pyplot.show()
 # <codecell>
 
 #    if(modello == 'Erdos-Renyi'):
-grafoErdos = networkx.erdos_renyi_graph(1000, 0.0801)
+grafoErdos = networkx.erdos_renyi_graph(100, 0.001)
 gradoErdos = grafoErdos.degree().values()
-adiacenzaErdos = networkx.to_numpy_matrix(grafoErdos)
-adiacenzaErdos
-gToolGrafoErdos = graph_tool.Graph(directed = False)
-%time conversione(gToolGrafoErdos, adiacenzaErdos)
+#adiacenzaErdos = networkx.to_numpy_matrix(grafoErdos)
+#adiacenzaErdos
+#gToolGrafoErdos = graph_tool.Graph(directed = False)
+#%time conversione(gToolGrafoErdos, adiacenzaErdos)
 
 #    if(modello == 'Watts-Strogatz'):
-#grafoWatts = networkx.watts_strogatz_graph(10000, 100, 0.2)
-#gradoWatts = grafoWatts.degree().values()
+grafoWatts = networkx.watts_strogatz_graph(100, 10, 0.2)
+gradoWatts = grafoWatts.degree().values()
 #adiacenzaWatts = networkx.to_numpy_matrix(grafoWatts)
 #adiacenzaWatts
 #gToolGrafoWatts = graph_tool.Graph(directed = False)
@@ -136,8 +136,8 @@ gToolGrafoErdos = graph_tool.Graph(directed = False)
 
 
 #    if(modello == 'Barabasi-Abert'):
-#grafoBarabasi = networkx.barabasi_albert_graph(10000, 100)
-#gradoBarabasi = grafoBarabasi.degree().values()
+grafoBarabasi = networkx.barabasi_albert_graph(100, 10)
+gradoBarabasi = grafoBarabasi.degree().values()
 #adiacenzaBarabasi = networkx.to_numpy_matrix(grafoBarabasi)
 #adiacenzaBarabasi
 #gToolGrafoBarabasi = graph_tool.Graph(directed = False)
@@ -174,11 +174,11 @@ pyplot.savefig('compareSameN.svg', format='svg', dpi=1000)
 #           vcmap=matplotlib.cm.gist_heat_r, output="Wattsmodel.eps")
 
 #grafo erdos
-pos = graph_tool.draw.arf_layout(gToolGrafoErdos)
+pos = graph_tool.draw.arf_layout(grafoErdos)
 #pos = graph_tool.draw.radial_tree_layout(gToolGrafoErdos, gToolGrafoErdos.vertex(0))
 graph_draw(gToolGrafoErdos, pos = pos, output_size=(1000, 1000), 
            vertex_color=[1,1,1,0], vertex_size=4, edge_pen_width=1.2,
-           vcmap=matplotlib.cm.gist_heat_r, output="Erdosmodel.eps")
+           vcmap=matplotlib.cm.gist_heat_r, output="Erdosmodel.png")
 
 # <codecell>
 
@@ -266,6 +266,12 @@ gradoBarabasi = gradiFinal = pandas.DataFrame(in_hist[0], columns=['grado'])
 # <markdowncell>
 
 # ## Attacco e failure con modelli
+
+# <codecell>
+
+grafoErdos = networkx.erdos_renyi_graph(10000, 0.0101)
+grafoWatts = networkx.watts_strogatz_graph(10000, 100, 0.2)
+grafoBarabasi = networkx.barabasi_albert_graph(10000, 100)
 
 # <codecell>
 
