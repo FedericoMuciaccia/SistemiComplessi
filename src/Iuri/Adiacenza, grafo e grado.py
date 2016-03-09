@@ -3,10 +3,10 @@
 
 # ### Importo tutte le librerie necessarie
 
-# In[9]:
+# In[2]:
 
 import geopy
-from geopy import distance #TODO BUGGONE
+from geopy import distance
 import math
 import itertools
 import pandas
@@ -22,7 +22,7 @@ get_ipython().magic(u'matplotlib inline')
 # 
 # NB: da verificare che distanza euclidea non crei troppi problemi
 
-# In[10]:
+# In[7]:
 
 colosseo = (41.890173, 12.492331)
 raccordo = [(41.914456, 12.615807),(41.990672, 12.502714),(41.793883, 12.511297),(41.812566, 12.396628),(41.956277, 12.384611)]
@@ -71,7 +71,7 @@ print raggiomedioEuclid
 
 # ### Popolo il dataframe e faccio una prima grossa scrematura
 
-# In[19]:
+# In[13]:
 
 dataframe = pandas.read_csv("/home/protoss/Documenti/Siscomp_datas/data/cell_towers.csv")
 #dataframe = pandas.read_csv("/home/protoss/Documenti/SistemiComplessi/data/cell_towers_diff-2016012100.csv")
@@ -88,7 +88,7 @@ italydoitcleaner.drop(italydoitcleaner.columns[[1, 3, 5, 10, 11, 12, 13]], axis 
 
 # ### Seleziono le antenne in Roma e faccio dei .csv appositi
 
-# In[20]:
+# In[14]:
 
 #istruzione che fa selezione alcune righe con criteri su alcune colonne, 
 #ne seleziona alcune e restituisce un array nompy di valori desiderati
@@ -126,8 +126,9 @@ treCell = treCell.reset_index(True)
 treCell.to_csv("../../data/Tre_towers.csv", index= False)
 
 
-# In[15]:
+# In[10]:
 
+#EUCLID DON'T TAUCH
 #istruzione che fa selezione alcune righe con criteri su alcune colonne, 
 #ne seleziona alcune e restituisce un array nompy di valori desiderati
 
@@ -210,7 +211,7 @@ for aziende in gestore:
 
 # ## Faccio disegno grafo e grafico distr grado
 
-# In[22]:
+# In[15]:
 
 #for azienda in gestore:
 
@@ -229,45 +230,45 @@ get_ipython().magic(u'time grafoWind = networkx.Graph(adiacenzaWind)')
 get_ipython().magic(u'time grafoTre = networkx.Graph(adiacenzaTre)')
 
 
-# In[23]:
+# In[16]:
 
 gradoRoma = grafoRoma.degree().values()
 numpy.savetxt("../../data/DistrGrado_Roma",gradoRoma,fmt='%d',newline='\n')
 istoGradoRoma = networkx.degree_histogram(grafoRoma)
 #numpy.savetxt("../../data/IstoGrado_Roma",istoGradoRoma,fmt='%d',newline='\n')
-romaCell["grado"] = gradoRoma
+romaCell["degree"] = gradoRoma
 romaCell.to_csv("../../data/Roma_towers.csv", index= False)
 
 gradoTim = grafoTim.degree().values()
 numpy.savetxt("../../data/DistrGrado_Tim",gradoTim,fmt='%d',newline='\n')
 istoGradoTim = networkx.degree_histogram(grafoTim)
 #numpy.savetxt("../../data/IstoGrado_Tim",istoGradoTim,fmt='%d',newline='\n')
-timCell["grado"] = gradoTim
+timCell["degree"] = gradoTim
 timCell.to_csv("../../data/Tim_towers.csv", index= False)
 
 gradoVoda = grafoVoda.degree().values()
 numpy.savetxt("../../data/DistrGrado_Vodafone",gradoVoda,fmt='%d',newline='\n')
 istoGradoVoda = networkx.degree_histogram(grafoVoda)
 #numpy.savetxt("../../data/IstoGrado_Voda",istoGradoVoda,fmt='%d',newline='\n')
-vodaCell["grado"] = gradoVoda
+vodaCell["degree"] = gradoVoda
 vodaCell.to_csv("../../data/Vodafone_towers.csv", index= False)
 
 gradoWind = grafoWind.degree().values()
 numpy.savetxt("../../data/DistrGrado_Wind",gradoWind,fmt='%d',newline='\n')
 istoGradoWind = networkx.degree_histogram(grafoWind)
 #numpy.savetxt("../../data/IstoGrado_Wind",istoGradoWind,fmt='%d',newline='\n')
-windCell["grado"] = gradoWind
+windCell["degree"] = gradoWind
 windCell.to_csv("../../data/Wind_towers.csv", index= False)
 
 gradoTre = grafoTre.degree().values()
 numpy.savetxt("../../data/DistrGrado_Tre",gradoTre,fmt='%d',newline='\n')
 istoGradoTre = networkx.degree_histogram(grafoTre)
 #numpy.savetxt("../../data/IstoGrado_Tre",istoGradoTre,fmt='%d',newline='\n')
-treCell["grado"] = gradoTre
+treCell["degree"] = gradoTre
 treCell.to_csv("../../data/Tre_towers.csv", index= False)
 
 
-# In[24]:
+# In[17]:
 
 get_ipython().magic(u'matplotlib inline')
 gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
@@ -311,7 +312,7 @@ pyplot.show()
 
 # ### Faccio istogramma del raggio delle antenne
 
-# In[25]:
+# In[18]:
 
 gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
 colori = ['#4d4d4d', '#004184','#ff3300','#ff8000','#018ECC']
@@ -334,7 +335,7 @@ pyplot.figure(figsize=(16*1.11,9*1.11))
 #gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
 
 for azienda, colore in zip(gestore,colori):
-    dataframe = pandas.read_csv("../data/{0}_towers.csv".format(azienda))
+    dataframe = pandas.read_csv("../../data/{0}_towers.csv".format(azienda))
     raggio = dataframe['range'].values
     distribuzione = rangeDistribution(raggio, azienda, colore)
 #    print dataframe[dataframe.range == 0]
@@ -344,7 +345,7 @@ pyplot.show()
     
 pyplot.figure(figsize=(16*1.11,9*1.11))
 for azienda, colore in zip(gestore,colori):
-    dataframe = pandas.read_csv("../data/{0}_towers.csv".format(azienda))
+    dataframe = pandas.read_csv("../../data/{0}_towers.csv".format(azienda))
     raggio = dataframe['range'].values
     distribuzione = rangeDistributionLog(raggio, azienda, colore)
 #    print dataframe[dataframe.range == 0]
@@ -353,8 +354,63 @@ for azienda, colore in zip(gestore,colori):
 pyplot.show()
 
 
-# # USARE GRAPH TOOL
-# # VALUTARE USO METODI SPETTRALI TIPO PAGE RANK / BETWEENNESS; CERCARE SE SI DISCOSTANO DA DISTR GRADO NEL NOSTRO CASO DI RETE NON DIRETTA
+# # TODO usare graph tool
+# 
+
+# # Topologia
+
+# In[3]:
+
+adiacenzaRoma = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Roma.csv",delimiter=',',dtype='int')
+adiacenzaTim = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tim.csv",delimiter=',',dtype='int')
+adiacenzaVoda = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Vodafone.csv",delimiter=',',dtype='int')
+adiacenzaWind = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Wind.csv",delimiter=',',dtype='int')
+adiacenzaTre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
+
+
+# In[18]:
+
+def topologyNetx(adiacenza):
+    grafo = networkx.Graph(adiacenza)
+    c = get_ipython().magic(u'time networkx.average_clustering(grafo)')
+    d = get_ipython().magic(u'time networkx.diameter(grafo)')
+    l = get_ipython().magic(u'time networkx.average_shortest_path_length(grafo)')
+    return c, d, l
+
+print "TIM"
+topoTim = topologyNetx(adiacenzaTim)
+print topoTim, "\n"
+
+print "VODA"
+topoVoda = topologyNetx(adiacenzaVoda)
+print topoVoda, "\n"
+
+print "WIND"
+topoWind = topologyNetx(adiacenzaWind)
+print topoWind, "\n"
+
+print "TRE"
+topoTre = topologyNetx(adiacenzaTre)
+print topoTre, "\n"
+
+print "ROMA"
+topoRoma = topologyNetx(adiacenzaRoma)
+print topoRoma
+
+
+# In[ ]:
+
+def conversione(grafo, adiacenza):
+    grafo.add_vertex(len(adiacenza))
+    num_vertices = adiacenza.shape[0]
+    for i in range(num_vertices - 1):
+        for j in range(i + 1, num_vertices):
+            if adiacenza[i,j] != 0:
+                e = grafo.add_edge(i, j)   
+
+def topologyGtool:
+
+
 
 # NB. num antenne  
 #    * TIM - 1550  
