@@ -3,7 +3,7 @@
 
 # ### Importo tutte le librerie necessarie
 
-# In[34]:
+# In[9]:
 
 import geopy
 from geopy import distance #TODO BUGGONE
@@ -22,7 +22,7 @@ get_ipython().magic(u'matplotlib inline')
 # 
 # NB: da verificare che distanza euclidea non crei troppi problemi
 
-# In[2]:
+# In[10]:
 
 colosseo = (41.890173, 12.492331)
 raccordo = [(41.914456, 12.615807),(41.990672, 12.502714),(41.793883, 12.511297),(41.812566, 12.396628),(41.956277, 12.384611)]
@@ -71,7 +71,7 @@ print raggiomedioEuclid
 
 # ### Popolo il dataframe e faccio una prima grossa scrematura
 
-# In[26]:
+# In[14]:
 
 dataframe = pandas.read_csv("/home/protoss/Documenti/Siscomp_datas/data/cell_towers.csv")
 #dataframe = pandas.read_csv("/home/protoss/Documenti/SistemiComplessi/data/cell_towers_diff-2016012100.csv")
@@ -88,18 +88,18 @@ italydoitcleaner.drop(italydoitcleaner.columns[[1, 3, 5, 10, 11, 12, 13]], axis 
 
 # ### Seleziono le antenne in Roma e faccio dei .csv appositi
 
-# In[27]:
+# In[13]:
 
 #istruzione che fa selezione alcune righe con criteri su alcune colonne, 
 #ne seleziona alcune e restituisce un array nompy di valori desiderati
 
 coordinate = dataframe[criterioMCC & criterioMinsamples][['lat', 'lon']].values
 
-get_ipython().magic(u'time distanza = map(euclidDistance, coordinate)')
-raggiomedioEuclid = 12000
+get_ipython().magic(u'time distanza = numpy.array(map(geodesicDistance, coordinate), dtype = int)')
+raggiomedioGeo = 12000
 
 italydoitcleaner['distance'] = distanza
-criterioRaccordo = italydoitcleaner.distance < raggiomedioEuclid
+criterioRaccordo = italydoitcleaner.distance < raggiomedioGeo
 romaCell = italydoitcleaner[criterioRaccordo]
 romaCell = romaCell.reset_index(drop=True)
 romaCell.to_csv("../../data/Roma_towers.csv", index= False)
@@ -126,16 +126,47 @@ treCell = treCell.reset_index(True)
 treCell.to_csv("../../data/Tre_towers.csv", index= False)
 
 
-# Domande su iterazione su panda dataframe e efficienza, un tizio dice che la funzione iterrows è molto poco efficiente e sarebbe molto meglio usare un numpy array. Forse esistono funzioni più efficienti. 
-# 
-# http://stackoverflow.com/questions/10729210/iterating-row-by-row-through-a-pandas-dataframe  
-# 
-# http://stackoverflow.com/questions/7837722/what-is-the-most-efficient-way-to-loop-through-dataframes-with-pandas
-# 
+# In[15]:
+
+#istruzione che fa selezione alcune righe con criteri su alcune colonne, 
+#ne seleziona alcune e restituisce un array nompy di valori desiderati
+
+coordinate = dataframe[criterioMCC & criterioMinsamples][['lat', 'lon']].values
+
+get_ipython().magic(u'time distanza = numpy.array(map(euclidDistance, coordinate), dtype=int)')
+raggiomedioEuclid = 12000
+
+italydoitcleaner['distance'] = distanza
+criterioRaccordo = italydoitcleaner.distance < raggiomedioEuclid
+romaCell = italydoitcleaner[criterioRaccordo]
+romaCell = romaCell.reset_index(drop=True)
+romaCell.to_csv("../../data/Roma_towersEuc.csv", index= False)
+
+criterioTim = romaCell.net == 1
+criterioWind = romaCell.net == 88
+criterioVoda = romaCell.net == 10
+criterioTre = romaCell.net == 99
+
+timCell = romaCell[criterioTim]
+timCell = timCell.reset_index(drop=True)
+timCell.to_csv("../../data/Tim_towersEuc.csv", index= False)
+
+windCell = romaCell[criterioWind]
+windCell = windCell.reset_index(drop=True)
+windCell.to_csv("../../data/Wind_towersEuc.csv", index= False)
+
+vodaCell = romaCell[criterioVoda]
+vodaCell = vodaCell.reset_index(drop=True)
+vodaCell.to_csv("../../data/Vodafone_towersEuc.csv", index= False)
+
+treCell = romaCell[criterioTre]
+treCell = treCell.reset_index(True)
+treCell.to_csv("../../data/Tre_towersEuc.csv", index= False)
+
 
 # ### Prendo le antenne di Roma e faccio matrice adiacenza
 
-# In[28]:
+# In[16]:
 
 #definisco la funzione che mi calcola la matrice di adiacenza
 def matriceSupEuclid(datiCoordinate, datiRaggi):
