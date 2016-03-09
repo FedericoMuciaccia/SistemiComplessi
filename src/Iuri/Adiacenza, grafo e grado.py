@@ -71,7 +71,7 @@ print raggiomedioEuclid
 
 # ### Popolo il dataframe e faccio una prima grossa scrematura
 
-# In[14]:
+# In[19]:
 
 dataframe = pandas.read_csv("/home/protoss/Documenti/Siscomp_datas/data/cell_towers.csv")
 #dataframe = pandas.read_csv("/home/protoss/Documenti/SistemiComplessi/data/cell_towers_diff-2016012100.csv")
@@ -88,7 +88,7 @@ italydoitcleaner.drop(italydoitcleaner.columns[[1, 3, 5, 10, 11, 12, 13]], axis 
 
 # ### Seleziono le antenne in Roma e faccio dei .csv appositi
 
-# In[13]:
+# In[20]:
 
 #istruzione che fa selezione alcune righe con criteri su alcune colonne, 
 #ne seleziona alcune e restituisce un array nompy di valori desiderati
@@ -166,7 +166,7 @@ treCell.to_csv("../../data/Tre_towersEuc.csv", index= False)
 
 # ### Prendo le antenne di Roma e faccio matrice adiacenza
 
-# In[16]:
+# In[21]:
 
 #definisco la funzione che mi calcola la matrice di adiacenza
 def matriceSupEuclid(datiCoordinate, datiRaggi):
@@ -210,7 +210,7 @@ for aziende in gestore:
 
 # ## Faccio disegno grafo e grafico distr grado
 
-# In[29]:
+# In[22]:
 
 #for azienda in gestore:
 
@@ -229,51 +229,45 @@ get_ipython().magic(u'time grafoWind = networkx.Graph(adiacenzaWind)')
 get_ipython().magic(u'time grafoTre = networkx.Graph(adiacenzaTre)')
 
 
-# In[31]:
-
-print("num gradi Roma", networkx.number_of_nodes(grafoRoma))
-print("num gradi Tim", networkx.number_of_nodes(grafoTim))
-print("num gradi Vodafone", networkx.number_of_nodes(grafoVoda))
-print("num gradi Wind", networkx.number_of_nodes(grafoWind))
-print("num gradi Tre", networkx.number_of_nodes(grafoTre))
+# In[23]:
 
 gradoRoma = grafoRoma.degree().values()
 numpy.savetxt("../../data/DistrGrado_Roma",gradoRoma,fmt='%d',newline='\n')
 istoGradoRoma = networkx.degree_histogram(grafoRoma)
-numpy.savetxt("../../data/IstoGrado_Roma",istoGradoRoma,fmt='%d',newline='\n')
+#numpy.savetxt("../../data/IstoGrado_Roma",istoGradoRoma,fmt='%d',newline='\n')
 romaCell["grado"] = gradoRoma
 romaCell.to_csv("../../data/Roma_towers.csv", index= False)
 
 gradoTim = grafoTim.degree().values()
 numpy.savetxt("../../data/DistrGrado_Tim",gradoTim,fmt='%d',newline='\n')
 istoGradoTim = networkx.degree_histogram(grafoTim)
-numpy.savetxt("../../data/IstoGrado_Tim",istoGradoTim,fmt='%d',newline='\n')
+#numpy.savetxt("../../data/IstoGrado_Tim",istoGradoTim,fmt='%d',newline='\n')
 timCell["grado"] = gradoTim
 timCell.to_csv("../../data/Tim_towers.csv", index= False)
 
 gradoVoda = grafoVoda.degree().values()
 numpy.savetxt("../../data/DistrGrado_Vodafone",gradoVoda,fmt='%d',newline='\n')
 istoGradoVoda = networkx.degree_histogram(grafoVoda)
-numpy.savetxt("../../data/IstoGrado_Voda",istoGradoVoda,fmt='%d',newline='\n')
+#numpy.savetxt("../../data/IstoGrado_Voda",istoGradoVoda,fmt='%d',newline='\n')
 vodaCell["grado"] = gradoVoda
 vodaCell.to_csv("../../data/Vodafone_towers.csv", index= False)
 
 gradoWind = grafoWind.degree().values()
 numpy.savetxt("../../data/DistrGrado_Wind",gradoWind,fmt='%d',newline='\n')
 istoGradoWind = networkx.degree_histogram(grafoWind)
-numpy.savetxt("../../data/IstoGrado_Wind",istoGradoWind,fmt='%d',newline='\n')
+#numpy.savetxt("../../data/IstoGrado_Wind",istoGradoWind,fmt='%d',newline='\n')
 windCell["grado"] = gradoWind
 windCell.to_csv("../../data/Wind_towers.csv", index= False)
 
 gradoTre = grafoTre.degree().values()
 numpy.savetxt("../../data/DistrGrado_Tre",gradoTre,fmt='%d',newline='\n')
 istoGradoTre = networkx.degree_histogram(grafoTre)
-numpy.savetxt("../../data/IstoGrado_Tre",istoGradoTre,fmt='%d',newline='\n')
+#numpy.savetxt("../../data/IstoGrado_Tre",istoGradoTre,fmt='%d',newline='\n')
 treCell["grado"] = gradoTre
 treCell.to_csv("../../data/Tre_towers.csv", index= False)
 
 
-# In[35]:
+# In[24]:
 
 get_ipython().magic(u'matplotlib inline')
 gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
@@ -317,7 +311,7 @@ pyplot.show()
 
 # ### Faccio istogramma del raggio delle antenne
 
-# In[33]:
+# In[25]:
 
 gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
 colori = ['#4d4d4d', '#004184','#ff3300','#ff8000','#018ECC']
