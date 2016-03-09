@@ -7,14 +7,12 @@
 \section{Reti \emph{scale-free}}
 \label{sec:teoria}
 %%%%%%%%%%%%%%%%%%%%%%%
-Le reti sono insiemi di oggetti per i quali è possibile una connessione. Gli ultimi 60 anni hanno visto un crescente interesse per esse, perché con le reti è possibile descrivere sistemi dei più disparati tipi nei campi più vari, dalla biologia all'economia, passando per reti elettriche, informatiche, ecosistemi,  e altro ancora. Ancora più importante, negli ultimi vent'anni è stato scoperto che una classe di reti ha proprietà del tutto comuni nonostante l'intrinseca diversità tra sistemi; la modellizzazione di queste reti, come crescita con caratteristiche preferenziali, è dovuta a Barabasi e Albert (1999)
-%TODO METTERE REF BIBLIOGRAFICO SISTEMATO
-, e vengono dette scale-free.
+Le reti sono insiemi di oggetti per i quali è possibile una connessione. Gli ultimi 60 anni hanno visto un crescente interesse per esse, perché con le reti è possibile descrivere sistemi dei più disparati tipi nei campi più vari, dalla biologia all'economia, passando per reti elettriche, informatiche, ecosistemi,  e altro ancora. Ancora più importante, negli ultimi vent'anni è stato scoperto che una classe di reti ha proprietà del tutto comuni nonostante l'intrinseca diversità tra sistemi; la modellizzazione di queste reti, come crescita con caratteristiche preferenziali, è dovuta a \textcite{Barbalbert1999}, e vengono dette scale-free.
 
 Per maggior semplicità, nell'esposizione del lavoro svolto verrà sempre assunto che le reti siano dirette e non pesate.
 
 \subsection{Proprietà e grandezze caratteristiche}
-Dal punto di vista matematico una rete è rappresentata da un grafo. Gli oggetti costitutivi di un grafo sono i texbf{nodi}, i quali vengono collegati opportunamente tra loro con dei textbf{link} secondo dei criteri che dipendono dal modello (nella costruzione di un grafo teorico) o dalla natura del sistema (per le reti reali). Il numero di nodi della rete, o di una sua parte, è ovviamente la grandezza fondamentale per definirne le dimensioni; il numero e la distribuzione dei link ne descrivono la connettività.
+Dal punto di vista matematico una rete è rappresentata da un grafo. Gli oggetti costitutivi di un grafo sono i \textbf{nodi}, i quali vengono collegati opportunamente tra loro con dei textbf{link} secondo dei criteri che dipendono dal modello (nella costruzione di un grafo teorico) o dalla natura del sistema (per le reti reali). Il numero di nodi della rete, o di una sua parte, è ovviamente la grandezza fondamentale per definirne le dimensioni; il numero e la distribuzione dei link ne descrivono la connettività.
 
 Prima di procedere alla descrizione dei modelli di rete sopracitati, è utile elencare un glossario di caratteristiche delle reti, spesso determinanti per distinguere un grafo scale-free dagli altri nello studio delle reti reali.
 
@@ -34,9 +32,7 @@ Prima di procedere alla descrizione dei modelli di rete sopracitati, è utile el
 	dove $E_i$ è il numero di link tra i $k_i$ primi vicini del vertice e $k_i(k_i-1)/2$ il numero di link possibili tra essi: cioè il numero di collegamenti necessari perché $i$ con i suoi vicini sia una porzione di grafo \emph{completa}, detta anche \emph{clique}.  
 	La media su tutti i nodi dei rispettivi $C_i$ dà un'indicazione su quanto la rete sia complessivamente clusterizzata e quindi può essere preso come coefficiente di clustering globale $C$ della rete. Una definizione più recente di $C$, equivalente alla precedente, lo pone uguale al rapporto tra il numero di triplette di nodi completamente collegate $N_\triangle$ e il numero di triplette che vede i tre nodi collegati da almeno due link $N_\wedge$. In entrambi i casi, più $C$ è vicino a $1$, più si ha clusterizzazione.
 	
-	Il coefficiente di clustering svolge un ruolo importante nel distinguere una rete completamente random da una che presenta caratteristiche di \emph{small-world}: infatti un rete con piccolo diametro tende a avere un $\langle C\rangle$ maggiore di una simile rete puramente casuale costruita con lo stesso numero di nodi e con il medesimo cammino più corto medio. Questo comportamento è stato notato in molte reti reali (Watts, Strogatz, 1998
-% TODO DA METTERE IN BIBLIOGRAFIA-->
-).
+	Il coefficiente di clustering svolge un ruolo importante nel distinguere una rete completamente random da una che presenta caratteristiche di \emph{small-world}: infatti un rete con piccolo diametro tende a avere un $\langle C\rangle$ maggiore di una simile rete puramente casuale costruita con lo stesso numero di nodi e con il medesimo cammino più corto medio. Questo comportamento è stato notato in molte reti reali \parencite{Watts1998}.
 	\item[Centralit\`a] Esistono vari modi per definire quando un nodo è centrale rispetto ad altri. Il primo è più immediato è il suo grado. Altri due tra i più importanti sono la \textbf{betweenness} e il \textbf{page-rank}. Preso un nodo $i$, il primo è definito come il numero di cammini più corti che è possibile tracciare tra due qualsiasi nodi della rete, purché passino per $i$; il secondo dà una maggior centralità a $i$ maggiore è il numero di link \emph{diretti} verso di esso, tenendo conto anche del rank dei nodi che si collegano a esso. 
 	
 	In reti dirette, benché non siano \emph{matematicamente} uguali, betweenness e page-rank sono statisticamente molto correlati al grado, pertanto non verranno analizzati. 
@@ -44,7 +40,7 @@ Prima di procedere alla descrizione dei modelli di rete sopracitati, è utile el
 \end{description}
 
 \subsection{Modelli di rete esponenziale }
-Lo studio delle reti random nasce nel 1959 dai (polacchi?) Erdős e Rényi, i quali per primi modellizzarono la definizione di una rete usando criteri probabilistici. Nel corso dei 30 anni successivi è stato osservato che molte reti reali, a dispetto delle dimensioni, avessero un diametro molto piccolo, portando alla definizione del concetto di *small-worlds* e nel 1987 al modello di Watts e Strogatz.
+Lo studio delle reti random nasce nel 1959 dai (polacchi?) Erdős e Rényi, i quali per primi modellizzarono la definizione di una rete usando criteri probabilistici. Nel corso dei 30 anni successivi è stato osservato che molte reti reali, a dispetto delle dimensioni, avessero un diametro molto piccolo, portando alla definizione del concetto di \emph{small-worlds} e nel 1987 al modello di Watts e Strogatz.
 %TODO mettere biblioref
 In entrambi i casi si parte da una configurazione iniziale di nodi per poi randomizzare i link tra essi. Per questo motivo la distribuzione del grado segue una Poissoniana, con una coda destra caratteristica di forma esponenziale; con un numero sufficiente di nodi e link, la distribuzione del grado si approssima a una gaussiana con un grado medio ben definito.
 
@@ -108,7 +104,7 @@ Successivamente si procede a riarrangiare in maniera random i link tra i nodi, c
 	\label{fig:ring}
 \end{figure}
 
-Con questo metodo, a seguito del *rewiring* si ha il rischio che il grafo non sia più connesso. Ponendo $n>1$ ciò può essere evitato, portando la probabilità di avere un grafo non connesso quasi a zero già con $n=2$.
+Con questo metodo, a seguito del \emph{rewiring} si ha il rischio che il grafo non sia più connesso. Ponendo $n>1$ ciò può essere evitato, portando la probabilità di avere un grafo non connesso quasi a zero già con $n=2$.
 Con $p \rightarrow 1$ il grafo diventa simile a quello di una rete di Erdős-Renyi:
 
 \begin{figure}[t!]
@@ -137,7 +133,7 @@ con $C(0) \sim 0.75$ per $N$ grande. Ricordando che per il modello di Erdős-Ren
 
 \begin{figure}[t!]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./Immagini/Par1/confrontoC}
+	\includegraphics[width=0.6\textwidth]{./Immagini/Par1/confrontoC}
 	\caption{Confronto tra i coefficienti di clustering dei due modelli, al variare del rispettivo parametro $p$.}
 	\label{fig:ring}
 \end{figure}
@@ -162,21 +158,24 @@ dove $m$ è il numero di link aggiunti per iterazione, ponendo quindi la condizi
 Ovviamente se il grado di un nodo è funzione di $t$, anche la P(k) lo sarà. Definendo $P(k_i(t)<k)$ la probabilità che un nodo $i$ abbia un grado minore di un certo valore $k$, la distribuzione del grado $P(k)$ può essere derivata ponendola uguale a $dP(k_i(t)<k)/dk$, ottenendo per $t\rightarrow \infty$:
 \[ P(k)\sim 2m^2 k^{-3}. \]
 
-\begin{figure}[t!]
-	\centering
-	\subfloat[Grafo random]
-	{\includegraphics[width=0.3\textwidth]{./Immagini/Par1/BigBarabasi}}
-	$\;$
-	\subfloat[Grafo small-world]
-	{\includegraphics[width=0.3\textwidth]{./Immagini/Par1/Wattsmodel}}
-	\caption{Esempio di grafi generato con il modello di Barabasi-Albert. Con $m=1$ \`e evidente la struttura frattale, ma essendo un grafo ad albero il clustering \`e nullo. }
-	\label{fig:}
-\end{figure}
+%TODO decomment
+% \begin{figure}[t!]
+% 	\centering
+% 	\includegraphics[width=0.9\textwidth]{./Immagini/Par1/Barabalbert1}
+% 	\caption{Esempio di grafo generato con il modello di Barabasi-Albert. Con $m=1$ \`e evidente la struttura frattale, ma essendo un grafo ad albero il clustering \`e nullo.}
+% 	\label{fig:barabalbero}
+% \end{figure}
 
 Il modello di Barabasi e Albert è un modello minimale, importantissimo perché il primo in grado di riprodurre un grafo che mostrasse un'invarianza di scala, ma che in alcuni aspetti mal si accorda con quelle reti reali con caratteristiche scale-free. Per cominciare la distribuzione del grado è una legge di potenza con esponente $3$,ma le reti scale-free solitamente hanno un esponente inferiore, seppur maggiore di $2$. Benché non sia possibile calcolare in modo analitico $\braket{l}$ e $C$ per una rete di Barabasi-Albert, da simulazioni numeriche è possibile ottenerne quantità caratteristiche. Il cammino medio risulta sottostimato rispetto alle reti reali e il coefficiente di clustering non è costante con l'aumentare di $N$ come per le reti reali ma diminuisce, anche se più lentamente di una rete random \footnote{Ovviamente il coefficiente di clustering dipende dal numero $m$ di link generati per ogni nuovo nodo. Con $m = 1$ il clustering \`e nullo dato che il grafo \`e un albero, mentre $C \neq 0$ per $m>1$ e cresce all'aumentare di $m$, mantenendosi comunque al di sotto dei valori di reti reali con parametri simili.}
 %TODO METTERE RIF BIBLIOGRAFI
 . Per questo motivo il modello iniziale è stato integrato e reso più complesso.  
-%TODO mettere immagini belle per m= 1 e m= 2-->
+
+\begin{figure}[t!]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./Immagini/Par1/compareSameN}
+	\caption{Confronto tra le distribuzioni del grado dei tre modelli esposti.}
+	\label{fig:barabalbero}
+\end{figure}
 
 
 \subsection{Percolazione} 
@@ -184,3 +183,6 @@ Cosa si intende per percolazione, teoria. Differenza punto di vista di percolazi
 
 \subsubsection{Soglia percolativa} 
 Vedere le due pubblicazioni di cohen e erez
+
+
+\clearpage

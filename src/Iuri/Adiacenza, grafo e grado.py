@@ -87,9 +87,14 @@ italydoitcleaner.drop(italydoitcleaner.columns[[0, 1, 3, 5, 10, 11, 12, 13]], ax
 #italydoitcleaner
 
 
+# In[5]:
+
+italydoitcleaner
+
+
 # ### Seleziono le antenne in Roma e faccio dei .csv appositi
 
-# In[56]:
+# In[11]:
 
 #inroma = pandas.DataFrame([[41.947416, 12.371001],
 #                            [41.899392, 12.397436],
@@ -116,30 +121,28 @@ italydoitcleaner['distanze'] = distanza
 criterioRaccordo = italydoitcleaner.distanze < raggiomedioEuclid
 romaCell = italydoitcleaner[criterioRaccordo]
 romaCell = romaCell.reset_index(drop=True)
-#romacellid
-romaCell.to_csv("../data/Roma_towers.csv")
+romaCell.to_csv("../../data/Roma_towers.csv", index= False)
 
 criterioTim = romaCell.net == 1
 criterioWind = romaCell.net == 88
 criterioVoda = romaCell.net == 10
 criterioTre = romaCell.net == 99
 
-
 timCell = romaCell[criterioTim]
 timCell = timCell.reset_index(drop=True)
-timCell.to_csv("../data/Tim_towers.csv")
+timCell.to_csv("../../data/Tim_towers.csv", index= False)
 
 windCell = romaCell[criterioWind]
 windCell = windCell.reset_index(drop=True)
-windCell.to_csv("../data/Wind_towers.csv")
+windCell.to_csv("../../data/Wind_towers.csv", index= False)
 
 vodaCell = romaCell[criterioVoda]
 vodaCell = vodaCell.reset_index(drop=True)
-vodaCell.to_csv("../data/Vodafone_towers.csv")
+vodaCell.to_csv("../../data/Vodafone_towers.csv", index= False)
 
 treCell = romaCell[criterioTre]
 treCell = treCell.reset_index(True)
-treCell.to_csv("../data/Tre_towers.csv")
+treCell.to_csv("../../data/Tre_towers.csv", index= False)
 
 
 # Domande su iterazione su panda dataframe e efficienza, un tizio dice che la funzione iterrows è molto poco efficiente e sarebbe molto meglio usare un numpy array. Forse esistono funzioni più efficienti. 

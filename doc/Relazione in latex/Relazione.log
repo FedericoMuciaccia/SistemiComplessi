@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.11.21)  9 MAR 2016 00:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.11.21)  9 MAR 2016 09:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1203,9 +1203,6 @@ LaTeX Warning: Label `fig:ring' multiply defined.
 
 LaTeX Warning: Label `fig:ring' multiply defined.
 
-
-LaTeX Warning: Label `fig:barabalbero' multiply defined.
-
 )
 \openout1 = `Relazione.aux'.
 
@@ -1379,8 +1376,8 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <17.28> not available
 (Font)              Font shape `T1/ptm/b/it' tried instead on input line 7.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 16.
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 26.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 14.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 24.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
@@ -1394,18 +1391,18 @@ pdf>
 (epstopdf)                    size: 561693 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/zoomring-e
 ps-converted-to.pdf ./Immagini/Par1/zoomring.eps>
-(epstopdf)             \includegraphics on input line 87.
+(epstopdf)             \includegraphics on input line 83.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Par1/zoomring-eps-converted-to.pdf, id=76, 951.555pt x 897.3525pt>
+<./Immagini/Par1/zoomring-eps-converted-to.pdf, id=83, 951.555pt x 897.3525pt>
 File: ./Immagini/Par1/zoomring-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Immagini/Par1/zoomring-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Par1/zoomring-eps-converted-to.pdf used on 
-input line 87.
+input line 83.
 (pdftex.def)             Requested size: 210.0pt x 198.03432pt.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 88.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 84.
 Package epstopdf Info: Source file: <./Immagini/Par1/ringnet.eps>
 (epstopdf)                    date: 2016-03-03 13:46:52
 (epstopdf)                    size: 22710 bytes
@@ -1415,18 +1412,18 @@ df>
 (epstopdf)                    size: 13320 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/ringnet-ep
 s-converted-to.pdf ./Immagini/Par1/ringnet.eps>
-(epstopdf)             \includegraphics on input line 97.
+(epstopdf)             \includegraphics on input line 93.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Par1/ringnet-eps-converted-to.pdf, id=77, 650.43pt x 650.43pt>
+<./Immagini/Par1/ringnet-eps-converted-to.pdf, id=84, 650.43pt x 650.43pt>
 File: ./Immagini/Par1/ringnet-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Immagini/Par1/ringnet-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Par1/ringnet-eps-converted-to.pdf used on i
-nput line 97.
+nput line 93.
 (pdftex.def)             Requested size: 167.99744pt x 167.99623pt.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 97.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 93.
 Package epstopdf Info: Source file: <./Immagini/Par1/smallworld.eps>
 (epstopdf)                    date: 2016-03-03 13:44:10
 (epstopdf)                    size: 22718 bytes
@@ -1436,15 +1433,15 @@ o.pdf>
 (epstopdf)                    size: 13331 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/smallworld
 -eps-converted-to.pdf ./Immagini/Par1/smallworld.eps>
-(epstopdf)             \includegraphics on input line 100.
+(epstopdf)             \includegraphics on input line 96.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Par1/smallworld-eps-converted-to.pdf, id=78, 650.43pt x 650.43pt>
+<./Immagini/Par1/smallworld-eps-converted-to.pdf, id=85, 650.43pt x 650.43pt>
 File: ./Immagini/Par1/smallworld-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Immagini/Par1/smallworld-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Par1/smallworld-eps-converted-to.pdf used o
-n input line 100.
+n input line 96.
 (pdftex.def)             Requested size: 167.99744pt x 167.99623pt.
 Package epstopdf Info: Source file: <./Immagini/Par1/random-smallworld.eps>
 (epstopdf)                    date: 2016-03-08 17:38:12
@@ -1455,16 +1452,16 @@ erted-to.pdf>
 (epstopdf)                    size: 16435 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/random-sma
 llworld-eps-converted-to.pdf ./Immagini/Par1/random-smallworld.eps>
-(epstopdf)             \includegraphics on input line 103.
+(epstopdf)             \includegraphics on input line 99.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Par1/random-smallworld-eps-converted-to.pdf, id=79, 650.43pt x 650.
+<./Immagini/Par1/random-smallworld-eps-converted-to.pdf, id=86, 650.43pt x 650.
 43pt>
 File: ./Immagini/Par1/random-smallworld-eps-converted-to.pdf Graphic file (type
  pdf)
  <use ./Immagini/Par1/random-smallworld-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Par1/random-smallworld-eps-converted-to.pdf
- used on input line 103.
+ used on input line 99.
 (pdftex.def)             Requested size: 167.99744pt x 167.99623pt.
 Package epstopdf Info: Source file: <./Immagini/Par1/totalrandomwatts.eps>
 (epstopdf)                    date: 2016-03-08 17:31:18
@@ -1475,23 +1472,23 @@ rted-to.pdf>
 (epstopdf)                    size: 16495 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/totalrando
 mwatts-eps-converted-to.pdf ./Immagini/Par1/totalrandomwatts.eps>
-(epstopdf)             \includegraphics on input line 106.
+(epstopdf)             \includegraphics on input line 102.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Par1/totalrandomwatts-eps-converted-to.pdf, id=80, 650.43pt x 650.4
+<./Immagini/Par1/totalrandomwatts-eps-converted-to.pdf, id=87, 650.43pt x 650.4
 3pt>
 File: ./Immagini/Par1/totalrandomwatts-eps-converted-to.pdf Graphic file (type 
 pdf)
  <use ./Immagini/Par1/totalrandomwatts-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Par1/totalrandomwatts-eps-converted-to.pdf 
-used on input line 106.
+used on input line 102.
 (pdftex.def)             Requested size: 167.99744pt x 167.99623pt.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 107.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 103.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 107.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 103.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 107.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 103.
 Package epstopdf Info: Source file: <./Immagini/Par1/Erdosmodel.eps>
 (epstopdf)                    date: 2016-03-08 17:56:20
 (epstopdf)                    size: 3350287 bytes
@@ -1501,15 +1498,15 @@ o.pdf>
 (epstopdf)                    size: 3610076 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/Erdosmodel
 -eps-converted-to.pdf ./Immagini/Par1/Erdosmodel.eps>
-(epstopdf)             \includegraphics on input line 117.
+(epstopdf)             \includegraphics on input line 113.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Par1/Erdosmodel-eps-converted-to.pdf, id=81, 889.3225pt x 953.5625p
+<./Immagini/Par1/Erdosmodel-eps-converted-to.pdf, id=88, 889.3225pt x 953.5625p
 t>
 File: ./Immagini/Par1/Erdosmodel-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Immagini/Par1/Erdosmodel-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Par1/Erdosmodel-eps-converted-to.pdf used o
-n input line 117.
+n input line 113.
 (pdftex.def)             Requested size: 126.00128pt x 135.09836pt.
 Package epstopdf Info: Source file: <./Immagini/Par1/Wattsmodel.eps>
 (epstopdf)                    date: 2016-03-08 17:56:20
@@ -1520,42 +1517,43 @@ o.pdf>
 (epstopdf)                    size: 3406077 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/Wattsmodel
 -eps-converted-to.pdf ./Immagini/Par1/Wattsmodel.eps>
-(epstopdf)             \includegraphics on input line 120.
+(epstopdf)             \includegraphics on input line 116.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Par1/Wattsmodel-eps-converted-to.pdf, id=82, 953.5625pt x 949.5475p
+<./Immagini/Par1/Wattsmodel-eps-converted-to.pdf, id=89, 953.5625pt x 949.5475p
 t>
 File: ./Immagini/Par1/Wattsmodel-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Immagini/Par1/Wattsmodel-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Par1/Wattsmodel-eps-converted-to.pdf used o
-n input line 120.
+n input line 116.
 (pdftex.def)             Requested size: 126.00128pt x 125.45946pt.
 Package epstopdf Info: Source file: <./Immagini/Par1/ComparGradeModel.eps>
-(epstopdf)                    date: 2016-03-08 17:57:32
-(epstopdf)                    size: 31301 bytes
+(epstopdf)                    date: 2016-03-09 00:27:20
+(epstopdf)                    size: 39627 bytes
 (epstopdf)             Output file: <./Immagini/Par1/ComparGradeModel-eps-conve
 rted-to.pdf>
-(epstopdf)                    date: 2016-03-08 18:17:18
-(epstopdf)                    size: 17167 bytes
+(epstopdf)                    date: 2016-03-09 09:40:59
+(epstopdf)                    size: 16636 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/ComparGrad
 eModel-eps-converted-to.pdf ./Immagini/Par1/ComparGradeModel.eps>
-(epstopdf)             \includegraphics on input line 123.
+(epstopdf)             \includegraphics on input line 119.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Par1/ComparGradeModel-eps-converted-to.pdf, id=83, 867.24pt x 650.4
-3pt>
+<./Immagini/Par1/ComparGradeModel-eps-converted-to.pdf, id=90, 710.655pt x 548.
+0475pt>
 File: ./Immagini/Par1/ComparGradeModel-eps-converted-to.pdf Graphic file (type 
 pdf)
  <use ./Immagini/Par1/ComparGradeModel-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Par1/ComparGradeModel-eps-converted-to.pdf 
-used on input line 123.
-(pdftex.def)             Requested size: 336.00128pt x 251.99931pt.
+used on input line 119.
+(pdftex.def)             Requested size: 336.00128pt x 259.12943pt.
  [6]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 132.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 126.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 132.
- [7 <./Immagini/Par1/zoomring-eps-converted-to.pdf>]
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 126.
+
+[7 <./Immagini/Par1/zoomring-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./Immagini/Par1/confrontoC.eps>
 (epstopdf)                    date: 2016-03-08 18:11:15
 (epstopdf)                    size: 8210 bytes
@@ -1565,29 +1563,22 @@ o.pdf>
 (epstopdf)                    size: 7135 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/confrontoC
 -eps-converted-to.pdf ./Immagini/Par1/confrontoC.eps>
-(epstopdf)             \includegraphics on input line 140.
+(epstopdf)             \includegraphics on input line 134.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Par1/confrontoC-eps-converted-to.pdf, id=485, 569.12625pt x 426.593
+<./Immagini/Par1/confrontoC-eps-converted-to.pdf, id=494, 569.12625pt x 426.593
 75pt>
 File: ./Immagini/Par1/confrontoC-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Immagini/Par1/confrontoC-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Par1/confrontoC-eps-converted-to.pdf used o
-n input line 140.
+n input line 134.
 (pdftex.def)             Requested size: 252.00256pt x 188.89302pt.
  [8 <./Immagini/Par1/ringnet-eps-converted-to.pdf> <./Immagini/Par1/smallworld-
 eps-converted-to.pdf> <./Immagini/Par1/random-smallworld-eps-converted-to.pdf> 
 <./Immagini/Par1/totalrandomwatts-eps-converted-to.pdf>] [9 <./Immagini/Par1/Er
 dosmodel-eps-converted-to.pdf> <./Immagini/Par1/Wattsmodel-eps-converted-to.pdf
-> <./Immagini/Par1/ComparGradeModel-eps-converted-to.pdf>]
-<./Immagini/Par1/Barabalbert1.pdf, id=592, 1003.75pt x 1003.75pt>
-File: ./Immagini/Par1/Barabalbert1.pdf Graphic file (type pdf)
-
-<use ./Immagini/Par1/Barabalbert1.pdf>
-Package pdftex.def Info: ./Immagini/Par1/Barabalbert1.pdf used on input line 16
-7.
-(pdftex.def)             Requested size: 377.99744pt x 377.99818pt.
- [10 <./Immagini/Par1/confrontoC-eps-converted-to.pdf>]
+> <./Immagini/Par1/ComparGradeModel-eps-converted-to.pdf>] [10 <./Immagini/Par1
+/confrontoC-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <./Immagini/Par1/compareSameN.eps>
 (epstopdf)                    date: 2016-03-08 21:14:14
 (epstopdf)                    size: 51299 bytes
@@ -1597,73 +1588,73 @@ Package epstopdf Info: Source file: <./Immagini/Par1/compareSameN.eps>
 (epstopdf)                    size: 19608 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Par1/compareSam
 eN-eps-converted-to.pdf ./Immagini/Par1/compareSameN.eps>
-(epstopdf)             \includegraphics on input line 178.
+(epstopdf)             \includegraphics on input line 167.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Par1/compareSameN-eps-converted-to.pdf, id=604, 934.49126pt x 548.0
+<./Immagini/Par1/compareSameN-eps-converted-to.pdf, id=586, 934.49126pt x 548.0
 475pt>
 File: ./Immagini/Par1/compareSameN-eps-converted-to.pdf Graphic file (type pdf)
 
  <use ./Immagini/Par1/compareSameN-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Par1/compareSameN-eps-converted-to.pdf used
- on input line 178.
+ on input line 167.
 (pdftex.def)             Requested size: 377.99744pt x 221.68205pt.
- [11 <./Immagini/Par1/Barabalbert1.pdf>] [12 <./Immagini/Par1/compareSameN-eps-
-converted-to.pdf>]) (./Paragrafi/Dati.tex) (./Paragrafi/Attack.tex) (./Paragraf
-i/Conclusioni.tex [13
+ [11 <./Immagini/Par1/compareSameN-eps-converted-to.pdf>]) (./Paragrafi/Dati.te
+x)
+(./Paragrafi/Attack.tex) (./Paragrafi/Conclusioni.tex [12
 
-]) (./MaterialeInizialeFinale/Bibliografia.tex)
+])
+(./MaterialeInizialeFinale/Bibliografia.tex)
+LaTeX Font Info:    Try loading font information for T1+fvm on input line 10.
 
-LaTeX Warning: Empty bibliography on input line 10.
+(/usr/share/texlive/texmf-dist/tex/latex/bera/t1fvm.fd
+File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
+)
+LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
+(Font)              scaled to size 10.79993pt on input line 10.
+ [13
 
+]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 98.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 98.
-(./Relazione.aux
-
-Package mparhack Warning: Marginpars may have changed.
-(mparhack)                Rerun to get them right.
-
-)
+ (./Relazione.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 98.
 Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 98.
-
-
-LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
 
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                Relazione
-(biblatex)                and rerun LaTeX afterwards.
+Package biblatex Warning: Please rerun LaTeX.
+(biblatex)                Page breaks have changed.
 
 Package logreq Info: Writing requests to 'Relazione.run.xml'.
 \openout1 = `Relazione.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 17925 strings out of 493085
- 279158 string characters out of 6136916
- 733517 words of memory out of 5000000
- 20951 multiletter control sequences out of 15000+600000
- 83914 words of font info for 134 fonts, out of 8000000 for 9000
+ 18112 strings out of 493085
+ 282333 string characters out of 6136916
+ 733645 words of memory out of 5000000
+ 21121 multiletter control sequences out of 15000+600000
+ 89750 words of font info for 138 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 44i,10n,67p,1205b,1203s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,10n,67p,1327b,1203s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/u
-tmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/urw/times/utmri8a.pfb>
-Output written on Relazione.pdf (13 pages, 17726557 bytes).
+type1/public/bera/fvmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symb
+ol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
+times/utmri8a.pfb>
+Output written on Relazione.pdf (13 pages, 7787119 bytes).
 PDF statistics:
- 91301 PDF objects out of 95282 (max. 8388607)
- 60204 compressed objects within 603 object streams
- 49 named destinations out of 1000 (max. 500000)
- 144 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 708 PDF objects out of 1000 (max. 8388607)
+ 236 compressed objects within 3 object streams
+ 60 named destinations out of 1000 (max. 500000)
+ 147 words of extra memory for PDF output out of 10000 (max. 10000000)
 

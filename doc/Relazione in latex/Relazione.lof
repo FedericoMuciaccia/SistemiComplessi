@@ -24,6 +24,4 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {4}{\ignorespaces Confronto tra i coefficienti di clustering dei due modelli, al variare del rispettivo parametro $p$.\relax }}{10}{figure.caption.9}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5}{\ignorespaces Esempio di grafo generato con il modello di Barabasi-Albert. Con $m=1$ \`e evidente la struttura frattale, ma essendo un grafo ad albero il clustering \`e nullo.\relax }}{11}{figure.caption.10}
-\defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6}{\ignorespaces Confronto tra le distribuzioni del grado dei tre modelli esposti.\relax }}{12}{figure.caption.11}
+\contentsline {figure}{\numberline {5}{\ignorespaces Confronto tra le distribuzioni del grado dei tre modelli esposti.\relax }}{11}{figure.caption.10}

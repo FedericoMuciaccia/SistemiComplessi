@@ -119,7 +119,7 @@ pyplot.show()
 # <codecell>
 
 #    if(modello == 'Erdos-Renyi'):
-grafoErdos = networkx.erdos_renyi_graph(10000, 0.0101)
+grafoErdos = networkx.erdos_renyi_graph(1000, 0.0201)
 gradoErdos = grafoErdos.degree().values()
 #adiacenzaErdos = networkx.to_numpy_matrix(grafoErdos)
 #adiacenzaErdos
@@ -136,7 +136,7 @@ gradoWatts = grafoWatts.degree().values()
 
 
 #    if(modello == 'Barabasi-Abert'):
-grafoBarabasi = networkx.barabasi_albert_graph(10000, 2)
+grafoBarabasi = networkx.barabasi_albert_graph(10000, 100)
 gradoBarabasi = grafoBarabasi.degree().values()
 #adiacenzaBarabasi = networkx.to_numpy_matrix(grafoBarabasi)
 #adiacenzaBarabasi
@@ -155,10 +155,10 @@ grafico = degreeDistributionLog(gradoErdos, 'Erdos-Renyi', '#699534')
 grafico = degreeDistributionLog(gradoWatts, 'Watts-Strogatz', '#3D5A92')
 grafico = degreeDistributionLog(gradoBarabasi, 'Barabasi-Albert', '#FD6266')
 #grafico = degreeDistributionLog(gradoBara, 'm=2', '#E47F2C')
-pyplot.ylim(0.9,10000)
-pyplot.xlim(1,300)
+pyplot.ylim(0.9,1100)
+pyplot.xlim(30,3000)
 pyplot.legend()
-pyplot.savefig('compareSameN.eps', format='eps', dpi=1000)
+pyplot.savefig('compareSameN.svg', format='svg', dpi=1000)
 
 # <codecell>
 
@@ -167,11 +167,11 @@ pyplot.savefig('compareSameN.eps', format='eps', dpi=1000)
 #pos = graph_tool.draw.radial_tree_layout(gToolGrafoWatts, gToolGrafoWatts.vertex(0))
 #gToolGrafoWatts = graph_tool.generation.circular_graph(80, 2)
 #pos = graph_tool.draw.sfdp_layout(gToolGrafoWatts, cooling_step=0.95)
-pos = graph_tool.draw.arf_layout(gToolGrafoWatts)
+#pos = graph_tool.draw.arf_layout(gToolGrafoWatts)
 #pos = graph_tool.draw.sfdp_layout(gToolGrafoWatts)
-graph_draw(gToolGrafoWatts, pos = pos, output_size=(1000, 1000),
-           vertex_color=[1,1,1,0], vertex_size=5, edge_pen_width=1.2,
-           vcmap=matplotlib.cm.gist_heat_r, output="Wattsmodel.eps")
+#graph_draw(gToolGrafoWatts, pos = pos, output_size=(1000, 1000),
+#           vertex_color=[1,1,1,0], vertex_size=5, edge_pen_width=1.2,
+#           vcmap=matplotlib.cm.gist_heat_r, output="Wattsmodel.eps")
 
 #grafo erdos
 pos = graph_tool.draw.arf_layout(gToolGrafoErdos)
@@ -205,7 +205,7 @@ graph_draw(gToolGrafoBarabasi, pos = pos, output_size=(1000, 1000),
 
 #initial = 0
 g = graph_tool.generation.price_network(10000, m=1, gamma = 1,
-                                              #seed_graph = gToolGrafoErdos,
+                                              seed_graph = gToolGrafoErdos,
                                               directed=False)
 pos = graph_tool.draw.sfdp_layout(g)
 graph_draw(g, pos = pos, output_size=(1000, 1000), 
@@ -269,23 +269,8 @@ gradoBarabasi = gradiFinal = pandas.DataFrame(in_hist[0], columns=['grado'])
 
 # <codecell>
 
-def modelAttack(modello, steps):
-    if(modello == 'Erdos-Renyi'):
-        grafoFinal = networkx.erdos_renyi_graph(1500, 0.05)
-        gradoFinal = grafoFinal.degree().values()
-        #print grado
-        grafico = degreeDistributionLog(gradoFinal, 'Erdos-Renyi', '#4d4d4d')
-    if(modello == 'Barabasi-Abert'):
-        grafoFinal = networkx.barabasi_albert_graph(1500, 40)
-        gradoFinal = grafoFinal.degree().values()
-        #print grado 
-        grafico = degreeDistributionLog(gradoFinal, 'Barabasi', '#ff3300')
-    if(modello == 'Watts-Strogatz'):
-        grafoFinal = networkx.watts_strogatz_graph(1500, 37, 1)
-        gradoFinal = grafoFinal.degree().values()
-        #print grado  
-        grafico = degreeDistributionLog(gradoFinal, 'Watts', '#47d147')
-    
+def modelAttack(grafoFinal, steps):
+    gradoFinal = grafoFinal.degree().values()
     graphSize = networkx.number_of_nodes(grafoFinal)
     passo = networkx.number_of_nodes(grafoFinal)/float(steps)
 
@@ -315,24 +300,8 @@ def modelAttack(modello, steps):
         diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append(networkx.number_of_nodes(giantCluster)/float(graphSize))
         
-def modelFailure(modello, steps):
-    if(modello == 'Erdos-Renyi'):
-        grafoFinal = networkx.erdos_renyi_graph(1500, 0.05)
-        gradoFinal = grafoFinal.degree().values()
-        #print grado
-        grafico = degreeDistributionLog(gradoFinal, 'Erdos-Renyi', '#4d4d4d')
-    if(modello == 'Barabasi-Abert'):
-        grafoFinal = networkx.barabasi_albert_graph(1500, 40)
-        gradoFinal = grafoFinal.degree().values()
-        #print grado 
-        grafico = degreeDistributionLog(gradoFinal, 'Barabasi', '#ff3300')
-    if(modello == 'Watts-Strogatz'):
-        grafoFinal = networkx.watts_strogatz_graph(1500, 37, 1)
-        gradoFinal = grafoFinal.degree().values()
-        #print grado  
-        grafico = degreeDistributionLog(gradoFinal, 'Watts', '#47d147')
-    
-
+def modelFailure(grafoFinal, steps):
+    gradoFinal = grafoFinal.degree().values()
     graphSize = networkx.number_of_nodes(grafoFinal)
     passo = networkx.number_of_nodes(grafoFinal)/float(steps)
 
