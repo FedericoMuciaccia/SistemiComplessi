@@ -40,6 +40,7 @@
 
 ## HTML
 [HTML color picker](http://www.w3schools.com/colors/colors_picker.asp)
+[HTML palette](http://paletton.com)
 [import](http://www.html5rocks.com/en/tutorials/webcomponents/imports/)
 
 ## pagina HTML della relazione
