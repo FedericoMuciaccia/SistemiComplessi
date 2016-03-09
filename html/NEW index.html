@@ -7,7 +7,6 @@
     <meta name="description" content="Analisi di rete per le antenne telefoniche di Roma: tesina per l'esame di Sistemi Complessi">
 
     <link rel="stylesheet" type="text/css" media="screen" href="NEW stylesheet.css">
-
     <title>Analisi di rete per le antenne telefoniche di Roma</title>
   </head>
 
@@ -59,24 +58,23 @@ Docente: Vittorio Loreto. Tutor: Antrea Capocci
 
 
 INIZIO PROVA LAYOUT
-
 <h2>Selezione dei dati</h2>
-
-<p>TODO scrivere cosa sono Mozilla Location Server ed OpenCellID</p>
 
 <p>Una volta scaricati i dati aggregati dalla pagina web <a href="https://location.services.mozilla.com/downloads">https://location.services.mozilla.com/downloads</a> si sono cominciate le operazioni di selezione dei dati.</p>
 
 <p>Il data sample riguarda tutti i continenti e risulta molto grosso (un file csv di circa 650 MB), per cui è necessario ridurlo il più possibile per poterlo maneggiare col nostro limitato quantitativo di RAM.</p>
 
-<p>Una prima grossolana ma efficiente scrematura riguarda i dati caratterizzati da un mobile county code non italiano, si è pertanto imposta la condizione
+<p>Una prima grossolana ma efficiente scrematura riguarda i dati caratterizzati da un mobile county code non italiano, si è pertanto imposta la condizione</p>
+
 <pre><code>
 mcc == 222
-</code></pre></p>
+</code></pre>
 
-<p>Successivamente vengono scartati i dati ritenuti inaffidabili, ovvero con soltanto una rivelazione da parte degli utenti
+<p>Successivamente vengono scartati i dati ritenuti inaffidabili, ovvero con soltanto una rivelazione da parte degli utenti</p>
+
 <pre><code>
-samples &gt; 1
-</code></pre></p>
+samples > 1
+</code></pre>
 
 <p>Adesso che il datasample si è ridotto molto possiamo effettuare delle operazioni computazionalmente un po' più pesanti: vogliamo eliminare tutte le rilevazioni al di fuori del Grande Raccordo Anulare, che per semplicità è stato schematizzato come una circonferenza di raggio 10 km con centro esattamente nol Colosseo.</p>
 
@@ -87,43 +85,53 @@ samples &gt; 1
 <li>Vincenty distance: la distanza geodesica su un ellissoide oblato. Tale distanza tiene in conto che la Terra non è una sfera perfetta ma è invece leggermente schiacciata ai poli. Delle due è quella più accurata, ma anche quella più difficile da calcolare numericamente.</li>
 </ul>
 
-<p>L'ulteriore condizione da soddisfare per i dati risulta dunque
+<p>L'ulteriore condizione da soddisfare per i dati risulta dunque</p>
+
 <pre><code>
-geodesicDistance(place) &lt;= raggioRaccordoAnulare
-</code></pre></p>
+geodesicDistance(place) <= raggioRaccordoAnulare
+</code></pre>
 
 <p>Si sono fatte differenti prove sia con <code>vincenty</code> (più lenta) che con <code>great_circle</code> (leggermente più veloce), ma i tempi di calcolo risultavano comunque spropositati. Pertanto abbiamo fatto una approssimazione: dato che la città di Roma sottende un angolo solido minuscolo rispetto alla totalità del pianeta, abbiamo ritenuto accettabile usare una distanza euclidea, ovviamente trasformando in metri le coordinate angolari di latitudine e longitudine con i relativi fattori di scala, dettati dal raggio terrestre.</p>
 
 <p>La distanza euclidea coinvolge solo quadrati è radici quadrate, per cui è molto più veloce delle altre due concorrenti. Il prezzo da pagare è una leggerissima imprecisione, del tutto trascurabile alle nostre scale.</p>
 
-<p>La funzione utilizzata è pertanto
+<p>La funzione utilizzata è pertanto</p>
+
 <pre><code>
 def euclideanDistace(x,y):
     return numpy.sqrt(numpy.square(x) + numpy.square(y))
 </code></pre>
-da notare il fatto che per il calcolo algebrico è stata utilizzata la libreria <code>numpy</code> invece che la libreria <code>math</code> builtin in Python, poiché è più veloce (è scritta in C) e supporta le operazioni direttamente su vettori di coordinate.</p>
+
+<p>da notare il fatto che per il calcolo algebrico è stata utilizzata la libreria <code>numpy</code> invece che la libreria <code>math</code> builtin in Python, poiché è più veloce (è scritta in C) e supporta le operazioni direttamente su vettori di coordinate.</p>
 
 <p>I dati sono stati importati in un dataframe tabulare usando la libreria <code>pandas</code>. Questo che ci ha permesso di effettuare facilmente tutte le query necessarie per il filtraggio dei dati.</p>
 
 <p>A questo punto abbiamo finalmente il nostro datasample della città di Roma: circa 7000 antenne in un file csv agevolmente maneggiabile di circa 1MB.</p>
 
-<p>TODO inserire scatterplot preliminare dei dati di Roma (notebook Fede)</p>
+<p><img src="../img/map/Roma_non_georeferenziata.svg"/></p>
 
-<p>Per visualizzare agevolmente i nostri dati serve una mappa georeferenziata, preferibilmente interattiva. A tal fine abbiamo usato la libreria <code>gmaps</code>, che dà semplice accesso alle mappe di Google Maps dando la possibilità di creare una heatmap.
-<pre><code>
-roma = pandas.read_csv("../data/Roma_towers.csv")
-coordinate = roma[['lat', 'lon']].values
-gmaps.heatmap(coordinate)
+<p>Per visualizzare agevolmente i nostri dati serve una mappa georeferenziata, preferibilmente interattiva. A tal fine per il notebook di IPython abbiamo usato la libreria <code>gmaps</code>, che dà semplice accesso inline alle mappe di Google Maps dando la possibilità di creare una heatmap, mentre per l'HTML di questa presentazione abbiamo usato le analoghe funzioni della libreria <code>gmplot</code>.
 </code></pre>
-(per scrivere questo paio di linee di codice c'è voluto un'intero pomeriggio!)</p>
+roma = pandas.read<em>csv("../data/Roma</em>towers.csv")
+coordinate = roma[['lat', 'lon']].values
+heatmap = gmaps.heatmap(coordinate)
+gmaps.display(heatmap)
+</code></pre>
+</code></pre>
+colosseo = (41.890183, 12.492369)
+mappa = gmplot.GoogleMapPlotter(41.890183, 12.492369, 12)
+mappa.heatmap(roma.lat.values,roma.lon.values)
+mappa.draw("../doc/mappa.html")
+</code></pre>
+(per scrivere queste poche linee di codice c'è voluto un'intero pomeriggio!)</p>
 
-<p>TODO mettere heatmap interattiva in HTML</p>
+<p>TODO mettere mappa interattiva in HTML</p>
+
+<div id="map_canvas" style="width: 100%; height: 100%;"></div>
 
 <p>Dalla mappa si capisce bene quanto sia fitta le rete di antenne Romana.</p>
 
-<p>TODO creare il notebook ordinato "data selection"</p>
-
-FINE PROVA LAYOUT
+<p>TODO creare il notebook ordinato "data selection"</p>FINE PROVA LAYOUT
 
 
 

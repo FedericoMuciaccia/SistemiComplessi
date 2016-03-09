@@ -1,6 +1,8 @@
 
 TODO sistemare tutto bene
 
+TODO scrivere cosa sono Mozilla Location Server ed OpenCellID
+
 ## importazione del dataframe dai dati di Mozilla
 
 TODO mettere il logo di Mozilla Stumbler e MLS (Mozilla Location Service)

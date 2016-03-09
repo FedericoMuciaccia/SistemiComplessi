@@ -128,25 +128,6 @@ colosseo = geopy.point.Point(41.890183, 12.492369)
 # plt.show()
 
 
-# In[11]:
-
-import gmplot
-from gmplot import GoogleMapPlotter
-
-# gmap = gmplot.from_geocode("San Francisco")
-
-gmap = gmplot.GoogleMapPlotter(37.428, -122.145, 16)
-
-#gmap.plot(latitudes, longitudes, 'cornflowerblue', edge_width=10)
-#gmap.plot((41.890183, 41.891183), (12.492369, 12.493369), 'cornflowerblue', edge_width=10)
-#gmap.scatter(more_lats, more_lngs, '#3B0B39', size=40, marker=False)
-#gmap.scatter(marker_lats, marker_lngs, 'k', marker=True)
-#gmap.heatmap(heat_lats, heat_lngs)
-
-# gmap.draw("mymap.html")
-print a
-
-
 # In[12]:
 
 copertura = dataframe[["range"]]
