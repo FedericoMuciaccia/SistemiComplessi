@@ -163,7 +163,7 @@ colori = ['#4d4d4d','#004184','#ff3300','#ff8000','#018ECC']
 gestore = ["Tim", "Vodafone", "Wind", "Tre"]
 #gestore = ["Roma"]
 
-#diametro = []
+diametro = []
 relSizeGC = []
 aziendaFinal = []
 ascisse = []

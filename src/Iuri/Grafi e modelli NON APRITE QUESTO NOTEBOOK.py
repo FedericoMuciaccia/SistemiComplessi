@@ -48,19 +48,6 @@ graph_draw(grafo, vertex_text=grafo.vertex_index, vertex_font_size=18,
 
 # <codecell>
 
-adiacenzaRoma = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Roma.csv",delimiter=',',dtype='int')
-adiacenzaTim = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tim.csv",delimiter=',',dtype='int')
-adiacenzaVoda = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Vodafone.csv",delimiter=',',dtype='int')
-adiacenzaWind = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Wind.csv",delimiter=',',dtype='int')
-adiacenzaTre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
-
-# <codecell>
-
-graph_draw(g, vertex_text=g.vertex_index, vertex_font_size=18,
-           output_size=(800, 800), output="two-nodes.png")
-
-# <codecell>
-
 g = Graph(directed=False)
 %time conversione(g, adiacenzaTre)
 pos = graph_tool.draw.sfdp_layout(g)

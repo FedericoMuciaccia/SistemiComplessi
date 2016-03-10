@@ -3,7 +3,7 @@
 
 # ### Importo tutte le librerie necessarie
 
-# In[2]:
+# In[3]:
 
 import geopy
 from geopy import distance
@@ -359,57 +359,22 @@ pyplot.show()
 
 # # Topologia
 
-# In[3]:
+# In[5]:
 
-adiacenzaRoma = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Roma.csv",delimiter=',',dtype='int')
-adiacenzaTim = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tim.csv",delimiter=',',dtype='int')
-adiacenzaVoda = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Vodafone.csv",delimiter=',',dtype='int')
-adiacenzaWind = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Wind.csv",delimiter=',',dtype='int')
-adiacenzaTre = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_Tre.csv",delimiter=',',dtype='int')
+gestore = ["Tim", "Vodafone", "Wind", "Tre"]
 
-
-# In[18]:
-
-def topologyNetx(adiacenza):
+def topologyNetx(gestore):
+    adiacenza = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(gestore),delimiter=',',dtype='int') 
     grafo = networkx.Graph(adiacenza)
-    c = get_ipython().magic(u'time networkx.average_clustering(grafo)')
-    d = get_ipython().magic(u'time networkx.diameter(grafo)')
-    l = get_ipython().magic(u'time networkx.average_shortest_path_length(grafo)')
+    c = networkx.average_clustering(grafo)
+    d = networkx.diameter(grafo)
+    l = networkx.average_shortest_path_length(grafo)
     return c, d, l
 
-print "TIM"
-topoTim = topologyNetx(adiacenzaTim)
-print topoTim, "\n"
-
-print "VODA"
-topoVoda = topologyNetx(adiacenzaVoda)
-print topoVoda, "\n"
-
-print "WIND"
-topoWind = topologyNetx(adiacenzaWind)
-print topoWind, "\n"
-
-print "TRE"
-topoTre = topologyNetx(adiacenzaTre)
-print topoTre, "\n"
-
-print "ROMA"
-topoRoma = topologyNetx(adiacenzaRoma)
-print topoRoma
-
-
-# In[ ]:
-
-def conversione(grafo, adiacenza):
-    grafo.add_vertex(len(adiacenza))
-    num_vertices = adiacenza.shape[0]
-    for i in range(num_vertices - 1):
-        for j in range(i + 1, num_vertices):
-            if adiacenza[i,j] != 0:
-                e = grafo.add_edge(i, j)   
-
-def topologyGtool:
-
+for compagnia in gestore:
+    print compagnia
+    topo = get_ipython().magic(u'time topologyNetx(compagnia)')
+    print topo, "\n"
 
 
 # NB. num antenne  
