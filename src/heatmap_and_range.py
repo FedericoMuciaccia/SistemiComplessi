@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[53]:
+# In[1]:
 
 import numpy
 import pandas
@@ -21,13 +21,13 @@ import gmaps
 # invece che uno scatterplot con dei raggi, la libreria ci consente solo di fare una heatmap (eventualmente pesata)
 # 
 
-# In[54]:
+# In[2]:
 
 roma = pandas.read_csv("../data/Roma_towers.csv")
 coordinate = roma[['lat', 'lon']].values
 
 
-# In[22]:
+# In[3]:
 
 heatmap = gmaps.heatmap(coordinate)
 gmaps.display(heatmap)
@@ -35,12 +35,12 @@ gmaps.display(heatmap)
 # TODO scrivere che dietro queste due semplici linee ci sta un pomeriggio intero di smadonnamenti
 
 
-# In[25]:
+# In[4]:
 
 colosseo = (41.890183, 12.492369)
 
 
-# In[61]:
+# In[5]:
 
 import gmplot
 from gmplot import GoogleMapPlotter
@@ -65,7 +65,7 @@ mappa = gmplot.GoogleMapPlotter(41.890183, 12.492369, 12)
 
 mappa.heatmap(roma.lat.values,roma.lon.values)
 
-mappa.draw("../doc/mappa.html")
+mappa.draw("../html/heatmap.html")
 #print a
 
 
@@ -73,7 +73,8 @@ mappa.draw("../doc/mappa.html")
 # 
 # Sembrano esserci dei problemi con la posizione delle antenne: ci sono antenne sul tevere, su ponte Sisto, dentro il parchetto di Castel Sant'Angelo, in mezzo al pratone della Sapienza, in cima al dipartimento di Fisica...
 # 
-# Inoltre sembra esserci una strana clusterizzazione lungo le vie di traffico principali. Questo è ragionevole nell'ottica di garantire la copertura in una città con grossi flussi turistici come Roma, ma probabilmente non a tal punto da rendere plausibile la presenza di 7 antenne attorno a piazza Panteon. Probabilmente sono artefatti di riostruzione.
+# 
+# Inoltre sembra esserci una strana clusterizzazione lungo le vie di traffico principali. Questo è ragionevole nell'ottica di garantire la copertura in una città con grossi flussi turistici come Roma, ma probabilmente non a tal punto da rendere plausibile la presenza di 7 antenne attorno a piazza Panteon. Ci sono anche coppie di antenne isolate che sembrano distare tra loro pochi metri. Probabilmente sono artefatti di ricostruzione.
 # 
 # Probabilmente l'algoitmo di ricostruzione di Mozilla ha diversi problemi. Se questa è la situazione delle antenne non oso pensare alla situazione dei router wifi.
 # 
@@ -88,7 +89,7 @@ mappa.draw("../doc/mappa.html")
 # dato che ci servirà fare un grafico con scale logaritmiche teniamo solo i dati con
 # > range =! 0
 
-# In[3]:
+# In[6]:
 
 
 # condizioni di filtro
@@ -105,7 +106,7 @@ raggi = romaFiltrato.range
 print max(raggi)
 
 
-# In[12]:
+# In[7]:
 
 
 # logaritmic (base 2) binning in log-log (base 10) plots of integer histograms
@@ -220,7 +221,7 @@ def logBinnedHist(histogramResults):
     return x, y
 
 
-# In[13]:
+# In[8]:
 
 
 # creazione di un istogramma log-log per la distribuzione del raggio di copertura
@@ -265,7 +266,7 @@ matplotlib.pyplot.step(xLog2, yLog2, where='post', color='#ff3300', linewidth=2,
 # matplotlib.pyplot.plot(xLog2, yLog2)
 
 # linea verticale ad indicare il massimo grado
-pyplot.axvline(x=max(raggi), color='#808080', linestyle='dotted', label='max range (20341m)')
+pyplot.axvline(x=max(raggi), color='#808080', linestyle='dotted', label='max range (41832m)')
 
 # legenda e salvataggio
 pyplot.legend(loc='lower left', frameon=False)
@@ -275,7 +276,7 @@ pyplot.savefig('../img/range/infinite_log_binning.svg', format='svg', dpi=600, t
 
 # ### Frequency-rank
 
-# In[15]:
+# In[9]:
 
 # istogramma sugli interi
 unique, counts = numpy.unique(raggi.values, return_counts=True)
@@ -284,7 +285,7 @@ rank = numpy.arange(1,len(unique)+1)
 frequency = numpy.array(sorted(counts, reverse=True))
 
 
-# In[16]:
+# In[10]:
 
 pyplot.figure(figsize=(20,10))
 pyplot.title('Distribuzione del raggio di copertura')
@@ -309,7 +310,7 @@ pyplot.savefig('../img/range/range_distribution.svg', format='svg', dpi=600, tra
 # 
 # the cumulative distribution function cdf(x) is the probability that a real-valued random variable X will take a value less than or equal to x
 
-# In[18]:
+# In[11]:
 
 conteggi, binEdges = numpy.histogram(raggi.values,
                                 bins=max(raggi)-min(raggi))
@@ -318,7 +319,7 @@ valoriRaggi = numpy.delete(binEdges, -1)
 N = len(raggi.values)
 
 
-# In[21]:
+# In[12]:
 
 
 pyplot.figure(figsize=(12,10))
@@ -339,7 +340,7 @@ pyplot.legend(loc='lower left', frameon=False)
 pyplot.savefig('../img/range/range_cumulated_distribution.svg', format='svg', dpi=600, transparent=True)
 
 
-# In[ ]:
+# In[13]:
 
 # TODO fare fit a mano e controllare le relazioni tra i vari esponenti
 

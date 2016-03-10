@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[20]:
+# In[37]:
 
 import pandas
 
@@ -12,32 +12,31 @@ get_ipython().magic(u'matplotlib inline')
 
 # ## Esempio di dati tabulati
 
-# In[ ]:
+# In[38]:
 
 # esempio di tabella da inserire in HTML nella relazione
 
 
-# In[13]:
+# In[39]:
 
-dataframe = pandas.read_csv("../data/cell_towers_diff-2016012100.csv")
-troncato = dataframe[0:10]
-troncato
-
-
-# In[17]:
-
-with open('../doc/dataframe_troncato.html', 'w') as tabella:
-    tabella.write(troncato.to_html(index=False))
+esempio = pandas.read_csv("../data/cell_towers_diff-2016012100.csv")
+esempio[0:10]
 
 
-# In[ ]:
+# In[40]:
 
-
+with open('../doc/diff_troncato.html', 'w') as tabella:
+    tabella.write(esempio[0:10].to_html(index=False))
 
 
 # In[ ]:
 
-TODO svuotare il notebook Fede e mettere qua la roba del data selection
+
+
+
+# In[41]:
+
+# TODO svuotare il notebook Fede e mettere qua la roba del data selection
 
 
 # In[ ]:
@@ -52,7 +51,7 @@ TODO svuotare il notebook Fede e mettere qua la roba del data selection
 
 # # Scatterplot preliminare non georeferenziato
 
-# In[49]:
+# In[43]:
 
 roma = pandas.read_csv("../data/Roma_towers.csv")
 
@@ -64,6 +63,8 @@ roma.plot(kind='scatter',
           label='Roma towers',
           #xlim=(12.34, 12.64),
           #ylim=(41.74,42.04),
+          xlim=(12.30, 12.70),
+          ylim=(41.75,42.05),
           figsize=(10,10))
 
 # pyplot.show()
@@ -84,9 +85,20 @@ pyplot.legend(loc='best', frameon=False)
 pyplot.savefig('../img/map/Roma_non_georeferenziata.svg', format='svg', dpi=600, transparent=True)
 
 
-# In[ ]:
+# In[44]:
+
+roma[0:10]
 
 
+# In[45]:
+
+with open('../doc/roma_troncato.html', 'w') as tabella:
+    tabella.write(roma[0:10].to_html(index=False))
+
+
+# In[36]:
+
+# TODO i file html vanno puliti un po' a mano e va aggiunto il riferimento al foglio di stile CSS appropriato per le tabelle
 
 
 # In[ ]:
