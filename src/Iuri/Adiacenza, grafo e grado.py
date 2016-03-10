@@ -377,6 +377,16 @@ for compagnia in gestore:
     print topo, "\n"
 
 
+# In[ ]:
+
+for compagnia in gestore:
+    print compagnia
+    adiacenza = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia),delimiter=',',dtype='int') 
+    grafo = networkx.Graph(adiacenza)
+    graphSize = networkx.number_of_nodes(grafoFinal)
+    print topo, "\n"
+
+
 # NB. num antenne  
 #    * TIM - 1550  
 #    * Vodafone - 1531  

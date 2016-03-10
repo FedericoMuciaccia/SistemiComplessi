@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[6]:
 
 import geopy
 from geopy import distance #TODO BUGGONE
@@ -17,7 +17,7 @@ get_ipython().magic(u'matplotlib inline')
 
 # # Simulazione attacco, andamento D e GC in funzione dei nodi rimossi
 
-# In[2]:
+# In[7]:
 
 #Funzioni step-by-step
 def attacco(compagnia):
@@ -81,7 +81,7 @@ def failure(compagnia):
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
 
 
-# In[3]:
+# In[8]:
 
 #Funzioni percentuali
 def attaccoPercent(compagnia, steps):
@@ -151,7 +151,7 @@ def failurePercent(compagnia, steps):
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
 
 
-# In[4]:
+# In[9]:
 
 colori = ['#004184','#ff3300','#ff8000','#018ECC','#4d4d4d']
 #gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
@@ -180,7 +180,7 @@ datiFinal.to_csv("/home/protoss/Documenti/SistemiComplessi/data/Iuri/AttackDataF
 #datiFinal.head()
 
 
-# In[21]:
+# In[5]:
 
 #Failure
 diametro = []
@@ -203,7 +203,7 @@ datiFinal.to_csv("/home/protoss/Documenti/SistemiComplessi/data/Iuri/FailureData
 
 # ## Faccio i grafici
 
-# In[5]:
+# In[19]:
 
 #Attack
 import seaborn
@@ -216,20 +216,23 @@ seaborn.set_style("ticks")
 
 #diametro
 seaborn.lmplot('percent', 'diameter', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
-           hue='provider', palette = colori,
-           scatter_kws={"marker": "D", "s": 100})
+               size = 9, aspect = 1.3333,
+               legend = False,
+               hue='provider', palette = colori,
+               scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Attacco: diametro')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0, 80)
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/AttackD_Final', format='eps', dpi=1000)
+pyplot.legend()
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/AttackD_Final', format='svg', dpi=1000)
 #pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackD_Final', format='eps', dpi=1000)
 
 #giant cluster
 seaborn.lmplot('percent', 'GCsize', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
+           size = 9, aspect = 1.3333,
+           legend = False,
            hue='provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Attacco: dimensioni relative del GC')
@@ -237,11 +240,12 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/AttackGC_Final', format='eps', dpi=1000)
+pyplot.legend()
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/AttackGC_Final', format='svg', dpi=1000)
 #pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackGC_Final', format='eps', dpi=1000)
 
 
-# In[10]:
+# In[20]:
 
 #Failure
 import seaborn
@@ -253,7 +257,8 @@ seaborn.set_style("ticks")
 
 #diametro
 seaborn.lmplot('percent', 'diameter', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
+           size = 9, aspect = 1.3333,
+           legend = False,
            hue='provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Random failure: diametro')
@@ -261,11 +266,13 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0, 20)
-pyplot.savefig('../../img/iuri/FailureD_Final', format='eps', dpi=1000)
+pyplot.legend()
+pyplot.savefig('../../img/iuri/FailureD_Final', format='svg', dpi=1000)
 
 #giant cluster
 seaborn.lmplot('percent', 'GCsize', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
+           size = 9, aspect = 1.3333,
+           legend = False,
            hue='provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Random failure: dimensioni relative del GC')
@@ -273,7 +280,8 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
-pyplot.savefig('../../img/iuri/FailureGC_Final', format='eps', dpi=1000)
+pyplot.legend()
+pyplot.savefig('../../img/iuri/FailureGC_Final', format='svg', dpi=1000)
 
 
 # # CALCOLO DEL DIAMETRO DI RETE ROMA IMPOSSIBILE, ANDAMENTO ESPONENZIALE CON L'AUMENTARE DEI NODI

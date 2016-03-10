@@ -59,25 +59,6 @@ def clustering(grafo):
     array = numpy.array(cluster.a)
     return numpy.average(array)
 
-# <codecell>
-
-def gradonodo(identificativo):
-        vertice = grafo.vertex(identificativo)
-        return vertice.out_degree()
-indice = numpy.arange(grafo.num_vertices())
-listagradi = map(gradonodo, indice)
-
-# <codecell>
-
-def kquadromedio(listadeg):
-    sommatoriaquadra = 0.0
-    for grado in listadeg:
-        sommatoriaquadra = sommatoriaquadra + grado**2    
-    return sommatoriaquadra/len(listadeg)
-
-criterion = kquadromedio(listadeg)/averageGrado(grafo)
-%time kquadromedio(listagradi)
-
 # <markdowncell>
 
 # ### Cicli input/output gafi
@@ -165,7 +146,7 @@ def attackPercent(compagnia, steps):
         listaGradi = map(gradonodo, indice)
         
         gradomedio.append(kmedio(listaGradi))
-        criterion = kquadromedio(listaGradi)/averageGrado(grafoFinal)
+        criterion = kquadromedio(listaGradi)/kmedio(listaGradi)
         criterio.append(criterion)
 
 #PERCENT FAILURE!!
@@ -230,13 +211,13 @@ def failurePercent(compagnia, steps):
         listaGradi = map(gradonodo, indice)
         
         gradomedio.append(kmedio(listaGradi))
-        criterion = kquadromedio(listaGradi)/averageGrado(grafoFinal)
+        criterion = kquadromedio(listaGradi)/kmedio(listaGradi)
         criterio.append(criterion)
 
 # <codecell>
 
-#gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
-gestore = ["Tim", "Vodafone", "Wind", "Tre"]
+gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
+#gestore = ["Tim", "Vodafone", "Wind", "Tre"]
 #compagnia = "Tre"
 
 indice = []
@@ -271,8 +252,8 @@ datiFinal.head()
 
 # <codecell>
 
-#gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
-gestore = ["Tim", "Vodafone", "Wind", "Tre"]
+gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
+#gestore = ["Tim", "Vodafone", "Wind", "Tre"]
 #gestore = "Roma"
 diametro = []
 cammino = []
@@ -315,7 +296,8 @@ seaborn.set_style("ticks")
 
 #diametro
 seaborn.lmplot('percent', 'diameter', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
+           size = 9, aspect = 1.3333,
+           legend = False,
            hue='Provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Attack: diametro')
@@ -323,11 +305,13 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0, 80)
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackD_Final', format='eps', dpi=1000)
+pyplot.legend()
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackD_Final', format='svg', dpi=1000)
 
 #giant cluster
 seaborn.lmplot('percent', 'GCsize', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
+           size = 9, aspect = 1.3333,
+           legend = False,
            hue='Provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Attack: dimensioni relative del GC')
@@ -335,11 +319,13 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackGC_Final', format='eps', dpi=1000)
+pyplot.legend()
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackGC_Final', format='svg', dpi=1000)
 
 #average length
 seaborn.lmplot('percent', 'average path length', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
+           size = 9, aspect = 1.3333,
+           legend = False,
            hue='Provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Attack: average path length')
@@ -347,11 +333,13 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,14)
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackl_Final', format='eps', dpi=1000)
+pyplot.legend()
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackl_Final', format='svg', dpi=1000)
 
 #clustering
 seaborn.lmplot('percent', 'clustering', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
+           size = 9, aspect = 1.3333,
+           legend = False,
            hue='Provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Attack: coefficiente clustering')
@@ -359,11 +347,13 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackC_Final', format='eps', dpi=1000)
+pyplot.legend()
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackC_Final', format='svg', dpi=1000)
 
 #gradomedio
 seaborn.lmplot('percent', 'average degree', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
+           size = 9, aspect = 1.3333,
+           legend = False,
            hue='Provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Attack: average degree')
@@ -371,11 +361,13 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,100)
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackk_Final', format='eps', dpi=1000)
+pyplot.legend()
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackk_Final', format='svg', dpi=1000)
 
 #CRITERION
 seaborn.lmplot('percent', 'soglia percolativa', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
+           size = 9, aspect = 1.3333,
+           legend = False,
            hue='Provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Attack: criterion')
@@ -383,7 +375,8 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,10)
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackc_Final', format='eps', dpi=1000)
+pyplot.legend()
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackc_Final', format='svg', dpi=1000)
 
 # <codecell>
 
@@ -397,7 +390,8 @@ seaborn.set_style("ticks")
 
 #diametro
 seaborn.lmplot('percent', 'diameter', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
+           size = 9, aspect = 1.3333,
+           legend = False,
            hue='Provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Random failure: diametro')
@@ -405,11 +399,13 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0, 20)
+pyplot.legend()
 pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailureD_Final', format='eps', dpi=1000)
 
 #giant cluster
 seaborn.lmplot('percent', 'GCsize', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
+           size = 9, aspect = 1.3333,
+           legend = False,
            hue='Provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Random failure: dimensioni relative del GC')
@@ -417,11 +413,13 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
+pyplot.legend()
 pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailureGC_Final', format='eps', dpi=1000)
 
 #average length
 seaborn.lmplot('percent', 'average path length', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
+           size = 9, aspect = 1.3333,
+           legend = False,
            hue='Provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Random failure: average path length')
@@ -429,11 +427,13 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,4)
+pyplot.legend()
 pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailurel_Final', format='eps', dpi=1000)
 
 #clustering
 seaborn.lmplot('percent', 'clustering', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
+           size = 9, aspect = 1.3333,
+           legend = False,
            hue='Provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Random failure: coefficiente clustering')
@@ -441,11 +441,13 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
+pyplot.legend()
 pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailureC_Final', format='eps', dpi=1000)
 
 #gradomedio
 seaborn.lmplot('percent', 'average degree', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
+           size = 9, aspect = 1.3333,
+           legend = False,
            hue='Provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Random failure: average degree')
@@ -453,18 +455,21 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,100)
+pyplot.legend()
 pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailurek_Final', format='eps', dpi=1000)
 
 #CRITERION
 seaborn.lmplot('percent', 'soglia percolativa', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
-           hue='Provider', palette = colori,
-           scatter_kws={"marker": "D", "s": 100})
+                size = 9, aspect = 1.3333,
+                legend = False,
+                hue='Provider', palette = colori,
+                scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Random failure: criterion')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,10)
+pyplot.legend()
 pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailurec_Final', format='eps', dpi=1000)
 
 # <codecell>
