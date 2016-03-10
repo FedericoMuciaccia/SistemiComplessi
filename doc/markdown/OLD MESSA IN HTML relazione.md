@@ -66,6 +66,8 @@ C'è un solo grande problema: i dati sono chiusi.
 
 Mozilla è da sempre impegnata per lo svilutto di tecnologie web aperte e standardizzate. Avendo riconosciuta la centralità della geolocalizzazione e la crescita esponenziale di siti ed applicazioni location-aware, ha deciso di ricalcare le orme di Google e fondare il suo servizio di geolocalizzazione usando WiFi ed antenne cellulari: [Mozilla Location Service](https://location.services.mozilla.com/).
 
+<iframe src="../html/MLS_header.html"></iframe>
+
 La mappatura viene fatta dagli utenti su base puramente volontaria, utilizzando l'apposita applicazione [Mozilla Stumbler](https://play.google.com/store/apps/details?id=org.mozilla.mozstumbler)
 
 ![Mozilla Stumbler](https://location.services.mozilla.com/static/images/mozstumbler.png)
@@ -74,7 +76,9 @@ Il progetto è ormai maturo e, come si può osservare dalla seguente mappa, la c
 
 TODO mettere bottone
 
-[Mozilla Location Service wolrd coverage](../html/MLS_map.html)
+<!-- [Mozilla Location Service wolrd coverage](../html/MLS_map.html) -->
+Mozilla Location Service wolrd coverage
+<iframe src="../html/MLS_map.html"></iframe>
 
 Mozilla Location Service funziona sia con le antenne cellulari che con i WiFi, soltanto che attulamente i dati della mappa WiFi (mostrati approssimati nella mappa precedente) non possono essere resi pubblici per questioni relative alle norme sulla privacy vigenti sia negli Stati Uniti sia in altre nazioni.
 
@@ -157,7 +161,9 @@ I dati sono stati importati in un dataframe tabulare usando la libreria `pandas`
 
 TODO fare una specie di bottone
 
-[Esempio del dataframe da noi utilizzato](../html/dataframe_example_Roma.html)
+<!-- [Esempio del dataframe da noi utilizzato](../html/dataframe_example_Roma.html) -->
+Esempio del dataframe da noi utilizzato
+<iframe src="../html/dataframe_example_Roma.html"></iframe>
 
 A questo punto abbiamo finalmente il nostro datasample della città di Roma: circa 7000 antenne in un file csv agevolmente maneggiabile di circa 1MB.
 
@@ -180,7 +186,9 @@ mappa.draw("../doc/mappa.html")
 
 TODO fare una specie di bottone
 
-[Heatmap delle antenne telefoniche di Roma](../html/heatmap.html)
+<!-- [Heatmap delle antenne telefoniche di Roma](../html/heatmap.html) -->
+Heatmap delle antenne telefoniche di Roma
+<iframe src="../html/heatmap.html"></iframe>
 
 Dalla mappa si capisce bene quanto sia fitta le rete di antenne Romana.
 
