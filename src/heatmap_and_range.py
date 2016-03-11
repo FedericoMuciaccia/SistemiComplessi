@@ -47,7 +47,7 @@ from gmplot import GoogleMapPlotter
 
 # gmap = gmplot.from_geocode("San Francisco")
 
-mappa = gmplot.GoogleMapPlotter(41.890183, 12.492369, 12)
+mappa = gmplot.GoogleMapPlotter(41.890183, 12.492369, 11)
 
 #gmap.plot(latitudes, longitudes, 'cornflowerblue', edge_width=10)
 #gmap.plot((41.890183, 41.891183), (12.492369, 12.493369), 'cornflowerblue', edge_width=10)
@@ -242,7 +242,7 @@ def logBinnedHist(histogramResults):
 
 # impostazioni plot complessivo
 # pyplot.figure(figsize=(20,8)) # dimensioni in pollici
-pyplot.figure(figsize=(15,15))
+pyplot.figure(figsize=(10,10))
 matplotlib.pyplot.xlim(10**0,10**5)
 matplotlib.pyplot.ylim(10**-3,10**2)
 pyplot.title('Distribuzione del raggio di copertura')
