@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[6]:
 
 import geopy
 from geopy import distance #TODO BUGGONE
@@ -79,8 +79,6 @@ def failure(compagnia):
         graphSize = networkx.number_of_nodes(grafoFinal)
 #        diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
-        
-colori = ['#4d4d4d','#004184','#ff3300','#ff8000','#018ECC']
 
 
 # In[8]:
@@ -116,7 +114,7 @@ def attaccoPercent(compagnia, steps):
         aziendaFinal.append(compagnia)
 
         graphSize = networkx.number_of_nodes(grafoFinal)
-#        diametro.append(networkx.diameter(giantCluster, e=None))
+        diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
 
 
@@ -151,45 +149,40 @@ def failurePercent(compagnia, steps):
         graphSize = networkx.number_of_nodes(grafoFinal)
         diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
-        
-colori = ['#4d4d4d','#004184','#ff3300','#ff8000','#018ECC']
 
 
-# In[4]:
+# In[9]:
 
-#Attacco
-
+colori = ['#004184','#ff3300','#ff8000','#018ECC','#4d4d4d']
 #gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
 gestore = ["Tim", "Vodafone", "Wind", "Tre"]
-#gestore = ["Roma"]
 
+
+# In[20]:
+
+#Attacco
 diametro = []
 relSizeGC = []
 aziendaFinal = []
 ascisse = []
 
 for provider in gestore:
-    get_ipython().magic(u'time attacco(provider)')
-    #%time attaccopercent(provider, 100)
+    #%time attacco(provider)
+    get_ipython().magic(u'time attaccoPercent(provider, 100)')
     
 datiFinal = pandas.DataFrame()
 
 datiFinal['percent'] = ascisse
-datiFinal['Compagnia'] = aziendaFinal
-#datiFinal['diam'] = diametro
-datiFinal['GC'] = relSizeGC
+datiFinal['Provider'] = aziendaFinal
+datiFinal['diameter'] = diametro
+datiFinal['GCsize'] = relSizeGC
 datiFinal.to_csv("/home/protoss/Documenti/SistemiComplessi/data/Iuri/AttackDataForSeaborn.csv")
-datiFinal.head()
+#datiFinal.head()
 
 
-# In[ ]:
+# In[5]:
 
 #Failure
-
-#gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
-#gestore = ["Tre"]
-gestore = ["Tim", "Vodafone", "Wind", "Tre"]
-
 diametro = []
 relSizeGC = []
 aziendaFinal = []
@@ -198,89 +191,97 @@ ascisse = []
 for provider in gestore:
     get_ipython().magic(u'time failurePercent(provider, 100)')
 
-get_ipython().magic(u'matplotlib inline')
-
 datiFinal = pandas.DataFrame()
 
 datiFinal['percent'] = ascisse
-datiFinal['Compagnia'] = aziendaFinal
-datiFinal['diam'] = diametro
-datiFinal['GC'] = relSizeGC
+datiFinal['Provider'] = aziendaFinal
+datiFinal['diameter'] = diametro
+datiFinal['GCsize'] = relSizeGC
 datiFinal.to_csv("/home/protoss/Documenti/SistemiComplessi/data/Iuri/FailureDataForSeaborn.csv")
-datiFinal
+#datiFinal
 
 
 # ## Faccio i grafici
 
-# In[ ]:
+# In[19]:
 
 #Attack
 import seaborn
 
 datiFinal = pandas.read_csv('/home/protoss/Documenti/SistemiComplessi/data/Iuri/AttackDataForSeaborn.csv')
+#datiFinal = pandas.read_csv('/home/protoss/Documenti/SistemiComplessi/data/Iuri/GtoolAttackDataForSeaborn.csv')
 
 seaborn.set_context("notebook", font_scale=1.1)
 seaborn.set_style("ticks")
 
 #diametro
-seaborn.lmplot('percent', 'diam', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
-           hue='Compagnia', palette = colori,
-           scatter_kws={"marker": "D", "s": 100})
+seaborn.lmplot('percent', 'diameter', data=datiFinal, fit_reg=False,
+               size = 9, aspect = 1.3333,
+               legend = False,
+               hue='provider', palette = colori,
+               scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Attacco: diametro')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
-pyplot.ylim(0, 60)
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/AttackD_Final', format='eps', dpi=1000)
-
+pyplot.ylim(0, 80)
+pyplot.legend()
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/AttackD_Final', format='svg', dpi=1000)
+#pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackD_Final', format='eps', dpi=1000)
 
 #giant cluster
-seaborn.lmplot('percent', 'GC', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
-           hue='Compagnia', palette = colori,
+seaborn.lmplot('percent', 'GCsize', data=datiFinal, fit_reg=False,
+           size = 9, aspect = 1.3333,
+           legend = False,
+           hue='provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Attacco: dimensioni relative del GC')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/AttackGC_Final', format='eps', dpi=1000)
+pyplot.legend()
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/AttackGC_Final', format='svg', dpi=1000)
+#pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackGC_Final', format='eps', dpi=1000)
 
 
-# In[ ]:
+# In[20]:
 
 #Failure
 import seaborn
 
-datiFinal = pandas.read_csv('../data/Iuri/FailureDataForSeaborn.csv')
+datiFinal = pandas.read_csv('../../data/Iuri/FailureDataForSeaborn.csv')
 
 seaborn.set_context("notebook", font_scale=1.1)
 seaborn.set_style("ticks")
 
 #diametro
-seaborn.lmplot('percent', 'diam', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
-           hue='Compagnia', palette = colori,
+seaborn.lmplot('percent', 'diameter', data=datiFinal, fit_reg=False,
+           size = 9, aspect = 1.3333,
+           legend = False,
+           hue='provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Random failure: diametro')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
-pyplot.ylim(0, 10)
-pyplot.savefig('../img/iuri/FailureD_Final', format='eps', dpi=1000)
+pyplot.ylim(0, 20)
+pyplot.legend()
+pyplot.savefig('../../img/iuri/FailureD_Final', format='svg', dpi=1000)
 
 #giant cluster
-seaborn.lmplot('percent', 'GC', data=datiFinal, fit_reg=False,
-           size = 7, aspect = 1.7778,
-           hue='Compagnia', palette = colori,
+seaborn.lmplot('percent', 'GCsize', data=datiFinal, fit_reg=False,
+           size = 9, aspect = 1.3333,
+           legend = False,
+           hue='provider', palette = colori,
            scatter_kws={"marker": "D", "s": 100})
 pyplot.title('Random failure: dimensioni relative del GC')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
-pyplot.savefig('../img/iuri/FailureGC_Final', format='eps', dpi=1000)
+pyplot.legend()
+pyplot.savefig('../../img/iuri/FailureGC_Final', format='svg', dpi=1000)
 
 
 # # CALCOLO DEL DIAMETRO DI RETE ROMA IMPOSSIBILE, ANDAMENTO ESPONENZIALE CON L'AUMENTARE DEI NODI
