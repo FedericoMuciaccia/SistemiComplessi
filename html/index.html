@@ -89,20 +89,35 @@ C'è un solo grande problema: i dati sono chiusi.</p>
 
 <h3>Mozilla Location Service</h3>
 
-<p>Mozilla è da sempre impegnata per lo svilutto di tecnologie web aperte e standardizzate. Avendo riconosciuta la centralità della geolocalizzazione e la crescita esponenziale di siti ed applicazioni location-aware, ha deciso di ricalcare le orme di Google e fondare il suo servizio di geolocalizzazione usando WiFi ed antenne cellulari: <a href="https://location.services.mozilla.com/">Mozilla Location Service</a>.</p>
+<p>Mozilla è da sempre impegnata nello svilutto di tecnologie web aperte e standardizzate. Avendo riconosciuta la centralità della geolocalizzazione e la crescita esponenziale di siti ed applicazioni location-aware, ha deciso di ricalcare le orme di Google e fondare il suo servizio di geolocalizzazione usando WiFi ed antenne cellulari: <a href="https://location.services.mozilla.com/">Mozilla Location Service</a>.</p>
 
 <iframe src="../html/MLS_header.html"></iframe>
 
-<p>La mappatura viene fatta dagli utenti su base puramente volontaria, utilizzando l'apposita applicazione <a href="https://play.google.com/store/apps/details?id=org.mozilla.mozstumbler">Mozilla Stumbler</a>.</p>
+<p>L'obbiettivo è quello di geolocalizzare gli utenti sulla base dell'ambiente radio che li circonda: MLS è un progetto collaborativo per creare un database mondiale aperto di Cell ID e WiFi georeferenziati. La mappatura viene fatta dagli utenti su base puramente volontaria, utilizzando l'apposita applicazione <a href="https://play.google.com/store/apps/details?id=org.mozilla.mozstumbler">Mozilla Stumbler</a>.</p>
 
-<p><img src="../img/Mozilla_Stumbler.jpg" alt="Mozilla Stumbler" title="" /></p>
+<p><a href="../img/Mozilla_Stumbler.jpg">
+<img src="../img/Mozilla_Stumbler.jpg" alt="Mozilla Stumbler app" title="Mozilla Stumbler app" /></a></p>
 
-<p>Il progetto è ormai maturo e, come si può osservare dalla seguente mappa, la copertura del mondo è molto capillare.</p>
+<p>Il progetto è ormai maturo e, come si può osservare dalle mappe sopra e sotto, la copertura del mondo è molto capillare.</p>
+<ul>
+<li>La prima mostra un esempio di utilizzo del programma a San Lorenzo, nel percorso tra le nostre due abitazioni. I pallini verdi sono i punti GPS delle rilevazioni complete (WiFi + rete cellulare) effettuate durante il tragitto. Come si può notare sono piuttosto fitti: 4 0 5 per ogni isolato. Le aree sfumate in blu mostrano invece, in maniera approssimata per motivi di privacy, l'esito dell'eleborazione di tutte le precedenti osservazoni nell'area, ovvero tutti i router WiFi e le antenne ricostruiti fin ora. La mappa è fittissima, ma questo non deve trarre in inganno: è ancora incompleta e per certi versi inaffidabile. Un esempio diretto sono le numerose ricostruzioni che appaiono in mezzo ai binari della stazione Termini: quelle derivano dai WiFi all'interno dei treni a cui si collegano i viaggiatori, ma che essendo oggetti in moto non possono essere usati ai fini della geolocalizzazione e pertanto dovrebbero essere filtrati ed esclusi dal database.</li>
+<li>La seconda mappa (interattiva) mostra invece la copertura globale raggiunta dal progetto. Sebbene risulti uno stadio abbastanza avanzato, si può notare come ci siano ancora delle disparità di mappatura anche tra gli stati ad alta presenza tecnologica: si confrontino ad esempio le capitali della Cina e del Giappone. Inoltre, essendo un progetto collaborativo open source e con sede negli Stati Uniti, sì può vedere come gli stati in cui la cultura open è meno diffusa o quelli in tensione con gli USA per quanto riguarda la politica estera risultino globalmente meno mappati. Un esempio emblematico potrebbe essere la differenza tra Nord Korea e Sud Korea.</li>
+</ul>
 
 <p><!-- <a href="../html/MLS_map.html">Mozilla Location Service wolrd coverage</a> -->
 Mozilla Location Service wolrd coverage.</p>
 
 <iframe src="../html/MLS_map.html" height=400 style="width:800px;"></iframe>
+
+<p>Dato l'approccio di crouwdsourcing collaborativo, i dati sono tanti e a copertura mondiale, continuamente aggiornati, aperti, facilmente scaricabili in database ordinati, puliti e ben documentati. Di seguito sono elencate alcune statistiche per avere un'idea dei numeri in gioco:</p>
+
+<a href="../html/statistiche_acquisizione.html">Statistiche di aquisizione</a>
+
+<iframe src="../html/statistiche_acquisizione.html" height=270"></iframe>
+
+<a href="../html/statistiche_regionali.html">Statistiche regionali</a>
+
+<iframe src="../html/statistiche_regionali.html" height=270"></iframe>
 
 <p>Mozilla Location Service funziona sia con le antenne cellulari che con i WiFi, soltanto che attulamente i dati della mappa WiFi (mostrati approssimati nella mappa precedente) non possono essere resi pubblici per questioni relative alle norme sulla privacy vigenti sia negli Stati Uniti sia in altre nazioni.</p>
 
@@ -292,7 +307,8 @@ def euclideanDistace(x,y):
 
 <p>A questo punto abbiamo finalmente il nostro datasample della città di Roma: circa 7000 antenne in un file csv agevolmente maneggiabile di circa 1MB.</p>
 
-<p><img src="../img/map/Roma_non_georeferenziata.svg"/></p>
+<p><a href="../img/map/Roma_non_georeferenziata.svg">
+<img src="../img/map/Roma_non_georeferenziata.svg"/></a></p>
 
 <p>Per visualizzare agevolmente i nostri dati serve una mappa georeferenziata, preferibilmente interattiva. A tal fine per il notebook di IPython abbiamo usato la libreria <code>gmaps</code>, che dà semplice accesso inline alle mappe di Google Maps dando la possibilità di creare una heatmap, mentre per l'HTML di questa presentazione abbiamo usato le analoghe funzioni della libreria <code>gmplot</code>.</p>
 
@@ -312,7 +328,7 @@ mappa.draw("../doc/heatmap.html")
 
 <p>(per scrivere queste poche linee di codice c'è voluto un'intero pomeriggio!)</p>
 
-<p>Heatmap delle antenne telefoniche di Roma</p>
+<p>Heatmap interattiva delle antenne telefoniche di Roma</p>
 
 <iframe src="../html/heatmap.html" height=670></iframe>
 
@@ -333,19 +349,19 @@ TODO forse spostare questa considerazione a quando si è spiegato il criterio di
 TODO spiegare la possibile casa di questi valori di raggi così bassi</p>
 
 <p>Facciamo un istogramma log-log per la distribusione del raggio di copertura, sia con la canalizzazione lineare sugli interi, sia con una canalizzazione logaritmica in base 2, per ridurre il rumore sulla coda.
-<img src="../img/range/infinite_log_binning.svg"/>
+<a href="../img/range/infinite_log_binning.svg"><img src="../img/range/infinite_log_binning.svg"/></a>
 La canalizzazione logaritmica pesata permette di osservare l'andamento ben sotto il singolo conteggio, ampliando di una decade l'intervallo di osservazione.</p>
 
 <p>In figura si può vedere come l'andamento sia abbastanza power-law su diverse decadi, soprattutto fino a <code>conteggio = 1</code>. Per verificare ulteriormente questo fatto abbiamo generato anche la curva del frequency-rank, che risulta seguire senza esitazioni il trend delineato dagli istogrammi.
 TODO  cercare di spiegare questa power-law.
 Il frequency-rank si ottiene ordinando in maniera decrescente il numero di conteggi per ogni canale unitario e associando un relativo ranking intero decrescente ai raggi corrispondenti.
-<img src="../img/range/range_distribution.svg"/></p>
+<a href="../img/range/range_distribution.svg"><img src="../img/range/range_distribution.svg"/></a></p>
 
 TODO mettere plugin che se si clicka sull'immagine la visualizza a tutto schermo
 
 <p>Si è infine analizzata la distribuzione cumulata, lasciata nel grafico seguente non normalizzata.
 La distribuzione cumulata $C(x)$ rappresenta la probabilità che la variabile random assuma un valore minore o uguale a $x$.
-<img src="../img/range/range_cumulated_distribution.svg"/>
+<a href="../img/range/range_cumulated_distribution.svg"><img src="../img/range/range_cumulated_distribution.svg"/></a>
 TODO capire l'andamento della cumulata</p>
 
 <p>TODO mettere caption nell'html delle figure</p>
@@ -361,9 +377,41 @@ TODO mettere retta con pendenza con fit a mano spannometrico</p>
 
 <h2>2.5 Distribuzione del grado</h2>
 
-<h2>3.3 Ottimizzazione del codice</h2>
+<h2>3.3 Ottimizzazione del codice (parte 1: multiprocessing)</h2>
 
-<h2>3.4 Strategie di attacco</h2>
+<p>Dato che i tempi di calcolo per l'analisi percolativa, soprattutto nel caso di random failure, risultavano spropositati (un'intera notte) rendendo difficile lo sviluppo del codice soprattutto nelle fasi iniziali, abbiamo cercato dei modi per velocizzare il calcolo ed aggirare il problema.</p>
+
+<p><img src="../img/meme_computational_power.jpg"/></p>
+
+<p>In primis si è cercato di evitare operazioni cicliche sui vettori dinamici, come <code>pop()</code> e <code>append()</code> e di utilizzare sempre librerie python ottimizzate e internamente scritte in C, come ad esempio <code>numpy</code>.
+Già questo permette operazioni su grossi vettori con un incremento di prestazioni rispetto al python puro di anche 5 volte.</p>
+
+<p>Inoltre si è tentato di sfruttare i diversi core della macchina, facendo degli esperimenti di rudimentale calcolo parallelo. In pratica si è cercato di rendere il codice non sequenziale, in modo da usare funzioni del tutto indipendenti e poter scrivere tutto in termini di funzioni <code>map()</code> per poi utilizzare la libreria builtin <code>multiprocessing</code> e fare una prima parallelizzazione.
+<pre><code>
+import multiprocessing
+cpus = multiprocessing.cpu_count()
+pool = multiprocessing.Pool(processes=cpus)
+pool.map(...)
+</code></pre></p>
+
+<p>Purtroppo peò questo approccio non si è rivelato adeguato. Nel fare i tentativi vedevamo che i processori lavoravano insieme al 100% per un primo periodo, per poi ibernarsi in una eterna fase di stallo al 20% del carico, probabilmente per incongruenze nel messaging tra le varie istanze di python. Non possedendo sufficienti conoscenze sul calcolo parallelo e il cloud computing per poter risolvere velocemente il problema, abbiamo dunque abbandonato questo aproccio.</p>
+
+<h2>3.4 Ottimizzazione del codice (parte 2: graph-tool)</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>3.5 Strategie di attacco</h2>
 
 <p>L'esigenza di provare a parallelizzare il codice ci ha portato a due versioni differenti della funzione di attacco intenzionale: una sequenziale e una parallela. Entrambe le varianti rimuovono circa l'1% dei nodi per volta.
 * la funzione sequenziale elimina l'insieme dell'1% dei nodi più importanti, analizza la rete e calcola il prossimo insieme di 1% di nodi da rimuove.
