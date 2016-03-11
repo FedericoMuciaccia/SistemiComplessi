@@ -12,12 +12,19 @@ splitting della matrice, approssimazione distanza, stampa su file
 
 
 
-## Ottimizzazione (parte 3: graph-tool)
 
 
 
 
-CPU vs RAM
+
+
+
+
+
+
+
+
+
 
 
 

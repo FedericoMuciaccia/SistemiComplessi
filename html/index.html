@@ -369,53 +369,53 @@ TODO capire l'andamento della cumulata</p>
 <p>TODO Facendo un fit TODO abbiamo ottenuto il seguerte esponente per l'andamento a potenza: TODO
 TODO mettere retta con pendenza con fit a mano spannometrico</p>
 
-<h2>2.4 Matrice di adiacenza e creazione del grafo</h2>
+<h2>TODO 2.4 Matrice di adiacenza e creazione del grafo</h2>
 
 <p>calcolare tutta la matrice di adiacenza con la distanza geodesica al posto di quella euclidea risulta pesantissimo ($N^2$ elementi)</p>
 
 <p>spiegare il criterio di linking</p>
 
-<h2>2.5 Distribuzione del grado</h2>
+<h2>TODO 2.5 Distribuzione del grado</h2>
 
-<h2>3.3 Ottimizzazione del codice (parte 1: multiprocessing)</h2>
+<h2>3.3 Speedup del codice (parte 1: multiprocessing)</h2>
 
-<p>Dato che i tempi di calcolo per l'analisi percolativa, soprattutto nel caso di random failure, risultavano spropositati (un'intera notte) rendendo difficile lo sviluppo del codice soprattutto nelle fasi iniziali, abbiamo cercato dei modi per velocizzare il calcolo ed aggirare il problema.</p>
+<p>Per le simulazioni di attacco intenzionale e random failure sulle reti in esame e lo studio approfondito dell'andamento delle grandezze statistiche e topologiche durante l'analisi percolativa abbiamo inizialmente utilizzato <code>networkx</code>, una libreria di Python piuttosto completa dedicata alle reti.</p>
 
-<p><img src="../img/meme_computational_power.jpg"/></p>
+<p>Tuttavia questa si è rivelata una scelta sbagliata, in quanto <code>networkx</code>, pur essendo molto completa e semplice da usare, non è particolarmente ottimizzata dal punto di vista dell'efficienza di calcolo. Questo perché è interamentente scritta in Python, anche per le sue routine più interne e non implementa alcun tipo di parallelismo builtin.</p>
+
+<p>Creare, manipolare e disegnare i grafi sono operazioni semplici e immediate, ma ma quando si cercano di usare le funzioni più pesanti dal punto di vista del calcolo, come per esempio quella per determinare il diametro della rete, <code>networkx</code> appare del tutto non soddisfacente.</p>
+
+<p>Per esempio, il calcolo di diametro, average path lenght, coefficiente di clustering e dimensioni del giant cluster impiegava 20 secondi per una singola iterazione con la rete Tre (la più piccola, circa 1400 nodi), 50 secondi per Tim e Vodafone (circa 1800 nodi entrambe) mentre con la rete Wind (la più grande, con circa 2350 nodi) impiegava ben 2.5 minuti. Questo dato, moltiplicato per i 100 passi richiesti, porta ad una previsione di più di 6 ore di calcolo per l'analisi percolativa di tutte le singole reti.</p>
+
+<p>Abbiamo osservato che i tempi scalano all'incirca quadraticamente col numero di nodi, per cui per lo studio della rete complessiva di tutta Roma sarebbero richiesti 20 minuti per una iterazione e quasi 30 ore di calcolo per l'analisi completa. Queste considerazioni rendevano di fatto impraticabile questa strada.</p>
+
+<p><img src="../img/meme_Leonida.jpg"/></p>
+
+<p>Dato che i tempi di calcolo richiesti per l'analisi percolativa risultavano spropositati, soprattutto nel caso di random failure, abbiamo cercato dei modi per velocizzare il calcolo ed aggirare il problema.</p>
 
 <p>In primis si è cercato di evitare operazioni cicliche sui vettori dinamici, come <code>pop()</code> e <code>append()</code> e di utilizzare sempre librerie python ottimizzate e internamente scritte in C, come ad esempio <code>numpy</code>.
-Già questo permette operazioni su grossi vettori con un incremento di prestazioni rispetto al python puro di anche 5 volte.</p>
+Già questo permette operazioni su grossi vettori con un incremento di prestazioni rispetto al python puro di almeno il doppio.</p>
 
 <p>Inoltre si è tentato di sfruttare i diversi core della macchina, facendo degli esperimenti di rudimentale calcolo parallelo. In pratica si è cercato di rendere il codice non sequenziale, in modo da usare funzioni del tutto indipendenti e poter scrivere tutto in termini di funzioni <code>map()</code> per poi utilizzare la libreria builtin <code>multiprocessing</code> e fare una prima parallelizzazione.
 <pre><code>
 import multiprocessing
 cpus = multiprocessing.cpu_count()
 pool = multiprocessing.Pool(processes=cpus)
-pool.map(...)
+pool.map(function, array)
 </code></pre></p>
 
-<p>Purtroppo peò questo approccio non si è rivelato adeguato. Nel fare i tentativi vedevamo che i processori lavoravano insieme al 100% per un primo periodo, per poi ibernarsi in una eterna fase di stallo al 20% del carico, probabilmente per incongruenze nel messaging tra le varie istanze di python. Non possedendo sufficienti conoscenze sul calcolo parallelo e il cloud computing per poter risolvere velocemente il problema, abbiamo dunque abbandonato questo aproccio.</p>
+<p>Abbandonare il paradigma sequenziale rendendo le funzioni totalmente indipendenti tra loro fa sì che esse possano girare in contemporarea riducendo il tempo di calcolo, ma nel contempo aumenta il quantitativo di RAM richiesta dal programma, quasi dello stesso fattore. Pertanto bisogna fare attenzione a far girare il programma su una macchina adeguata sotto tutti i punti di vista.</p>
 
-<h2>3.4 Ottimizzazione del codice (parte 2: graph-tool)</h2>
+<p>Purtroppo peò nel nostro caso questo approccio non si è rivelato adeguato. Nel fare i tentativi vedevamo che i processori lavoravano insieme al 100% per un primo periodo, per poi ibernarsi in una eterna fase di stallo al 20% del carico, probabilmente per incongruenze nel messaging tra le varie istanze di python. Non possedendo sufficienti conoscenze sul calcolo parallelo e il cloud computing per poter risolvere velocemente il problema, abbiamo dunque abbandonato questo aproccio.</p>
 
+<p><img src="../img/meme_Boromir.jpg" width="90%"/></p>
 
-
-
-
-
-
-
-
-
-
-
-
-
-<h2>3.5 Strategie di attacco</h2>
+<h2>3.4 Strategie di attacco</h2>
 
 <p>L'esigenza di provare a parallelizzare il codice ci ha portato a due versioni differenti della funzione di attacco intenzionale: una sequenziale e una parallela. Entrambe le varianti rimuovono circa l'1% dei nodi per volta.
-* la funzione sequenziale elimina l'insieme dell'1% dei nodi più importanti, analizza la rete e calcola il prossimo insieme di 1% di nodi da rimuove.
-* la funzione parallela ha invece un comportamento più adiabatico: guarda il grafo iniziale e fa una classifica assoluta dei nodi per importanza, rimuovendone di volta in volta l'1% in maniera ordinata.</p>
+<ul>
+<li>la funzione sequenziale elimina l'insieme dell'1% dei nodi più importanti, analizza la rete e calcola il prossimo insieme di 1% di nodi da rimuove.</li>
+<li>la funzione parallela ha invece un comportamento più adiabatico: guarda il grafo iniziale e fa una classifica assoluta dei nodi per importanza, rimuovendone di volta in volta l'1% in maniera ordinata.</li></ul></p>
 
 <p>Possiamo supporre che un reale attacco alla rete sia portato avanti con modalità adiabatiche: un ipotetico terrorista piazza nella notte delle cariche esplosive sotto le antenne che ritiene fondamentali e poi le fa scoppiare durante il giorno tutte in una volta.
 A titolo di esempio, possiamo immaginare che l'attacco si consideri riuscito quando metà dell'area metropolitana rimane isolata senza possibilità di comunicare. Questo è il parametro finale in base al quale viene scelta la sequenza di antenne da far esplodere.</p>
@@ -434,8 +434,59 @@ la strategia ottimale è quella che, a parità di risultato, coinvolge il minor 
 <p>Nel caso di random failure (escludendo gli effetti di saturazione a cascata) non c'è invece alcuna differenza tra l'approccio sequenziale e quello <strong>parallelo</strong>, rendendo il secondo algorimo preferibile nel caso si voglia sfruttare tutta la potenza delle moderne cpu multicore.</p>
 
 <p>Riassumendo:
-* Nel caso di intentional attack è doveroso usare un approccio sequenziale.
-* Nel caso di random failure è consigliabile utilizzare un approccio parallelo.</p>
+<ul>
+<li>Nel caso di intentional attack è doveroso usare un approccio sequenziale.</li>
+<li>Nel caso di random failure è consigliabile utilizzare un approccio parallelo.</li>
+</ul></p>
+
+<h2>3.5 Speedup del codice (parte 2: graph-tool)</h2>
+
+<p>Come già detto la prima soluzione al problema dei tempi è stata tentare una parallelizzazione del codice in Python: dato che <code>networkx</code> non supporta il calcolo parallelo interno, si è tentato di parallelizzare le funzioni di attacco intenzionale e random failure. Abbiamo però mostrato come alcuni degli algoritmi siano intrinsecamente sequenziali.</p>
+
+<p>Un possibile metodo per ovviare a ciò sarebbe potuto essere generare e salvare in memoria tutte le reti a tutte le iterazioni e successivamente usare delle funzioni parallelizzabili per l'analisi. Tuttavia con <code>networkx</code> la richiesta di tempo di calcolo rimane comunque alta e si aggiungerebbe anche il problema della memoria RAM, dello spazio su disco e dei tempi di lettura e scrittura.</p>
+
+<p>L'unica via praticabile è stata ripiegare su <code>graph_tool</code>: un'altra libreria meno user-friendly ma estremamente più efficiente e sopratutto impostata di default sul calcolo parallelo. Le funzioni di analisi topologica e statistica sono molto più veloci rispetto a <code>networkx</code>, poiché implementate in C col <em>template programming</em> ed ottimizzate in fase di compilazione. Inoltre la possibilità di usarle nativamente in parallelo su 4 core e 8 thread ci ha permesso di calcolare le singole funzioni con una velocità più di 60 volte superiore a prima.</p>
+
+<p>Considerato ciò, il codice per lo studio percolativo delle reti è stato convertito (con non poco sforzo) per poter fare uso della nuova libreria. Alla fine, per l'analisi percolativa completa di tutte le reti, ovvero con lo studio in funzione dei nodi rimossi delle quantità
+<ul>
+<li>diametro $D$</li>
+<li>average path lenght $\langle l \rangle$</li>
+<li>clustering coefficient $C$</li>
+<li>average degree \langle k \rangle</li>
+<li>dimensioni del giant cluster</li>
+<li>criterio di soglia percolativa (andamento di $\langle k^2 \rangle / \langle k \rangle$)</li>
+</ul>
+da una previsione iniziale di più di 24 ore di tempo di calcolo si è passati a circa $3/4$ d'ora, con uno speedup di circa un fattore 30.</p>
+
+<p><img src="../img/meme_Obama.jpg" width="80%"/></p>
+
+<h2>TODO Analisi percolativa</h2>
+
+
+
+
+
+
+
+<h2>TODO Conclusioni e prospettive future</h2>
+
+
+
+vedere l'effetto cascata
+
+http://www.html.it/pag/51161/location-services/
+
+
+
+
+<h2>TODO Bibliografia</h2>
+
+
+
+
+
+
+
 
 
 
