@@ -332,7 +332,7 @@ pyplot.title('Attack: average path length')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
-pyplot.ylim(0,14)
+pyplot.ylim(0,30)
 pyplot.legend()
 pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackl_Final', format='svg', dpi=1000)
 
@@ -360,7 +360,7 @@ pyplot.title('Attack: average degree')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
-pyplot.ylim(0,100)
+pyplot.ylim(0,250)
 pyplot.legend()
 pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackk_Final', format='svg', dpi=1000)
 
@@ -398,9 +398,9 @@ pyplot.title('Random failure: diametro')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
-pyplot.ylim(0, 20)
+pyplot.ylim(0, 15)
 pyplot.legend()
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailureD_Final', format='eps', dpi=1000)
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailureD_Final', format='svg', dpi=1000)
 
 #giant cluster
 seaborn.lmplot('percent', 'GCsize', data=datiFinal, fit_reg=False,
@@ -414,7 +414,7 @@ pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
 pyplot.legend()
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailureGC_Final', format='eps', dpi=1000)
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailureGC_Final', format='svg', dpi=1000)
 
 #average length
 seaborn.lmplot('percent', 'average path length', data=datiFinal, fit_reg=False,
@@ -426,9 +426,9 @@ pyplot.title('Random failure: average path length')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
-pyplot.ylim(0,4)
+pyplot.ylim(0,3)
 pyplot.legend()
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailurel_Final', format='eps', dpi=1000)
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailurel_Final', format='svg', dpi=1000)
 
 #clustering
 seaborn.lmplot('percent', 'clustering', data=datiFinal, fit_reg=False,
@@ -442,7 +442,7 @@ pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
 pyplot.legend()
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailureC_Final', format='eps', dpi=1000)
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailureC_Final', format='svg', dpi=1000)
 
 #gradomedio
 seaborn.lmplot('percent', 'average degree', data=datiFinal, fit_reg=False,
@@ -454,9 +454,9 @@ pyplot.title('Random failure: average degree')
 pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
-pyplot.ylim(0,100)
+#pyplot.ylim(0,100)
 pyplot.legend()
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailurek_Final', format='eps', dpi=1000)
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailurek_Final', format='svg', dpi=1000)
 
 #CRITERION
 seaborn.lmplot('percent', 'soglia percolativa', data=datiFinal, fit_reg=False,
@@ -470,7 +470,7 @@ pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0,10)
 pyplot.legend()
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailurec_Final', format='eps', dpi=1000)
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolFailurec_Final', format='svg', dpi=1000)
 
 # <codecell>
 

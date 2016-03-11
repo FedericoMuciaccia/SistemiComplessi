@@ -56,14 +56,14 @@ Nel caso di un grafo di Erdős e Renyi queste sono:
 \begin{itemize}
 	\item la distribuzione del grado ha una forma di distribuzione binomiale, la quale tende a una poissoniana per $p$ piccole, e a una gaussiana per $\langle k \rangle$ grandi. Questo implica che la topologia della rete è abbastanza omogenea, con molti nodi che hanno approssimativamente lo stesso grado;
 	
-	\item il diametro tende a essere piccolo, come l'average path length. Con $p$ non troppo piccolo il numero di nodi che abbiano una certa distanza $l$ si può approssimare a $\langle k\rangle^l$; uguagliandolo a $N$ deriva che sia diametro che average path length scalano con buona approssimazione con il logaritmo di N (quindi lentamente), secondo la relazione
+	\item con $N$ grande, il diametro tende a essere piccolo, come l'average path length. Con $p$ non troppo piccolo il numero di nodi che abbiano una certa distanza una lunghezza $l$ si può approssimare a $\langle k\rangle^l$; uguagliandolo a $N$ deriva che diametro e average path length scalano con buona approssimazione con il logaritmo di N, secondo la relazione
 	\begin{equation}
 	\label{eq:lunghezze}
 	l \sim \frac{ln(N)}{ln(\langle k \rangle)}. 	 
 	\end{equation}
 	Molte reti reali presentano simili caratteristiche nei gradi di separazione, che hanno portato alla definizione del termine "small world" per esse;
 	
-	\item il clustering di una rete ramdom tende a essere molto basso. Infatti, preso un nodo e i suoi primi vicini, la probabilità una coppia di essi sia connessa è $p$. Pertanto su tutto il grafo, il coefficiente di clustering medio è proprio $p$, il quale di solito è abbastanza minore di 1 (con $p = 0.1$ un grafo random diventa già molto connesso, per esempio con $10^4$ nodi avrebbe $\langle k\rangle = 10^3$). Questo fatto, al contrario del diametro, si pone in contrasto con le reti reali, le quali hanno quasi sempre un $\langle C \rangle$ sensibilmente più alto;
+	\item il clustering di una rete ramdom tende a essere molto basso. Infatti, preso un nodo e i suoi primi vicini, la probabilità una coppia di essi sia connessa è $p$. Pertanto su tutto il grafo, il coefficiente di clustering medio è proprio $p$, il quale di solito è abbastanza minore di 1 (con $p = 0.1$ un grafo random diventa già molto connesso, per esempio con $10^4$ nodi avrebbe $\langle k\rangle = 10^3$). Questo fatto, al contrario del diametro, si pone in contrasto con le reti reali, le quali hanno quasi sempre un $\langle C \rangle$ sensibilmente più alto.
 \end{itemize}
 
 % \begin{wrapfloat}{figure}{I}{0pt}
@@ -81,7 +81,7 @@ Il fatto che il coefficiente di clustering non dipende dal numero di nodi è car
 \begin{figure}[t!]
 	\centering
 	\includegraphics[width=0.5\textwidth]{./Immagini/Par1/zoomring}
-	\caption{Il punto di partenza del modello Watts-Strogatz: un reticolo con condizioni al contorno cicliche.}
+	\caption[Reticolo ciclico.]{Il punto di partenza del modello Watts-Strogatz: un reticolo con condizioni al contorno cicliche.}
 	\label{fig:ring}
 \end{figure}
 
@@ -100,7 +100,7 @@ Successivamente si procede a riarrangiare in maniera random i link tra i nodi, c
 	$\;$
 	\subfloat[p = 1]
 	{\includegraphics[width=0.4\textwidth]{./Immagini/Par1/totalrandomwatts}}
-	\caption{Generazione di grafi con il modello Watts-Strogatz a differenti $p$ di rewiring.}
+	\caption[Generazione con modello Watts-Strogatz.]{Generazione di grafi con il modello Watts-Strogatz a differenti $p$ di rewiring.}
 	\label{fig:ring}
 \end{figure}
 
@@ -117,7 +117,7 @@ Con $p \rightarrow 1$ il grafo diventa simile a quello di una rete di Erdős-Ren
 	\\
 	\subfloat
 	{\includegraphics[width=0.8\textwidth]{./Immagini/Par1/ComparGradeModel}}
-	\caption{Confronto tra due grafi da 100 nodi: uno generato con il modello Erdos-Renyi ($p=7\%$) e uno con il modello Watts-Strogatz partendo da un reticolo con nodi connessi ai primi 3 vicini e il 100\% di probabilit\`a di rewiring. A parte la somiglianza dei grafi, le distribuzioni del grado hanno simile comportamento.}
+	\caption[Confronto grafi random.]{Confronto tra due grafi da 100 nodi: uno generato con il modello Erdos-Renyi ($p=7\%$) e uno con il modello Watts-Strogatz partendo da un reticolo con nodi connessi ai primi 3 vicini e il 100\% di probabilit\`a di rewiring. A parte la somiglianza dei grafi, le distribuzioni del grado hanno simile comportamento.}
 	\label{fig:}
 \end{figure}
 
@@ -132,7 +132,7 @@ con $C(0) \sim 0.75$ per $N$ grande. Ricordando che per il modello di Erdős-Ren
 \begin{figure}[t!]
 	\centering
 	\includegraphics[width=0.6\textwidth]{./Immagini/Par1/confrontoC}
-	\caption{Confronto tra i coefficienti di clustering dei due modelli, al variare del rispettivo parametro $p$.}
+	\caption[Confronto clustering.]{Confronto tra i coefficienti di clustering teorici dei due modelli, al variare del rispettivo parametro $p$.}
 	\label{fig:ring}
 \end{figure}
 
@@ -160,18 +160,29 @@ Ovviamente se il grado di un nodo è funzione di $t$, anche la P(k) lo sarà. De
 % 	\label{fig:barabalbero}
 % \end{figure}
 
-Il modello di Barabasi e Albert è un modello minimale, importantissimo perché il primo in grado di riprodurre un grafo che mostrasse un'invarianza di scala, ma che in alcuni aspetti mal si accorda con quelle reti reali con caratteristiche scale-free. Per cominciare la distribuzione del grado è una legge di potenza con esponente $3$,ma le reti scale-free solitamente hanno un esponente inferiore, seppur maggiore di $2$. Benché non sia possibile calcolare in modo analitico $\braket{l}$ e $C$ per una rete di Barabasi-Albert, da simulazioni numeriche è possibile ottenerne quantità caratteristiche. Il cammino medio risulta sottostimato rispetto alle reti reali e il coefficiente di clustering non è costante con l'aumentare di $N$ come per le reti reali ma diminuisce, anche se più lentamente di una rete random \footnote{Ovviamente il coefficiente di clustering dipende dal numero $m$ di link generati per ogni nuovo nodo. Con $m = 1$ il clustering \`e nullo dato che il grafo \`e un albero, mentre $C \neq 0$ per $m>1$ e cresce all'aumentare di $m$, mantenendosi comunque al di sotto dei valori di reti reali con parametri simili.} \parencite{Barbalbert2002}. Per questo motivo il modello iniziale è stato integrato e reso più complesso.  
+Il modello di Barabasi e Albert è un modello minimale, importantissimo perché il primo in grado di riprodurre un grafo che mostrasse un'invarianza di scala, ma che in alcuni aspetti mal si accorda con quelle reti reali con caratteristiche scale-free. Per cominciare la distribuzione del grado è una legge di potenza con esponente $3$,ma le reti scale-free solitamente hanno un esponente inferiore, seppur maggiore di $2$. Benché non sia possibile calcolare in modo analitico $\braket{l}$ e $C$ per una rete di Barabasi-Albert, da simulazioni numeriche è possibile ottenerne quantità caratteristiche. 
+
+Il cammino medio risulta sottostimato rispetto alle reti reali e il coefficiente di clustering non è costante con l'aumentare di $N$ come per le reti reali ma diminuisce, anche se più lentamente di una rete random\footnote{Ovviamente il coefficiente di clustering dipende dal numero $m$ di link generati per ogni nuovo nodo. Con $m = 1$ il clustering \`e nullo dato che il grafo \`e un albero, mentre $C \neq 0$ per $m>1$ e cresce all'aumentare di $m$, mantenendosi comunque al di sotto dei valori di reti reali con parametri simili.} \parencite{Barbalbert2002}. Per questo motivo il modello iniziale è stato integrato e reso più complesso.  
 
 \begin{figure}[t!]
 	\centering
 	\includegraphics[width=0.9\textwidth]{./Immagini/Par1/compareSameN}
-	\caption{Confronto tra le distribuzioni del grado dei tre modelli esposti.}
+	\caption[Confronto $P(k)$]{Confronto tra le distribuzioni del grado dei tre modelli esposti.}
 	\label{fig:barabalbero}
 \end{figure}
 
 
 \subsection{Percolazione} 
-Cosa si intende per percolazione, teoria. Differenza punto di vista di percolazione in formazione di rete e percolazione in distruzione di rete?
+Per percolazione, in analogia con i liquidi, si intende il passaggio di informazione da un lato all'altro di una rete. Nello specifico, quando si fa uno studio percolativo di una rete, si cerca l'esistenza o meno di un cluster che ricopra l'intera rete (\emph{spanning cluster}, o \emph{giant cluster}). Il giant cluster \`e definito come quella componente di una rete le cui dimensioni sono dello stesso ordine della dimensione della rete complessiva (e quindi gli altri nodi o cluster minori hanno dimensioni di ordini inferiore), cio\`e il rapporto tra le sue dimensioni e le dimensioni dell'intera rete \`e $\sim 1$.
+
+Tipicamente uno studio percolativo su una rete random consiste nell'individuare, durante la costruzione della rete partendo da $N$ nodi scollegati, la soglia percolativa $p_c$, cio\`e la probabilit\`a di creazione link tale che compaia lo spanning cluster. Nel caso di una rete costruita con il modello di Barabasi-Albert la questione non si pone, dato che per definizione questa \`e composta da un solo cluster in crescita progressiva. Inoltre, dato che una rete di antenne cellulari nasce con una progettazione molto dettagliata in modo che venga costruita gi\`a oltre la soglia percolativa, nel caso in esame non \`e praticabile n\'e interessante individuare $p_c$ in costruzione. In questo caso ha pi\`u senso individuare la soglia percolativa per distruzione della rete. 
+
+Uno studio per distruzione pu\`o avere pi\`u approcci che portano a soglie diverse:
+\begin{itemize}
+ \item se si parte da una rete con uno spanning cluster, rimuovendo link tra tutte le coppie di nodi connesse con una certa probabilit\`a, si avr\`a una $p_d$ oltre la quale la rete non percola pi\`u. In questo caso $p_{d_{link}} = 1-p$ soltanto se si parte da un grafo completamente connesso.
+ \item in alternativa si possono rimuovere i nodi in maniera random. In questo caso, rimuovendo un nodo si rimuovono in un colpo solo tutti i link a esso collegati, portanto quindi a una $p_{d_{nodo}} \neq p_{d_{link}}$. Si pu\`o dare una probabilit\`a maggiore ai nodi con grado pi\`u alto per simulare un attacco mirato.
+ \item in maniera opposta a un attachment progressivo, pu\`o essere usata un metodo di distruzione progressiva, nel quale si rimuove un nodo per volta e si simula la rimozione successiva con la rete risultante dalla rimozione precedente. Nel caso di una rimozione random, la differenza di questo metodo progressivo con quello diretto \`e poco significativa, ma risulta molto differente con l'attacco intenzionale, come spiegato in maniera pi\`u dettagliata nel paragrafo \ref{subsec:simulazione}. Per rimozione progressiva dei nodi, che sia random o intenzionale, la soglia percolativa \`e espressa come la frazione critica $f$ di nodi rimossi, rispetto al numero di nodi originale, oltre la quale non si ha pi\`u uno spanning cluster.
+\end{itemize}
 
 \subsubsection{Soglia percolativa} 
 Vedere le due pubblicazioni di cohen e erez

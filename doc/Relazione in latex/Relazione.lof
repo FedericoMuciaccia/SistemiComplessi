@@ -4,9 +4,9 @@
 \defcounter {refsection}{0}\relax 
 \select@language {italian}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Il punto di partenza del modello Watts-Strogatz: un reticolo con condizioni al contorno cicliche.\relax }}{7}{figure.caption.6}
+\contentsline {figure}{\numberline {1}{\ignorespaces Reticolo ciclico.}}{7}{figure.caption.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2}{\ignorespaces Generazione di grafi con il modello Watts-Strogatz a differenti $p$ di rewiring.\relax }}{8}{figure.caption.7}
+\contentsline {figure}{\numberline {2}{\ignorespaces Generazione con modello Watts-Strogatz.}}{8}{figure.caption.7}
 \defcounter {refsection}{0}\relax 
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {p = 0}}}{8}{subfigure.2.1}
 \defcounter {refsection}{0}\relax 
@@ -16,12 +16,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subfigure}{\numberline {(d)}{\ignorespaces {p = 1}}}{8}{subfigure.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3}{\ignorespaces Confronto tra due grafi da 100 nodi: uno generato con il modello Erdos-Renyi ($p=7\%$) e uno con il modello Watts-Strogatz partendo da un reticolo con nodi connessi ai primi 3 vicini e il 100\% di probabilit\`a di rewiring. A parte la somiglianza dei grafi, le distribuzioni del grado hanno simile comportamento.\relax }}{9}{figure.caption.8}
+\contentsline {figure}{\numberline {3}{\ignorespaces Confronto grafi random.}}{9}{figure.caption.8}
 \defcounter {refsection}{0}\relax 
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Grafo random}}}{9}{subfigure.3.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Grafo small-world}}}{9}{subfigure.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4}{\ignorespaces Confronto tra i coefficienti di clustering dei due modelli, al variare del rispettivo parametro $p$.\relax }}{10}{figure.caption.9}
+\contentsline {figure}{\numberline {4}{\ignorespaces Confronto clustering.}}{10}{figure.caption.9}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5}{\ignorespaces Confronto tra le distribuzioni del grado dei tre modelli esposti.\relax }}{11}{figure.caption.10}
+\contentsline {figure}{\numberline {5}{\ignorespaces Confronto $P(k)$}}{11}{figure.caption.10}

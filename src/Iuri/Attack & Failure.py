@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[6]:
+# In[1]:
 
 import geopy
 from geopy import distance #TODO BUGGONE
@@ -17,7 +17,7 @@ get_ipython().magic(u'matplotlib inline')
 
 # # Simulazione attacco, andamento D e GC in funzione dei nodi rimossi
 
-# In[7]:
+# In[2]:
 
 #Funzioni step-by-step
 def attacco(compagnia):
@@ -81,7 +81,7 @@ def failure(compagnia):
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
 
 
-# In[8]:
+# In[3]:
 
 #Funzioni percentuali
 def attaccoPercent(compagnia, steps):
@@ -151,7 +151,7 @@ def failurePercent(compagnia, steps):
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
 
 
-# In[9]:
+# In[4]:
 
 colori = ['#004184','#ff3300','#ff8000','#018ECC','#4d4d4d']
 #gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
@@ -180,6 +180,16 @@ datiFinal.to_csv("/home/protoss/Documenti/SistemiComplessi/data/Iuri/AttackDataF
 #datiFinal.head()
 
 
+# CPU times: user 1min 34s, sys: 644 ms, total: 1min 35s  
+# Wall time: 1min 34s  
+# CPU times: user 1min 44s, sys: 696 ms, total: 1min 44s  
+# Wall time: 1min 43s  
+# CPU times: user 4min 40s, sys: 2.09 s, total: 4min 42s  
+# Wall time: 4min 40s  
+# CPU times: user 37.4 s, sys: 188 ms, total: 37.6 s  
+# Wall time: 37.4 s  
+#   
+
 # In[5]:
 
 #Failure
@@ -200,6 +210,16 @@ datiFinal['GCsize'] = relSizeGC
 datiFinal.to_csv("/home/protoss/Documenti/SistemiComplessi/data/Iuri/FailureDataForSeaborn.csv")
 #datiFinal
 
+
+# CPU times: user 7min 42s, sys: 3.14 s, total: 7min 45s  
+# Wall time: 7min 41s  
+# CPU times: user 6min 53s, sys: 3.04 s, total: 6min 56s  
+# Wall time: 6min 52s  
+# CPU times: user 22min 48s, sys: 9.6 s, total: 22min 57s  
+# Wall time: 22min 44s  
+# CPU times: user 3min 7s, sys: 1.29 s, total: 3min 8s  
+# Wall time: 3min 7s  
+# 
 
 # ## Faccio i grafici
 

@@ -3,7 +3,7 @@
 
 # ### Importo tutte le librerie necessarie
 
-# In[3]:
+# In[1]:
 
 import geopy
 from geopy import distance
@@ -388,10 +388,10 @@ for compagnia in gestore:
 
 
 # NB. num antenne  
-#    * TIM - 1550  
-#    * Vodafone - 1531  
-#    * Wind - 2175   
-#    * 3 - 1315  
+#    * TIM - 1756  
+#    * Vodafone - 1771  
+#    * Wind - 2365   
+#    * 3 - 1395  
 #    
 # Tot antenne: 6571  
 
