@@ -43,16 +43,24 @@
 [HTML palette](http://paletton.com)
 [import](http://www.html5rocks.com/en/tutorials/webcomponents/imports/)
 
-## pagina HTML della relazione
+## Pagina HTML della relazione
 [homepage](http://federicomuciaccia.github.io/SistemiComplessi/)
 
-## graph-tool (ANCORA DA PROVARE)
+## Graph-tool
 [quick start](https://graph-tool.skewed.de/static/doc/quickstart.html)
 [performance comparison](http://graph-tool.skewed.de/performance)
 [documentation](http://graph-tool.skewed.de/static/doc/index.html)
 [homepage](http://graph-tool.skewed.de/)
 [installation](http://graph-tool.skewed.de/download)
 [animations](http://graph-tool.skewed.de/static/doc/demos/animation.html)
+
+## Palette colori Sapienza
+porpora #822433
+grigio #52514B
+blu #344761
+arancio #C03E27
+verde acqua #18625B
+oliva ascolana #534F2C
 
 
 

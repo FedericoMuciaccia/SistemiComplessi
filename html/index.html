@@ -19,16 +19,9 @@
           <!-- <a id="forkme_banner" href="https://github.com/FedericoMuciaccia/SistemiComplessi">View on GitHub</a> -->
 
           <h1 id="project_title">Analisi di rete per le antenne telefoniche di Roma</h1>
-          <h2 id="project_tagline">Federico Muciaccia e Iuri la Rosa</h2>
-
-<p>
-Tesina d'esame per il corso di Sistemi Complessi, anno accademico 2015-2016<br>
-Docente: Vittorio Loreto. Tutor: Antrea Capocci
-</p>
-            <!-- <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/FedericoMuciaccia/SistemiComplessi/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/FedericoMuciaccia/SistemiComplessi/tarball/master">Download this project as a tar.gz file</a>
-            </section> -->
+          <h2 id="project_tagline">Federico Muciaccia e Iuri La Rosa</h2>
+	  <p>Tesina d'esame per il corso di Sistemi Complessi, anno accademico 2015-2016<br>
+	  Docente: Vittorio Loreto. Tutor: Antrea Capocci</p>
         </header>
     </div>
 
@@ -100,25 +93,150 @@ C'è un solo grande problema: i dati sono chiusi.</p>
 
 <iframe src="../html/MLS_header.html"></iframe>
 
-<p>La mappatura viene fatta dagli utenti su base puramente volontaria, utilizzando l'apposita applicazione <a href="https://play.google.com/store/apps/details?id=org.mozilla.mozstumbler">Mozilla Stumbler</a></p>
+<p>La mappatura viene fatta dagli utenti su base puramente volontaria, utilizzando l'apposita applicazione <a href="https://play.google.com/store/apps/details?id=org.mozilla.mozstumbler">Mozilla Stumbler</a>.</p>
 
-<p><img src="https://location.services.mozilla.com/static/images/mozstumbler.png" alt="Mozilla Stumbler" title="" /></p>
+<p><img src="../img/Mozilla_Stumbler.jpg" alt="Mozilla Stumbler" title="" /></p>
 
 <p>Il progetto è ormai maturo e, come si può osservare dalla seguente mappa, la copertura del mondo è molto capillare.</p>
 
-<p>TODO mettere bottone</p>
-
 <p><!-- <a href="../html/MLS_map.html">Mozilla Location Service wolrd coverage</a> -->
-Mozilla Location Service wolrd coverage</p>
+Mozilla Location Service wolrd coverage.</p>
 
 <iframe src="../html/MLS_map.html" height=400 style="width:800px;"></iframe>
 
 <p>Mozilla Location Service funziona sia con le antenne cellulari che con i WiFi, soltanto che attulamente i dati della mappa WiFi (mostrati approssimati nella mappa precedente) non possono essere resi pubblici per questioni relative alle norme sulla privacy vigenti sia negli Stati Uniti sia in altre nazioni.</p>
 
-<p>Pertanto gli unici dati attualmente liberamente disponibili sono quelli sulle antenne radio delle varie generazioni: 2G (GSM), 3G (UMTS), 4G (LTE). <br />
-I dati forniti da Mozilla sono un'estensione di quelli già disponibili sulla piattaforma <a href="http://opencellid.org/">OpenCellID</a>, anche loro open.</p>
+<p>Pertanto gli unici dati attualmente liberamente disponibili (dominio pubblico, licenza <a href=https://creativecommons.org/publicdomain/zero/1.0/ >CC0</a>) sono quelli sulle antenne radio delle varie generazioni: 2G (GSM), 3G (UMTS), 4G (LTE). <br />
+I dati forniti da Mozilla sono un'estensione di quelli già disponibili sulla piattaforma <a href="http://opencellid.org/">OpenCellID</a>, anche loro open (licenza <a href=https://creativecommons.org/licenses/by-sa/3.0/ >CC-BY-SA 3.0</a>).</p>
 
 <p>Questi sono dunque i dati che abbiamo analizzato in questa nostra tesina.</p>
+
+<h2>2.1 Struttura dei dati</h2>
+
+<p>I dati <a href="https://location.services.mozilla.com/downloads">scaricabili</a> dal sito del progetto Mozilla Location Service appaiono così:</p>
+
+<a href="../html/dataframe_example_Mozilla.html">Esempio del dataframe MLS</a>
+
+<iframe src="../html/dataframe_example_Mozilla.html" height=480"></iframe>
+
+<p>I dati vengono forniti in un file CSV, le cui voci, secondo la <a href="https://mozilla.github.io/ichnaea/import_export.html">documentazione ufficiale</a>, sono organizzate nella seguente maniera:</p>
+
+<p><code>
+radio
+</code></p>
+
+<blockquote>
+  <p>Network type. One of the strings GSM, UMTS or LTE.</p>
+</blockquote>
+
+<p><code>
+mcc
+</code></p>
+
+<blockquote>
+  <p>Mobile Country Code. An integer, for example 505, the code for Australia.</p>
+</blockquote>
+
+<p><code>
+net
+</code></p>
+
+<blockquote>
+  <p>For GSM, UMTS and LTE networks, this is the mobile network code (MNC). An integer, for example 4, the MNC used by Vodaphone in the Netherlands.</p>
+</blockquote>
+
+<p><code>
+area
+</code></p>
+
+<blockquote>
+  <p>For GSM and UMTS networks, this is the location area code (LAC). For LTE networks, this is the tracking area code (TAC). An integer, for example 2035.</p>
+</blockquote>
+
+<p><code>
+cell
+</code></p>
+
+<blockquote>
+  <p>For GSM and LTE networks, this is the cell id or cell identity (CID). For UMTS networks this is the UTRAN cell id, which is the concatenation of 2 bytes of radio network controller (RNC) code and 2 bytes of cell id. An integer, for example 32345.</p>
+</blockquote>
+
+<p><code>
+unit
+</code></p>
+
+<blockquote>
+  <p>For UMTS networks, this is the primary scrambling code (PSC). For LTE networks, this is the physical cell id (PCI). For GSM networks, this is empty. An integer, for example 312.</p>
+</blockquote>
+
+<p><code>
+lon
+</code></p>
+
+<blockquote>
+  <p>Longitude in degrees between -180.0 and 180.0 using the WSG 84 reference system. A floating point number, for example 52.3456789.</p>
+</blockquote>
+
+<p><code>
+lat
+</code></p>
+
+<blockquote>
+  <p>Latitude in degrees between -90.0 and 90.0 using the WSG 84 reference system. A floating point number, for example -10.034.</p>
+</blockquote>
+
+<p><code>
+range
+</code></p>
+
+<blockquote>
+  <p>Estimate of radio range, in meters. This is an estimate on how large each cell area is, as a radius around the estimated position and is based on the observations or a knowledgeable source. An integer, for example 2500.</p>
+</blockquote>
+
+<p><code>
+samples
+</code></p>
+
+<blockquote>
+  <p>Total number of observations used to calculate the estimated position, range and averageSignal. An integer, for example 1200.</p>
+</blockquote>
+
+<p><code>
+changeable
+</code></p>
+
+<blockquote>
+  <p>Whether or not this cell is a position estimate based on observations, and therefore subject to change in the future, or is an exact location entered from a knowledgeable source. A boolean value, encoded as either 1 (for “changeable”) or 0 (for “exact”).</p>
+</blockquote>
+
+<p><code>
+created
+</code></p>
+
+<blockquote>
+  <p>Timestamp of the time when this record was first created. An integer, counting seconds since the UTC Unix Epoch of 1970-01-01T00:00:00Z. For example, 1406204196, which is the timestamp for 2014-07-24T12:16:36Z.</p>
+</blockquote>
+
+<p><code>
+updated
+</code></p>
+
+<blockquote>
+  <p>Timestamp of the time when this record was most recently modified. An integer, counting seconds since the UTC Unix Epoch of 1970-01-01T00:00:00Z. For example, 1406204196, which is the timestamp for 2014-07-24T12:16:36Z.</p>
+</blockquote>
+
+<p><code>
+averageSignal
+</code></p>
+
+<blockquote>
+  <p>Average signal strength from all observations for the cell network. An integer value, in dBm. For example, -72. <br />
+This field is only used by the OpenCellID project and historically has been used as a hint towards the quality of the position estimate.</p>
+</blockquote>
+
+<p>I dati forniti sono di tipo aggregato, ovvero riportano il numero di osservazioni per antenna ed il risultato della stima della sua posizione. Esistono anche dati grezzi, ovvero corrispondenti alle singole osservazioni dei singoli utenti. Tale dataset però non viene reso pubblicamente disponibile, in quanto contenente diverse informazioni, anche di carattere dinamico, utili a tracciare il singolo individuo. È allo studio un meccanismo di autorizzazioni per permettere agni utenti consci degli eventuali rischi di pubblicare i dati che li riguardano.</p>
+
+<p>I valori di latitudine e longitudine per le coordinate nelle proiezioni geografiche seguono il sistema di riferimento dettato dalla convenzione <em>WSG 84 Web Mercator</em>.</p>
 
 <h2>2.2 Data selection</h2>
 
@@ -168,12 +286,9 @@ def euclideanDistace(x,y):
 
 <p>I dati sono stati importati in un dataframe tabulare usando la libreria <code>pandas</code>. Questo che ci ha permesso di effettuare facilmente tutte le query necessarie per il filtraggio dei dati.</p>
 
-<p>TODO fare una specie di bottone</p>
+<a href="../html/dataframe_example_Roma.html">Esempio del dataframe da noi utilizzato</a>
 
-<p><!-- <a href="../html/dataframe_example_Roma.html">Esempio del dataframe da noi utilizzato</a> -->
-Esempio del dataframe da noi utilizzato</p>
-
-<iframe src="../html/dataframe_example_Roma.html" height=480 style="width:700px;"></iframe>
+<iframe src="../html/dataframe_example_Roma.html" height=460></iframe>
 
 <p>A questo punto abbiamo finalmente il nostro datasample della città di Roma: circa 7000 antenne in un file csv agevolmente maneggiabile di circa 1MB.</p>
 
@@ -192,17 +307,14 @@ gmaps.display(heatmap)
 colosseo = (41.890183, 12.492369)
 mappa = gmplot.GoogleMapPlotter(41.890183, 12.492369, 12)
 mappa.heatmap(roma.lat.values,roma.lon.values)
-mappa.draw("../doc/mappa.html")
+mappa.draw("../doc/heatmap.html")
 </code></pre>
 
 <p>(per scrivere queste poche linee di codice c'è voluto un'intero pomeriggio!)</p>
 
-<p>TODO fare una specie di bottone</p>
+<p>Heatmap delle antenne telefoniche di Roma</p>
 
-<p><!-- <a href="../html/heatmap.html">Heatmap delle antenne telefoniche di Roma</a> -->
-Heatmap delle antenne telefoniche di Roma</p>
-
-<iframe src="../html/heatmap.html" height=640></iframe>
+<iframe src="../html/heatmap.html" height=670></iframe>
 
 <p>Dalla mappa si capisce bene quanto sia fitta le rete di antenne Romana.</p>
 
@@ -228,6 +340,8 @@ La canalizzazione logaritmica pesata permette di osservare l'andamento ben sotto
 TODO  cercare di spiegare questa power-law.
 Il frequency-rank si ottiene ordinando in maniera decrescente il numero di conteggi per ogni canale unitario e associando un relativo ranking intero decrescente ai raggi corrispondenti.
 <img src="../img/range/range_distribution.svg"/></p>
+
+TODO mettere plugin che se si clicka sull'immagine la visualizza a tutto schermo
 
 <p>Si è infine analizzata la distribuzione cumulata, lasciata nel grafico seguente non normalizzata.
 La distribuzione cumulata $C(x)$ rappresenta la probabilità che la variabile random assuma un valore minore o uguale a $x$.
@@ -314,8 +428,8 @@ la strategia ottimale è quella che, a parità di risultato, coinvolge il minor 
     <div id="footer_wrap" class="outer">
       <footer class="inner">
         <p class="copyright">
-	<p>Maintained by <a href="https://github.com/FedericoMuciaccia">Federico Muciaccia</a> and <a href="https://github.com/LolAsdOmgWtfAfk">Iuri La Rosa</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+	<p>Authors: <a href="https://github.com/FedericoMuciaccia">Federico Muciaccia</a> and <a href="https://github.com/LolAsdOmgWtfAfk">Iuri La Rosa</a></p>
+	<p>License: <a href=https://creativecommons.org/licenses/by-sa/3.0/ >CC-BY-SA 3.0</a></p>
       </footer>
     </div>
 
