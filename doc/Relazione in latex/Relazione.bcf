@@ -2243,6 +2243,11 @@
     <bcf:citekey order="5">Barbalbert2002</bcf:citekey>
     <bcf:citekey order="6">Barbalbert2002</bcf:citekey>
     <bcf:citekey order="7">Barbalbert2002</bcf:citekey>
+    <bcf:citekey order="8">Cohen2000</bcf:citekey>
+    <bcf:citekey order="9">Molloy1995</bcf:citekey>
+    <bcf:citekey order="10">Cohen2000</bcf:citekey>
+    <bcf:citekey order="11">Cohen2001</bcf:citekey>
+    <bcf:citekey order="12">Barbalbert2002</bcf:citekey>
     <bcf:citekey order="0">*</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nyt" type="entry" sortscheme="nyt">

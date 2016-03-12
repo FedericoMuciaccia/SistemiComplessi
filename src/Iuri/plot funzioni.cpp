@@ -48,24 +48,24 @@ void graficifit(const char* input)	//macro uguale alla precedente ma che popola 
 	grafico->SetMarkerStyle(20);
 	grafico->SetMarkerSize(0.9);
 	
-	grafico->SetTitle("Confronto C(p)");
-	grafico->GetXaxis()->SetTitle("p");
-	grafico->GetYaxis()->SetTitle("C");
-	grafico->GetYaxis()->SetNdivisions(10,3,0,kTRUE);
-	grafico->GetXaxis()->SetNdivisions(10,3,0,kTRUE);
+	grafico->SetTitle("F(q)=q");
+// 	grafico->GetXaxis()->SetTitle("p");
+// 	grafico->GetYaxis()->SetTitle("C");
+	grafico->GetYaxis()->SetNdivisions(2,2,0,kTRUE);
+	grafico->GetXaxis()->SetNdivisions(2,2,0,kTRUE);
 	
-	axis->SetLimits(0,1.05);
-	grafico->GetHistogram()->SetMaximum(0.80);         
+	axis->SetLimits(0,1.1);
+	grafico->GetHistogram()->SetMaximum(1.1);         
 	grafico->GetHistogram()->SetMinimum(0);
 	
  	grafico->Draw("AP"); // traccia il grafico dei punti
 
-	TF1 *retta = new TF1("retta", "x", -0.1, 1);	// definisco funzione di fitting: retta
+	TF1 *retta = new TF1("retta", "x", -0.2, 2);	// definisco funzione di fitting: retta
 	retta->SetLineColor(kGreen-6);
 	retta->SetLineWidth(2.8);
 
 	
-	TF1 *curva = new TF1("curva", "0.75*(1-x)**3", -0.1, 1);	// definisco funzione di fitting: retta
+	TF1 *curva = new TF1("curva", "0.4+0.6*(x**1.5)", -0.2, 2);	// definisco funzione di fitting: retta
 	curva->SetLineColor(kBlue-7);
 	curva->SetLineWidth(2.8);
 	
@@ -77,7 +77,7 @@ void graficifit(const char* input)	//macro uguale alla precedente ma che popola 
 	
 	legenda = new TLegend(0.957,0.955,0.785,0.825);
 	legenda->SetFillColor(0);
-	legenda->AddEntry(retta,"C_{ER}(p)","L");
- 	legenda->AddEntry(curva, "C_{WS}(p)", "L");
+	legenda->AddEntry(retta,"q","L");
+ 	legenda->AddEntry(curva, "F(q)", "L");
 	legenda->Draw("SAME");
 }
