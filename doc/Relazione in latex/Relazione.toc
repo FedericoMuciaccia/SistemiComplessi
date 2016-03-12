@@ -20,10 +20,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {1.4.1}Soglia percolativa}{12}{subsubsection.1.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2}Costruzione e analisi delle reti}{13}{section.2}
+\contentsline {section}{\numberline {2}Costruzione e analisi delle reti}{15}{section.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Network breakdown}{13}{section.3}
+\contentsline {section}{\numberline {3}Network breakdown}{15}{section.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1}Simulazione}{13}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.1}Simulazione}{15}{subsection.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Conclusioni}{13}{section.4}
+\contentsline {section}{\numberline {4}Conclusioni}{15}{section.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Riferimenti bibliografici}{16}{section*.12}
