@@ -165,7 +165,7 @@ pyplot.show()
 # <codecell>
 
 #    if(modello == 'Erdos-Renyi'):
-grafoErdos = networkx.erdos_renyi_graph(100, 0.02)
+grafoErdos = networkx.erdos_renyi_graph(10000, 0.002)
 gradoErdos = grafoErdos.degree().values()
 adiacenzaErdos = networkx.to_numpy_matrix(grafoErdos)
 adiacenzaErdos
@@ -284,7 +284,7 @@ graph_draw(gToolGrafoBarabasi, pos = pos, output_size=(1000, 1000),
 # <codecell>
 
 #initial = 0
-g = graph_tool.generation.price_network(100, m=2, gamma = 1,
+g = graph_tool.generation.price_network(10000, m=10, gamma = 1,
                                               #seed_graph = gToolGrafoErdos,
                                               directed=False)
 #pos = graph_tool.draw.sfdp_layout(g)

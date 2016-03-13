@@ -1,0 +1,299 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.5 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist{nyt}{nyt}
+    \entry{Barbalbert2002}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=da501ced81e5fe59aeaa8f4cbdcf8545}{Albert}{A\bibinitperiod}{R.}{R\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=8371a09b75201e2c5d1d92ca0b19f115}{Barabasi}{B\bibinitperiod}{A.\bibnamedelimi L.}{A\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{09ee627d3526c09424299629cae08d76}
+      \strng{fullhash}{09ee627d3526c09424299629cae08d76}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelyear}{2002}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Reviews of modern physics}
+      \field{title}{Statistical mechanics of complex networks}
+      \field{volume}{74}
+      \field{year}{2002}
+      \field{pages}{47}
+      \range{pages}{1}
+    \endentry
+    \entry{Barbalbert2000}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=da501ced81e5fe59aeaa8f4cbdcf8545}{Albert}{A\bibinitperiod}{R.}{R\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=cf9eb06fb79de28cbf64fbe1d1d39f98}{Jeong}{J\bibinitperiod}{H.}{H\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=8371a09b75201e2c5d1d92ca0b19f115}{Barabasi}{B\bibinitperiod}{A.\bibnamedelimi L.}{A\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{16a3d310043f4cf6b3c06502be9d42c3}
+      \strng{fullhash}{16a3d310043f4cf6b3c06502be9d42c3}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelyear}{2000}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature}
+      \field{title}{Error and attack tolerance of complex networks}
+      \field{volume}{406}
+      \field{year}{2000}
+      \field{pages}{378}
+      \range{pages}{1}
+    \endentry
+    \entry{Barbalbert1999}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=8371a09b75201e2c5d1d92ca0b19f115}{Barabasi}{B\bibinitperiod}{A.\bibnamedelimi L.}{A\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=da501ced81e5fe59aeaa8f4cbdcf8545}{Albert}{A\bibinitperiod}{R.}{R\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{dd196852da7de4bda9019514edee3882}
+      \strng{fullhash}{dd196852da7de4bda9019514edee3882}
+      \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
+      \field{labelyear}{1999}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Science}
+      \field{title}{Emergence of scaling in random nertowrks}
+      \field{volume}{286}
+      \field{year}{1999}
+      \field{pages}{509}
+      \range{pages}{1}
+    \endentry
+    \entry{Cohen2000}{article}{}
+      \name{author}{4}{}{%
+        {{uniquename=0,hash=931b341c37281aa4ac6d835439c3651f}{Cohen}{C\bibinitperiod}{R.}{R\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=5178d8e2736c4e3c85edfdc3574ae15f}{Erez}{E\bibinitperiod}{K.}{K\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=91a2fa5cf529886f6a6380a1f4bb512a}{ben-Avraham}{b\bibinithyphendelim A\bibinitperiod}{D.}{D\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=d34f5e04d6ca191e4634d0acc6b11bc5}{S.}{S\bibinitperiod}{Havlin}{H\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{9f3546b823c2c5cb9d0ed1b6d890f95c}
+      \strng{fullhash}{dd100050955067de05ea04790410d162}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{labelyear}{2000}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physical Review letters}
+      \field{title}{Resilience of the Internet to Random Breakdowns}
+      \field{volume}{85}
+      \field{year}{2000}
+      \field{pages}{4626}
+      \range{pages}{1}
+    \endentry
+    \entry{Cohen2001}{article}{}
+      \name{author}{4}{}{%
+        {{uniquename=0,hash=931b341c37281aa4ac6d835439c3651f}{Cohen}{C\bibinitperiod}{R.}{R\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=5178d8e2736c4e3c85edfdc3574ae15f}{Erez}{E\bibinitperiod}{K.}{K\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=91a2fa5cf529886f6a6380a1f4bb512a}{ben-Avraham}{b\bibinithyphendelim A\bibinitperiod}{D.}{D\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=d34f5e04d6ca191e4634d0acc6b11bc5}{S.}{S\bibinitperiod}{Havlin}{H\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{9f3546b823c2c5cb9d0ed1b6d890f95c}
+      \strng{fullhash}{dd100050955067de05ea04790410d162}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{labelyear}{2001}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physical Review letters}
+      \field{title}{Breakdown of the Internet under Intentional Attack}
+      \field{volume}{86}
+      \field{year}{2001}
+      \field{pages}{3682}
+      \range{pages}{1}
+    \endentry
+    \entry{Erdos1959}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=731f652a1aa2e8b4d8dd88796de84778}{Erdős}{E\bibinitperiod}{P.}{P\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=e827c42e4155b77814dc8e6550cc77eb}{Rényi}{R\bibinitperiod}{A.}{A\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{8ebb435b1ca26ba0480021e2cca18b08}
+      \strng{fullhash}{8ebb435b1ca26ba0480021e2cca18b08}
+      \field{sortinit}{E}
+      \field{sortinithash}{fefc5210ef4721525b2a478df41efcd4}
+      \field{labelyear}{1959}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Publicationes Mathematicae Debrecen}
+      \field{title}{On random graphs I}
+      \field{volume}{6}
+      \field{year}{1959}
+      \field{pages}{290}
+      \range{pages}{1}
+    \endentry
+    \entry{Molloy1995}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=0396ddc3dc0e46bf168ca9224885ea55}{Molloy}{M\bibinitperiod}{M.}{M\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=0b680a926b9bd146277cee40a3520cc5}{Reed}{R\bibinitperiod}{B.}{B\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{7165fb324cf14a28a551cd9fc7bda5aa}
+      \strng{fullhash}{7165fb324cf14a28a551cd9fc7bda5aa}
+      \field{sortinit}{M}
+      \field{sortinithash}{2684bec41e9697b92699b46491061da2}
+      \field{labelyear}{1995}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Random structures and algorithms}
+      \field{title}{A critical point for random graphs with a given degree sequence}
+      \field{volume}{6}
+      \field{year}{1995}
+      \field{pages}{161}
+      \range{pages}{1}
+    \endentry
+    \entry{Motter2002}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=ff43482671191287e48f1231a33a96a6}{Motter}{M\bibinitperiod}{A.\bibnamedelimi E.}{A\bibinitperiod\bibinitdelim E\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=d06af7c2508004c618b62a5f422351fc}{Lai}{L\bibinitperiod}{Y.\bibnamedelimi C.}{Y\bibinitperiod\bibinitdelim C\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{e8de7f16c34c9a47504fbf6b1d599649}
+      \strng{fullhash}{e8de7f16c34c9a47504fbf6b1d599649}
+      \field{sortinit}{M}
+      \field{sortinithash}{2684bec41e9697b92699b46491061da2}
+      \field{labelyear}{2002}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physical Review E}
+      \field{title}{Cascade-based attacks on complex networks}
+      \field{volume}{66}
+      \field{year}{2002}
+      \field{pages}{065102}
+      \range{pages}{1}
+    \endentry
+    \entry{mozilla}{online}{}
+      \list{organization}{1}{%
+        {Mozilla Foundation}%
+      }
+      \field{sortinit}{M}
+      \field{sortinithash}{2684bec41e9697b92699b46491061da2}
+      \field{labelyear}{nodate}
+      \field{labeltitlesource}{title}
+      \field{title}{Mozilla Location Service}
+      \verb{url}
+      \verb https://location.services.mozilla.com/
+      \endverb
+    \endentry
+    \entry{cellid}{online}{}
+      \list{organization}{1}{%
+        {ENAiKOON}%
+      }
+      \field{sortinit}{O}
+      \field{sortinithash}{7803d2715d5e795e70382b084ab8d00e}
+      \field{labelyear}{nodate}
+      \field{labeltitlesource}{title}
+      \field{title}{OpenCellID}
+      \verb{url}
+      \verb http://opencellid.org/
+      \endverb
+    \endentry
+    \entry{Wang2009}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=441311d7f14dc1f68a9e804adfe567c8}{Wang}{W\bibinitperiod}{J.\bibnamedelimi W.}{J\bibinitperiod\bibinitdelim W\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=e0889c441371a6546184d9ef62dd1a8e}{Rong}{R\bibinitperiod}{L.\bibnamedelimi L.}{L\bibinitperiod\bibinitdelim L\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{fdde68ac61fed2e4c31e24bb8fd81572}
+      \strng{fullhash}{fdde68ac61fed2e4c31e24bb8fd81572}
+      \field{sortinit}{W}
+      \field{sortinithash}{99e3ba1b3f78bb6f073e7fa7ac11636b}
+      \field{labelyear}{2009}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Safety Science}
+      \field{title}{Cascade-based attack vulnerability on the US power grid}
+      \field{volume}{47}
+      \field{year}{2009}
+      \field{pages}{1332}
+      \range{pages}{1}
+    \endentry
+    \entry{Watts1998}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=cf9269d89841535ad96795ab2c381ecd}{Watts}{W\bibinitperiod}{J.}{J\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=5a0f784116d8cee6e6f3cc06d14e2840}{Strogatz}{S\bibinitperiod}{H.}{H\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{37c146777f4fb9e01502001399d2ab20}
+      \strng{fullhash}{37c146777f4fb9e01502001399d2ab20}
+      \field{sortinit}{W}
+      \field{sortinithash}{99e3ba1b3f78bb6f073e7fa7ac11636b}
+      \field{labelyear}{1998}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature}
+      \field{title}{Collective dynamics of 'small-world' networks}
+      \field{volume}{393}
+      \field{year}{1998}
+      \field{pages}{440}
+      \range{pages}{1}
+    \endentry
+    \entry{Zhao2004}{article}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=99b12822f8310533971a287caad4524c}{Zhao}{Z\bibinitperiod}{L.}{L\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=0356a602e501e47f6d05d69119fa2bbc}{Park}{P\bibinitperiod}{K.}{K\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=d06af7c2508004c618b62a5f422351fc}{Lai}{L\bibinitperiod}{Y.\bibnamedelimi C.}{Y\bibinitperiod\bibinitdelim C\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{53b7664f1628cca483198bef786966c0}
+      \strng{fullhash}{53b7664f1628cca483198bef786966c0}
+      \field{sortinit}{Z}
+      \field{sortinithash}{fdda4caaa6b5fa63e0c081dcb159543a}
+      \field{labelyear}{2004}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physical Review E}
+      \field{title}{Attack vulnerability of scale-free networks due to cascading breakdown}
+      \field{volume}{70}
+      \field{year}{2004}
+      \field{pages}{035101}
+      \range{pages}{1}
+    \endentry
+    \entry{Zhao2005}{article}{}
+      \name{author}{4}{uniquelist=4}{%
+        {{uniquename=0,hash=99b12822f8310533971a287caad4524c}{Zhao}{Z\bibinitperiod}{L.}{L\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=0356a602e501e47f6d05d69119fa2bbc}{Park}{P\bibinitperiod}{K.}{K\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=d06af7c2508004c618b62a5f422351fc}{Lai}{L\bibinitperiod}{Y.\bibnamedelimi C.}{Y\bibinitperiod\bibinitdelim C\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=c56b5b75a790422ef9bdea040d21d99d}{Ye}{Y\bibinitperiod}{N.}{N\bibinitperiod}{}{}{}{}}%
+      }
+      \strng{namehash}{becf4489b98b797921da27bba03c9360}
+      \strng{fullhash}{becf4489b98b797921da27bba03c9360}
+      \field{sortinit}{Z}
+      \field{sortinithash}{fdda4caaa6b5fa63e0c081dcb159543a}
+      \field{labelyear}{2005}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Physical Review E}
+      \field{title}{Tolerance of scale-free networks against attack-induced cascades}
+      \field{volume}{72}
+      \field{year}{2005}
+      \field{pages}{025104}
+      \range{pages}{1}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+
