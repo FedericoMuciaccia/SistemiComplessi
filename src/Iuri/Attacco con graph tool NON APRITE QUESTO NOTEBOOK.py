@@ -71,12 +71,69 @@ for compagnia in gestore:
 
 # <codecell>
 
+def topologia(compagnia):
+    azienda = []
+    diametro = []
+    cammino = []
+    cluster = []
+    relSizeGC = []
+    gradomedio = []
+    criterio = []
+    fcritica = []
+
+    grafo = load_graph("/home/protoss/Documenti/Siscomp_datas/data/GTool{0}.xml".format(compagnia))
+    
+    def gradonodo(identificativo):
+        vertice = grafo.vertex(identificativo)
+        return vertice.out_degree()
+
+    def kmedio(listadeg):
+        return numpy.mean(listadeg)
+    
+    def kquadromedio(listadeg):
+        listadegQuadri = numpy.power(listadeg, 2)
+        return numpy.mean(listadegQuadri)
+    
+    def freqCriterion(criterion):
+        return 1-(1/(criterion-1))
+    
+    graphSize = grafo.num_vertices()
+    giantCluster = graph_tool.topology.label_largest_component(grafo)
+    giantCluster = graph_tool.GraphView(grafo, vfilt=giantCluster)
+    
+    azienda.append(compagnia)
+    diametro.append(diameter(grafo))
+    cammino.append(averageLength(grafo))
+    cluster.append(clustering(grafo))
+    relSizeGC.append((giantCluster.num_vertices())/(float(graphSize)))
+
+    indice = numpy.arange(grafo.num_vertices())
+    listaGradi = map(gradonodo, indice)
+        
+    gradomedio.append(kmedio(listaGradi))
+    criterion = kquadromedio(listaGradi)/kmedio(listaGradi)
+    criterio.append(criterion)
+    fcritica.append(freqCriterion(criterion))
+
+# <codecell>
+
 # caricamento rete e studio topologico iniziale
 for compagnia in gestore:
-    print compagnia
-    grafo = load_graph("/home/protoss/Documenti/Siscomp_datas/data/GTool{0}.xml".format(gestore))
-    topo = %time topologia(grafo)
-    print topo, "\n"
+    %time topologia(compagnia)
+
+# <codecell>
+
+datiInitial = pandas.DataFrame()
+datiInitial['Rete'] = azienda
+datiInitial['GC %'] = relSizeGC
+datiInitial['D'] = diametro
+datiInitial['<l>'] = cammino
+datiInitial['C'] = cluster
+datiInitial['<k>'] = gradomedio
+datiInitial['<k^2>/<k>'] = criterio
+datiInitial['f'] = fcritica
+
+datiInitial.to_csv("/home/protoss/Documenti/SistemiComplessi/data/Iuri/DatiIniziali.csv")
 
 # <markdowncell>
 
