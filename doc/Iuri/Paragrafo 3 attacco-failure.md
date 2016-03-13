@@ -20,7 +20,6 @@ Le reti da cui è partito lo studio percolativo sono le 5 definite e costruite n
 
 
 [Dati iniziali delle reti studiate.][tab:datiInitial]
-
 	Rete		|N		|$GC\%$	|$D$	|$\langle l\rangle$	|$C$		|$\langle k\rangle$	|$C/\langle k\rangle$	|$\langle k^2\rangle/\langle k\rangle$	|$f\%$
 	:--		|--		|--		|--	|--				|--		|--				|--					|--							|--:  
 	Tim		|1756	|1		|2	|1.96			|0.89	|64.3			|0.014				|359							|99.7
@@ -80,7 +79,6 @@ o alcuni ecosistemi dove una catena alimentare che veda la scomparsa di una spec
 Una possibile interessante applicazione dei metodi e degli strumenti usati per analizzare la rete di antenne di Roma potrebbe essere lo studio di città molto più grandi e densamente popolate (come New York o Tokyo), ma servirebbero capacità di calcolo e di memoria molto più grandi di quelle a nostra disposizione. Un altro possibile studio potrebbe essere verificare la possibilità di creare una rete distribuita e aperta con i router wi-fi. Avendo questi un raggio molto inferiore delle antenne cellulari, la rete sarebbe molto simile a un reticolo, quindi benché uno studio percolativo possa essere interessante, non lo sarebbe dal punto di vista delle reti complesse. 
 %valutare se lasciare o rimuovere
 Una rete di questo tipo sarebbe comunque un nuovo concetto di Internet, che potrebbe avere interessanti sviluppi su reti di altro tipo, per esempio sociali, correlate a essa.
-
 
 
 [fig:failGC]: ./Immagini/Attack/gToolFailureGC_Final "Failure: GC](fig:f"
