@@ -70,6 +70,9 @@ Il fatto che il coefficiente di clustering non dipende dal numero di nodi è car
 
 Successivamente si procede a riarrangiare in maniera random i link tra i nodi, con una probabilità $p$ per ogni link di venire modificato. In questo modo si hanno un certo numero di link (in media $pnN$) che invece di essere tra nodi in prossimità, saranno tra nodi più lontani, come nel grafo:
 
+<!-- TODO da mettere un caption unico e tutte le figure assieme 
+\caption[Generazione con modello Watts-Strogatz.]{Generazione di grafi con il modello Watts-Strogatz a differenti $p$ di rewiring.}
+-->
 ![p=0](fig:WSp0)
 ![p=0.03](fig:WSp3)
 ![p=0.3](fig:WSp30)
@@ -79,6 +82,9 @@ Successivamente si procede a riarrangiare in maniera random i link tra i nodi, c
 Con questo metodo, a seguito del *rewiring* si ha il rischio che il grafo non sia più connesso. Ponendo $n>1$ ciò può essere evitato, portando la probabilità di avere un grafo non connesso quasi a zero già con $n=2$.
 Con $p \rightarrow 1$ il grafo diventa simile a quello di una rete di Erdős-Renyi:
 
+<!-- TODO da mettere un caption unico e tutte le figure assieme 
+\caption[Confronto grafi random.]{Confronto tra due grafi da 100 nodi: uno generato con il modello Erdos-Renyi ($p=7\%$) e uno con il modello Watts-Strogatz partendo da un reticolo con nodi connessi ai primi 3 vicini e il 100\% di probabilità di rewiring. A parte la somiglianza dei grafi, le distribuzioni del grado hanno simile comportamento.}
+-->
 ![Grafo random](fig:confrontoGraforandom)
 ![Grafo small-world](fig:confrontoGrafosmall)
 ![Confronto $P(k)$](fig:confrontoGradigauss)
@@ -170,16 +176,20 @@ TODO REF A EQUAZIONE DA SISTEMARE
 \ref{fig:banalita}
 <!-- TODO REF A FIGURA DA SISTEMARE -->
 , si può adottare un metodo grafico: la retta e la curva si intersecano sempre in due punti, il primo con $F'(q)<q'=1$ e il secondo con $F'(q) \geq 1$. Dato che uno dei due deve sempre essere $F(1)=1$, se 
+
 <!-- \label{eq:soluzione} -->
 $$F'(q=1) \geq 1 $$
+
 significa che esiste un altro punto di intersezione per $q<1$ e quindi esiste il giant cluster.
 Svolgendo $d_qF|_{q=1} \geq 1$ si ottiene la condizione di esistenza dello spanning cluster in termini del grado, o criterio di \textcite{Molloy1995}:
+
 <!--  \label{eq:criterion} -->
 $$\frac{\langle k^2\rangle}{\langle k \rangle}\geq 2.$$
 
 Questo risultato è valido per ogni tipo di rete \parencite{Cohen2000}.
 
 Un nodo con un grado iniziale $k_0$ avrà, dopo la rimozione di una frazione $f$ di nodi, un grado k con una probabilità dettata da una distribuzione binomiale $B_{p,k_0}(k)$, e quindi la nuova distribuzione dei gradi sarà $P(k) = \sum_{k_0} P(k_0)B_{p,k_0}(k)$. Ricavando i nuovi $\langle k \rangle$ e $\langle k^2 \rangle$ si ottiene che la frazione di nodi rimossi necessaria perché si verifichi che $\langle k^2\rangle/\langle k \rangle = 2$, e cioè il grafo sia completamente frammentato, è 
+
 
 TODO \label{eq:criterionfreq}
 
@@ -193,16 +203,17 @@ con
 
 Nel caso dell'attacco intenzionale la percentuale $f$ è ottenuta per via numerica. Dato inoltre il peculiare metodo di attacco scelto, sarebbe necessario uno studio progressivo che a ogni iterazione tenga conto del taglio dei $k$ più grandi e ricalcoli la $P(k)$ per ottenere il rapporto $\frac{\langle k^2 \rangle}{\langle k \rangle}$. Risulterebbe pertanto più conveniente effettuare simulazioni numeriche direttamente sui modelli \parencite{Cohen2001}.
 
-In ogni caso, a livello qualitativo, come nel caso di attacco random ci si aspettava una maggiore resistenza da parte delle reti scale-free, a causa del grande numero di nodi poco connessi che garantisce una $P(k)$ a legge di potenza con un opportuno $\alpha$, nel caso dell'attacco intenzionale ci si aspetta una certa fragilità. Infatti le reti scale free sono costruite attorno ai nodi più connessi, si può supporre quindi che rimuoverli per primi provochi un deterioramento più veloce rispetto a una rete random con uguale grado medio \parencite{Barbalbert2002}.
+In ogni caso, a livello qualitativo, come nel caso di attacco random ci si aspttettava una maggiore resistenza da parte delle reti scale-free, a causa del grande numero di nodi poco connessi che garantisce una $P(k)$ a legge di potenza con un opportuno $\alpha$, nel caso dell'attacco intenzionale ci si aspetta una certa fragilità. Infatti le reti scale free sono costruite attorno ai nodi più connessi, si può supporre quindi che rimuoverli per primi provochi un deterioramento più veloce rispetto a una rete random con uguale grado medio \parencite{Barbalbert2002}.
+<!-- Todo da mettere un caption unico e tutte le figure assieme
+\caption[Esistenza soluzione non banale.]{Confronto tra il caso in cui $F(q)=q$ ha solo la soluzione banale $q=1$, e il caso in cui esiste una soluzione per $q<1$.}
+-->
 ![Soluzione banale.](fig:banale)
 ![Soluzione non banale.](fig:nonbanale)
 
 
 [fig:ring]: ./img/Teoria/zoomring.svg "Il punto di partenza del modello Watts-Strogatz: un reticolo con condizioni al contorno cicliche."
 
-<!-- TODO da mettere un caption unico e tutte le figure assieme 
-\caption[Generazione con modello Watts-Strogatz.]{Generazione di grafi con il modello Watts-Strogatz a differenti $p$ di rewiring.}
--->
+
 [fig:WSp0]: ./img/Teoria/ringnet.svg "$p = 0$"
 [fig:WSp3]: ./img/Teoria/smallworld.svg "$p = 0.03$"
 [fig:WSp30]: ./img/Teoria/random-smallworld.svg "$p = 0.3$"
