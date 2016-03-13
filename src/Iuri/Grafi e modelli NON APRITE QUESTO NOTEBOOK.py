@@ -35,6 +35,59 @@ def conversione(grafo, adiacenza):
 
 # <codecell>
 
+#funzioni topologiche
+def averageLength(grafo):
+    istoLength = graph_tool.stats.distance_histogram(grafo)
+    istoLength[1] = numpy.delete(istoLength[1], len(istoLength[1])-1)
+    return numpy.average(istoLength[1], weights=istoLength[0])
+
+def diameter(grafo):
+    istoLength = graph_tool.stats.distance_histogram(grafo)
+    return len(istoLength[0])-1
+
+def clustering(grafo):
+    cluster = graph_tool.clustering.local_clustering(grafo)
+    array = numpy.array(cluster.a)
+    return numpy.average(array)
+
+# <codecell>
+
+def topologia(grafo, compagnia):
+    
+    def gradonodo(identificativo):
+        vertice = grafo.vertex(identificativo)
+        return vertice.out_degree()
+
+    def kmedio(listadeg):
+        return numpy.mean(listadeg)
+    
+    def kquadromedio(listadeg):
+        listadegQuadri = numpy.power(listadeg, 2)
+        return numpy.mean(listadegQuadri)
+    
+    def freqCriterion(criterion):
+        return 1-(1/float(criterion-1))
+    
+    graphSize = grafo.num_vertices()
+    giantCluster = graph_tool.topology.label_largest_component(grafo)
+    giantCluster = graph_tool.GraphView(grafo, vfilt=giantCluster)
+    
+    azienda.append(compagnia)
+    diametro.append(diameter(grafo))
+    cammino.append(averageLength(grafo))
+    cluster.append(clustering(grafo))
+    relSizeGC.append((giantCluster.num_vertices())/(float(graphSize)))
+
+    indice = numpy.arange(grafo.num_vertices())
+    listaGradi = map(gradonodo, indice)
+        
+    gradomedio.append(kmedio(listaGradi))
+    criterion = kquadromedio(listaGradi)/float(kmedio(listaGradi))
+    criterio.append(criterion)
+    fcritica.append(freqCriterion(criterion))
+
+# <codecell>
+
 #esempio di creazione grafo
 grafo = Graph(directed=False)
 v1 = grafo.add_vertex()
@@ -112,21 +165,22 @@ pyplot.show()
 # <codecell>
 
 #    if(modello == 'Erdos-Renyi'):
-grafoErdos = networkx.erdos_renyi_graph(100, 0.06)
+grafoErdos = networkx.erdos_renyi_graph(1756, 0.03661162)
 gradoErdos = grafoErdos.degree().values()
 adiacenzaErdos = networkx.to_numpy_matrix(grafoErdos)
-#adiacenzaErdos
+adiacenzaErdos
 gToolGrafoErdos = graph_tool.Graph(directed = False)
 %time conversione(gToolGrafoErdos, adiacenzaErdos)
+#gToolGrafoErdos.save("GToolErdosTim.xml")
 
 #    if(modello == 'Watts-Strogatz'):
-grafoWatts = networkx.watts_strogatz_graph(100, 4, 0)
-gradoWatts = grafoWatts.degree().values()
-adiacenzaWatts = networkx.to_numpy_matrix(grafoWatts)
+#grafoWatts = networkx.watts_strogatz_graph(236, 64, 0)
+#gradoWatts = grafoWatts.degree().values()
+#adiacenzaWatts = networkx.to_numpy_matrix(grafoWatts)
 #adiacenzaWatts
-gToolGrafoWatts = graph_tool.Graph(directed = False)
-%time conversione(gToolGrafoWatts, adiacenzaWatts)
-
+#gToolGrafoWatts = graph_tool.Graph(directed = False)
+#%time conversione(gToolGrafoWatts, adiacenzaWatts)
+#gToolGrafoWatts.save("GToolWattsTim.xml")
 
 #    if(modello == 'Barabasi-Abert'):
 #grafoBarabasi = networkx.barabasi_albert_graph(100, 10)
@@ -142,22 +196,39 @@ gToolGrafoWatts = graph_tool.Graph(directed = False)
 
 # <codecell>
 
-#grafoErdos = networkx.erdos_renyi_graph(100, 0.06)
-#gradoErdos = grafoErdos.degree().values()
+azienda = []
+diametro = []
+cammino = []
+cluster = []
+relSizeGC = []
+gradomedio = []
+criterio = []
+fcritica = []
 
-grafoWatts = networkx.watts_strogatz_graph(100, 6, 1)
-gradoWatts = grafoWatts.degree().values()
+topologia(gToolGrafoErdos, "Tim")
+datiInitial = pandas.DataFrame()
+datiInitial['Rete'] = azienda
+datiInitial['GC %'] = relSizeGC
+datiInitial['D'] = diametro
+datiInitial['<l>'] = cammino
+datiInitial['C'] = cluster
+datiInitial['<k>'] = gradomedio
+datiInitial['<k^2>/<k>'] = criterio
+datiInitial['f'] = fcritica
+datiInitial
+
+# <codecell>
 
 %matplotlib inline
 pyplot.figure(figsize=(12,9)) 
 grafico = degreeDistributionLog(gradoErdos, 'Erdos-Renyi', '#699534')
-grafico = degreeDistributionLog(gradoWatts, 'Watts-Strogatz', '#3D5A92')
+#grafico = degreeDistributionLog(gradoWatts, 'Watts-Strogatz', '#3D5A92')
 #grafico = degreeDistributionLog(gradoBarabasi, 'Barabasi-Albert', '#FD6266')
 #grafico = degreeDistributionLog(gradoBara, 'm=2', '#E47F2C')
 #pyplot.ylim(0.9,1100)
-pyplot.xlim(1,25)
+#pyplot.xlim(1,25)
 pyplot.legend()
-pyplot.savefig('compareSameN.svg', format='svg', dpi=1000)
+#pyplot.savefig('compareSameN.svg', format='svg', dpi=1000)
 
 # <codecell>
 

@@ -24,8 +24,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3}Network breakdown}{15}{section.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1}Simulazione}{15}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.1}Il punto di partenza}{15}{subsection.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Conclusioni}{15}{section.4}
+\contentsline {subsubsection}{\numberline {3.1.1}Random failure}{16}{subsubsection.3.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Riferimenti bibliografici}{16}{section*.12}
+\contentsline {subsubsection}{\numberline {3.1.2}Attacco intenzionale}{16}{subsubsection.3.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2}Risultati}{19}{subsection.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}Conclusioni}{19}{section.4}

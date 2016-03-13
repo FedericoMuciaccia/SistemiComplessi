@@ -8,13 +8,13 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {2}{\ignorespaces Generazione con modello Watts-Strogatz.}}{8}{figure.caption.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {p = 0}}}{8}{subfigure.2.1}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$p = 0$}}}{8}{subfigure.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {p = 0.03}}}{8}{subfigure.2.2}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$p = 0.03$}}}{8}{subfigure.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {p = 0.3}}}{8}{subfigure.2.3}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$p = 0.3$}}}{8}{subfigure.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {p = 1}}}{8}{subfigure.2.4}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {$p = 1$}}}{8}{subfigure.2.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {3}{\ignorespaces Confronto grafi random.}}{9}{figure.caption.8}
 \defcounter {refsection}{0}\relax 
@@ -31,3 +31,31 @@
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Solo $q=1$}}}{14}{subfigure.6.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Esistenza di $q<1$}}}{14}{subfigure.6.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {7}{\ignorespaces Risultati random.}}{17}{figure.caption.13}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$GC$}}}{17}{subfigure.7.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$C$}}}{17}{subfigure.7.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$\delimiter "426830A l \delimiter "526930B $}}}{17}{subfigure.7.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {$D$}}}{17}{subfigure.7.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {$\delimiter "426830A k \delimiter "526930B $}}}{17}{subfigure.7.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {$\delimiter "426830A k^2 \delimiter "526930B /\delimiter "426830A k \delimiter "526930B $}}}{17}{subfigure.7.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {8}{\ignorespaces Risultati attacco.}}{18}{figure.caption.14}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$GC$}}}{18}{subfigure.8.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$C$}}}{18}{subfigure.8.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$\delimiter "426830A l \delimiter "526930B $}}}{18}{subfigure.8.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {$D$}}}{18}{subfigure.8.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {$\delimiter "426830A k \delimiter "526930B $}}}{18}{subfigure.8.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {$\delimiter "426830A k^2 \delimiter "526930B /\delimiter "426830A k \delimiter "526930B $}}}{18}{subfigure.8.6}
