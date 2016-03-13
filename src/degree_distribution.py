@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[2]:
+# In[1]:
 
 import numpy
 import pandas
@@ -115,7 +115,7 @@ pyplot.legend()
 # TODO scrivere che dietro il futuro istogramma equispaziato ci sta un giorno di lavoro
 
 
-# In[58]:
+# In[2]:
 
 
 # logaritmic (base 2) binning in log-log (base 10) plots of integer histograms
@@ -306,9 +306,9 @@ gradi = [numpy.loadtxt("../data/DistrGrado_{0}".format(compagnia)) for compagnia
 # grado = numpy.loadtxt("../data/DistrGrado_{0}",compagnia)
 
 
-# In[73]:
+# In[7]:
 
-pyplot.figure(figsize=(12,8)) # dimensioni in pollici
+pyplot.figure(figsize=(12,9)) # dimensioni in pollici (formato 4:3)
 
 distribuzioneRangeTutti = pyplot.hist(gradi,
                                  bins=(max(gradi[-1])-1)/8, #TODO smoothing dei canali 
@@ -330,11 +330,93 @@ pyplot.ylim(10**0,10**3)
 pyplot.xscale("log")
 pyplot.yscale("log")
 pyplot.legend(loc='upper right', frameon=False)
+pyplot.savefig("../img/degree/degreeDistribution.svg", format="svg", transparent=True)
+
 
 
 # In[68]:
 
 # TODO fare frequency-rank
+
+
+# In[ ]:
+
+
+    
+    
+    
+    
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
+#matplotlib.pyplot.step(x=rank, y=frequency, where='post', label='frequency-rank', color='#00cc44')
+
+#matplotlib.pyplot.scatter(x=unique, y=counts, marker='o', color='#3385ff', label='linear binning (scatter)')
+#matplotlib.pyplot.step(xLog2, yLog2, where='post', color='#ff3300', label='log_2 weighted binning')
+
+
+
+
+# In[31]:
+
+pyplot.figure(figsize=(12,8)) # dimensioni in pollici (formato 4:3)
+
+#pyplot.plot((1,10**3), (10**6,1), linestyle="--", color="gray")
+pyplot.plot((10**1,10**2), (10**3,10**0), linestyle="--", color="gray", label="pow=-3")
+pyplot.plot((10**2,10**3), (10**2,10**0), linestyle="-.", color="gray", label="pow=-2")
+
+
+for i in range(5):
+    # istogramma sugli interi
+    unique, counts = numpy.unique(gradi[i], return_counts=True)
+    # print numpy.asarray((unique, counts)).T
+    rank = numpy.arange(1,len(unique)+1)
+    frequency = numpy.array(sorted(counts, reverse=True))
+    #matplotlib.pyplot.step(x=rank, y=frequency, where='post', label=compagnie[i], color=colori[i])
+    matplotlib.pyplot.scatter(x=rank, y=frequency, label=compagnie[i], color=colori[i])
+
+
+# # istogramma, semplice ed efficace!!! TODO !!!
+# for i in range(5):
+#     unique, counts = numpy.unique(gradi[i], return_counts=True)
+#     matplotlib.pyplot.step(x=unique, y=counts, where='post', label=compagnie[i], color=colori[i])
+#     # matplotlib.pyplot.scatter(x=unique, y=counts, label=compagnie[i], color=colori[i])
+# TODO vedere come si può fare tutto elegantemente usando un dataframe con tutti i dati, i nomi ed i colori
+
+pyplot.title('Degree')
+pyplot.ylabel("Frequency")
+pyplot.xlabel("Rank")
+pyplot.xlim(10**0,10**3)
+pyplot.ylim(10**0,10**2)
+# pyplot.gca().set_xscale("log")
+# pyplot.gca().set_yscale("log"
+pyplot.xscale("log")
+pyplot.yscale("log")
+pyplot.legend(loc='upper right', frameon=False)
+pyplot.savefig("../img/degree/degree_frequencyRank.svg", format="svg", transparent=True)
+
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
 
 
 # In[ ]:

@@ -39,11 +39,20 @@
 
 
 
+<h2>Sommario</h2>
+<p>Lo scopo di questo lavoro è fare un'analisi di rete usando un campione di antenne telefoniche cellulari, ipotizzando di voler costruire una ipotetica *mesh network* con esse. Abbiamo scelto di analizzare il sistema delle antenne comprese entro il Raccordo Anulare di Roma. Non sapendo a priori di quale tipo di rete si tratta, e che tipo di grafo si costruisce da essa, sono state studiate alcune proprietà topologiche e comportamentali dell'insieme di antenne studiate.
+Dopo aver definito il criterio con cui dare un link a due nodi, sono state calcolate le matrici di adiacenza della rete complessiva e di quelle composte solo dalle antenne dei singoli gestori presenti in Italia. La prima parte dell'analisi consiste nell'estrapolare dai grafi ottenuti le distribuzioni dei gradi e nell'affidare all'istogramma dei gradi la forma funzionale che meglio gli si adatti. Avendo così ottenuto indicazioni significative sui tipi di rete in analisi, le abbiamo verficate studiando il comportamento percolativo della rete, mediante rimozione di nodi in due diversi scenari: un attacco intenzionale, che rimuovesse le antenne a partire da quelle con maggior grado, e una caduta random del sistema. I risultati ottenuti sono stati confrontati con modelli di rete esponenziali e scale-free.
+L'esposizione è articolata nel seguente modo:</p>
 
+<p><strong>Nel paragrafo 1</strong> verranno esposte le basi teoriche dello studio effettuato, con particolare accento ai modelli di rete utilizzati come riferimento e ai concetti di percolazione e soglia percolativa.</p>
 
-<h2>Cosa vogliamo fare</h2>
+<p><strong>Nel paragrafo 2</strong> si spiega come sono stati raccolti e organizzati i dati, come è stata definita la rete e quindi con quali criteri è stata definita la matrice di adiacenza. Successivamente, accennando ai problemi computazionali avuti nel gestire la rete complessiva da circa 7000 nodi, verranno calcolate le matrici di adiacenza e le distribuzioni del grado.</p>
 
-<h2>2 GeoData: where and why</h2>
+<p><strong>Nel paragrafo 3</strong> viene effettuato lo studio percolativo mediante i due scenari di rimozione di nodi,  analizzando l'andamento del diametro e delle dimensioni del cluster più grande con la progressiva caduta delle antenne. I risultati sono stati confrontati con quelli ottenuti dai modelli, i quali hanno rivelato delle ambiguità. Nel caso di attacco random è stato testato infine un ipotetico effetto cascata causato dall'overload delle antenne rimaste (previa rimozione dei grossi hub che servono proprio a scongiurare tale evenienza).</p>
+
+<h2>TODO Cosa vogliamo fare</h2>
+
+<h2>2 GeoData: where and why (TODO sistemare titolo)</h2>
 
 <h3>Google Location Service</h3>
 
@@ -371,11 +380,101 @@ TODO mettere retta con pendenza con fit a mano spannometrico</p>
 
 <h2>TODO 2.4 Matrice di adiacenza e creazione del grafo</h2>
 
-<p>calcolare tutta la matrice di adiacenza con la distanza geodesica al posto di quella euclidea risulta pesantissimo ($N^2$ elementi)</p>
+<p>TODO correggere, mettere formule e spezzare in paragrafi</p>
 
-<p>spiegare il criterio di linking</p>
+<p>TODO prime ottimizzazioni (RAM e CPU) astuzie e approssimazioni. splitting della matrice, approssimazione distanza, stampa su file</p>
 
-<h2>TODO 2.5 Distribuzione del grado</h2>
+<p>TODO calcolare tutta la matrice di adiacenza con la distanza geodesica al posto di quella euclidea risulta pesantissimo ($N^2$ elementi)</p>
+
+<p>TODO spiegare il criterio di linking</p>
+
+<p>Prese le antenne nell'area selezionata come i nodi della rete, è necessario definire un criterio per stabilire un link. Nell'ottica di una ipotetica mesh network, la scelta è stata di considerare collegate due antenne se non hanno zone d'ombra del segnale nello spazio tra di esse, in modo che qualsiasi utente al suo interno possa comunicare con altri utenti (si suppone quindi un diverso metodo di comunicazione tra antenne, come cavo, altri canali Wi-fi). Trascurando dislivelli del terreno e edifici, è stato supposto che la porzione di spazio coperta da un'antenna sia un cilindro del raggio fornito dai dati. Il criterio scelto è stato quindi che la distanza $\delta_{ij}$ tra due antenne fosse minore dei loro raggi in modo tale che essi si sovrappongano per il $20\%$: $\delta_{ij} < 0.8(r_i+r_j)$.</P>
+
+<p>Stabilito il criterio, bisogna costruire la rete, popolando la matrice di adiacenza dei nodi. Dato che il criterio di linking richiede la conoscenza della distanza tra due antenne, è stato necessario calcolare le distanze tra ogni coppia di nodi. I dati in nostro possesso forniscono le coordinate geografiche, che sono delle coordinate sferiche, e quindi ci si è posti il problema di come calcolare le distanze. Inizialmente la scelta è caduta su una funzione della libreria <code>geopy</code>, la quale permette di calcoalare la distanza geodesica con il metodo <code>great-circle</code> e con la formula <code>vincenty</code>. La prima è più veloce e usa un modello sferico di Terra, la seconda richiede più calcoli perché usa un accurato modello ellissoidale (impiega circa il doppio del tempo del metodo <code>great-circle</code>).
+Purtroppo, tuttavia, i tempi di calcolo richiesti da queste funzioni sono piuttosto alti in prospettiva di calcolare una matrice di $7000^2$ elementi. Per risparmiare tempo, dato che la rete definita non è diretta, per prima cosa è stata modificata la funzione di calcolo della matrice di adiacenza in modo che calcolasse soltanto la metà superiore. Successivamente si poteva tentare di diagonalizzare a blocchi la matrice, cosa purtroppo impossibile poiché dai dati risulta che un certo numero di antenne hanno raggi d'azione nell'ordine dei 10-20 km, ricoprendo quindi tutta l'area di Roma selezionata. 
+L'unica via praticabile per far calare drasticamente il tempo necessario per calcolare tutte le matrici necessarie per l'analisi è stata quindi convertire le coordinate geografiche in cartesiane e usare la distanza euclidea. In questo modo si è ottenuto un guadagno di velocità di un fattore 10.
+Calcolate le matrici definitive per la rete complessiva e per quelle delle singole compagnie, sono state salvate su file in modo da non doverle più ricalcolare.</P>
+
+<h2>2.5 Distribuzione del grado</h2>
+
+<p>I vettore di gradi per ogni nodo del grafo si ottiene facilmente con il metodo <code>.degree()</code> della classe <code>Graph</code> di <code>networkx</code>.</p>
+
+<p>Abbiamo dunque fatto un istogramma congiunto di tutti i provider e della rete totale con un canale per ogni possibile numero naturare, ma in scala log-log risultava illegibile.
+Per ridurre un poco il rumore sulle code la canalizzazione è stata ridutta di 8 volte rispetto alle unità naturali. Data la poca estensione delle curve ed il fatto che molte non arrivavano fino ad 1, si è scelto di evitare il log-binning in base 2, in quanto in questo caso troppo grossolano e non in grado di conservare tutta l'informazione sulle code della distribuzione.</p>
+
+<p><a href="../img/degree/degreeDistribution.svg"">
+<img src="../img/degree/degreeDistribution.svg" /></a></p>
+
+<p>Come si può vedere nella figura, soprattutto per la rete complessiva l'andamento è circa power law dal massimo in poi. L'esponente è in valore assoluto di poco superiore a 3 nella prima parte e di poco inferiore a 3 nell'ultima parte della coda, estesa per circa mezza decade.</p>
+
+<p>Di seguito viene anche riportato l'andamento del frequency-rank (in forma di scatterplot per migliorarne la legibilità). La differenza nei valori sulle y rispetto all'istogramma precedente è dovuta al fatto che grazie all'ottima visibilità qui è stato possibile riprendere la canalizzazione sui numeri naturali, non aggregata.</p>
+
+<p><a href="../img/degree/degree_frequencyRank.svg"">
+<img src="../img/degree/degree_frequencyRank.svg" /></a></p>
+
+
+
+
+
+
+
+
+<h2>3 Network breakdown TODO INCOMPLETO DA RIPRENDERE DAL MARKDOWN DI IURI AGGIORNATO</h2>
+
+<p>TODO (formerly "Analisi percolativa" ma questo è un titolo noioso, meglio una roba più deep impact ogliea)</p>
+
+<p>Una volta osservate le distribuzioni del grado nelle reti delle quattro compagnie e nella rete complessiva formata da tutte le antenne comprese nell'area metropolitana di Roma, procediamo con lo studio percolativo. In riferimento al lavoro fatto da Albert, Jeong e Barabasi nel 1999, la scelta è stata di simulare due differenti scenari in cui i nodi della rete vengono disabilitati. Nel primo scenario si è ipotizzato un attacco intenzionale che cominciasse dai nodi con maggior grado, nel secondo una rimozione random. 
+Lo scopo è studiare l'andamento, in funzione della percentuale di nodi rimossi, del diametro $D$ della rete e della dimensione del cluster più grande (ipotizzando, o meglio verificando, che esso sia il <em>Giant Cluster</em> della rete) rapportata al numero totale di nodi sopravvissuti. A seconda di come la rete si comporterà, sarà possibile dedurne la robustezza nei due scenari, in modo tale da poter confrontare meglio tale comportamento con quello di una rete scale-free, o di una di tipo random.
+Per poter fare questo confronto sono state generate, usando le funzioni di <em>networkx</em>, delle reti con i modelli di rete scale free (<em>preferential attachment</em>, Barabasi, Albert 1999) e di rete esponenziale (<em>random network</em>, Erdős, Renyi 1959 e <em>small world</em>, Watts, Strogatz, 1998) e su tutti e tre i modelli abbiamo simulato i due scenari di caduta progressiva della rete. In tutti e cinque i campioni di rete che abbiamo analizzato è stato conteggiata la variazione di $D$ e $GC$ e i grafici ottenuti sono stati messi a confronto a quelli ottenuti con le reti generate secondo i modelli.</p>
+
+<p>TODO DA DECIDERE SE TAGLIARE O SINTETIZZARE</p>
+
+<p>La rete reale ha ovviamente delle contromisure per evitare la caduta delle comunicazioni. Le antenne trasmettono segnali tra loro su due bande di frequenza: una <em>user-side</em>, dedicata alle normali trasmissioni tra utenti del servizio, e una dedicata a un complesso sistema di feedback gestito da degli hub (grosse antenne con raggio sui 20 km). Questa struttura gerarchica permette, nel caso di caduta di una antenna o di un improvviso eccessivo carico in una zona circoscritta, che gli hub gestiscano potenza e capacità delle antenne circostanti mentre vengono inviati tecnici per un intervento sul luogo. 
+Questo sistema ha un certo tempo di reazione. L'analisi da noi svolta pertanto suppone che la caduta della rete avvenga in un tempo inferiore, in una sorta di approssimazione adiabatica. Inoltre, la sola caduta degli hub sarebbe già sufficiente a compromettere seriamente l'integrità della rete (le antenne avrebbero difficoltà a coordinare le comunicazioni tra loro), ma nella nostra ipotesi di mesh-network distribuita ci interessano soltanto le comunicazioni nelle frequenze user-side. Usando questo modello semplificato siamo riusciti a ottenere alcune informazioni su una ipotetica rete wireless di questa natura.</p>
+
+<h2>3.1 Attacco intenzionale</h2>
+
+<p>TODO NB quando dico "ci si aspetta" forse va fatto riferimento a condizione di percolazione teorica</p>
+
+<p>Nello scenario di attacco intenzionale ci si aspetta una veloce frammentazione della rete. I cluster diverranno rapidamente più piccoli fino a frammentarsi del tutto entro pochi punti percentuali di nodi rimossi. Nel caso di una rete fortemente connessa come quella in esame ci si aspetta una resistenza maggiore, ma comunque una soglia percolativa bassa (approssimativamente entro il 50%). Se la rete è di tipo scale-free dovrebbe essere più fragile ad attacchi di questo tipo: mentre in una rete random i nodi più connessi sono solo una coda della distribuzione del grado, una rete a power-law ha in proporzione molti più nodi molto connessi.
+Dal punto di vista del diametro della rete, levando i nodi più connessi ci si aspetta che esso aumenti, fino a quando la rete diventa tanto frammentata da essere costituita da clusters con pochissimi nodi. Oltrepassata la soglia di frammentazione quindi il diametro dei clusters più grandi decrescerà rapidamente a zero.</p>
+
+<h3>3.1.1 Risultati</h3>
+
+<p><strong>inserisci grafici con caption</strong></p>
+
+<h3>3.1.2 Confronto con i modelli</h3>
+
+<p><strong>inserisci grafici con caption</strong></p>
+
+<p>NB fare calcolo con rete scale free e random con gradi medi attorno a valori delle nostre reti
+Vedede eventuali discrepanze con quanto atteso</p>
+
+<h2>3.2 Caduta random</h2>
+
+<h3>3.2.1 Risultati</h3>
+
+<p><strong>inserisci grafici con caption</strong></p>
+
+<h3>3.2.2 Confronto con i modelli</h3>
+
+<p><strong>inserisci grafici con caption</strong></p>
+
+<p><strong>mettere anche grafico della distr del grado dei modelli quando si fa il discorso del modello che non va</strong></p>
+
+<p>Qui va fatto un lungo discorso dato che non appatta nulla. Far vedere che con modello scale free di bar e alb con pendenza 3 in realtà non hai alcuna scalefreeness dato che cade tutto in praticamente una sola decade. Far vedere che comportamento è UGUALE ai modelli esponenziali, e che dipende SOLO dal grado medio, e che quindi l'articolo del 2000 è truffaldino. Testare reti modello più grandi, fino a 10000 per non far fondere il pc e solo andamento gc
+Vedere che succede con preferential attachment generalizzato con esponenti 1,5/2/2,5 a vari valori di gradomedio.</p>
+
+<h3>TODO 3.2.3 Effetto cascata</h3>
+
+
+
+
+
+
+
+
+
 
 <h2>3.3 Speedup del codice (parte 1: multiprocessing)</h2>
 
