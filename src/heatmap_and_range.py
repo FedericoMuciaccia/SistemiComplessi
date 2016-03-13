@@ -177,6 +177,10 @@ def logBinnedHist(histogramResults):
     
     # print len(bins)
     
+    
+    
+    
+    # TODO rendere generale questa funzione!!!
     totalValues, binEdges, otherBinNumbers = scipy.stats.binned_statistic(raggi.values,
                                                                          raggi.values,
                                                                          statistic='count',
