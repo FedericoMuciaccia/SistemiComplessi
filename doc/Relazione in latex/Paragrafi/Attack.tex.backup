@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%
 %(formerly "Analisi percolativa" ma questo è un titolo noioso, meglio una roba più deep impact ogliea) 
 
-Una volta osservate le distribuzioni del grado nelle reti delle quattro compagnie e nella rete complessiva formata da tutte le antenne comprese nell'area metropolitana di Roma, procediamo con lo studio percolativo. In riferimento al lavoro fatto da \textcite{barbalbert2000}, la scelta è stata di simulare due differenti scenari in cui i nodi della rete vengono disabilitati. Nel primo scenario si è ipotizzato un attacco intenzionale che cominciasse dai nodi con maggior grado, nel secondo una rimozione random. 
+Una volta osservate le distribuzioni del grado nelle reti delle quattro compagnie e nella rete complessiva formata da tutte le antenne comprese nell'area metropolitana di Roma, procediamo con lo studio percolativo. In riferimento al lavoro fatto da \textcite{Barbalbert2000}, la scelta è stata di simulare due differenti scenari in cui i nodi della rete vengono disabilitati. Nel primo scenario si è ipotizzato un attacco intenzionale che cominciasse dai nodi con maggior grado, nel secondo una rimozione random. 
 
 Lo scopo è studiare l'andamento, in funzione della percentuale di nodi rimossi, del diametro $D$ della rete e della dimensione del cluster più grande (ipotizzando, o meglio verificando, che esso sia il *Giant Cluster* della rete) rapportata al numero totale di nodi sopravvissuti. A seconda di come la rete si comporterà, sarà possibile dedurne la robustezza nei due scenari, in modo tale da poter confrontare meglio tale comportamento con quello di una rete scale-free o random, di pari grado medio $\langle k \rangle$.
 
@@ -23,52 +23,84 @@ Questo sistema ha un certo tempo di reazione. L'analisi da noi svolta pertanto s
 \subsection{Il punto di partenza}
 Le reti da cui è partito lo studio percolativo sono le 5 definite e costruite nel precedente paragrafo. Le grandezze iniziali erano
 
+
 \begin{table}[t]
+\caption{Dati iniziali delle reti studiate.}
 	\begin{tabular}{cccccccccc}
 	\toprule
-	Rete		&N		&$GC\%$	&$D$	&$\langle l\rangle$	&$C$		&$\langle k\rangle$	&$C/\langle k\rangle$	&$\langle k^2\rangle/\langle k\rangle$	&$f\%$
+	Rete		&N		&$GC\%$	&$D$	&$\langle l\rangle$	&$C$		&$\langle k\rangle$	&$C/\langle k\rangle$	&$\langle k^2\rangle/\langle k\rangle$	&$f\%$\\
 	\midrule  
-	Tim		&1756	&1		&2	&1.96			&0.89	&64.3			&0.014				&358.7							&99.7
-	Vodafone	&1771	&1		&2	&1.97			&0.87	&52.9			&0.016				&243.3							&99.6
-	Wind		&2365	&1		&2	&1.96			&0.89	&97.3			&0.009				&477.7							&99.8
-	Tre		&1395	&1		&2	&1.97			&0.88	&41.4			&0.021				&239.4							&99.6
-	Roma		&7287	&1		&2	&1.97			&0.89	&239.1			&0.004				&1353.2							&99.9
+	Tim		&1756	&1		&2	&1.96			&0.89	&64.3			&0.014				&358.7							&99.7\\
+	Vodafone	&1771	&1		&2	&1.97			&0.87	&52.9			&0.016				&243.3							&99.6\\
+	Wind		&2365	&1		&2	&1.96			&0.89	&97.3			&0.009				&477.7							&99.8\\
+	Tre		&1395	&1		&2	&1.97			&0.88	&41.4			&0.021				&239.4							&99.6\\
+	Roma		&7287	&1		&2	&1.97			&0.89	&239.1			&0.004				&1353.2							&99.9\\
 	\bottomrule
 	\end{tabular}
 \label{tab:datiInitial}
-\caption{Dati iniziali delle reti studiate.}
 \end{table}
 
 \subsubsection{Random failure}
-La prima cosa da notare è che le reti delle singole compagnie hanno un rapporto coefficiente di clustering-grado medio in linea con molte altre reti reali \parencite{barabalbert2002}, mentre stranamente la rete costruita con tutte le antenne non vede aumentare particolarmente il suo clustering. Inoltre ci si aspetta che le reti siano tutte particolarmente resistenti sotto random failure, comportamento che sembra più simile a quello di una rete scale free. Tuttavia una rete random con un grado medio alto ha comunque un $f$ molto alto. Per esempio, una rete random avente $N = N_{Tim}$ e $\langle k \rangle = \langle k \rangle_{Tim}$, avrebbe una $f$ critica di poco inferiore: $\sim 98\%$. Infatti, essendo per una rete random $\langle k \rangle = Np$, perché sia uguale a $\langle k \rangle_{Tim}$ con $\sim 1800$ nodi, deve essere $p \sim 3.7\%$, 
+La prima cosa da notare è che le reti delle singole compagnie hanno un rapporto coefficiente di clustering-grado medio in linea con molte altre reti reali \parencite{Barbalbert2002}, mentre stranamente la rete costruita con tutte le antenne non vede aumentare particolarmente il suo clustering. Inoltre ci si aspetta che le reti siano tutte particolarmente resistenti sotto random failure, comportamento che sembra più simile a quello di una rete scale free. Tuttavia una rete random con un grado medio alto ha comunque un $f$ molto alto. Per esempio, una rete random avente $N = N_{Tim}$ e $\langle k \rangle = \langle k \rangle_{Tim}$, avrebbe una $f$ critica di poco inferiore: $\sim 98\%$. Infatti, essendo per una rete random $\langle k \rangle = Np$, perché sia uguale a $\langle k \rangle_{Tim}$ con $\sim 1800$ nodi, deve essere $p \sim 3.7\%$, 
 $$\Rightarrow \sigma^2 = Np(1-p) = \langle k^2 \rangle - \langle k \rangle^2 \sim 62$$
-$$\Rightarrow \frac{langle k^2 \rangle }{\langle k \rangle} \sim \frac{4200}{62} = 65$$
-$$\Rightarrow f \sim 1 - \frac{1}{64} \sim 98\%$$
-Con una rete random costruita con i parametri della rete totale si ottiene $f = 99.5$. Valori quindi che si distinguono poco dalla soglia per una rete power-law finita, anche nel caso in cui l'esponente sia di poco maggiore di 3.
+$$\Rightarrow \frac{\langle k^2 \rangle }{\langle k \rangle} = \frac{Np(1-p)-(Np)^2}{Np} \sim 1+Np = 1+ \langle k \rangle \sim 65$$
+$$\Rightarrow f \sim 1 - \frac{1}{65} \sim 98\%$$
+Con una rete random costruita con i parametri della rete totale si ottiene $f = 99.5$. Valori quindi che si distinguono poco dalla soglia per una rete power-law finita, anche nel caso in cui l'esponente sia di poco maggiore di 3: $f \sim 1 - \frac{1}{\frac{\alpha - 2}{\alpha-3}k_{max}} > 90\%$ già per un grado massimo di $\sim10$.
 
 
-% WARNING MI VENGONO COSE ASSURDE DAI CALCOLI, CERCARE DI CAPIRE QUALE SIGMA CI VORREBBE PER AVERE UNA RETE RANDOM CROLLANTE TODO TODO, POSSIBILE RISULTATO GRAVE! TODO
-% Con gradi medi abbastanza alti, come quelli delle reti in esame, si può avere una soglia percolativa solo se $\langle k^2 \rangle$ è abbastanza piccolo. Fissato $\langle k \rangle$, ciò può avvenire solo se $\sigma^2$ è molto piccola, così che $\langle k^2 \rangle$
 \subsubsection{Attacco intenzionale}
 Nello scenario di attacco intenzionale ci si aspetta una veloce frammentazione della rete. I cluster diverranno rapidamente più piccoli fino a frammentarsi del tutto entro pochi punti percentuali di nodi rimossi. Nel caso di una rete fortemente connessa come quella in esame ci si aspetta una resistenza maggiore, ma comunque una soglia percolativa bassa (approssimativamente entro il $50\%$). Se la rete è di tipo scale-free dovrebbe essere più fragile ad attacchi di questo tipo: mentre in una rete random i nodi più connessi sono solo una coda della distribuzione del grado, una rete a power-law ha in proporzione molti più nodi molto connessi.
 Dal punto di vista del diametro della rete, levando i nodi più connessi ci si aspetta che esso aumenti, fino a quando la rete diventa tanto frammentata da essere costituita da clusters con pochissimi nodi. Oltrepassata la soglia di frammentazione quindi il diametro dei clusters più grandi decrescerà rapidamente a zero.
 
 \subsection{Risultati}
-\begin{figure}[t!]
+\begin{figure}[p!]
 	\centering
-	\subfloat[$p = 0$]
-	{\includegraphics[width=0.4\textwidth]{./Immagini/Par1/ringnet}}
+	\subfloat[$GC$]
+	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolFailureGC_Final}}
 	$\;$
-	\subfloat[$p = 0.03$]
-	{\includegraphics[width=0.4\textwidth]{./Immagini/Par1/smallworld}}
+	\subfloat[$C$]
+	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolFailureC_Final}}
 	\\
-	\subfloat[$p = 0.3$]
-	{\includegraphics[width=0.4\textwidth]{./Immagini/Par1/random-smallworld}}
+	\subfloat[$\langle l \rangle$]
+	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolFailurel_Final}}
 	$\;$
-	\subfloat[$p = 1$]
-	{\includegraphics[width=0.4\textwidth]{./Immagini/Par1/totalrandomwatts}}
-	\caption[Generazione con modello Watts-Strogatz.]{Generazione di grafi con il modello Watts-Strogatz a differenti $p$ di rewiring.}
-	\label{fig:watts}
+	\subfloat[$D$]
+	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolFailureD_Final}}
+	\\
+	\subfloat[$\langle k \rangle$]
+	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolFailurek_Final}}
+	$\;$
+	\subfloat[$\langle k^2 \rangle/\langle k \rangle$]
+	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolFailurec_Final}}
+	\caption[Risultati random.]{Risultati per rimozione random}
+	\label{fig:fail}
 \end{figure}
 
+
+
+\begin{figure}[p!]
+	\centering
+	\subfloat[$GC$]
+	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolAttackGC_Final}}
+	$\;$
+	\subfloat[$C$]
+	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolAttackC_Final}}
+	\\
+	\subfloat[$\langle l \rangle$]
+	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolAttackl_Final}}
+	$\;$
+	\subfloat[$D$]
+	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolAttackD_Final}}
+	\\
+	\subfloat[$\langle k \rangle$]
+	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolAttackk_Final}}
+	$\;$
+	\subfloat[$\langle k^2 \rangle/\langle k \rangle$]
+	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolAttackc_Final}}
+	\caption[Risultati attacco.]{Risultati per rimozione con massima efficienza}
+	\label{fig:atak}
+\end{figure}
+
+\subsection{Conclusioni}
+Come abbiamo visto, in regime di alta connettività, dal punto di vista percolativo si notano poco le differenze tra reti generate secondo un modello scale-free o random. La differenza si nota quando il grado medio della rete è più basso. Per esempio una rete random con $\langle k \rangle \sim 2$ ha $f\sim 50\%$, mentre una rete scale free con stesso $\langle k \rangle$ ha $f\sim 80\%$. 
 

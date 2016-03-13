@@ -165,7 +165,7 @@ pyplot.show()
 # <codecell>
 
 #    if(modello == 'Erdos-Renyi'):
-grafoErdos = networkx.erdos_renyi_graph(1756, 0.03661162)
+grafoErdos = networkx.erdos_renyi_graph(100, 0.02)
 gradoErdos = grafoErdos.degree().values()
 adiacenzaErdos = networkx.to_numpy_matrix(grafoErdos)
 adiacenzaErdos
@@ -216,6 +216,16 @@ datiInitial['<k>'] = gradomedio
 datiInitial['<k^2>/<k>'] = criterio
 datiInitial['f'] = fcritica
 datiInitial
+
+# <codecell>
+
+def gradonodo(identificativo):
+        vertice = gToolGrafoErdos.vertex(identificativo)
+        return vertice.out_degree()
+    
+indice = numpy.arange(gToolGrafoErdos.num_vertices())
+listaGradi = map(gradonodo, indice)
+numpy.sum(listaGradi)
 
 # <codecell>
 
@@ -274,14 +284,48 @@ graph_draw(gToolGrafoBarabasi, pos = pos, output_size=(1000, 1000),
 # <codecell>
 
 #initial = 0
-g = graph_tool.generation.price_network(10000, m=1, gamma = 1,
+g = graph_tool.generation.price_network(100, m=2, gamma = 1,
                                               #seed_graph = gToolGrafoErdos,
                                               directed=False)
-pos = graph_tool.draw.sfdp_layout(g)
-graph_draw(g, pos = pos, output_size=(1000, 1000), 
-           vertex_color=[1,1,1,0], vertex_size=3, edge_pen_width=1,
-           vcmap=matplotlib.cm.gist_heat_r, 
-           output=("barabalbert1.svg"))
+#pos = graph_tool.draw.sfdp_layout(g)
+#graph_draw(g, pos = pos, output_size=(1000, 1000), 
+#           vertex_color=[1,1,1,0], vertex_size=3, edge_pen_width=1,
+#           vcmap=matplotlib.cm.gist_heat_r, 
+#           output=("barabalbert1.svg"))
+
+# <codecell>
+
+azienda = []
+diametro = []
+cammino = []
+cluster = []
+relSizeGC = []
+gradomedio = []
+criterio = []
+fcritica = []
+
+topologia(g, "Barabalbero")
+datiInitial = pandas.DataFrame()
+datiInitial['Rete'] = azienda
+datiInitial['GC %'] = relSizeGC
+datiInitial['D'] = diametro
+datiInitial['<l>'] = cammino
+datiInitial['C'] = cluster
+datiInitial['<k>'] = gradomedio
+datiInitial['<k^2>/<k>'] = criterio
+datiInitial['f'] = fcritica
+datiInitial
+
+# <codecell>
+
+
+def gradonodo(identificativo):
+        vertice = g.vertex(identificativo)
+        return vertice.out_degree()
+    
+indice = numpy.arange(g.num_vertices())
+listaGradi = map(gradonodo, indice)
+numpy.sum(listaGradi)
 
 # <codecell>
 

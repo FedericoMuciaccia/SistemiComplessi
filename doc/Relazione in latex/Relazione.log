@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.11.21)  13 MAR 2016 05:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.11.21)  13 MAR 2016 19:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1400,7 +1400,7 @@ o.pdf>
 (epstopdf)             \includegraphics on input line 83.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/zoomring-eps-converted-to.pdf, id=87, 951.555pt x 897.3525pt
+<./Immagini/Teoria/zoomring-eps-converted-to.pdf, id=85, 951.555pt x 897.3525pt
 >
 File: ./Immagini/Teoria/zoomring-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Immagini/Teoria/zoomring-eps-converted-to.pdf>
@@ -1421,7 +1421,7 @@ eps-converted-to.pdf ./Immagini/Teoria/ringnet.eps>
 (epstopdf)             \includegraphics on input line 93.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/ringnet-eps-converted-to.pdf, id=88, 650.43pt x 650.43pt>
+<./Immagini/Teoria/ringnet-eps-converted-to.pdf, id=86, 650.43pt x 650.43pt>
 File: ./Immagini/Teoria/ringnet-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Immagini/Teoria/ringnet-eps-converted-to.pdf>
@@ -1448,7 +1448,7 @@ ld-eps-converted-to.pdf ./Immagini/Teoria/smallworld.eps>
 (epstopdf)             \includegraphics on input line 96.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/smallworld-eps-converted-to.pdf, id=89, 650.43pt x 650.43pt>
+<./Immagini/Teoria/smallworld-eps-converted-to.pdf, id=87, 650.43pt x 650.43pt>
 File: ./Immagini/Teoria/smallworld-eps-converted-to.pdf Graphic file (type pdf)
 
 <use ./Immagini/Teoria/smallworld-eps-converted-to.pdf>
@@ -1467,7 +1467,7 @@ mallworld-eps-converted-to.pdf ./Immagini/Teoria/random-smallworld.eps>
 (epstopdf)             \includegraphics on input line 99.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/random-smallworld-eps-converted-to.pdf, id=90, 650.43pt x 65
+<./Immagini/Teoria/random-smallworld-eps-converted-to.pdf, id=88, 650.43pt x 65
 0.43pt>
 File: ./Immagini/Teoria/random-smallworld-eps-converted-to.pdf Graphic file (ty
 pe pdf)
@@ -1487,7 +1487,7 @@ domwatts-eps-converted-to.pdf ./Immagini/Teoria/totalrandomwatts.eps>
 (epstopdf)             \includegraphics on input line 102.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/totalrandomwatts-eps-converted-to.pdf, id=91, 650.43pt x 650
+<./Immagini/Teoria/totalrandomwatts-eps-converted-to.pdf, id=89, 650.43pt x 650
 .43pt>
 File: ./Immagini/Teoria/totalrandomwatts-eps-converted-to.pdf Graphic file (typ
 e pdf)
@@ -1512,7 +1512,7 @@ el-eps-converted-to.pdf ./Immagini/Teoria/Erdosmodel.eps>
 (epstopdf)             \includegraphics on input line 113.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/Erdosmodel-eps-converted-to.pdf, id=99, 889.3225pt x 953.562
+<./Immagini/Teoria/Erdosmodel-eps-converted-to.pdf, id=97, 889.3225pt x 953.562
 5pt>
 File: ./Immagini/Teoria/Erdosmodel-eps-converted-to.pdf Graphic file (type pdf)
 
@@ -1532,8 +1532,8 @@ el-eps-converted-to.pdf ./Immagini/Teoria/Wattsmodel.eps>
 (epstopdf)             \includegraphics on input line 116.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/Wattsmodel-eps-converted-to.pdf, id=100, 953.5625pt x 949.54
-75pt>
+<./Immagini/Teoria/Wattsmodel-eps-converted-to.pdf, id=98, 953.5625pt x 949.547
+5pt>
 File: ./Immagini/Teoria/Wattsmodel-eps-converted-to.pdf Graphic file (type pdf)
 
  <use ./Immagini/Teoria/Wattsmodel-eps-converted-to.pdf>
@@ -1552,8 +1552,8 @@ adeModel-eps-converted-to.pdf ./Immagini/Teoria/ComparGradeModel.eps>
 (epstopdf)             \includegraphics on input line 119.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/ComparGradeModel-eps-converted-to.pdf, id=101, 710.655pt x 5
-48.0475pt>
+<./Immagini/Teoria/ComparGradeModel-eps-converted-to.pdf, id=99, 710.655pt x 54
+8.0475pt>
 File: ./Immagini/Teoria/ComparGradeModel-eps-converted-to.pdf Graphic file (typ
 e pdf)
  <use ./Immagini/Teoria/ComparGradeModel-eps-converted-to.pdf>
@@ -1578,7 +1578,7 @@ oC-eps-converted-to.pdf ./Immagini/Teoria/confrontoC.eps>
 (epstopdf)             \includegraphics on input line 134.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/confrontoC-eps-converted-to.pdf, id=496, 569.12625pt x 426.5
+<./Immagini/Teoria/confrontoC-eps-converted-to.pdf, id=494, 569.12625pt x 426.5
 9375pt>
 File: ./Immagini/Teoria/confrontoC-eps-converted-to.pdf Graphic file (type pdf)
 
@@ -1613,7 +1613,7 @@ ameN-eps-converted-to.pdf ./Immagini/Teoria/compareSameN.eps>
 (epstopdf)             \includegraphics on input line 169.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/compareSameN-eps-converted-to.pdf, id=586, 934.49126pt x 548
+<./Immagini/Teoria/compareSameN-eps-converted-to.pdf, id=584, 934.49126pt x 548
 .0475pt>
 File: ./Immagini/Teoria/compareSameN-eps-converted-to.pdf Graphic file (type pd
 f)
@@ -1643,14 +1643,14 @@ LaTeX Warning: Citation 'Cohen2001' on page 13 undefined on input line 231.
 LaTeX Warning: Citation 'Barbalbert2002' on page 13 undefined on input line 233
 .
 
-[13] <./Immagini/Teoria/banale.pdf, id=614, 372.07457pt x 301.25674pt>
+[13] <./Immagini/Teoria/banale.pdf, id=612, 372.07457pt x 301.25674pt>
 File: ./Immagini/Teoria/banale.pdf Graphic file (type pdf)
 
 <use ./Immagini/Teoria/banale.pdf>
 Package pdftex.def Info: ./Immagini/Teoria/banale.pdf used on input line 238.
 (pdftex.def)             Requested size: 167.99744pt x 136.02396pt.
 
-<./Immagini/Teoria/nonbanale.pdf, id=615, 372.07457pt x 302.06755pt>
+<./Immagini/Teoria/nonbanale.pdf, id=613, 372.07457pt x 302.06755pt>
 File: ./Immagini/Teoria/nonbanale.pdf Graphic file (type pdf)
 
 <use ./Immagini/Teoria/nonbanale.pdf>
@@ -1683,17 +1683,17 @@ Package epstopdf Info: Source file: <./Immagini/Attack/gToolFailureGC_Final.eps
 (epstopdf)                    size: 76586 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolFai
 lureGC_Final-eps-converted-to.pdf ./Immagini/Attack/gToolFailureGC_Final.eps>
-(epstopdf)             \includegraphics on input line 61.
+(epstopdf)             \includegraphics on input line 59.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Attack/gToolFailureGC_Final-eps-converted-to.pdf, id=640, 865.2325p
+<./Immagini/Attack/gToolFailureGC_Final-eps-converted-to.pdf, id=638, 865.2325p
 t x 650.43pt>
 File: ./Immagini/Attack/gToolFailureGC_Final-eps-converted-to.pdf Graphic file 
 (type pdf)
 
 <use ./Immagini/Attack/gToolFailureGC_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolFailureGC_Final-eps-converted-t
-o.pdf used on input line 61.
+o.pdf used on input line 59.
 (pdftex.def)             Requested size: 193.20282pt x 145.23878pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolFailureC_Final.eps>
 
@@ -1705,16 +1705,16 @@ converted-to.pdf>
 (epstopdf)                    size: 88210 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolFai
 lureC_Final-eps-converted-to.pdf ./Immagini/Attack/gToolFailureC_Final.eps>
-(epstopdf)             \includegraphics on input line 64.
+(epstopdf)             \includegraphics on input line 62.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Attack/gToolFailureC_Final-eps-converted-to.pdf, id=641, 865.2325pt
+<./Immagini/Attack/gToolFailureC_Final-eps-converted-to.pdf, id=639, 865.2325pt
  x 650.43pt>
 File: ./Immagini/Attack/gToolFailureC_Final-eps-converted-to.pdf Graphic file (
 type pdf)
  <use ./Immagini/Attack/gToolFailureC_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolFailureC_Final-eps-converted-to
-.pdf used on input line 64.
+.pdf used on input line 62.
 (pdftex.def)             Requested size: 193.20282pt x 145.23878pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolFailurel_Final.eps>
 
@@ -1726,16 +1726,16 @@ converted-to.pdf>
 (epstopdf)                    size: 89192 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolFai
 lurel_Final-eps-converted-to.pdf ./Immagini/Attack/gToolFailurel_Final.eps>
-(epstopdf)             \includegraphics on input line 67.
+(epstopdf)             \includegraphics on input line 65.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Attack/gToolFailurel_Final-eps-converted-to.pdf, id=642, 865.2325pt
+<./Immagini/Attack/gToolFailurel_Final-eps-converted-to.pdf, id=640, 865.2325pt
  x 650.43pt>
 File: ./Immagini/Attack/gToolFailurel_Final-eps-converted-to.pdf Graphic file (
 type pdf)
  <use ./Immagini/Attack/gToolFailurel_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolFailurel_Final-eps-converted-to
-.pdf used on input line 67.
+.pdf used on input line 65.
 (pdftex.def)             Requested size: 193.20282pt x 145.23878pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolFailureD_Final.eps>
 
@@ -1747,16 +1747,16 @@ converted-to.pdf>
 (epstopdf)                    size: 72160 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolFai
 lureD_Final-eps-converted-to.pdf ./Immagini/Attack/gToolFailureD_Final.eps>
-(epstopdf)             \includegraphics on input line 70.
+(epstopdf)             \includegraphics on input line 68.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Attack/gToolFailureD_Final-eps-converted-to.pdf, id=643, 865.2325pt
+<./Immagini/Attack/gToolFailureD_Final-eps-converted-to.pdf, id=641, 865.2325pt
  x 650.43pt>
 File: ./Immagini/Attack/gToolFailureD_Final-eps-converted-to.pdf Graphic file (
 type pdf)
  <use ./Immagini/Attack/gToolFailureD_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolFailureD_Final-eps-converted-to
-.pdf used on input line 70.
+.pdf used on input line 68.
 (pdftex.def)             Requested size: 193.20282pt x 145.23878pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolFailurek_Final.eps>
 
@@ -1768,16 +1768,16 @@ converted-to.pdf>
 (epstopdf)                    size: 89614 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolFai
 lurek_Final-eps-converted-to.pdf ./Immagini/Attack/gToolFailurek_Final.eps>
-(epstopdf)             \includegraphics on input line 73.
+(epstopdf)             \includegraphics on input line 71.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Attack/gToolFailurek_Final-eps-converted-to.pdf, id=644, 865.2325pt
+<./Immagini/Attack/gToolFailurek_Final-eps-converted-to.pdf, id=642, 865.2325pt
  x 650.43pt>
 File: ./Immagini/Attack/gToolFailurek_Final-eps-converted-to.pdf Graphic file (
 type pdf)
  <use ./Immagini/Attack/gToolFailurek_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolFailurek_Final-eps-converted-to
-.pdf used on input line 73.
+.pdf used on input line 71.
 (pdftex.def)             Requested size: 193.20282pt x 145.23878pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolFailurec_Final.eps>
 
@@ -1789,17 +1789,19 @@ converted-to.pdf>
 (epstopdf)                    size: 18090 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolFai
 lurec_Final-eps-converted-to.pdf ./Immagini/Attack/gToolFailurec_Final.eps>
-(epstopdf)             \includegraphics on input line 76.
+(epstopdf)             \includegraphics on input line 74.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Attack/gToolFailurec_Final-eps-converted-to.pdf, id=645, 865.2325pt
+<./Immagini/Attack/gToolFailurec_Final-eps-converted-to.pdf, id=643, 865.2325pt
  x 650.43pt>
 File: ./Immagini/Attack/gToolFailurec_Final-eps-converted-to.pdf Graphic file (
 type pdf)
  <use ./Immagini/Attack/gToolFailurec_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolFailurec_Final-eps-converted-to
-.pdf used on input line 76.
+.pdf used on input line 74.
 (pdftex.def)             Requested size: 193.20282pt x 145.23878pt.
+
+[16]
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolAttackGC_Final.eps>
 
 (epstopdf)                    date: 2016-03-13 05:06:11
@@ -1810,16 +1812,16 @@ converted-to.pdf>
 (epstopdf)                    size: 90526 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolAtt
 ackGC_Final-eps-converted-to.pdf ./Immagini/Attack/gToolAttackGC_Final.eps>
-(epstopdf)             \includegraphics on input line 86.
+(epstopdf)             \includegraphics on input line 84.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Attack/gToolAttackGC_Final-eps-converted-to.pdf, id=646, 865.2325pt
+<./Immagini/Attack/gToolAttackGC_Final-eps-converted-to.pdf, id=651, 865.2325pt
  x 650.43pt>
 File: ./Immagini/Attack/gToolAttackGC_Final-eps-converted-to.pdf Graphic file (
 type pdf)
  <use ./Immagini/Attack/gToolAttackGC_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolAttackGC_Final-eps-converted-to
-.pdf used on input line 86.
+.pdf used on input line 84.
 (pdftex.def)             Requested size: 193.20282pt x 145.23878pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolAttackC_Final.eps>
 (epstopdf)                    date: 2016-03-13 05:06:11
@@ -1830,16 +1832,16 @@ onverted-to.pdf>
 (epstopdf)                    size: 84463 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolAtt
 ackC_Final-eps-converted-to.pdf ./Immagini/Attack/gToolAttackC_Final.eps>
-(epstopdf)             \includegraphics on input line 89.
+(epstopdf)             \includegraphics on input line 87.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Attack/gToolAttackC_Final-eps-converted-to.pdf, id=647, 865.2325pt 
+<./Immagini/Attack/gToolAttackC_Final-eps-converted-to.pdf, id=652, 865.2325pt 
 x 650.43pt>
 File: ./Immagini/Attack/gToolAttackC_Final-eps-converted-to.pdf Graphic file (t
 ype pdf)
  <use ./Immagini/Attack/gToolAttackC_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolAttackC_Final-eps-converted-to.
-pdf used on input line 89.
+pdf used on input line 87.
 (pdftex.def)             Requested size: 193.20282pt x 145.23878pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolAttackl_Final.eps>
 (epstopdf)                    date: 2016-03-13 05:06:11
@@ -1850,16 +1852,16 @@ onverted-to.pdf>
 (epstopdf)                    size: 87041 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolAtt
 ackl_Final-eps-converted-to.pdf ./Immagini/Attack/gToolAttackl_Final.eps>
-(epstopdf)             \includegraphics on input line 92.
+(epstopdf)             \includegraphics on input line 90.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Attack/gToolAttackl_Final-eps-converted-to.pdf, id=648, 865.2325pt 
+<./Immagini/Attack/gToolAttackl_Final-eps-converted-to.pdf, id=653, 865.2325pt 
 x 650.43pt>
 File: ./Immagini/Attack/gToolAttackl_Final-eps-converted-to.pdf Graphic file (t
 ype pdf)
  <use ./Immagini/Attack/gToolAttackl_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolAttackl_Final-eps-converted-to.
-pdf used on input line 92.
+pdf used on input line 90.
 (pdftex.def)             Requested size: 193.20282pt x 145.23878pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolAttackD_Final.eps>
 (epstopdf)                    date: 2016-03-13 05:06:11
@@ -1870,16 +1872,16 @@ onverted-to.pdf>
 (epstopdf)                    size: 80922 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolAtt
 ackD_Final-eps-converted-to.pdf ./Immagini/Attack/gToolAttackD_Final.eps>
-(epstopdf)             \includegraphics on input line 95.
+(epstopdf)             \includegraphics on input line 93.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Attack/gToolAttackD_Final-eps-converted-to.pdf, id=649, 865.2325pt 
+<./Immagini/Attack/gToolAttackD_Final-eps-converted-to.pdf, id=654, 865.2325pt 
 x 650.43pt>
 File: ./Immagini/Attack/gToolAttackD_Final-eps-converted-to.pdf Graphic file (t
 ype pdf)
  <use ./Immagini/Attack/gToolAttackD_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolAttackD_Final-eps-converted-to.
-pdf used on input line 95.
+pdf used on input line 93.
 (pdftex.def)             Requested size: 193.20282pt x 145.23878pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolAttackk_Final.eps>
 (epstopdf)                    date: 2016-03-13 05:06:11
@@ -1890,16 +1892,16 @@ onverted-to.pdf>
 (epstopdf)                    size: 87007 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolAtt
 ackk_Final-eps-converted-to.pdf ./Immagini/Attack/gToolAttackk_Final.eps>
-(epstopdf)             \includegraphics on input line 98.
+(epstopdf)             \includegraphics on input line 96.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Attack/gToolAttackk_Final-eps-converted-to.pdf, id=650, 865.2325pt 
+<./Immagini/Attack/gToolAttackk_Final-eps-converted-to.pdf, id=655, 865.2325pt 
 x 650.43pt>
 File: ./Immagini/Attack/gToolAttackk_Final-eps-converted-to.pdf Graphic file (t
 ype pdf)
  <use ./Immagini/Attack/gToolAttackk_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolAttackk_Final-eps-converted-to.
-pdf used on input line 98.
+pdf used on input line 96.
 (pdftex.def)             Requested size: 193.20282pt x 145.23878pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolAttackc_Final.eps>
 (epstopdf)                    date: 2016-03-13 05:06:11
@@ -1910,28 +1912,28 @@ onverted-to.pdf>
 (epstopdf)                    size: 47865 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolAtt
 ackc_Final-eps-converted-to.pdf ./Immagini/Attack/gToolAttackc_Final.eps>
-(epstopdf)             \includegraphics on input line 101.
+(epstopdf)             \includegraphics on input line 99.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Attack/gToolAttackc_Final-eps-converted-to.pdf, id=651, 865.2325pt 
+<./Immagini/Attack/gToolAttackc_Final-eps-converted-to.pdf, id=656, 865.2325pt 
 x 650.43pt>
 File: ./Immagini/Attack/gToolAttackc_Final-eps-converted-to.pdf Graphic file (t
 ype pdf)
  <use ./Immagini/Attack/gToolAttackc_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolAttackc_Final-eps-converted-to.
-pdf used on input line 101.
+pdf used on input line 99.
 (pdftex.def)             Requested size: 193.20282pt x 145.23878pt.
 )
-(./Paragrafi/Conclusioni.tex [16] [17 <./Immagini/Attack/gToolFailureGC_Final-e
+(./Paragrafi/Conclusioni.tex [17] [18 <./Immagini/Attack/gToolFailureGC_Final-e
 ps-converted-to.pdf> <./Immagini/Attack/gToolFailureC_Final-eps-converted-to.pd
 f> <./Immagini/Attack/gToolFailurel_Final-eps-converted-to.pdf> <./Immagini/Att
 ack/gToolFailureD_Final-eps-converted-to.pdf> <./Immagini/Attack/gToolFailurek_
 Final-eps-converted-to.pdf> <./Immagini/Attack/gToolFailurec_Final-eps-converte
-d-to.pdf>] [18 <./Immagini/Attack/gToolAttackGC_Final-eps-converted-to.pdf> <./
+d-to.pdf>] [19 <./Immagini/Attack/gToolAttackGC_Final-eps-converted-to.pdf> <./
 Immagini/Attack/gToolAttackC_Final-eps-converted-to.pdf> <./Immagini/Attack/gTo
 olAttackl_Final-eps-converted-to.pdf> <./Immagini/Attack/gToolAttackD_Final-eps
 -converted-to.pdf> <./Immagini/Attack/gToolAttackk_Final-eps-converted-to.pdf> 
-<./Immagini/Attack/gToolAttackc_Final-eps-converted-to.pdf>] [19])
+<./Immagini/Attack/gToolAttackc_Final-eps-converted-to.pdf>])
 (./MaterialeInizialeFinale/Bibliografia.tex)
 
 LaTeX Warning: Empty bibliography on input line 10.
@@ -1946,6 +1948,9 @@ Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 98.
 LaTeX Warning: There were undefined references.
 
 
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                Relazione
 (biblatex)                and rerun LaTeX afterwards.
@@ -1955,31 +1960,29 @@ Package logreq Info: Writing requests to 'Relazione.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18192 strings out of 493085
- 285817 string characters out of 6136916
- 736821 words of memory out of 5000000
- 21164 multiletter control sequences out of 15000+600000
+ 18167 strings out of 493085
+ 285546 string characters out of 6136916
+ 734697 words of memory out of 5000000
+ 21139 multiletter control sequences out of 15000+600000
  87301 words of font info for 141 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  44i,10n,67p,1154b,1203s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{section*.15} has been referenced but does not exi
-st, replaced by a fixed one
-
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/symbols/msam10.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/
-qhvr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/time
-s/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Relazione.pdf (19 pages, 8794487 bytes).
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/symbols/msam10.pfb></usr/share/texmf/fonts/type1/public/tex-gyr
+e/qhvr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ti
+mes/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb
+>
+Output written on Relazione.pdf (19 pages, 8795853 bytes).
 PDF statistics:
- 1186 PDF objects out of 1200 (max. 8388607)
- 335 compressed objects within 4 object streams
+ 1188 PDF objects out of 1200 (max. 8388607)
+ 337 compressed objects within 4 object streams
  81 named destinations out of 1000 (max. 500000)
- 225 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 233 words of extra memory for PDF output out of 10000 (max. 10000000)
 
