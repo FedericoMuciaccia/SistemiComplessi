@@ -492,7 +492,7 @@ Molte reti reali presentano simili caratteristiche nei gradi di separazione, che
 
 <p>Il fatto che il coefficiente di clustering non dipenda dal numero di nodi è caratteristico dei reticoli, pertanto il punto di partenza del modello di Watts e Strogatz è un reticolo con condizioni al contorno cicliche, i cui $N$ nodi sono collegati ai primi $n$ vicini. Se poniamo, per esempio, $n = 2$, si configura così un anello del tipo:</p>
 
-<p><img src="../img/Teoria/zoomring.svg" title="fig:ring" /></p>
+<p><img src="../img/Teoria/zoomring.svg" title="fig:ring" width="70%" /></p>
 <!-- <figure>
 <figcaption>Reticolo ciclico. Il punto di partenza del modello Watts-Strogatz: un reticolo con condizioni al contorno cicliche.</figcaption>
 </figure> -->
@@ -504,13 +504,14 @@ Molte reti reali presentano simili caratteristiche nei gradi di separazione, che
 <!-- TODO fare subplot a 4, col caption complessivo -->
 <p>
 $p = 0$:
-<img src="../img/Teoria/ringnet.svg" title="fig:WSp0" />
+<img src="../img/Teoria/ringnet.svg" title="fig:WSp0" width="50%"/>
 $p = 0.03$:
-<img src="../img/Teoria/smallworld.svg" title="fig:WSp3" />
+<img src="../img/Teoria/smallworld.svg" title="fig:WSp3" width="50%"/>
 $p = 0.3$:
-<img src="../img/Teoria/random-smallworld.svg" title="fig:WSp30" />
+<img src="../img/Teoria/random-smallworld.svg" title="fig:WSp30" width="50%"/>
 $p = 1$:
-<img src="../img/Teoria/totalrandomwatts.svg" title="fig:WSp100" /></p>
+<img src="../img/Teoria/totalrandomwatts.svg" title="fig:WSp100" width="50%"/></p>
+
 
 <p>Con questo metodo, a seguito del <em>rewiring</em> si ha il rischio che parti del grafo non siano più connesse. Ponendo $n>1$ ciò può essere evitato, abbassando di molto la probabilità di avere un grafo non connesso già con $n=2$.</p>
 
@@ -519,9 +520,9 @@ $p = 1$:
 <!-- TODO da mettere un caption unico e tutte le figure assieme -->
 <p>
 Esempio di grafo random
-<img src="../img/Teoria/Erdosmodel.svg" title="fig:confrontoGraforandom"/>
+<img src="../img/Teoria/Erdosmodel.svg" title="fig:confrontoGraforandom" width="60%"/>
 Esempio di grafo small-world con $p=1$
-<img src="../img/Teoria/Wattsmodel.svg" title="fig:confrontoGrafosmall"/>
+<img src="../img/Teoria/Wattsmodel.svg" title="fig:confrontoGrafosmall" width="60%"/>
 Confronto $P(k)$
 <img src="../img/Teoria/ComparDegExp.svg" title="fig:confrontoGradigauss"/></p>
 
@@ -569,108 +570,91 @@ Per tutti questi motivi il modello iniziale è stato negli anni integrato e reso
 
 <h2>Teoria della percolazione</h2>
 
-<p>Per percolazione, in analogia con i liquidi, si intende il passaggio di informazione da un lato all'altro di una rete. Nello specifico, quando si fa uno studio percolativo di una rete, si cerca l'esistenza o meno di un cluster che ricopra l'intera rete (<em>spanning cluster</em>, o <em>giant cluster</em>). Il giant cluster è definito come quella componente di una rete le cui dimensioni sono dello stesso ordine della dimensione della rete complessiva (e quindi gli altri nodi o cluster minori hanno dimensioni di ordini inferiore), cioè il rapporto tra le sue dimensioni e le dimensioni dell'intera rete è $\sim 1$.</p>
+<p>Per percolazione, in analogia con i liquidi, si intende il passaggio di informazione da un lato all'altro di una rete. Nello specifico, quando si fa uno studio percolativo di una rete, si cerca l'esistenza o meno di un cluster che ricopra l'intera rete (<em>spanning cluster</em>, o <em>giant cluster</em>). Il giant cluster è definito come quella componente di una rete le cui dimensioni sono dello stesso ordine della dimensione della rete complessiva (e quindi gli altri nodi o cluster minori hanno dimensioni di ordine inferiore), cioè il rapporto tra le sue dimensioni e le dimensioni dell'intera rete è $\sim 1$.</p>
 
 <p>Tipicamente uno studio percolativo su una rete random consiste nell'individuare, durante la costruzione della rete partendo da $N$ nodi scollegati, la soglia percolativa $p_c$, cioè la probabilità di creazione link tale che compaia lo spanning cluster. Nel caso di una rete costruita con il modello di Barabasi-Albert la questione non si pone, dato che per definizione questa è composta da un solo cluster in crescita progressiva. Inoltre, dato che una rete di antenne cellulari nasce con una progettazione molto dettagliata in modo che venga costruita già oltre la soglia percolativa, nel caso in esame non è praticabile né interessante individuare $p_c$ in costruzione. In questo caso ha più senso individuare la soglia percolativa per distruzione della rete. </p>
 
 <p>Uno studio per distruzione può avere più approcci che portano a soglie diverse:
 <ul>
-<li>se si parte da una rete con uno spanning cluster, rimuovendo link tra tutte le coppie di nodi connesse con una certa probabilità, si avrà una $p<em>d$ oltre la quale la rete non percola più. In questo caso $p</em>{d_{link}} = 1-p$ soltanto se si parte da un grafo completamente connesso.</li>
-
-<p>TODO BARBASI LO CHIAMA UN PROBLEMA DI BOND PERCOLATION INVERSO, CHE SIGNIFICA?</p>
-
-
-<li>in alternativa si possono rimuovere i nodi in maniera random. In questo caso, rimuovendo un nodo si rimuovono in un colpo solo tutti i link a esso collegati, portanto quindi a una $p_{d_{nodo}} \neq p_{d_{link}}$. Si può dare una probabilità maggiore ai nodi con grado più alto per simulare un attacco mirato.</li>
-<li>in maniera opposta a un attachment progressivo, può essere usata un metodo di distruzione progressiva, nel quale si rimuove un nodo per volta e si simula la rimozione successiva con la rete risultante dalla rimozione precedente. Nel caso di una rimozione random, la differenza di questo metodo progressivo con quello diretto è poco significativa, ma risulta molto differente con l'attacco intenzionale, come spiegato in maniera più dettagliata nel paragrafo \ref{subsec:simulazione}.</li>
+<li>Se si parte da una rete con uno spanning cluster, rimuovendo link tra tutte le coppie di nodi connesse con una certa probabilità, si avrà una $p_d$ oltre la quale la rete non percola più. In questo caso $p_{d_{link}} = 1-p$ soltanto se si parte da un grafo completamente connesso.</li>
+<!-- TODO BARBASI LO CHIAMA UN PROBLEMA DI BOND PERCOLATION INVERSO, CHE SIGNIFICA? -->
+<li>In alternativa si possono rimuovere i nodi in maniera random. In questo caso, rimuovendo un nodo si rimuovono in un colpo solo tutti i link a esso collegati, portanto quindi a una $p_{d_{nodo}} \neq p_{d_{link}}$. Si può dare una probabilità maggiore ai nodi con grado più alto per simulare un attacco mirato.</li>
+<li>In maniera opposta a un attachment progressivo, può essere usato un metodo di distruzione progressiva, nel quale si rimuove un nodo per volta e si simula la rimozione successiva con la rete risultante dalla rimozione precedente. Nel caso di una rimozione random, la differenza di questo metodo progressivo con quello diretto è poco significativa, ma risulta molto differente con l'attacco intenzionale, come spiegato in maniera più dettagliata nel paragrafo sulle simulazioni.</li>
 </ul>
-
-<p>TODO RIFERIMENTO A PARAGRAFO DA SISTEMARE</p>
+<!-- TODO RIFERIMENTO A PARAGRAFO DA SISTEMARE -->
 
 <p>Per rimozione progressiva dei nodi, che sia random o intenzionale, la soglia percolativa è espressa come la frazione critica $f$ di nodi rimossi, rispetto al numero di nodi originale, oltre la quale non si ha più uno spanning cluster.</p>
 
 <h3>Soglia percolativa</h3>
 
-<p>Nel caso di rimozione di nodi da una rete, è interessante determinare quale è la frazione $f$ di nodi che è necessario rimuovere per avere una frammentazione completa della rete. Un criterio per stabilire l'esistenza del giant cluster si basa sull'approssimazione che la rete sia abbastanza frammentata da poter trascurare i cicli. In questa situazione se esiste il cluster che copre tutta la rete è ridotto con buona approssimazione a un albero, e quindi si ha che, preso un nodo qualsiasi connesso al giant cluster, questo sia connesso a almeno un altro nodo \parencite{Cohen2000}. </p>
+<p>Nel caso di rimozione di nodi da una rete, è interessante determinare quale è la frazione $f$ di nodi che è necessario rimuovere per avere una frammentazione completa della rete. Un criterio per stabilire l'esistenza del giant cluster si basa sull'approssimazione che la rete sia abbastanza frammentata da poter trascurare i cicli.</p>
+<!-- In questa situazione se esiste il cluster che copre tutta la rete è ridotto con buona approssimazione a un albero, e quindi si ha che, preso un nodo qualsiasi connesso al giant cluster, questo sia connesso a almeno un altro nodo \parencite{Cohen2000}. -->
 
-<p>Definiamo quindi la probabilità $q$ che un link scelto a caso non porti a un nodo che non faccia parte del giant cluster. Se $q &lt; (minore) 1$ significa che esiste almeno un nodo che porti al giant cluster, e quindi il giant cluster esiste. L'intento è sapere quando è $1$, per far ciò possiamo calcolare $q$ definendola come la probabilità $P_{\rightarrow}(k)$ che un link scelto a caso porti a un nodo di grado $k$, per la probabilità $q^{k-1}$che gli altri $k-1$ nodi non portino al giant cluster, sommato su tutti i possibili gradi:
-$$q = \sum_k P_{\rightarrow}(k) q^{k-1},$$
+<p>Definiamo quindi la probabilità $q$ che un link scelto a caso non porti a un nodo che non faccia parte del giant cluster. Se $q &lt; 1$ significa che esiste almeno un nodo che porti al giant cluster, e quindi il giant cluster esiste. L'intento è sapere quando è 1, per far ciò possiamo calcolare $q$ definendola come la probabilità $P_{\rightarrow}(k)$ che un link scelto a caso porti a un nodo di grado $k$, per la probabilità $q^{k-1}$che gli altri $k-1$ nodi non portino al giant cluster, sommato su tutti i possibili gradi:
+\begin{equation}
+q = \sum_k P_{\rightarrow}(k) q^{k-1}
+\label{eq:condizione}
+\end{equation}
+</p>
 
-<p>TODO \label{eq:condizione}</p>
-
-Se definiamo a sua volta $P_{\rightarrow}(k)$ come la probabilità di avere un nodo di grado $k$, per il numero di link possibili con cui possiamo ottenerlo (cioè il suo grado), allora $P<em>{\rightarrow}(k)$ diventa
+<p>Se definiamo a sua volta $P_{\rightarrow}(k)$ come la probabilità di avere un nodo di grado $k$, per il numero di link possibili con cui possiamo ottenerlo (cioè il suo grado), allora $P_{\rightarrow}(k)$ diventa
 $$P_{\rightarrow}(k) = \frac{P(k)k}{\sum_{k'}P(k')k'} = \frac{P(k)k}{\langle k \rangle}$$
 $$\Rightarrow q = \frac{1}{\langle k \rangle}\sum_k P(k)kq^{k-1} $$
 Questa è uan funzione parametrica e ricorsiva. Chiamandola $F(q)$ e studiandola si ha che ha derivate prima e seconda positive, pertanto è sempre crescente e convessa; inoltre si ha che $F(1) = 1$ e $F(0)>0$. Tutto ciò vale per qualsiasi parametro $k$.</p>
 
-<p>Risolvendo l'equazione $q = F(q)$ si ottiene la condizione secondo cui il giant cluster non può esistere. Infatti, se esiste una soluzione oltre a quella banale per $q=1$, significa che l'equazione 
-\ref{eq:condizione}</p>
+<p>Risolvendo l'equazione $q = F(q)$ si ottiene la condizione secondo cui il giant cluster non può esistere. Infatti, se esiste una soluzione oltre a quella banale per $q=1$, significa che l'equazione (\ref{eq:condizione}) è verificata per valori di $q &lt; 1$ e che quindi il giant cluster esiste. Come si può vedere dalla figura, si può adottare un metodo grafico: la retta e la curva si intersecano sempre in due punti, il primo con $F'(q) &lt; q'=1$ e il secondo con $F'(q) \geq 1$.</p>
+<!-- \ref{fig:banalita} -->
 
-<p>TODO REF A EQUAZIONE DA SISTEMARE</p>
+<!-- TODO da mettere un caption unico e tutte le figure assieme -->
+<p>Esistenza soluzione non banale. Confronto tra il caso in cui $F(q)=q$ ha solo la soluzione banale $q=1$, e il caso in cui esiste una soluzione per $q &lt; 1$.
+<img src="../img/Teoria/Banale.svg" alt="Soluzione banale." title="fig:banale" />
+<img src="../img/Teoria/Nonbanale.svg" alt="Soluzione non banale." title="fig:nonbanale" /></p>
 
-<p>è verificata per valori di $q &lt; (minore) 1$ e che quindi il giant cluster esiste. Come si può vedere dalla figura 
-\ref{fig:banalita}
+<p>Dato che uno dei due deve sempre essere $F(1)=1$, se
+\begin{equation}
+F'(q=1) \geq 1
+\label{eq:soluzione}
+\end{equation}
+significa che esiste un altro punto di intersezione per $q &lt;1$ e quindi esiste il giant cluster. Svolgendo $d_qF|_{q=1} \geq 1$ si ottiene la condizione di esistenza dello spanning cluster in termini del grado, o criterio di Molloy-Reed [7]:
+\begin{equation}
+\frac{\langle k^2\rangle}{\langle k \rangle}\geq 2
+\label{eq:criterion}
+\end{equation}
+Questo risultato è valido per ogni tipo di rete [4].</p>
 
-TODO REF A FIGURA DA SISTEMARE
+<p>Un nodo con un grado iniziale $k_0$ avrà, dopo la rimozione di una frazione $f$ di nodi, un grado k con una probabilità dettata da una distribuzione binomiale $B_{p,k_0}(k)$, e quindi la nuova distribuzione dei gradi sarà $P(k) = \sum_{k_0} P(k_0)B_{p,k_0}(k)$. Ricavando i nuovi $\langle k \rangle$ e $\langle k^2 \rangle$ si ottiene che la frazione di nodi rimossi necessaria perché si verifichi che $\langle k^2\rangle/\langle k \rangle = 2$, e cioè il grafo sia completamente frammentato, è
+\begin{equation}
+f = 1 - \frac{1}{\frac{\langle k^2 \rangle}{\langle k \rangle}-1}
+\label{eq:criterionfreq}
+\end{equation}
+</p>
 
-, si può adottare un metodo grafico: la retta e la curva si intersecano sempre in due punti, il primo con $F'(q)&lt; (minore) q'=1$ e il secondo con $F'(q) \geq 1$. Dato che uno dei due deve sempre essere $F(1)=1$, se 
-
-TODO \label{eq:soluzione}
-
-$$F'(q=1) \geq 1 $$
-significa che esiste un altro punto di intersezione per $q&lt;1$ e quindi esiste il giant cluster.
-Svolgendo $d_qF|_{q=1} \geq 1$ si ottiene la condizione di esistenza dello spanning cluster in termini del grado, o criterio di \textcite{Molloy1995}:
-
-TODO \label{eq:criterion}
-
-$$\frac{\langle k^2\rangle}{\langle k \rangle}\geq 2.$$</p>
-
-<p>Questo risultato è valido per ogni tipo di rete \parencite{Cohen2000}.</p>
-
-<p>Un nodo con un grado iniziale $k_0$ avrà, dopo la rimozione di una frazione $f$ di nodi, un grado k con una probabilità dettata da una distribuzione binomiale $B_{p,k_0}(k)$, e quindi la nuova distribuzione dei gradi sarà $P(k) = \sum_{k_0} P(k_0)B_{p,k_0}(k)$. Ricavando i nuovi $\langle k \rangle$ e $\langle k^2 \rangle$ si ottiene che la frazione di nodi rimossi necessaria perché si verifichi che $\langle k^2\rangle/\langle k \rangle = 2$, e cioè il grafo sia completamente frammentato, è </p>
-
-<p>TODO \label{eq:criterionfreq}</p>
-
-<p>$$f = 1 - \frac{1}{\frac{\langle k^2 \rangle}{\langle k \rangle}-1}$$</p>
-
-<p>Nel caso specifico di una rete costruita con il modello di Barabasi-Albert, questa avrà $P(k)\propto k^{-\gamma}$, che spazierà da un minimo $m$ e un massimo $K$. In questo caso, ponendo $K\gg m \gg 1$, si può approssimare $k$ a una grandezza continua e si ottengono due comportamenti a seconda del valore di $\gamma$:
-$$\frac{\langle k^2\rangle}{\langle k \rangle} = c \frac{2-\gamma}{3-\gamma},$$
-con
+<p>Nel caso specifico di una rete costruita con il modello di Barabasi-Albert, questa avrà $P(k)\propto k^{-\alpha}$, che spazierà da un minimo $m$ e un massimo $K$. In questo caso, ponendo $K\gg m \gg 1$, si può approssimare $k$ a una grandezza continua e si ottengono due comportamenti a seconda del valore di $\alpha$:
+$$\frac{\langle k^2\rangle}{\langle k \rangle} = c \frac{2-\alpha}{3-\alpha},$$
 <ul>
-<li><strong>$\gamma > 3 \Rightarrow c\sim m.$</strong> Si ha una transizione allo stato completamente frammentato per valori di $f&lt;1$</li>
-<li><strong>$\gamma &lt; (minore) 3 \Rightarrow c=c(K).$</strong> La transizione dipende dal valore di $K$, per cui esiste per reti finite, ma per $K \rightarrow \infty$ $f\rightarrow1$.</li>
+<li>Con <strong>$\alpha > 3 \Rightarrow c\sim m$</strong> si ha una transizione allo stato completamente frammentato per valori di $f&lt;1$.</li>
+<li>Con<strong>$\alpha &lt; (minore) 3 \Rightarrow c=c(K)$</strong> la transizione dipende dal valore di $K$, per cui esiste per reti finite, ma per $K \rightarrow \infty$, $f\rightarrow1$.</li>
 </ul></p>
 
-<p>Nel caso dell'attacco intenzionale la percentuale $f$ è ottenuta per via numerica. Dato inoltre il peculiare metodo di attacco scelto, sarebbe necessario uno studio progressivo che a ogni iterazione tenga conto del taglio dei $k$ più grandi e ricalcoli la $P(k)$ per ottenere il rapporto $\frac{\langle k^2 \rangle}{\langle k \rangle}$. Risulterebbe pertanto più conveniente effettuare simulazioni numeriche direttamente sui modelli \parencite{Cohen2001}.</p>
+<p>Nel caso dell'attacco intenzionale la percentuale $f$ è ottenuta per via numerica. Dato inoltre il peculiare metodo di attacco scelto, sarebbe necessario uno studio progressivo che a ogni iterazione tenga conto del taglio dei $k$ più grandi e ricalcoli la $P(k)$ per ottenere il rapporto ${\langle k^2 \rangle}/{\langle k \rangle}$. Risulterebbe pertanto più conveniente effettuare simulazioni numeriche direttamente sui modelli [5].</p>
 
-<p>In ogni caso, a livello qualitativo, come nel caso di attacco random ci si aspettava una maggiore resistenza da parte delle reti scale-free, a causa del grande numero di nodi poco connessi che garantisce una $P(k)$ a legge di potenza con un opportuno $\gamma$, nel caso dell'attacco intenzionale ci si aspetta una certa fragilità. Infatti le reti scale free sono costruite attorno ai nodi più connessi, si può supporre quindi che rimuoverli per primi provochi un deterioramento più veloce rispetto a una rete random con uguale grado medio \parencite{Barbalbert2002}.
-<img src="fig:banale" alt="Soluzione banale." title="" />
-<img src="fig:nonbanale" alt="Soluzione non banale." title="" /></p>
-
-TODO mettere ancore HTML a tutte le seguenti figure
-
-
-
-<p>TODO da mettere un caption unico e tutte le figure assieme
-\caption[Esistenza soluzione non banale.]{Confronto tra il caso in cui $F(q)=q$ ha solo la soluzione banale $q=1$, e il caso in cui esiste una soluzione per $q&lt; (minore) 1$.}</p>
-
-[fig:banale]: ./img/Teoria/Banale.svg "Solo $q=1$"
-[fig:nonbanale]: ./img/Teoria/Bonbanale.svg "Esistenza di $q&amp; (minore)1$"
+<p>In ogni caso, a livello qualitativo, come nel caso di attacco random ci si aspettava una maggiore resistenza da parte delle reti scale-free, a causa del grande numero di nodi poco connessi che garantisce una $P(k)$ a legge di potenza con un opportuno $\alpha$, nel caso dell'attacco intenzionale ci si aspetta una certa fragilità. Infatti le reti scale free sono costruite attorno ai nodi più connessi; si può supporre quindi che rimuoverli per primi provochi un deterioramento più veloce rispetto a una rete random con uguale grado medio [1].
 
 <h2>Network breakdown</h2><!--analisi percolativa -->
 
-<p>Una volta osservate le distribuzioni del grado nelle reti delle quattro compagnie e nella rete complessiva formata da tutte le antenne comprese nell'area metropolitana di Roma, procediamo con lo studio percolativo. In riferimento al lavoro fatto da [2], la scelta è stata di simulare due differenti scenari in cui i nodi della rete vengono disabilitati. Nel primo scenario si è ipotizzato un attacco intenzionale che cominciasse dai nodi con maggior grado, nel secondo una rimozione random. </p>
+<p>Una volta osservate le distribuzioni del grado nelle reti delle quattro compagnie e nella rete complessiva formata da tutte le antenne comprese nell'area metropolitana di Roma, procediamo con lo studio percolativo. Si è scelto di simulare due differenti scenari in cui i nodi della rete vengono disabilitati [2]. Nel primo scenario si è ipotizzato un attacco intenzionale che cominciasse dai nodi con maggior grado, nel secondo una rimozione random. </p>
 
-<p>Lo scopo è studiare l'andamento, in funzione della percentuale di nodi rimossi, del diametro $D$ della rete e della dimensione del cluster più grande (ipotizzando, o meglio, verificando che esso sia il Giant Cluster della rete) rapportata al numero totale di nodi sopravvissuti. A seconda di come la rete si comporterà, sarà possibile dedurne la robustezza nei due scenari, in modo tale da poter confrontare meglio tale comportamento con quello di una rete scale-free o random di pari grado medio $\langle k \rangle$.</p>
+<p>Lo scopo è studiare l'andamento, in funzione della percentuale di nodi rimossi, del diametro $D$ della rete e della dimensione del cluster più grande (verificando che esso sia il Giant Cluster della rete) rapportata al numero totale di nodi sopravvissuti. A seconda di come la rete si comporterà, sarà possibile dedurne la robustezza nei due scenari, in modo tale da poter confrontare meglio tale comportamento con quello di una rete scale-free o random di pari grado medio $\langle k \rangle$.</p>
 
 <p>In tutti e cinque i campioni di rete che abbiamo analizzato, sono stati conteggiati gli andamenti di alcune grandezze topologiche e statistiche di interesse: oltre a dimensione del giant cluster, $D$, anche $\langle l \rangle$, coefficiente di clustering globale $C$, $\langle k \rangle$ e $\langle k^2 \rangle/\langle k \rangle$. I grafici ottenuti sono stati messi a confronto a quelli ottenuti con le reti generate secondo i modelli.</p>
 
 È importante ricordare che la rete reale ha ovviamente delle contromisure per evitare la caduta delle comunicazioni. Le antenne trasmettono segnali tra loro su due bande di frequenza: una <em>user-side</em>, dedicata alle normali trasmissioni tra utenti del servizio, e una dedicata a un complesso sistema di feedback gestito da degli <em>hub</em> (grosse antenne con raggio sui 20 km). Questa struttura gerarchica permette, nel caso di caduta di una antenna o di un improvviso eccessivo carico in una zona circoscritta, che gli hub gestiscano potenza e capacità delle antenne circostanti mentre vengono inviati tecnici per un intervento sul luogo.</p>
 
-<p>Questo sistema ha un certo tempo di reazione. L'analisi da noi svolta pertanto suppone che la caduta della rete avvenga in un tempo inferiore, in una sorta di approssimazione adiabatica. Inoltre, la sola caduta degli hub sarebbe già sufficiente a compromettere seriamente l'integrità della rete (le antenne avrebbero difficoltà a coordinare le comunicazioni tra loro), ma nella nostra ipotesi di mesh-network distribuita ci interessano soltanto le comunicazioni nelle frequenze user-side. Usando questo modello semplificato siamo riusciti a ottenere alcune informazioni su una ipotetica rete wireless di questa natura.</p>
+<p>Questo sistema ha un certo tempo di reazione. L'analisi da noi svolta pertanto suppone che la caduta della rete avvenga in un tempo inferiore, in una sorta di approssimazione adiabatica. Inoltre, la sola caduta degli hub sarebbe già sufficiente a compromettere seriamente l'integrità della rete (le antenne avrebbero difficoltà a coordinare le comunicazioni tra loro), ma nella nostra ipotesi di mesh-network distribuita ci interessano soltanto le comunicazioni nelle frequenze user-side. Usando questo modello semplificato siamo riusciti a ottenere alcune informazioni su una ipotetica rete cittadina di questa natura.</p>
 
 <h3>Speedup del codice (parte 1: multiprocessing)</h3>
 
-<p>Per le simulazioni di attacco intenzionale e random failure sulle reti in esame, e lo studio approfondito dell'andamento delle grandezze statistiche e topologiche durante l'analisi percolativa, abbiamo inizialmente utilizzato <code>networkx</code>, una libreria di Python piuttosto completa dedicata alle reti.</p>
+<p>Per le simulazioni di attacco intenzionale e random failure sulle reti in esame e lo studio approfondito dell'andamento delle grandezze statistiche e topologiche durante l'analisi percolativa, abbiamo inizialmente utilizzato <code>networkx</code>, una libreria di Python piuttosto completa dedicata alle reti.</p>
 
 <p>Tuttavia questa si è rivelata una scelta sbagliata, in quanto <code>networkx</code>, pur essendo molto completa e semplice da usare, non è particolarmente ottimizzata dal punto di vista dell'efficienza di calcolo. Questo perché è interamentente scritta in Python, anche per le sue routine più interne e non implementa alcun tipo di parallelismo built-in.</p>
 
@@ -687,7 +671,7 @@ TODO mettere ancore HTML a tutte le seguenti figure
 <p>In primis si è cercato di evitare operazioni cicliche sui vettori dinamici, come <code>pop()</code> e <code>append()</code> e di utilizzare sempre librerie python ottimizzate e internamente scritte in C, come ad esempio <code>numpy</code>.
 Già questo permette operazioni su grossi vettori con un incremento di prestazioni rispetto al python puro di almeno il doppio.</p>
 
-<p>Inoltre si è tentato di sfruttare i diversi core della macchina, facendo degli esperimenti di rudimentale calcolo parallelo. In pratica si è cercato di rendere il codice non sequenziale, in modo da usare funzioni del tutto indipendenti e poter scrivere tutto in termini di funzioni <code>map()</code> per poi utilizzare la libreria built-in <code>multiprocessing</code> e fare una prima parallelizzazione.
+<p>Inoltre si è tentato di sfruttare i diversi core della macchina, facendo degli esperimenti di rudimentale calcolo parallelo. In pratica si è cercato di rendere il codice non sequenziale, in modo da usare funzioni del tutto indipendenti e poter scrivere tutto quanto in termini di funzioni <code>map()</code> per poi utilizzare la libreria built-in <code>multiprocessing</code> e fare una prima parallelizzazione.
 <pre><code>
 import multiprocessing
 cpus = multiprocessing.cpu_count()
@@ -697,7 +681,7 @@ pool.map(function, array)
 
 <p>Abbandonare il paradigma sequenziale rendendo le funzioni totalmente indipendenti tra loro fa sì che esse possano girare in contemporarea riducendo il tempo di calcolo, ma nel contempo aumenta il quantitativo di RAM richiesta dal programma, quasi dello stesso fattore. Pertanto bisogna fare attenzione a far girare il programma su una macchina adeguata sotto tutti i punti di vista.</p>
 
-<p>Purtroppo peò nel nostro caso questo approccio non si è rivelato adatto. Nel fare i tentativi vedevamo che i processori lavoravano insieme al 100% per un primo periodo, per poi ibernarsi in una eterna fase di stallo al 20% del carico, probabilmente per incongruenze nel messaging tra le varie istanze di python. Non possedendo sufficienti conoscenze sul calcolo parallelo e il cloud computing per poter risolvere velocemente il problema, abbiamo dunque abbandonato questo aproccio.</p>
+<p>Purtroppo peò nel nostro caso questo approccio non si è rivelato adatto. Nel fare i tentativi vedevamo che i processori lavoravano insieme al 100% per un primo periodo, per poi ibernarsi in una eterna fase di stallo al 20% del carico, probabilmente per incongruenze nel messaging tra le varie istanze di python. Non possedendo sufficienti conoscenze su calcolo parallelo e cloud computing per poter risolvere velocemente il problema, abbiamo dunque abbandonato questo aproccio.</p>
 
 <p><img src="../img/meme_Boromir.jpg" width="90%"/></p>
 
@@ -705,8 +689,8 @@ pool.map(function, array)
 
 <p>L'esigenza di provare a parallelizzare il codice ci ha portato a due versioni differenti della funzione di attacco intenzionale: una sequenziale e una parallela. Entrambe le varianti rimuovono circa l'1% dei nodi per volta:
 <ul>
-<li>la funzione sequenziale elimina l'insieme dell'1% dei nodi più importanti, analizza la rete e calcola il prossimo insieme di 1% di nodi da rimuove;</li>
-<li>la funzione parallela ha invece un comportamento più adiabatico: guarda il grafo iniziale e fa una classifica assoluta dei nodi per importanza, rimuovendone di volta in volta l'1% in maniera ordinata;</li></ul></p>
+<li>La funzione sequenziale elimina l'insieme dell'1% dei nodi più importanti, analizza la rete e calcola il prossimo insieme di 1% di nodi da rimuove.</li>
+<li>La funzione parallela ha invece un comportamento più adiabatico: guarda il grafo iniziale e fa una classifica assoluta dei nodi per importanza, rimuovendone di volta in volta l'1% in maniera ordinata.</li></ul></p>
 
 <p>Possiamo supporre che un reale attacco alla rete sia portato avanti con modalità adiabatiche: un ipotetico terrorista piazza nella notte delle cariche esplosive sotto le antenne che ritiene fondamentali e poi le fa scoppiare in un secondo momento tutte in una volta.
 A titolo di esempio, possiamo immaginare che l'attacco si consideri riuscito quando metà dell'area metropolitana rimane isolata senza possibilità di comunicare. Questo è il parametro finale in base al quale viene scelta la sequenza di antenne da far esplodere.</p>
@@ -716,11 +700,10 @@ In altre parole: è questa una strategia <em>ottimale</em>? <br />
 La risposta è no!
 La strategia ottimale è quella che, a parità di risultato, coinvolge il minor numero di antenne fatte eplodere, anche per minimizzare il rischio di essere scoperto nella notte mentre piazza l'esplosivo in giro per la città.</p>
 
-<p>Tale strategia può essere evidenziata solo da una simulazione <strong>sequenziale</strong>, fatta facendo evolvere la rete passo per passo, secondo una strategia di <em>steepest descent</em>. Questo garantisce di trovare la strategia ottimale, soprattutto se vengono inclusi anche gli effetti a cascata dovuti all'overload e alla saturazione di banda. Dal grafico sottostante si evince comunque che non c'è molta differenza tra procedere sequenzialmente con un campionamento all'1% o eseguire una simulazione di attacco nodo per nodo, per cui ad ogni modo il costo computazionale complessivo non risulta eccessivo.</p>
+<p>Tale strategia può essere evidenziata solo da una simulazione <strong>sequenziale</strong>, fatta facendo evolvere la rete passo per passo, secondo una strategia di <em>steepest descent</em>. Questo garantisce di trovare la strategia ottimale, soprattutto se vengono inclusi anche gli effetti a cascata dovuti all'overload e alla saturazione di banda. Dal grafico sottostante (attacco intenzionale) si evince comunque che non c'è molta differenza tra procedere sequenzialmente con un campionamento all'1% o eseguire una simulazione di attacco nodo per nodo, per cui ad ogni modo il costo computazionale complessivo non risulta eccessivo.</p>
 
-<p>TODO inserire grafico di confronto per "Roma totale" tra parallelo 1%, sequenziale 1% e sequenziale step-by-step</p>
-
-<p>TODO in futuro inserire nel plot anche gli affetti a cascata, per far vedere che la curva crolla prima</p>
+<p><img src="../img/Breakdown/AttackGC_Compare.svg"/></p>
+<!-- TODO in futuro inserire nel plot anche gli affetti a cascata, per far vedere che la curva crolla prima -->
 
 <p>Nel caso di random failure (escludendo gli effetti di saturazione a cascata) non c'è invece alcuna differenza tra l'approccio sequenziale e quello <strong>parallelo</strong>, rendendo il secondo algorimo preferibile nel caso si voglia sfruttare tutta la potenza delle moderne cpu multicore.</p>
 
