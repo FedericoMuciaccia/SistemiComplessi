@@ -6,9 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description" content="Analisi di rete per le antenne telefoniche di Roma: tesina per l'esame di Sistemi Complessi">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
+    <link rel="stylesheet" type="text/css" media="screen" href="html/relazione.css">
+<link rel="stylesheet" type="text/css" media="screen" href="html/dataframe.css">
     <title>Analisi di rete per le antenne telefoniche di Roma</title>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript">
+        MathJax.Hub.Config({
+            tex2jax: {
+    		inlineMath: [['$','$'], ['\\(','\\)']],
+    		processEscapes: true
+  	    }
+	});
+    </script>
+    <script type="text/x-mathjax-config">
+	MathJax.Hub.Config({
+	    TeX: { equationNumbers: { autoNumber: "AMS" } }
+	});
+    </script>
   </head>
 
   <body>
@@ -19,16 +33,9 @@
           <!-- <a id="forkme_banner" href="https://github.com/FedericoMuciaccia/SistemiComplessi">View on GitHub</a> -->
 
           <h1 id="project_title">Analisi di rete per le antenne telefoniche di Roma</h1>
-          <h2 id="project_tagline">Federico Muciaccia e Iuri la Rosa</h2>
-
-<p>
-Tesina d'esame per il corso di Sistemi Complessi, anno accademico 2015-2016<br>
-Docente: Vittorio Loreto. Tutor: Antrea Capocci
-</p>
-            <!-- <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/FedericoMuciaccia/SistemiComplessi/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/FedericoMuciaccia/SistemiComplessi/tarball/master">Download this project as a tar.gz file</a>
-            </section> -->
+          <h2 id="project_tagline">Federico Muciaccia e Iuri La Rosa</h2>
+	  <p>Tesina d'esame per il corso di Sistemi Complessi, anno accademico 2015-2016<br>
+	  Docente: Vittorio Loreto. Tutor: Antrea Capocci</p>
         </header>
     </div>
 
@@ -36,10 +43,6 @@ Docente: Vittorio Loreto. Tutor: Antrea Capocci
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 	<a id="forkme_banner" href="https://github.com/FedericoMuciaccia/SistemiComplessi">View on GitHub</a>
-        <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here <a href="https://guides.github.com/features/mastering-markdown/">using GitHub Flavored Markdown</a>, select a template crafted by a designer, and publish. After your page is generated, you can check out the new <code>gh-pages</code> branch locally. If you’re using GitHub Desktop, simply sync your repository and you’ll see the new branch.</p>
 
 
 
@@ -50,80 +53,759 @@ Docente: Vittorio Loreto. Tutor: Antrea Capocci
 
 
 
+<h2>Sommario</h2>
 
+<p>Lo scopo di questo lavoro è fare un'analisi di rete usando un campione di antenne per la telefonia cellulare, avendo in mente la costruzione di una ipotetica <em>mesh network</em> che copra l'intera area della città di Roma, schematicamente delimitata dal Grande Raccordo Anulare.</p>
 
+<p>Dopo aver definito il criterio con cui dare un link a due nodi, sono state calcolate le matrici di adiacenza della rete complessiva e di quelle relative ai singoli gestori telefonici. Si è dunque proceduto ad uno studio della topologia di tali reti, estraendone le distribuzioni del grado e cercando la forma funzionale che meglio vi si adatti. Una volta ottenute indicazioni significative sui tipi di rete in analisi, le abbiamo verficate studiando il comportamento percolativo della rete, mediante rimozione di nodi in due diversi scenari: un attacco intenzionale, con rimozione delle antenne a partire da quelle con maggior grado, e una serie di failure random nel sistema. I risultati ottenuti sono stati confrontati con i principali modelli di rete.</p>
 
+<p>L'esposizione è articolata nel seguente modo: inizialmente si spiega come sono stati raccolti e organizzati i dati, come è stata definita la rete e quindi con quali criteri è stata costruita la matrice di adiacenza, accennando ai problemi computazionali avuti durante l'analisi. Dopodiché vengono esposte le basi teoriche dello studio effettuato, con particolare accento ai modelli di rete utilizzati come riferimento e ai concetti di percolazione e soglia percolativa. Infine si illustra lo studio percolativo numerico nei due scenari di rimozione di nodi, analizzando in particolare l'andamento del diametro e delle dimensioni del cluster più grande con la progressiva caduta delle antenne. I risultati sono poi stati confrontati con quelli ottenuti dai modelli, rivelando alcune ambiguità.</p><!-- Nel caso di attacco random è stato testato infine un ipotetico effetto cascata causato dall'overload delle antenne rimaste (previa rimozione dei grossi hub che servono proprio a scongiurare tale evenienza). -->
 
+<h2>Going beyond GPS geolocalization</h2><!-- Google Location Service -->
 
+<h3>GPS and battery drain</h3>
 
+<p>La geolocalizzazione dei dispositivi, soprattutto quelli <em>mobile</em>, sta rapidamente diventando parte intergrante del nostro modo quotidiano di fruire la tecnologia.
+Si usa nel navigatore stradale, per impostare automaticamente il luogo di cui desideriamo le previsioni del tempo o da cui vogliamo prendere un treno o un aereo, per aggiungere informazioni contestuali alle fotografie che scattiamo e tanto altro ancora.</p>
 
+<p>Il modo storicamente utilizzato per effettuare la geolocalizzazione è per via satellitare, tramite il GPS. Ma il GPS ha due tipi di problemi:</p>
 
-INIZIO PROVA LAYOUT
+<ul>
+<li>è <em>davvero</em> lento ad agganciare un numero congruo di satelliti, tali da poter registrare una posizione accurata,</li>
+<li>comporta un ingente consumo di energia.</li>
+</ul>
 
-<h2>Selezione dei dati</h2>
+<p>Soprattutto il secondo punto è in palese conflitto con l'esigenza dei moderni dispositivi portatili di avere un'ampia autonomia energerica. Per porre rimedio a questo fatto, Google ha via via comiciato ad utilizzare altri tipi alternativi di geolocalizzazione, per comporre un sistema ibrido.</p>
 
-<p>TODO scrivere cosa sono Mozilla Location Server ed OpenCellID</p>
+<ol>
+<li>Un primo grado di grossolana geolocalizzazione avviene tramite le celle della rete telefonica, a cui tutti gli smartphone sono connessi. La precisione è dell'ordine delle centinaia di metri.</li>
+<li>Un secondo grado, molto più accurato, viene realizzato tramite le reti wifi visibili in quell'istante dal dispositivo. La precisione è dell'ordine di qualche decina di metri.</li>
+<li>Infine, solo se il compito richiesto richiede una precisione ulteriore, si accende il GPS, per un risultato con la precisione inferiore al metro. Cominciare da una stima della posizione più che accettabile riduce di molto la durata delle operazioni a GPS acceso, consentendo un drastico risparmio della batteria.</li>
+</ol>
+
+<h3>Geolocalization via WiFi</h3>
+
+<p>La diffusione del Wifi è ormai capillare, soprattutto in contesto cittadino. Virtualmente c'è un router WiFi in ogni appartamento. Mentre camminiamo per la città con il WiFi dello smartphone acceso, captiamo in ogni punto decine di segnali. Se sono note la posizione di questi router e la potenza del segnale da loro emesso, è possibile triangolare la nostra posizione con una notevole precisione. Ciò è dovuto sia al fatto che un segnale WiFi ha un raggio tipico di una trentina di metri, sia per l'ingente numero di segnali con i quali si sta triangolando, tipicamente più di una decina.</p>
+
+<p>Quindi per sapere la mia posizione devo avere accesso a una mappa delle posizioni di tutti i router.
+E come si costruisce questa mappa? Esattamente al contrario: camminando per la città con GPS acceso, avendo dunque un'alta precisione sulla posizione del dispositivo, e triangolando la posizione di tutti i router visibili combinando tutte le rilevazioni del tracciato.</p>
+
+<p>Dunque Google ha mappato tutti i WiFi di tutto il globo per dare la possibilità agli utenti dei suoi servizi come Google Maps (e delle applicazioni che si appoggiano alle sue API) di ottenere la propria localizzazione con una buona precisione e un consumo di batteria risibile.
+La precisione è arrivata ad essere dell'ordine dei 5 metri e i tempi di accesso pressoché istantanei: di fatto rendendo inutile accendere il GPS nella maggior parte dei casi.</p>
+
+<p>Questo tipo di localizzazione ha inoltre un altro grande vantaggio: funziona anche sottoterra e dentro gli edifici, luoghi normalmente inaccessibili al segnale GPS, di natura satellitare.</p>
+
+<p>Ovviamente la mappa dei router WiFi è in continua evoluzione, per cui il modo più conveniente per redigerla è sfruttando il crowdsourcing: ai milioni di utenti ignari, giornalmente in moto per la città, viene acceso il GPS un paio di volte al giorno per pochi secondi, in un momento di inutilizzo del dispositivo, e in questo modo si crea velocemente una mappa complessiva e quotidianamente aggiornata, a beneficio di tutti.</p>
+
+<p>Tutto questo è tremendamente intelligente ed efficiente.
+C'è un solo grande problema: i dati sono chiusi.</p>
+
+<h3>Mozilla Location Service</h3>
+
+<p>Mozilla è da sempre impegnata nello sviluppo di tecnologie web aperte e standardizzate. Avendo riconosciuta la centralità della geolocalizzazione e la crescita esponenziale di siti ed applicazioni <em>location-aware</em>, ha deciso di ricalcare le orme di Google e fondare il suo servizio di geolocalizzazione usando WiFi ed antenne cellulari: <a href="https://location.services.mozilla.com/">Mozilla Location Service</a>.</p>
+
+<iframe src="html/MLS_header.html"></iframe>
+
+<p>L'obbiettivo è quello di geolocalizzare gli utenti sulla base dell'ambiente radio che li circonda: MLS è un progetto collaborativo per creare un database mondiale aperto di Cell ID e WiFi georeferenziati. La mappatura viene fatta dagli utenti su base puramente volontaria, utilizzando l'apposita applicazione <a href="https://play.google.com/store/apps/details?id=org.mozilla.mozstumbler">Mozilla Stumbler</a>.</p>
+
+<p><a href="img/Mozilla_Stumbler.jpg">
+<img src="img/Mozilla_Stumbler.jpg" alt="Mozilla Stumbler app" title="Mozilla Stumbler app" /></a></p>
+
+<p>Il progetto è ormai maturo e, come si può osservare dalle mappe sopra e sotto, la copertura del mondo è molto capillare.</p>
+<ul>
+<li>La prima mostra un esempio di utilizzo del programma a San Lorenzo, in un normale percorso cittadino. I pallini verdi sono i punti GPS delle rilevazioni complete (WiFi + rete cellulare) effettuate durante il tragitto. Come si può notare sono piuttosto fitti: 4 o 5 per ogni isolato. Le aree sfumate in blu mostrano invece, in maniera approssimata per motivi di privacy, l'esito dell'eleborazione di tutte le precedenti osservazoni nell'area, ovvero tutti i router WiFi e le antenne ricostruiti fin ora. La mappa è fittissima, ma questo non deve trarre in inganno: è ancora incompleta e per certi versi inaffidabile. Un esempio diretto sono le numerose ricostruzioni che appaiono in mezzo ai binari della stazione Termini: quelle derivano dai WiFi all'interno dei treni a cui si collegano i viaggiatori, ma che essendo oggetti in moto non possono essere usati ai fini della geolocalizzazione e pertanto dovrebbero essere filtrati ed esclusi dal database.</li>
+<li>La seconda mappa (interattiva) mostra invece la copertura globale raggiunta dal progetto. Sebbene risulti uno stadio abbastanza avanzato, si può notare come ci siano ancora delle disparità di mappatura anche tra gli stati ad alta presenza tecnologica: si confrontino ad esempio le capitali della Cina e del Giappone. Inoltre, essendo un progetto collaborativo <em>open source</em> e con sede negli Stati Uniti, sì può vedere come gli stati in cui la cultura open è meno diffusa o quelli in tensione con gli USA per quanto riguarda la politica estera risultino globalmente meno mappati. Un esempio emblematico potrebbe essere la differenza tra Nord Korea e Sud Korea.</li>
+
+</ul>
+
+<p><!-- <a href="../html/MLS_map.html">Mozilla Location Service wolrd coverage</a> -->
+Mozilla Location Service world coverage.</p>
+
+<iframe src="html/MLS_map.html" height=400 style="width:800px;"></iframe>
+
+<p>Dato l'approccio di crouwdsourcing collaborativo, i dati sono tanti e a copertura mondiale, continuamente aggiornati, aperti, facilmente scaricabili in database ordinati, puliti e ben documentati. Di seguito sono elencate alcune statistiche per avere un'idea dei numeri in gioco:</p>
+
+<a href="html/statistiche_acquisizione.html">Statistiche di aquisizione</a>
+
+<iframe src="html/statistiche_acquisizione.html" height=270"></iframe>
+
+<a href="html/statistiche_regionali.html">Statistiche regionali</a>
+
+<iframe src="html/statistiche_regionali.html" height=270"></iframe>
+
+<p>Mozilla Location Service funziona sia con le antenne cellulari che con i WiFi, soltanto che attulamente i dati della mappa WiFi (mostrati approssimati nella mappa precedente) non possono essere resi pubblici per questioni relative alle norme sulla privacy vigenti sia negli Stati Uniti sia in altre nazioni.</p>
+
+<p>Pertanto gli unici dati attualmente liberamente disponibili (dominio pubblico, licenza <a href=https://creativecommons.org/publicdomain/zero/1.0/ >CC0</a>) sono quelli sulle antenne radio delle varie generazioni: 2G (GSM), 3G (UMTS), 4G (LTE). <br />
+I dati forniti da Mozilla sono un'estensione di quelli già disponibili sulla piattaforma <a href="http://opencellid.org/">OpenCellID</a>, anche loro open (licenza <a href=https://creativecommons.org/licenses/by-sa/3.0/ >CC-BY-SA 3.0</a>).</p>
+
+<p>Questi sono dunque i dati che abbiamo analizzato in questa nostra tesina.</p>
+
+<h2>MLS dataset</h2><!-- Struttura dei dati -->
+
+<p>I dati <a href="https://location.services.mozilla.com/downloads">scaricabili</a> dal sito del progetto Mozilla Location Service appaiono così:</p>
+
+<a href="html/dataframe_example_Mozilla.html">Esempio del dataframe MLS</a>
+
+<iframe src="html/dataframe_example_Mozilla.html" height=480"></iframe>
+
+<p>I dati vengono forniti in un file CSV, le cui voci, secondo la <a href="https://mozilla.github.io/ichnaea/import_export.html">documentazione ufficiale</a>, sono organizzate nella seguente maniera:</p>
+
+<p><code>
+radio
+</code></p>
+
+<blockquote>
+  <p>Network type. One of the strings GSM, UMTS or LTE.</p>
+</blockquote>
+
+<p><code>
+mcc
+</code></p>
+
+<blockquote>
+  <p>Mobile Country Code. An integer, for example 505, the code for Australia.</p>
+</blockquote>
+
+<p><code>
+net
+</code></p>
+
+<blockquote>
+  <p>For GSM, UMTS and LTE networks, this is the mobile network code (MNC). An integer, for example 4, the MNC used by Vodaphone in the Netherlands.</p>
+</blockquote>
+
+<p><code>
+area
+</code></p>
+
+<blockquote>
+  <p>For GSM and UMTS networks, this is the location area code (LAC). For LTE networks, this is the tracking area code (TAC). An integer, for example 2035.</p>
+</blockquote>
+
+<p><code>
+cell
+</code></p>
+
+<blockquote>
+  <p>For GSM and LTE networks, this is the cell id or cell identity (CID). For UMTS networks this is the UTRAN cell id, which is the concatenation of 2 bytes of radio network controller (RNC) code and 2 bytes of cell id. An integer, for example 32345.</p>
+</blockquote>
+
+<p><code>
+unit
+</code></p>
+
+<blockquote>
+  <p>For UMTS networks, this is the primary scrambling code (PSC). For LTE networks, this is the physical cell id (PCI). For GSM networks, this is empty. An integer, for example 312.</p>
+</blockquote>
+
+<p><code>
+lon
+</code></p>
+
+<blockquote>
+  <p>Longitude in degrees between -180.0 and 180.0 using the WSG 84 reference system. A floating point number, for example 52.3456789.</p>
+</blockquote>
+
+<p><code>
+lat
+</code></p>
+
+<blockquote>
+  <p>Latitude in degrees between -90.0 and 90.0 using the WSG 84 reference system. A floating point number, for example -10.034.</p>
+</blockquote>
+
+<p><code>
+range
+</code></p>
+
+<blockquote>
+  <p>Estimate of radio range, in meters. This is an estimate on how large each cell area is, as a radius around the estimated position and is based on the observations or a knowledgeable source. An integer, for example 2500.</p>
+</blockquote>
+
+<p><code>
+samples
+</code></p>
+
+<blockquote>
+  <p>Total number of observations used to calculate the estimated position, range and averageSignal. An integer, for example 1200.</p>
+</blockquote>
+
+<p><code>
+changeable
+</code></p>
+
+<blockquote>
+  <p>Whether or not this cell is a position estimate based on observations, and therefore subject to change in the future, or is an exact location entered from a knowledgeable source. A boolean value, encoded as either 1 (for “changeable”) or 0 (for “exact”).</p>
+</blockquote>
+
+<p><code>
+created
+</code></p>
+
+<blockquote>
+  <p>Timestamp of the time when this record was first created. An integer, counting seconds since the UTC Unix Epoch of 1970-01-01T00:00:00Z. For example, 1406204196, which is the timestamp for 2014-07-24T12:16:36Z.</p>
+</blockquote>
+
+<p><code>
+updated
+</code></p>
+
+<blockquote>
+  <p>Timestamp of the time when this record was most recently modified. An integer, counting seconds since the UTC Unix Epoch of 1970-01-01T00:00:00Z. For example, 1406204196, which is the timestamp for 2014-07-24T12:16:36Z.</p>
+</blockquote>
+
+<p><code>
+averageSignal
+</code></p>
+
+<blockquote>
+  <p>Average signal strength from all observations for the cell network. An integer value, in dBm. For example, -72. <br />
+This field is only used by the OpenCellID project and historically has been used as a hint towards the quality of the position estimate.</p>
+</blockquote>
+
+<p>I dati forniti sono di tipo aggregato, ovvero riportano il numero di osservazioni per antenna ed il risultato della stima della sua posizione. Esistono anche dati grezzi, ovvero corrispondenti alle singole osservazioni dei singoli utenti. Tale dataset però non viene reso pubblicamente disponibile, in quanto contenente diverse informazioni, anche di carattere dinamico, utili a tracciare il singolo individuo. È allo studio un meccanismo di autorizzazioni per permettere agli utenti consci degli eventuali rischi di pubblicare i dati che li riguardano.</p>
+
+<p>I valori di latitudine e longitudine, per le coordinate nelle proiezioni geografiche, seguono il sistema di riferimento dettato dalla convenzione <em>WSG 84 Web Mercator</em>.</p>
+
+<h3>Data selection</h3>
 
 <p>Una volta scaricati i dati aggregati dalla pagina web <a href="https://location.services.mozilla.com/downloads">https://location.services.mozilla.com/downloads</a> si sono cominciate le operazioni di selezione dei dati.</p>
 
-<p>Il data sample riguarda tutti i continenti e risulta molto grosso (un file csv di circa 650 MB), per cui è necessario ridurlo il più possibile per poterlo maneggiare col nostro limitato quantitativo di RAM.</p>
+<p>Il data sample riguarda tutti i continenti e risulta molto grosso (un file csv di circa 650 MB), per cui è necessario ridurlo il più possibile per poterlo maneggiare con il nostro limitato quantitativo di RAM.</p>
 
-<p>Una prima grossolana ma efficiente scrematura riguarda i dati caratterizzati da un mobile county code non italiano, si è pertanto imposta la condizione
+<p>Una prima grossolana ma efficiente scrematura riguarda i dati caratterizzati da un mobile county code non italiano, si è pertanto imposta la condizione</p>
+
 <pre><code>
 mcc == 222
-</code></pre></p>
+</code></pre>
 
-<p>Successivamente vengono scartati i dati ritenuti inaffidabili, ovvero con soltanto una rivelazione da parte degli utenti
+<p>Successivamente vengono scartati i dati ritenuti inaffidabili, ovvero con soltanto una rivelazione da parte degli utenti</p>
+
 <pre><code>
-samples &gt; 1
-</code></pre></p>
+samples > 1
+</code></pre>
 
-<p>Adesso che il datasample si è ridotto molto possiamo effettuare delle operazioni computazionalmente un po' più pesanti: vogliamo eliminare tutte le rilevazioni al di fuori del Grande Raccordo Anulare, che per semplicità è stato schematizzato come una circonferenza di raggio 10 km con centro esattamente nol Colosseo.</p>
+<p>Adesso che il datasample si è molto ridotto, possiamo effettuare delle operazioni computazionalmente un po' più pesanti: vogliamo eliminare tutte le rilevazioni al di fuori del Grande Raccordo Anulare, che per semplicità è stato schematizzato come una circonferenza di raggio 10 km con centro esattamente nel Colosseo.</p>
 
 <p>Per far questo serve definire una nozione di distanza. Dato che i nostri sono dati geolocalizzati sarebbe naturale introdurre una distanza geodesica. A tal fine abbiamo usato la libreria <code>geopy</code>, che contiene due definizioni differenti:</p>
 
 <ul>
-<li>Grat circe distance: la distanza geodesica su una sfera. Per due punti non agli antipodi passa sempre una circonferenza di raggio massimo lungo cui scorre la geodesica, ovvero il cammino di minima distanza.</li>
+<li>Great circe distance: la distanza geodesica su una sfera. Per due punti non agli antipodi passa sempre una circonferenza di raggio massimo lungo cui scorre la geodesica, ovvero il cammino di minima distanza.</li>
 <li>Vincenty distance: la distanza geodesica su un ellissoide oblato. Tale distanza tiene in conto che la Terra non è una sfera perfetta ma è invece leggermente schiacciata ai poli. Delle due è quella più accurata, ma anche quella più difficile da calcolare numericamente.</li>
 </ul>
 
-<p>L'ulteriore condizione da soddisfare per i dati risulta dunque
+<p>L'ulteriore condizione da soddisfare per i dati risulta dunque</p>
+
 <pre><code>
-geodesicDistance(place) &lt;= raggioRaccordoAnulare
-</code></pre></p>
+geodesicDistance(place) <= raggioRaccordoAnulare
+</code></pre>
 
 <p>Si sono fatte differenti prove sia con <code>vincenty</code> (più lenta) che con <code>great_circle</code> (leggermente più veloce), ma i tempi di calcolo risultavano comunque spropositati. Pertanto abbiamo fatto una approssimazione: dato che la città di Roma sottende un angolo solido minuscolo rispetto alla totalità del pianeta, abbiamo ritenuto accettabile usare una distanza euclidea, ovviamente trasformando in metri le coordinate angolari di latitudine e longitudine con i relativi fattori di scala, dettati dal raggio terrestre.</p>
 
-<p>La distanza euclidea coinvolge solo quadrati è radici quadrate, per cui è molto più veloce delle altre due concorrenti. Il prezzo da pagare è una leggerissima imprecisione, del tutto trascurabile alle nostre scale.</p>
+<p>La distanza euclidea coinvolge solo quadrati è radici quadrate, risultando nel complesso circa dieci volte più veloce delle altre due concorrenti. Il prezzo da pagare è una leggerissima imprecisione, del tutto trascurabile alle nostre scale.</p>
 
-<p>La funzione utilizzata è pertanto
+<p>La funzione utilizzata è pertanto</p>
+
 <pre><code>
 def euclideanDistace(x,y):
     return numpy.sqrt(numpy.square(x) + numpy.square(y))
 </code></pre>
-da notare il fatto che per il calcolo algebrico è stata utilizzata la libreria <code>numpy</code> invece che la libreria <code>math</code> builtin in Python, poiché è più veloce (è scritta in C) e supporta le operazioni direttamente su vettori di coordinate.</p>
 
-<p>I dati sono stati importati in un dataframe tabulare usando la libreria <code>pandas</code>. Questo che ci ha permesso di effettuare facilmente tutte le query necessarie per il filtraggio dei dati.</p>
+<p>Da notare il fatto che per il calcolo algebrico è stata utilizzata la libreria <code>numpy</code> invece che la libreria <code>math</code> <em>built-in</em> in Python, poiché è più veloce (è scritta in C) e supporta le operazioni direttamente su vettori di coordinate.</p>
 
-<p>A questo punto abbiamo finalmente il nostro datasample della città di Roma: circa 7000 antenne in un file csv agevolmente maneggiabile di circa 1MB.</p>
+<p>I dati sono stati importati in un <em>dataframe</em> tabulare usando la libreria <code>pandas</code>. Questo che ci ha permesso di effettuare facilmente tutte le <em>query</em> necessarie per il filtraggio dei dati.</p>
 
-<p>TODO inserire scatterplot preliminare dei dati di Roma (notebook Fede)</p>
+<a href="html/dataframe_example_Roma.html">Esempio del dataframe da noi utilizzato</a>
 
-<p>Per visualizzare agevolmente i nostri dati serve una mappa georeferenziata, preferibilmente interattiva. A tal fine abbiamo usato la libreria <code>gmaps</code>, che dà semplice accesso alle mappe di Google Maps dando la possibilità di creare una heatmap.
+<iframe src="html/dataframe_example_Roma.html" height=480></iframe>
+
+<p>A questo punto abbiamo finalmente il nostro datasample della città di Roma: circa 7000 antenne in un file csv facilmente maneggiabile di circa 1MB.</p>
+
+<p><a href="img/map/Roma_non_georeferenziata.svg">
+<img src="img/map/Roma_non_georeferenziata.svg"/></a></p>
+
+<p>Per visualizzare agevolmente i nostri dati serve una mappa georeferenziata, preferibilmente interattiva. A tal fine, per il notebook di IPython abbiamo usato la libreria <code>gmaps</code>, che dà semplice accesso inline alle mappe di Google Maps dando la possibilità di creare una <em>heatmap</em>, mentre per l'HTML di questa presentazione abbiamo usato le analoghe funzioni della libreria <code>gmplot</code>.</p>
+
 <pre><code>
 roma = pandas.read_csv("../data/Roma_towers.csv")
 coordinate = roma[['lat', 'lon']].values
-gmaps.heatmap(coordinate)
+heatmap = gmaps.heatmap(coordinate)
+gmaps.display(heatmap)
 </code></pre>
-(per scrivere questo paio di linee di codice c'è voluto un'intero pomeriggio!)</p>
 
-<p>TODO mettere heatmap interattiva in HTML</p>
+<pre><code>
+colosseo = (41.890183, 12.492369)
+mappa = gmplot.GoogleMapPlotter(41.890183, 12.492369, 12)
+mappa.heatmap(roma.lat.values,roma.lon.values)
+mappa.draw("../doc/heatmap.html")
+</code></pre>
+
+<p>(per scrivere queste poche linee di codice c'è voluto un intero pomeriggio!)</p>
+
+<p>Heatmap interattiva delle antenne telefoniche di Roma</p>
+
+<iframe src="html/heatmap.html" height=670></iframe>
 
 <p>Dalla mappa si capisce bene quanto sia fitta le rete di antenne Romana.</p>
 
-<p>TODO creare il notebook ordinato "data selection"</p>
+<!-- TODO creare il notebook ordinato "data selection" -->
 
-FINE PROVA LAYOUT
+<h3>Analisi del raggio di copertura delle antenne</h3>
+
+<p>Dato che ci servirà fare grafici con scale logaritmiche, eliminiamo i dati di antenne che presentano un raggio nullo</p>
+
+<pre><code>
+range =! 0
+</code></pre>
+
+<p>Il raggio minimo risulta essere $1\:m$, mentre quello massimo $41832\:m$. Dato che il raggio del Grande Raccordo Anulare è circa $10\:km$, significa che ci saranno antenne con un grado di connessione totale. Raggi irragionevolmente piccoli probabilmente sono il residuo di misure effettuate con il GPS spento e senza connessione internet, dimodoché il software di acquisizione risulti ingannato assegnando la posizione dell'utente all'antenna più vicina.</p>
+<!-- TODO forse spostare questa considerazione a quando si è spiegato il criterio di linking.
+TODO spiegare la possibile casa di questi valori di raggi così bassi -->
+
+<p>Facciamo un istogramma log-log per la distribusione del raggio di copertura, sia con la canalizzazione lineare sugli interi, sia con una canalizzazione logaritmica in base 2, per ridurre il rumore sulla coda.
+<a href="../img/range/infinite_log_binning.svg"><img src="../img/range/infinite_log_binning.svg"/></a>
+La canalizzazione logaritmica pesata permette di osservare l'andamento ben sotto il singolo conteggio, ampliando di una decade l'intervallo di osservazione.</p>
+
+<p>In figura si può vedere come l'andamento sia abbastanza power-law su diverse decadi, soprattutto fino a <code>conteggio = 1</code>. Per verificare ulteriormente questo fatto abbiamo generato anche la curva del <em>frequency-rank</em>, che risulta seguire senza esitazioni il trend delineato dagli istogrammi.
+<!-- TODO  cercare di spiegare questa power-law. -->
+Il frequency-rank si ottiene ordinando in maniera decrescente il numero di conteggi per ogni canale unitario e associando un relativo ranking intero decrescente ai raggi corrispondenti.
+<a href="../img/range/range_distribution.svg"><img src="../img/range/range_distribution.svg"/></a></p>
+
+<!-- TODO mettere plugin che se si clicka sull'immagine la visualizza a tutto schermo -->
+
+<!-- <p>Si è infine analizzata la distribuzione cumulata, lasciata nel grafico seguente non normalizzata.
+La distribuzione cumulata $C(x)$ rappresenta la probabilità che la variabile random assuma un valore minore o uguale a $x$.
+<a href="../img/range/range_cumulated_distribution.svg"><img src="../img/range/range_cumulated_distribution.svg"/></a>
+TODO capire l'andamento della cumulata</p>
+
+<p>TODO mettere caption nell'html delle figure</p>
+
+<p>TODO Facendo un fit TODO abbiamo ottenuto il seguerte esponente per l'andamento a potenza: TODO
+TODO mettere retta con pendenza con fit a mano spannometrico</p> -->
+
+<h2>Graph theory and network analysis</h2><!-- teoria delle reti -->
+
+<!-- TODO RIORDINARE NUMERI, FIGURE E CORREGGERE E PARAGRAFARE -->
+<!-- TODO mettere ancore per i riferimenti bibliografici nel testo -->
+
+<p>Le reti sono insiemi di oggetti connessi tra loro. Gli ultimi 60 anni hanno visto un crescente interesse per esse, poiché con le reti è possibile descrivere sistemi dei tipi più disparati nei campi più vari: dalla biologia all'economia, passando per reti elettriche, informatiche, ecosistemi,  e altro ancora. Ancora più importante, negli ultimi vent'anni è stato scoperto che una classe di reti ha proprietà del tutto comuni nonostante l'intrinseca diversità tra i sistemi che la realizzano; queste reti vengono dette scale-free perché presentano manifeste caratteristiche di invarianza di scala e la loro modellizzazione, mediante un processo di crescita preferenziale, è dovuta a Barabasi e Albert [3]. <!-- \textcite{Barbalbert1999} --></p>
+
+<p>Per maggior semplicità, nell'esposizione del lavoro svolto verrà sempre assunto che le reti siano dirette e non pesate.</p>
+
+<h3>Proprietà e grandezze caratteristiche</h3>
+
+<p>Dal punto di vista matematico una rete è rappresentata da un <em>grafo</em>. Gli oggetti costitutivi di un grafo sono i <em>nodi</em>, i quali vengono collegati opportunamente tra loro con dei <em>link</em> secondo dei criteri che dipendono dal modello (nella costruzione di un grafo teorico) o dalla natura del sistema (per le reti reali). Il numero di nodi della rete, o di una sua sottoparte, è ovviamente la grandezza fondamentale per definirne le dimensioni; il numero e la distribuzione dei link ne descrivono la connettività.</p>
+
+<p>Prima di procedere allo studio della rete di antenne cellulari e alla descrizione dei modelli di rete, è utile fornire un glossario delle quantità caratteristiche delle reti, spesso determinanti per riuscire a categorizzare un grafo come scale-free.</p>
+
+<p><strong>Grado</strong> Il grado di un nodo è il numero di altri nodi a cui è connesso. La connettività di una rete è ben rappresentata dalla <strong>distribuzione del grado</strong>, la cui forma funzionale $P(k)$ è il primo criterio per discriminare una rete scale-free.</p>
+
+<p><strong>Distanze</strong> Alla base di ogni topologia c'è il concetto di distanza. La distanza tra due nodi di un grafo è definita come il numero di link che li separa nel più piccolo cammino possibile lungo la rete. Altre quantità topologiche importanti sono:
+<ul>
+<li>L'<strong>eccentricità di un nodo</strong>: la massima delle distanze tra un nodo scelto e tutti gli altri nodi della rete.</li>
+<li>Il <strong>diametro</strong>: la massima eccentricità tra quelle di tutti i nodi del grafo. Detto in termini più generali, il diametro è il minor cammino più grande tra tutte le possibili coppie di nodi della rete.</li>
+<li>L'<strong>average path length</strong>: la distanza media tra tutte le possibili coppie di nodi della rete.</li>
+</ul></p>
+
+<!-- TODO (correlazione con diametro?) -->
+
+<p><strong>Custering</strong> Per misurare quanto i nodi di un grafo tendono a creare degli aggregati, viene definito il coefficiente di clustering $C_i$. Per un vertice $i$ di grado $k_i$, $C_i$ è definito come il rapporto
+$$C_i = \frac{2E_i}{k_i(k_i-1)},$$
+dove $E_i$ è il numero di link tra i $k_i$ primi vicini del vertice e $k_i(k_i-1)/2$ è il numero totale di link possibili tra essi: cioè il numero di collegamenti necessari perché $i$ con i suoi vicini sia una porzione di grafo <em>completa</em>, detta anche <em>clique</em>.</p>
+<!-- TODO scrivere meglio -->
+
+<p>La media su tutti i nodi dei rispettivi $C_i$ dà un'indicazione di quanto la rete sia complessivamente clusterizzata e quindi può essere preso come coefficiente di clustering globale $C$ della rete. Una definizione più recente di $C$, equivalente alla precedente, lo pone uguale al rapporto tra il numero di triplette di nodi completamente collegate $N_\triangle$ e il numero di triplette che vede i tre nodi collegati da almeno due link $N_\wedge$. In entrambi i casi, più $C$ è vicino a $1$, più si ha clusterizzazione.</p>
+
+<p>Il coefficiente di clustering svolge un ruolo importante nel distinguere una rete completamente random da una che presenta caratteristiche di <em>small-world</em>: infatti un rete con piccolo diametro tende a avere un $C$ maggiore di una simile rete puramente casuale costruita con lo stesso numero di nodi e con il medesimo cammino più corto medio. Questo comportamento è stato notato in molte reti reali [9]. <!-- \parencite{Watts1998} --></p>
+<!-- TODO non si è ancora detto cosa è lo small-world -->
+
+<p><strong>Centralità</strong> Esistono vari modi per definire quando un nodo è centrale rispetto ad altri. Il primo e più immediato è il suo grado. Altri due tra i più importanti sono la <strong>betweenness</strong> e il <strong>page-rank</strong>. Preso un nodo $i$, il primo è definito come il numero di cammini più corti che è possibile tracciare tra due qualsiasi nodi della rete, purché passino per $i$; il secondo dà una misura della centralità di $i$ molto dipendente dal numero di link <em>diretti</em> verso di esso, tenendo conto anche del ranking dei nodi che si collegano a esso. </p>
+
+<p>In reti indirette, benché non siano <em>matematicamente</em> uguali, betweenness e page-rank sono statisticamente molto correlati al grado, pertanto non verranno analizzati. </p>
+
+<!-- TODO (fare grafico correlazione grado-betweenness-pagerank) -->
+
+<h3>Matrice di adiacenza e costruzione del grafo</h3>
+
+<!-- TODO correggere e spezzare in paragrafi -->
+
+<!-- TODO prime ottimizzazioni (RAM e CPU) astuzie e approssimazioni -->
+
+<!-- TODO calcolare tutta la matrice di adiacenza con la distanza geodesica al posto di quella euclidea risulta pesantissimo ($N^2$ elementi) -->
+
+<p>Prese le antenne nell'area selezionata come i nodi della rete, è necessario definire un criterio per stabilire un link. Nell'ottica di una ipotetica mesh network, la scelta è stata di considerare collegate due antenne se, nello spazio tra esse, vi è continuità di segnale, in modo che qualsiasi utente nel mezzo possa comunicare con altri utenti. Trascurando dislivelli del terreno ed edifici, è stato supposto che la porzione di spazio coperta da un'antenna sia un cerchio di raggio uguale a <code>range</code>. Il criterio scelto è stato quindi che la distanza $\delta_{ij}$ tra due antenne fosse minore della somma dei loro raggi, contando una sovrapposizione di almeno il $20\%$.
+$$\delta_{ij} < 0.8(r_i+r_j)$$</P>
+
+<p>Stabilito il criterio, bisogna costruire la rete popolando la matrice di adiacenza. Dato che il criterio di linking richiede la conoscenza della distanza tra due antenne, è stato necessario calcolare le distanze tra ogni coppia di nodi. 
+
+I dati in nostro possesso forniscono le coordinate geografiche di latitudine e longitudine, quindi ci si è posti il problema di come calcolare le distanze. Inizialmente la scelta è caduta su due funzioni della libreria <code>geopy</code>, <code>great-circle</code> e <code>vincenty</code>, le quali permettono di calcoalare la distanza geodesica mediante le rispettive definizioni di distanza geodesica. Come già detto in precedenza, la prima è più veloce e usa un modello sferico di Terra, la seconda richiede più calcoli perché usa un accurato modello ellissoidale (impiega circa il doppio del tempo).</p>
+
+<p>Purtroppo i tempi di calcolo richiesti da queste funzioni risultano piuttosto alti, soprattutto per una matrice di circa $7000^2$ elementi. Per risparmiare tempo, dato che la rete da noi definita non è diretta, è stata modificata la funzione di calcolo della matrice di adiacenza in modo che ne calcolasse soltanto la metà superiore. Il tentativo di diagonalizzare a blocchi la matrice è purtroppo impossibile poiché dai dati risulta che un certo numero di antenne hanno raggi d'azione nell'ordine di decine di km, ricoprendo quindi tutta l'area di Roma selezionata e connettendosi dunque con tutte le altre, portando valori molto fuori la diagonale.</p>
+
+<p>L'unica via praticabile per far calare drasticamente il tempo necessario per calcolare tutte le matrici richieste, è stata quindi convertire le coordinate geografiche in cartesiane e usare la distanza euclidea. In questo modo si è riprodotto di nuovo il guadagno di velocità di un fattore 10, già ottenuto nel calcolare le distanze delle antenne dal Colosseo.
+
+Una volta calcolate le matrici definitive per la rete complessiva e per le singole compagnie, sono state salvate su file in formato CVS, in modo da non doverle più ricalcolare.</P>
+
+<h3>Distribuzione del grado</h3>
+
+<p>I vettore di gradi per ogni nodo del grafo si ottiene facilmente con il metodo <code>.degree()</code> della classe <code>Graph</code> di <code>networkx</code>.</p>
+
+<p>Abbiamo dunque fatto un istogramma congiunto di tutti i provider e della rete totale con un canale per ogni possibile numero naturale, ma in scala log-log risultava illegibile; per ridurre un po' il rumore sulle code, la canalizzazione è stata ridotta di 8 volte rispetto alle unità naturali. Data la poca estensione delle curve ed il fatto che molte non arrivavano fino ad 1, si è scelto di evitare il log-binning in base 2, in quanto in questo caso risultava troppo grossolano e non in grado di conservare tutta l'informazione sulle code della distribuzione.</p>
+
+<p><a href="../img/degree/degreeDistribution.svg"">
+<img src="../img/degree/degreeDistribution.svg" /></a></p>
+
+<p>Come si può vedere nella figura, soprattutto per la rete complessiva, l'andamento è circa power law dal massimo in poi. L'esponente è in valore assoluto di poco superiore a 3 nella prima parte e di poco inferiore a 3 nell'ultima parte della coda, estesa per circa mezza decade.</p>
+
+<p>Di seguito viene anche riportato l'andamento del frequency-rank (in forma di scatterplot per migliorarne la legibilità). La differenza nei valori sulle y rispetto all'istogramma precedente è dovuta al fatto che grazie all'ottima visibilità qui è stato possibile riprendere la canalizzazione sui numeri naturali, non aggregata.</p>
+
+<p><a href="../img/degree/degree_frequencyRank.svg"">
+<img src="../img/degree/degree_frequencyRank.svg" /></a></p>
+
+<h3>Modelli di rete</h3>
+
+<p>Lo studio delle reti random nasce dagli ungheresi Erdős e Rényi [6], i quali per primi modellizzarono la definizione di una rete usando criteri probabilistici. Nel corso dei 40 anni successivi è stato osservato come molte reti reali, a dispetto delle dimensioni, avessero un diametro molto piccolo, portando alla definizione del concetto di <em>small-worlds</em> e al modello di Watts e Strogatz [9].</p>
+
+<p>In entrambi i casi si parte da una configurazione iniziale di nodi per poi creare o riarrangiare randomicamente i link tra essi. Per questo motivo la distribuzione del grado segue una Poissoniana, con la caratteristica coda destra esponenziale. Con un numero sufficiente di nodi e link, la distribuzione del grado si approssima a una gaussiana con un grado medio ben definito.</p>
+
+<h4>Erdős e Rényi</h4><!-- random network -->
+
+<p>Il modello di Erdős e Rényi parte da $N$ nodi ed $n$ link indiretti. Se poniamo che i nodi siano distinguibili, possono esistere $\binom{n}{N(N-1)/2)}$ configurazioni equiprobabili, tra le quali può esserne presa una in maniera random. Un'altra maniera per definire una rete random è il criterio binomiale: partire da un set di $N$ nodi e dare a ogni possibile coppia un link con una certa probabilità $p$.</p>
+
+<p>Il punto più importante di un approccio probabilistico alle reti è la cassificazione dei grafi mediante lo studio delle loro proprietà. Se la probabilità che una certa proprietà si verifichi tende a 1 con $N \rightarrow \infty$, si osserva che per reti limitate essa si verifica con probabilità significativa anche con pochi nodi. Ciò si verifica per molte caratteristiche e questo fatto permette di poter trattare le reti per categorie in base alle loro proprietà peculiari.</p>
+
+<p>Nel caso di un grafo di Erdős e Renyi si ha che:
+<ul>
+<li>La distribuzione del grado ha una forma di distribuzione binomiale, la quale tende a una poissoniana per $p$ piccole, e a una gaussiana per $\langle k \rangle$ grandi. Questo implica che la topologia della rete è abbastanza omogenea, con molti nodi che hanno approssimativamente lo stesso grado.</li>
+<li>Con $N$ grande, il diametro tende a essere piccolo, come l'average path length. Con $p$ non troppo piccola il numero di nodi che abbiano una certa distanza di lunghezza $l$ si può approssimare a $\langle k\rangle^l$; uguagliandolo ad $N$ si deriva che diametro e average path length scalano con buona approssimazione con il logaritmo di N, secondo la relazione
+\begin{equation}
+  l \sim \frac{ln(N)}{ln(\langle k \rangle)}
+   \label{eq:lunghezze}
+\end{equation}
+Molte reti reali presentano simili caratteristiche nei gradi di separazione, che hanno portato alla definizione del termine "small world" per esse.</li>
+<li>Il clustering di una rete random tende a essere molto basso. Infatti, preso un nodo e i suoi primi vicini, la probabilità una coppia di essi sia connessa è $p$. Pertanto su tutto il grafo, il coefficiente di clustering medio è proprio $p$, il quale di solito è abbastanza minore di 1 (con $p = 0.1$ un grafo random diventa già molto connesso: per esempio con $10^4$ nodi avrebbe $\langle k\rangle = 10^3$). Contrariamente a quanto avviene per il diametro, questo fatto si pone in contrasto con le reti reali, le quali hanno quasi sempre un $C$ sensibilmente più alto.</li>
+</ul></p>
+
+<h4>Watts e Strogatz</h4><!-- small world -->
+
+<p>Come abbiamo visto, il modello di Erdős e Renyi descrive bene il piccolo diametro delle reti reali, ma non il loro elevato grado di clusterizzazione e il fatto che il coefficiente di clustering è simile per reti con $N$ molto diverso. Notando per primi ciò, Watts e Strogatz hanno formulato un modello che meglio si adatta alle caratteristiche reali delle reti. </p>
+
+<p>Il fatto che il coefficiente di clustering non dipenda dal numero di nodi è caratteristico dei reticoli, pertanto il punto di partenza del modello di Watts e Strogatz è un reticolo con condizioni al contorno cicliche, i cui $N$ nodi sono collegati ai primi $n$ vicini. Se poniamo, per esempio, $n = 2$, si configura così un anello del tipo:</p>
+
+<p><img src="../img/Teoria/zoomring.svg" title="fig:ring" width="70%" /></p>
+<!-- <figure>
+<figcaption>Reticolo ciclico. Il punto di partenza del modello Watts-Strogatz: un reticolo con condizioni al contorno cicliche.</figcaption>
+</figure> -->
+
+<p>Successivamente si procede a riarrangiare in maniera random i link tra i nodi, con una probabilità $p$ per ogni link di venire modificato. In questo modo si hanno un certo numero di link (in media $2pnN$) che invece di essere tra nodi in prossimità, saranno tra nodi più lontani, come nei grafi in figura, per differenti $p$ di rewiring.</p>
+<!--TODO da mettere un caption unico e tutte le figure assieme 
+\caption[Generazione con modello Watts-Strogatz.]{Generazione di grafi con il modello Watts-Strogatz a differenti $p$ di rewiring. -->
+
+<!-- TODO fare subplot a 4, col caption complessivo -->
+<p>
+$p = 0$:
+<img src="../img/Teoria/ringnet.svg" title="fig:WSp0" width="50%"/>
+$p = 0.03$:
+<img src="../img/Teoria/smallworld.svg" title="fig:WSp3" width="50%"/>
+$p = 0.3$:
+<img src="../img/Teoria/random-smallworld.svg" title="fig:WSp30" width="50%"/>
+$p = 1$:
+<img src="../img/Teoria/totalrandomwatts.svg" title="fig:WSp100" width="50%"/></p>
+
+
+<p>Con questo metodo, a seguito del <em>rewiring</em> si ha il rischio che parti del grafo non siano più connesse. Ponendo $n>1$ ciò può essere evitato, abbassando di molto la probabilità di avere un grafo non connesso già con $n=2$.</p>
+
+<p>Con $p \rightarrow 1$ il grafo diventa simile a quello di una rete di Erdős-Renyi. Nelle figure viene mostrato il confronto tra due grafi da 100 nodi: uno generato con il modello Erdos-Renyi ($p = 7\%$) e uno con il modello Watts-Strogatz partendo da un reticolo con nodi connessi ai primi 3 vicini e il 100% di probabilità di rewiring. A parte la somiglianza dei grafi, le distribuzioni del grado hanno simile comportamento.</p>
+
+<!-- TODO da mettere un caption unico e tutte le figure assieme -->
+<p>
+Esempio di grafo random
+<img src="../img/Teoria/Erdosmodel.svg" title="fig:confrontoGraforandom" width="60%"/>
+Esempio di grafo small-world con $p=1$
+<img src="../img/Teoria/Wattsmodel.svg" title="fig:confrontoGrafosmall" width="60%"/>
+Confronto $P(k)$
+<img src="../img/Teoria/ComparDegExp.svg" title="fig:confrontoGradigauss"/></p>
+
+<p>Per avere una rete tipica, che abbia un numero di connessioni non troppo elevato, ma non così poco da rischiare da avere un grafo non connesso a seguito dell'operazione di rewiring, possono essere considerati degli $N$ ed $n$ tali che $N>>n>>ln(N)>>1$. Con queste condizioni la distribuzione del grado $P(k)$ ha una forma gaussiana la cui media coincide con $2n$, con $\sigma$ più piccole per $p$ basse, tendente a una delta di Dirac per $p \rightarrow 0$. Infatti, mentre con $p = 0$ si ha un reticolo con grado uguale per ogni nodo, l'operazione di random rewiring introduce una casualità sulla $P(K)$ ben descritta da una gaussiana per $N$ grandi, che però ha una larghezza sensibilmente inferiore a quella di una rete random, portando a una rete ancora più omogenea.</p>
+
+<p>Valori tipici di $\langle l \rangle$ per le reti reali sono ben descritti dal modello di Erdős e Renyi secondo l'equazione (\ref{eq:lunghezze}) [1], cioè ci si aspetta scali in modo logaritmico fissato $\langle k \rangle$. In una rete generata secondo il modello di Watts-Strogatz, le lunghezze dei cammini, fissato $2n \equiv \langle k \rangle$, scalano in media in modo diverso al variare di $p$. Per $p$ molto basse ($p &lt;&lt; 1/nN$) le lunghezze caratteristiche sono proporzionali alla dimensione del grafo, il quale è ancora molto simile a una reticolo. Abbastanza presto, per $p >> 1/nN$, vi è invece un largo intervallo di $p$ che vede già verificarsi il fenomeno small-world, con le lunghezze dei cammini che scalano come $ln(N)$ in accordo con le reti reali.</p>
+<!-- TODO \footnote{$p >> 10^(-4)$ per una rete con $10^3$ nodi e $P(k)$ centrata in 10} </p> -->
+
+<p>L'altra caratteristica fondamentale di uno small-world è che abbia un clustering abbastanza alto in relazione a una rete puramente random. Per $p = 0$ il reticolo ha un $C(p = 0)$ costante al variare di $N$; all'aumentare di $p$, presa una tripletta chiusa, la probabilità che tutti e tre i link rimangano inalterati è $(1-p)^3$, e i suoi due primi vicini hanno probabilità $p^3$ di vedere almeno uno dei loro link riarrangiato. Dato che $C=N_\triangle/N_\wedge$ e che $N_\wedge$ rimane costante con il rewiring, si può porre 
+$$C(p) \propto N_\triangle (p) \Rightarrow C(p) \sim C(0)(1-p)^3, $$
+con $C(0) \sim 0.75$ per $N$ grande. Ricordando che per il modello di Erdős-Renyi $C_{ER}=p_{ER}$, e che per modellizzare una rete reale $p$ solitamente è abbastanza piccola, dato che $\langle k \rangle = Np$, risulta che per valori di $p \lesssim 0.25$ si hanno velocemente $C_{WS}$ sensibilmente maggiori di $C_{ER}$. Inoltre, con un rewiring moderato il coefficiente di clustering può variare poco al variare di $N$, essendo ancora non troppo dissimile da un reticolo.</p>
+
+<p>Confronto tra i coefficienti di clustering teorici dei due modelli, al variare del rispettivo parametro $p$.
+<img src="../img/Teoria/ConfrontoC.svg" alt="Confronto clustering." title="fig:confrontoC" /></p>
+
+<p>Concludendo, un grafo è considerato small-world se ha contemporaneamente piccole distanze medie e, a differenza dei grafi random, una clusterizzazione relativamente elevata. Pertanto il modello di Watts e Strogatz descrive in maniera soddisfacente reti che abbiano queste caratteristiche, purché non siano scale-free.</p>
+
+<h4>Barabasi e Albert</h4><!-- scale-free -->
+
+<p>Molte importanti reti reali di grandi dimensioni hanno la notevole caratteristica di avere un certo livello di invarianza di scala. Questa è manifestata da una distribuzione del grado che segue una funzione a legge di potenza $P(k)\sim k^{-\gamma}$, con $\gamma$ compreso quasi sempre tra $2$ e $3$, in maniera sempre più esatta per $k$ alti.</p>
+
+<p>Le reti random possono riprodurre una $P(k)$ arbitraria, e quindi anche una <em>power-law</em>, ma per $\gamma > 2$ risultano non connesse, rendendo $\langle l \rangle$ non facilmente definibile [1]. Le reti small-world invece riproducono bene le proprietà di clustering e cammini medi, ma non possono portare a $P(k)$ power-law. Serve pertanto un modello che riproduca piccoli diametri, grandi clustering e $P(k)$ a legge di potenza.</p>
+
+<p>I modelli di Erdős-Renyi e Watts-Strogatz partono da una configurazione di nodi e poi distribuiscono o riarrangiano i link con una certa probabilità <em>uniforme</em> per tutti i link. Le reti reali, tuttavia, spesso partono da un certo numero piccolo di nodi e successivamente crescono. Il primo punto chiave del modello formulato da Barabasi e Albert è proprio il concetto di crescita: la rete parte a $t=0$ con $m_0$ nodi e a ogni step temporale si aggiunge alla rete un nodo con un certo numero $m &lt; m_0$ di link da assegnare agli altri nodi esistenti. Il secondo punto riguarda il fatto che la probabilità di <em>attachment</em> di un nuovo nodo agli altri non è uniforme su tutti i nodi ma preferenziale: il <em>preferential attachment</em> dà quindi una maggiore probabilità $\Pi (k_i)$, di collegamento di un nodo nuovo a un certo nodo $i$, in maniera proporzionale al suo grado, secondo la formula
+$$\Pi (k_i) = \frac{k_i}{\sum_j k_j}.$$</p>
+
+<p>La costruzione della rete avviene in modo dinamico, pertanto il grado di un nodo $i$ sarà funzione crescente del suo tempo di vita nella rete, con una probabilità di attachment dei nuovi nodi a $i$ anch'essa dipendente da $t$. Pertanto, con l'andare del tempo il grado di $i$ aumenterà sempre più velocemente. Approssimando $k_i$ a una variabile continua per $t$ grandi, si ha che 
+$$\frac{dk_i}{dt} = m \Pi (k_i) = m \frac{k_i}{\sum_{j=1}^{N-1} k_j} = m \frac{k_i}{2mt - m} = \frac{k_i}{2t - 1} \sim \frac{k_i}{2t},$$
+dove $m$ è il numero di link aggiunti ad ogni iterazione. Ponendo quindi la condizione iniziale per il nodo $i$, $k_i(t_i) = m$ si ottiene infine
+$$ k_i(t) = m \sqrt{\frac{t}{t_i}}. $$</p>
+
+<p>Ovviamente se il grado di un nodo è funzione di $t$, anche la $P(k)$ lo sarà. Definendo $P(k_i(t) &lt; k)$ la probabilità che un nodo $i$ abbia un grado minore di un certo valore $k$, la distribuzione del grado $P(k)$ può essere derivata ponendola uguale a $dP(k_i(t) &lt; k)/dk$, ottenendo per $t\rightarrow \infty$ la formula
+$$ P(k)\sim 2m^2 k^{-3}. $$</p>
+
+<p>A seguito un esempio di grafo generato con il modello di Barabasi-Albert. Con $m=1$ è evidente la struttura frattale, ma essendo un grafo ad albero il clustering è nullo.
+<img src="../img/Teoria/Barabalbert1.svg" alt="Albero scale-free" title="fig:barabalbero" /></p>
+
+<p>Il modello di Barabasi e Albert è un modello minimale, importantissimo perché il primo in grado di riprodurre un grafo che mostrasse un'invarianza di scala, ma che in alcuni aspetti mal si accorda con quelle reti reali con caratteristiche scale-free. Per cominciare la distribuzione del grado è una legge di potenza con esponente 3, ma le reti scale-free solitamente hanno un esponente inferiore, seppur maggiore di 2. </p>
+
+<p>Benché non sia possibile calcolare in modo analitico $\langle l\rangle$ e $C$ per una rete di Barabasi-Albert, da simulazioni numeriche è possibile ottenerne quantità caratteristiche. Il cammino medio risulta sottostimato rispetto alle reti reali e il coefficiente di clustering non è costante con l'aumentare di $N$ ma diminuisce, anche se più lentamente di una rete random [1]. Ovviamente il coefficiente di clustering dipende dal numero $m$ di link generati per ogni nuovo nodo. Con $m = 1$ il clustering è nullo dato che il grafo è un albero, mentre si ha $C \neq 0$ per $m>1$, che cresce all'aumentare di $m$, mantenendosi comunque al di sotto dei valori di reti reali con parametri simili.
+Per tutti questi motivi il modello iniziale è stato negli anni integrato e reso più complesso.</p>
+
+<p>Confronto tra le distribuzioni del grado dei tre modelli esposti.
+<img src="../img/Teoria/CompareSameN.svg" alt="Confronto $P(k)$" title="fig:confrontoGradi" /></p>
+
+<h2>Teoria della percolazione</h2>
+
+<p>Per percolazione, in analogia con i liquidi, si intende il passaggio di informazione da un lato all'altro di una rete. Nello specifico, quando si fa uno studio percolativo di una rete, si cerca l'esistenza o meno di un cluster che ricopra l'intera rete (<em>spanning cluster</em>, o <em>giant cluster</em>). Il giant cluster è definito come quella componente di una rete le cui dimensioni sono dello stesso ordine della dimensione della rete complessiva (e quindi gli altri nodi o cluster minori hanno dimensioni di ordine inferiore), cioè il rapporto tra le sue dimensioni e le dimensioni dell'intera rete è $\sim 1$.</p>
+
+<p>Tipicamente uno studio percolativo su una rete random consiste nell'individuare, durante la costruzione della rete partendo da $N$ nodi scollegati, la soglia percolativa $p_c$, cioè la probabilità di creazione link tale che compaia lo spanning cluster. Nel caso di una rete costruita con il modello di Barabasi-Albert la questione non si pone, dato che per definizione questa è composta da un solo cluster in crescita progressiva. Inoltre, dato che una rete di antenne cellulari nasce con una progettazione molto dettagliata in modo che venga costruita già oltre la soglia percolativa, nel caso in esame non è praticabile né interessante individuare $p_c$ in costruzione. In questo caso ha più senso individuare la soglia percolativa per distruzione della rete. </p>
+
+<p>Uno studio per distruzione può avere più approcci che portano a soglie diverse:
+<ul>
+<li>Se si parte da una rete con uno spanning cluster, rimuovendo link tra tutte le coppie di nodi connesse con una certa probabilità, si avrà una $p_d$ oltre la quale la rete non percola più. In questo caso $p_{d_{link}} = 1-p_c$ soltanto se si parte da un grafo completamente connesso.</li>
+<!-- TODO BARBASI LO CHIAMA UN PROBLEMA DI BOND PERCOLATION INVERSO, CHE SIGNIFICA? -->
+<li>In alternativa si possono rimuovere i nodi in maniera random. In questo caso, rimuovendo un nodo si rimuovono in un colpo solo tutti i link a esso collegati, portanto quindi a una $p_{d_{nodo}} \neq p_{d_{link}}$. Si può dare una probabilità di rimozione maggiore ai nodi con grado più alto per simulare un attacco mirato, e avere quindi una $p_{d_{nodo}}$ più bassa.</li>
+<li>In maniera opposta a un attachment progressivo, può essere usato un metodo di distruzione progressiva, nel quale si rimuove un nodo per volta e si simula la rimozione successiva con la rete risultante dalla rimozione precedente. Nel caso di una rimozione random, la differenza di questo metodo progressivo con quello diretto è poco significativa, ma risulta molto differente con l'attacco intenzionale, come spiegato in maniera più dettagliata più avanti, nel paragrafo sulle strategie di rimozione.</li>
+</ul>
+<!-- TODO RIFERIMENTO A PARAGRAFO DA SISTEMARE -->
+
+<p>Per rimozione progressiva dei nodi, che sia random o intenzionale, la soglia percolativa è espressa come la frazione critica $f$ di nodi rimossi, rispetto al numero di nodi originale, oltre la quale non si ha più uno spanning cluster.</p>
+
+<h3>Soglia percolativa</h3>
+
+<p>Nel caso di rimozione di nodi da una rete, è interessante determinare quale è la frazione $f$ di nodi che è necessario rimuovere per avere una frammentazione completa della rete. Un criterio per stabilire l'esistenza del giant cluster si basa sull'approssimazione che la rete sia abbastanza frammentata da poter trascurare i cicli.</p>
+<!-- In questa situazione se esiste il cluster che copre tutta la rete è ridotto con buona approssimazione a un albero, e quindi si ha che, preso un nodo qualsiasi connesso al giant cluster, questo sia connesso a almeno un altro nodo \parencite{Cohen2000}. -->
+
+<p>Definiamo quindi la probabilità $q$ che un link scelto a caso <em>non</em> porti a un nodo che faccia parte del giant cluster. Se $q &lt; 1$ significa che esiste almeno un nodo che porta al giant cluster, che quindi esiste. L'intento è sapere quando è 1, per far ciò possiamo calcolare $q$ definendola come la probabilità $P_{\rightarrow}(k)$ che un link scelto a caso porti a un nodo di grado $k$, per la probabilità $q^{k-1}$che gli altri $k-1$ link non portino al giant cluster, sommato su tutti i possibili gradi:
+\begin{equation}
+q = \sum_k P_{\rightarrow}(k) q^{k-1}
+\label{eq:condizione}
+\end{equation}
+</p>
+
+<p>Se definiamo a sua volta $P_{\rightarrow}(k)$ come la probabilità di avere un nodo di grado $k$, per il numero di link possibili con cui possiamo ottenerlo (cioè il suo grado), allora $P_{\rightarrow}(k)$ diventa
+$$P_{\rightarrow}(k) = \frac{P(k)k}{\sum_{k'}P(k')k'} = \frac{P(k)k}{\langle k \rangle}$$
+$$\Rightarrow q = \frac{1}{\langle k \rangle}\sum_k P(k)kq^{k-1} $$
+Questa è una equazione parametrica e ricorsiva, per ottenere la soluzione $q = F(q)$ è utile un approccio grafico. Studiando $F(q)$ si ricavache ha derivate prima e seconda positive, pertanto è sempre crescente e convessa; inoltre si ha che $F(1) = 1$ e $F(0)>0$. Tutto ciò vale per qualsiasi parametro $k$.</p>
+
+<p>Risolvendo l'equazione $q = F(q)$ si ottiene la condizione di esistenza del giant cluster. Infatti, se esiste una soluzione oltre a quella banale per $q=1$, significa che l'equazione (\ref{eq:condizione}) è verificata per valori di $q &lt; 1$ e che quindi il giant cluster esiste. Come si può vedere dalla figura la retta e la curva si intersecano sempre in due punti, il primo con $F'(q) &lt; 1$ e il secondo con $F'(q) \geq 1$.</p>
+<!-- \ref{fig:banalita} -->
+
+<!-- TODO da mettere un caption unico e tutte le figure assieme -->
+<p>Esistenza soluzione non banale. Confronto tra il caso in cui $F(q)=q$ ha solo la soluzione banale $q=1$, e il caso in cui esiste una soluzione per $q &lt; 1$.
+<img src="../img/Teoria/Banale.svg" alt="Soluzione banale." title="fig:banale" />
+<img src="../img/Teoria/Nonbanale.svg" alt="Soluzione non banale." title="fig:nonbanale" /></p>
+
+<p>Dato che uno dei due deve sempre essere $F(1)=1$, se $F'(q=1) \geq 1$ significa che l'altro punto di intersezione, con $F'(q) &lt; 1$, esiste per $q &lt;1$ e quindi esiste il giant cluster. Svolgendo $d_qF|_{q=1} \geq 1$ si ottiene la condizione di esistenza dello spanning cluster in termini del grado, o criterio di Molloy-Reed [7]:
+\begin{equation}
+\frac{\langle k^2\rangle}{\langle k \rangle}\geq 2
+\label{eq:criterion}
+\end{equation}
+Questo risultato è valido per ogni tipo di rete [4].</p>
+
+<p>Un nodo con un grado iniziale $k_0$ avrà, dopo la rimozione di una frazione $f$ di nodi, un grado k con una probabilità dettata da una distribuzione binomiale $B_{p,k_0}(k)$, e quindi la nuova distribuzione dei gradi sarà $P(k) = \sum_{k_0} P(k_0)B_{p,k_0}(k)$. Ricavando i nuovi $\langle k \rangle$ e $\langle k^2 \rangle$ si ottiene che la frazione di nodi rimossi necessaria perché si verifichi che $\langle k^2\rangle/\langle k \rangle = 2$, e cioè il grafo sia completamente frammentato, è
+\begin{equation}
+f = 1 - \frac{1}{\frac{\langle k^2 \rangle}{\langle k \rangle}-1}
+\label{eq:criterionfreq}
+\end{equation}
+</p>
+
+<p>Nel caso specifico di una rete costruita con il modello di Barabasi-Albert, questa avrà $P(k)\propto k^{-\gamma}$, che spazierà da un minimo $m$ e un massimo $K$. In questo caso, ponendo $K\gg m \gg 1$, si può approssimare $k$ a una grandezza continua e si ottengono due comportamenti a seconda del valore di $\gamma$:
+$$\frac{\langle k^2\rangle}{\langle k \rangle} = c \frac{2-\gamma}{3-\gamma},$$
+<ul>
+<li>Con <strong>$\gamma > 3 \Rightarrow c\sim m$</strong>, si ha una transizione allo stato completamente frammentato per valori di $f&lt;1$.</li>
+<li>Con <strong>$\gamma &lt; 3 \Rightarrow c=c(K)$</strong>, la transizione dipende dal valore di $K$, per cui esiste per reti finite, ma per $K \rightarrow \infty$, $f\rightarrow1$.</li>
+</ul></p>
+
+<p>Nel caso dell'attacco intenzionale la percentuale $f$ è ottenuta per via numerica. Dato inoltre che verrà usato un metodo di attacco sequenziale (v. paragrafo Strategie di attacco), sarebbe necessario uno studio progressivo che a ogni iterazione tenga conto del taglio dei $k$ più grandi e ricalcoli la $P(k)$ per ottenere il rapporto ${\langle k^2 \rangle}/{\langle k \rangle}$. Risulterebbe pertanto più conveniente effettuare simulazioni numeriche direttamente sui modelli [5].</p>
+
+<p>In ogni caso, a livello qualitativo, come nel caso di attacco random ci si aspettava una maggiore resistenza da parte delle reti scale-free, a causa del grande numero di nodi poco connessi che garantisce una $P(k)\propto k^{-\gamma}$, nel caso dell'attacco intenzionale ci si aspetta una certa fragilità. Infatti le reti scale free sono costruite attorno ai nodi più connessi; si può supporre quindi che rimuoverli per primi provochi un deterioramento più veloce rispetto a una rete random con uguale grado medio [1].
+
+<h2>Network breakdown</h2><!--analisi percolativa -->
+
+<p>Una volta osservate le distribuzioni del grado nelle reti delle quattro compagnie e nella rete complessiva formata da tutte le antenne comprese nell'area metropolitana di Roma, procediamo con lo studio percolativo. Si è scelto di simulare due differenti scenari in cui i nodi della rete vengono disabilitati [2]. Nel primo scenario si è ipotizzato un attacco intenzionale che cominciasse dai nodi con maggior grado, nel secondo una rimozione random. </p>
+
+<p>Lo scopo è studiare l'andamento, in funzione della percentuale di nodi rimossi, del diametro $D$ della rete e della dimensione del cluster più grande (verificando che esso sia il Giant Cluster della rete) rapportata al numero totale di nodi sopravvissuti. A seconda di come la rete si comporterà, sarà possibile dedurne la robustezza nei due scenari, in modo tale da poter confrontare meglio tale comportamento con quello di una rete scale-free o random di pari grado medio $\langle k \rangle$.</p>
+
+<p>In tutti e cinque i campioni di rete che abbiamo analizzato, sono stati conteggiati gli andamenti di alcune grandezze topologiche e statistiche di interesse: oltre a dimensione del giant cluster, $D$, anche $\langle l \rangle$, coefficiente di clustering globale $C$, $\langle k \rangle$ e $\langle k^2 \rangle/\langle k \rangle$. I grafici ottenuti sono stati messi a confronto a quelli ottenuti con le reti generate secondo i modelli.</p>
+
+È importante ricordare che la rete reale ha ovviamente delle contromisure per evitare la caduta delle comunicazioni. Le antenne trasmettono segnali tra loro su due bande di frequenza: una <em>user-side</em>, dedicata alle normali trasmissioni tra utenti del servizio, e una dedicata a un complesso sistema di feedback gestito da degli <em>hub</em> (grosse antenne con raggio sui 20 km). Questa struttura gerarchica permette, nel caso di caduta di una antenna o di un improvviso eccessivo carico in una zona circoscritta, che gli hub gestiscano potenza e capacità delle antenne circostanti mentre vengono inviati tecnici per un intervento sul luogo.</p>
+
+<p>Questo sistema ha un certo tempo di reazione. L'analisi da noi svolta pertanto suppone che la caduta della rete avvenga in un tempo inferiore, in una sorta di approssimazione adiabatica. Inoltre, la sola caduta degli hub sarebbe già sufficiente a compromettere seriamente l'integrità della rete (le antenne avrebbero difficoltà a coordinare le comunicazioni tra loro), ma nella nostra ipotesi di mesh-network distribuita ci interessano soltanto le comunicazioni nelle frequenze user-side. Usando questo modello semplificato siamo riusciti a ottenere alcune informazioni su una ipotetica rete cittadina di questa natura.</p>
+
+<h3>Speedup del codice (parte 1: multiprocessing)</h3>
+
+<p>Per le simulazioni di attacco intenzionale e random failure sulle reti in esame e lo studio approfondito dell'andamento delle grandezze statistiche e topologiche durante l'analisi percolativa, abbiamo inizialmente utilizzato <code>networkx</code>, una libreria di Python piuttosto completa dedicata alle reti.</p>
+
+<p>Tuttavia questa si è rivelata una scelta sbagliata, in quanto <code>networkx</code>, pur essendo molto completa e semplice da usare, non è particolarmente ottimizzata dal punto di vista dell'efficienza di calcolo. Questo perché è interamentente scritta in Python, anche per le sue routine più interne e non implementa alcun tipo di parallelismo built-in.</p>
+
+<p>Creare, manipolare e disegnare i grafi sono operazioni semplici e immediate, ma ma quando si cercano di usare le funzioni più pesanti dal punto di vista del calcolo, come per esempio quella per determinare il diametro della rete, <code>networkx</code> appare del tutto non soddisfacente.</p>
+
+<p>Per esempio, il calcolo di diametro, average path lenght, coefficiente di clustering e dimensioni del giant cluster impiegava 20 secondi per una singola iterazione con la rete Tre (la più piccola, circa 1400 nodi), 50 secondi per Tim e Vodafone (circa 1800 nodi entrambe) mentre con la rete Wind (la più grande, con circa 2350 nodi) impiegava ben 2.5 minuti. Questo dato, moltiplicato per i 100 passi richiesti, porta ad una previsione di più di 6 ore di calcolo per l'analisi percolativa di tutte le singole reti.</p>
+
+<p>Abbiamo osservato che i tempi scalano all'incirca quadraticamente con il numero di nodi, per cui per lo studio della rete complessiva di tutta Roma sarebbero richiesti 20 minuti per una iterazione e quasi 30 ore di calcolo per l'analisi completa. Queste considerazioni rendevano di fatto impraticabile questa strada.</p>
+
+<p><img src="../img/meme_Leonida.jpg"/></p>
+
+<p>Dato che i tempi di calcolo richiesti per l'analisi percolativa risultavano spropositati, soprattutto nel caso di random failure, abbiamo cercato dei modi per velocizzare il calcolo ed aggirare il problema.</p>
+
+<p>In primis si è cercato di evitare operazioni cicliche sui vettori dinamici, come <code>pop()</code> e <code>append()</code> e di utilizzare sempre librerie python ottimizzate e internamente scritte in C, come ad esempio <code>numpy</code>.
+Già questo permette operazioni su grossi vettori con un incremento di prestazioni rispetto al python puro di almeno il doppio.</p>
+
+<p>Inoltre si è tentato di sfruttare i diversi core della macchina, facendo degli esperimenti di rudimentale calcolo parallelo. In pratica si è cercato di rendere il codice non sequenziale, in modo da usare funzioni del tutto indipendenti e poter scrivere tutto quanto in termini di funzioni <code>map()</code> per poi utilizzare la libreria built-in <code>multiprocessing</code> e fare una prima parallelizzazione.
+<pre><code>
+import multiprocessing
+cpus = multiprocessing.cpu_count()
+pool = multiprocessing.Pool(processes=cpus)
+pool.map(function, array)
+</code></pre></p>
+
+<p>Abbandonare il paradigma sequenziale rendendo le funzioni totalmente indipendenti tra loro fa sì che esse possano girare in contemporarea riducendo il tempo di calcolo, ma nel contempo aumenta il quantitativo di RAM richiesta dal programma, quasi dello stesso fattore. Pertanto bisogna fare attenzione a far girare il programma su una macchina adeguata sotto tutti i punti di vista.</p>
+
+<p>Purtroppo peò nel nostro caso questo approccio non si è rivelato adatto. Nel fare i tentativi vedevamo che i processori lavoravano insieme al 100% per un primo periodo, per poi ibernarsi in una eterna fase di stallo al 20% del carico, probabilmente per incongruenze nel messaging tra le varie istanze di python. Non possedendo sufficienti conoscenze su calcolo parallelo e cloud computing per poter risolvere velocemente il problema, abbiamo dunque abbandonato questo aproccio.</p>
+
+<p><img src="../img/meme_Boromir.jpg" width="90%"/></p>
+
+<h3>Strategie di attacco</h3>
+
+<p>L'esigenza di provare a parallelizzare il codice ci ha portato a due versioni differenti della funzione di attacco intenzionale: una sequenziale e una parallela. Entrambe le varianti rimuovono circa l'1% dei nodi per volta:
+<ul>
+<li>La funzione sequenziale elimina l'insieme dell'1% dei nodi più importanti, analizza la rete e calcola il prossimo insieme di 1% di nodi da rimuove.</li>
+<li>La funzione parallela ha invece un comportamento più adiabatico: guarda il grafo iniziale e fa una classifica assoluta dei nodi per importanza, rimuovendone di volta in volta l'1% in maniera ordinata.</li></ul></p>
+
+<p>Possiamo supporre che un reale attacco alla rete sia portato avanti con modalità adiabatiche: un ipotetico terrorista piazza nella notte delle cariche esplosive sotto le antenne che ritiene fondamentali e poi le fa scoppiare in un secondo momento tutte in una volta.
+A titolo di esempio, possiamo immaginare che l'attacco si consideri riuscito quando metà dell'area metropolitana rimane isolata senza possibilità di comunicare. Questo è il parametro finale in base al quale viene scelta la sequenza di antenne da far esplodere.</p>
+
+<p>Ma chi garantisce che questa sequenza coincide con gli N nodi di grado maggior all'istante iniziale?
+In altre parole: è questa una strategia <em>ottimale</em>? <br />
+La risposta è no!
+La strategia ottimale è quella che, a parità di risultato, coinvolge il minor numero di antenne fatte eplodere, anche per minimizzare il rischio di essere scoperto nella notte mentre piazza l'esplosivo in giro per la città.</p>
+
+<p>Tale strategia può essere evidenziata solo da una simulazione <strong>sequenziale</strong>, fatta facendo evolvere la rete passo per passo, secondo una strategia di <em>steepest descent</em>. Questo garantisce di trovare la strategia ottimale, soprattutto se vengono inclusi anche gli effetti a cascata dovuti all'overload e alla saturazione di banda. Dal grafico sottostante (attacco intenzionale) si evince comunque che non c'è molta differenza tra procedere sequenzialmente con un campionamento all'1% o eseguire una simulazione di attacco nodo per nodo, per cui ad ogni modo il costo computazionale complessivo non risulta eccessivo.</p>
+
+<p><img src="../img/Breakdown/AttackGC_Compare.svg"/></p>
+<!-- TODO in futuro inserire nel plot anche gli affetti a cascata, per far vedere che la curva crolla prima -->
+
+<p>Nel caso di random failure (escludendo gli effetti di saturazione a cascata) non c'è invece alcuna differenza tra l'approccio sequenziale e quello <strong>parallelo</strong>, rendendo il secondo algorimo preferibile nel caso si voglia sfruttare tutta la potenza delle moderne cpu multicore.</p>
+
+<p>Riassumendo:
+<ul>
+<li>Nel caso di intentional attack è doveroso usare un approccio sequenziale.</li>
+<li>Nel caso di random failure è consigliabile utilizzare un approccio parallelo.</li>
+</ul></p>
+
+<h3>Speedup del codice (parte 2: graph-tool)</h3>
+
+<p>Come già detto la prima soluzione al problema dei tempi è stata tentare una parallelizzazione del codice in Python: dato che <code>networkx</code> non supporta il calcolo parallelo interno, si è tentato di parallelizzare le funzioni di attacco intenzionale e random failure. Abbiamo però mostrato come alcuni degli algoritmi siano intrinsecamente sequenziali.</p>
+
+<p>Un possibile metodo per ovviare a ciò sarebbe potuto essere generare e salvare in memoria tutte le reti a tutte le iterazioni e successivamente usare delle funzioni parallelizzabili per l'analisi. Tuttavia con <code>networkx</code> la richiesta di tempo di calcolo rimane comunque alta e si aggiungerebbe anche il problema della memoria RAM, dello spazio su disco e dei tempi di lettura e scrittura.</p>
+
+<p>L'unica via praticabile è stata ripiegare su <code>graph_tool</code>: un'altra libreria meno <em>user-friendly</em> ma estremamente più efficiente e sopratutto impostata di default sul calcolo parallelo. Le funzioni di analisi topologica e statistica sono molto più veloci rispetto a <code>networkx</code>, poiché implementate in C con il <em>template programming</em> ed ottimizzate in fase di compilazione. Inoltre la possibilità di usarle nativamente in parallelo su 4 core e 8 thread ci ha permesso di calcolare le singole funzioni con una velocità più di 60 volte superiore a prima.</p>
+
+<p>Considerato ciò, il codice per lo studio percolativo delle reti è stato convertito (con non poco sforzo) per poter fare uso della nuova libreria. Alla fine, per l'analisi percolativa completa di tutte le reti, ovvero con lo studio, in funzione dei nodi rimossi, delle quantità
+<ul>
+<li>diametro $D$</li>
+<li>average path lenght $\langle l \rangle$</li>
+<li>clustering coefficient $C$</li>
+<li>average degree $\langle k \rangle$</li>
+<li>dimensioni del giant cluster</li>
+<li>criterio di soglia percolativa (andamento di $\langle k^2 \rangle / \langle k \rangle$)</li>
+</ul>
+da una previsione iniziale di più di 24 ore di tempo di calcolo si è passati a circa $3/4$ d'ora, con uno speedup di circa un fattore 30.</p>
+
+<p><img src="../img/meme_Obama.jpg" width="80%"/></p>
+
+<!-- <h3>Il punto di partenza</h3> -->
+
+<h3>Random failure</h3>
+
+<p>Le reti da cui è partito lo studio percolativo sono le 5 definite e costruite nel precedente paragrafo. Le grandezze iniziali erano</p>
+
+<a href="../html/risultatianalisi.html">Dati iniziali delle reti studiate</a>
+
+<iframe src="../html/risultatianalisi.html" height=270"></iframe>
+
+<p>La prima cosa da notare è che le reti delle singole compagnie hanno un rapporto $C / \langle k \rangle$ in linea con molte altre reti reali [1], mentre stranamente la rete costruita con tutte le antenne non vede aumentare particolarmente il suo clustering. Inoltre ci si aspetta che le reti siano tutte particolarmente resistenti sotto random failure, comportamento che sembra più simile a quello di una rete scale free. Tuttavia una rete random con un grado medio alto ha comunque un $f$ molto alto. Per esempio, una rete random avente $N = N_{Tim}$ e $\langle k \rangle = \langle k \rangle_{Tim}$, avrebbe una $f$ critica di poco inferiore: $\sim 98\%$. Infatti, essendo per una rete random $\langle k \rangle = Np$, perché sia uguale a $\langle k \rangle_{Tim}$ con $\sim 1800$ nodi, deve essere $p \sim 3.7\%$, 
+$$\Rightarrow \sigma^2 = Np(1-p) = \langle k^2 \rangle - \langle k \rangle^2 \sim 62$$
+$$\Rightarrow \frac{\langle k^2 \rangle }{\langle k \rangle} = \frac{Np(1-p)-(Np)^2}{Np} \sim 1+Np = 1+ \langle k \rangle \sim 65$$
+$$\Rightarrow f \sim 1 - \frac{1}{65} \sim 98\%$$</p>
+
+<p>Con una rete random costruita con i parametri della rete totale si ottiene $f = 99.5$. Valori quindi che si distinguono poco dalla soglia per una rete power-law finita, anche nel caso in cui l'esponente sia di poco maggiore di 3: $f \sim 1 - \frac{1}{\frac{\gamma - 2}{\gamma-3}k_{max}} > 90\%$ già per un grado massimo di $\sim10$.</p>
+
+<h3>Attacco intenzionale</h3>
+
+<p>Nello scenario di attacco intenzionale ci si aspetta una veloce frammentazione della rete. I cluster diverranno rapidamente più piccoli fino a frammentarsi del tutto entro pochi punti percentuali di nodi rimossi. Nel caso di una rete fortemente connessa come quella in esame ci si aspetta una resistenza maggiore, ma comunque una soglia percolativa bassa (approssimativamente entro il $50\%$). Se la rete è di tipo scale-free dovrebbe essere più fragile ad attacchi di questo tipo: mentre in una rete random i nodi più connessi sono solo una coda della distribuzione del grado; una rete a power-law ha in proporzione molti più nodi molto connessi.</p>
+
+<p>Dal punto di vista del diametro della rete, levando i nodi più connessi ci si aspetta che esso aumenti fino a quando la rete diventa tanto frammentata da essere costituita da cluster con pochissimi nodi. Oltrepassata la soglia di frammentazione quindi il diametro dei cluster più grandi decrescerà rapidamente a zero.</p>
+
+
+<h3>Risultati per immagini</h3>
+
+$GC \%$, $C$, $\langle l \rangle$, $D$, $\langle k \rangle$ e $\langle k^2 \rangle / \langle k \rangle$
+
+<p>Risultati per rimozione random: 
+<img src="../img/Breakdown/gToolFailureGC_Final.svg" alt="Failure: GC" title="fig:failGC" />
+<img src="../img/Breakdown/gToolFailureC_Final.svg" alt="Failure: C" title="fig:failC" />
+<img src="../img/Breakdown/gToolFailurel_Final.svg" alt="Failure: l" title="fig:faill" />
+<img src="../img/Breakdown/gToolFailureD_Final.svg" alt="Failure: D" title="fig:failD" />
+<img src="../img/Breakdown/gToolFailurek_Final.svg" alt="Failure: k" title="fig:failk" />
+<img src="../img/Breakdown/gToolFailurec_Final.svg" alt="Failure: criterio" title="fig:failc" /></p>
+
+<p>Risultati per rimozione con massima efficienza
+<img src="../img/Breakdown/gToolAttackGC_Final.svg" alt="Attack: GC" title="fig:atakGC" />
+<img src="../img/Breakdown/gToolAttackC_Final.svg" alt="Attack: C" title="fig:atakC" />
+<img src="../img/Breakdown/gToolAttackl_Final.svg" alt="Attack: l" title="fig:atakl" />
+<img src="../img/Breakdown/gToolAttackD_Final.svg" alt="Attack: D" title="fig:atakD" />
+<img src="../img/Breakdown/gToolAttackk_Final.svg" alt="Attack: k" title="fig:atakk" />
+<img src="../img/Breakdown/gToolAttackc_Final.svg" alt="Attack: criterio" title="fig:atakc" /></p>
+
+<h2>Conclusioni e prospettive future</h2>
+
+Come abbiamo visto, in regime di alta connettività dal punto di vista percolativo si notano poco le differenze tra reti generate secondo un modello scale-free o random. La differenza si nota quando il grado medio della rete è più basso. Per esempio una rete random con $\langle k \rangle \sim 2$ ha $f\sim 50\%$, mentre una rete scale free con stesso $\langle k \rangle$ ha $f\sim 80\%$. Una spiegazione qualitativa sta nel fatto che con una distribuzione del grado a legge di potenza, i nodi meno connessi sono in larga maggioranza, quindi è meno probabile che un attacco random riesca a destrutturare la rete, rispetto a un grafo che abbia una $P(k)$ poissoniana. </p>
+
+<!-- Un'altra cosa da notare è che a parità di $N$, una rete di Barabasi-Albert è molto più connessa di una di Erdos-Renyi. Nell'esempio sopra, infatti, con $N=100$ una la prima ha $\sim400$ link, mentre la seconda il doppio; per avere lo stesso numero di link la rete random ha bisogno di una $p \Rightarrow \langle k \rangle$ doppi. Questa differenza va attenuandosi con $N$ più grandi. -->
+
+<p>Uno studio percolativo su reti reali, quindi, non aiuta a identificare una eventuale invarianza di scala per reti molto grandi e connesse. Tuttavia può essere decisiva per reti più piccole, come piccole comunità, reti locali e alcuni ecosistemi: nonostante la bassa statistica, i comportamento di reti con pochi nodi possono essere distinti in maniera significativa da uno studio percolativo.</p>
+
+<p>Nel caso di reti il cui funzionamento dipende dalla capacità dei nodi di gestire un certo carico, uno studio percolativo dovrebbe anche considerare l'eventualità che con la rimozione di alcuni nodi, altri vadano in sovraccarico e si scolleghino dalla rete, ovvero di un effetto cascata [8][10][11][12]. È il caso delle reti comunicative, come quelle telefoniche cellulari analizzate o una ipotetica rete mesh costruita con i router WiFi, ma anche ovviamente reti di distribuzioni elettriche, ecc.</p>
+
+<p>Una possibile interessante applicazione dei metodi e degli strumenti usati per analizzare la rete di antenne di Roma potrebbe essere lo studio di città molto più grandi e densamente popolate (come New York o Tokyo), ma servirebbero capacità di calcolo e di memoria molto più grandi di quelle a nostra disposizione. Un altro possibile studio potrebbe essere verificare la possibilità di creare una rete distribuita e aperta con i router WiFi.
+<!-- Avendo questi un raggio molto inferiore delle antenne cellulari, la rete sarebbe molto simile a un reticolo, quindi benché uno studio percolativo possa essere interessante, non lo sarebbe dal punto di vista delle reti complesse. 
+%valutare se lasciare o rimuovere -->
+Una rete di questo tipo sarebbe comunque un nuovo concetto di Internet, che potrebbe avere interessanti sviluppi su reti di altro tipo, per esempio quelle sociali.</p>
+
+<h2>Bibliografia</h2>
+
+<ol>
+<li><a href="http://arxiv.org/pdf/cond-mat/0106096">Albert, R. and A. L. Barabasi (2002), <em>Statistical mechanic of complex networks</em>, Reviews of modern phyisics <strong>74</strong>, 47.</a> </li>
+<li><a href="http://www.nature.com/nature/journal/v406/n6794/pdf/406378a0.pdf">Albert, R., H. Jeong, and A. L. Barabasi (2000), <em>Error and attack tolerance of complex networks</em>, Nature <strong>406</strong>, 378.</a></li>
+<li><a href="http://arxiv.org/pdf/cond-mat/9910332">Barabasi, A. L. and R. Albert (1999), <em>Emergence of scaling in random networks</em>, Science <strong>286</strong>, 509.</a></li>
+<li><a href="http://arxiv.org/pdf/cond-mat/0007048">Cohen, R. K. Erez, D. ben-Avraham and S. Havlin (2000), <em>Resilience of the internet to random breakdown</em>, Physical Review letters <strong>85</strong>, 4626.</a></li>
+<li><a href="http://arxiv.org/pdf/cond-mat/0010251">Cohen, R. K. Erez, D. ben-Avraham and S. Havlin (2001), <em>Breakdown of the internet under intentional attack</em>, Physical Review letters <strong>86</strong>, 3682.</a></li>
+<li><a href="http://www.renyi.hu/~p_erdos/1959-11.pdf">Erdős, P. and A. Rényi (1959), <em>On random graph I.</em>, Publicationes Mathematicae Debrecen <strong>6</strong>, 290.</a></li>
+<li><a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.24.6195&amp;rep=rep1&amp;type=pdf">Molloy, M. e B. Reed (1995). <em>A critical point for random graphs with a given degree sequence</em>. Random structures and algorithms <strong>6</strong>, 161.</a></li>
+<li><a href="http://arxiv.org/pdf/cond-mat/0301086">Motter, A. E: and Y. C. Lai (2002), <em>Cascade-based attacks on complex networks</em>, Physical Review E <strong>66</strong>, p. 065102.</a></li>
+<li><a href="http://www.nature.com/nature/journal/v393/n6684/pdf/393440a0.pdf">Watts, J. and H. Strogatz (1998), <em>Collective dynamics of 'small-world' networks</em>, Nature <strong>393</strong>, 440.</a></li>
+<li><a href="http://staffweb.worc.ac.uk/DrC/Courses%202010-11/Comp%203104/Tutor%20Inputs/Session%207%20Prep/Small%20World%20networks/PRE_04_ZPL.pdf">Zhao, L., Park, K., and Lai, Y. C. (2004), <em>Attack vulnerability of scale-free networks due to cascading breakdown</em>, Physical review E, <strong>70</strong>, 035101.</a></li>
+<li><a href="http://chaos1.la.asu.edu/~yclai/papers/PRE_05_ZPLY.pdf">Zhao, L., Park, K., Lai, Y. C., and Ye, N. (2005), <em>Tolerance of scale-free networks against attack-induced cascades</em>, Physical Review E, <strong>72</strong>, 025104.</a></li>
+<li><a href="http://kexue.com.cn/upload/blog/file/2010/3/2010328195832179667.pdf">Wang, J. W., and Rong, L. L. (2009). <em>Cascade-based attack vulnerability on the US power grid</em>, Safety Science, <strong>47</strong>, 1332.</a></li>
+<li><a href="http://opencellid.org/"><em>OpenCellID</em> (ENAiKOON).</a></li>
+<li><a href="https://location.services.mozilla.com/"><em>Mozilla Location Service</em> (Mozilla Foundation).</a></li>
+</ol>
 
 
 
@@ -135,17 +817,12 @@ FINE PROVA LAYOUT
 
 
 
+<!--
 
+<h3>
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
 
-
-
-
-
-
-
-
-
-
+<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here <a href="https://guides.github.com/features/mastering-markdown/">using GitHub Flavored Markdown</a>, select a template crafted by a designer, and publish. After your page is generated, you can check out the new <code>gh-pages</code> branch locally. If you’re using GitHub Desktop, simply sync your repository and you’ll see the new branch.</p>
 
 <h3>
 <a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Designer Templates</h3>
@@ -166,6 +843,8 @@ FINE PROVA LAYOUT
 <a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support or Contact</h3>
 
 <p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
+
+-->
       </section>
     </div>
 
@@ -173,8 +852,8 @@ FINE PROVA LAYOUT
     <div id="footer_wrap" class="outer">
       <footer class="inner">
         <p class="copyright">
-	<p>Maintained by <a href="https://github.com/FedericoMuciaccia">Federico Muciaccia</a> and <a href="https://github.com/LolAsdOmgWtfAfk">Iuri La Rosa</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+	<p>Authors: <a href="https://github.com/FedericoMuciaccia">Federico Muciaccia</a> and <a href="https://github.com/LolAsdOmgWtfAfk">Iuri La Rosa</a></p>
+	<p>License: <a href=https://creativecommons.org/licenses/by-sa/3.0/ >CC-BY-SA 3.0</a></p>
       </footer>
     </div>
 

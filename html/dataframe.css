@@ -1,0 +1,23 @@
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #4d4d4d; /*#373737;*/
+  margin-bottom: 20px;
+  text-align: left;
+  font-family: Arial, sans-serif;
+ }
+
+th {
+  /*font-family: 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+  /*font-weight: bold;*/
+  padding: 10px;
+  background: #4d4d4d; /*#373737;*/
+  color: white;
+  /*border-bottom: 2px solid #373737;*/
+ }
+
+td {
+  padding: 10px;
+  /*border: 1px solid #373737;*/
+ }
+

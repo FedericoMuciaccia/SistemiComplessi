@@ -1,0 +1,47 @@
+body,html{background:#fff}
+h2{font-size:32px;letter-spacing:-1px}
+h2{display:block;margin:0 0 12px;line-height:100%;text-shadow:0 1px 0 rgba(255,255,255,.75);color:#484848}
+h2{color:#0096dd}
+#outer-wrapper{background:url(https://location.services.mozilla.com/static/images/bg-stone.png) repeat-x #f9f9f9}
+
+
+
+
+#outer-wrapper,#wrapper{position:relative}
+article,body,div,figure,h2,header,html,img,menu,nav,object,p,section,summary{margin:0;padding:0;border:0}
+figure,figure img,header,section{display:block}
+
+
+body{font-size:14px;line-height:1.5;font-family:'Open Sans','Droid Arabic Naskh',sans-serif;color:#333}
+h2{font-family:'Open Sans Light','Droid Arabic Naskh',sans-serif;font-weight:400}
+#masthead:after{display:block;visibility:hidden;height:0;clear:both;content:"."}
+.header-logo{padding-top:20px}
+.header-logo img{float:left;padding-right:5px}
+.header-logo h2{padding-top:5px}
+#wrapper{padding-bottom:20px;width:1000px;margin:0 auto}
+img{max-width:100%}
+#masthead{display:block;margin:0 auto;padding-left:20px;padding-right:20px;position:relative;width:960px}
+
+
+
+
+
+
+
+@media only screen and (max-width:760px){
+#wrapper{width:320px;padding-bottom:5px}
+#masthead{width:auto;padding-left:10px;padding-right:10px;padding-bottom:20px}
+h2{font-size:28px;letter-spacing:-.5px}
+}
+
+@media only screen and (min-width:480px) and (max-width:760px){
+#wrapper{width:440px}
+#masthead{width:auto}
+}
+
+@media only screen and (min-width:760px) and (max-width:1000px){
+#wrapper{width:760px}
+#masthead{width:720px}
+}
+
+
