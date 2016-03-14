@@ -257,9 +257,9 @@ averageSignal
 This field is only used by the OpenCellID project and historically has been used as a hint towards the quality of the position estimate.</p>
 </blockquote>
 
-<p>I dati forniti sono di tipo aggregato, ovvero riportano il numero di osservazioni per antenna ed il risultato della stima della sua posizione. Esistono anche dati grezzi, ovvero corrispondenti alle singole osservazioni dei singoli utenti. Tale dataset però non viene reso pubblicamente disponibile, in quanto contenente diverse informazioni, anche di carattere dinamico, utili a tracciare il singolo individuo. È allo studio un meccanismo di autorizzazioni per permettere agni utenti consci degli eventuali rischi di pubblicare i dati che li riguardano.</p>
+<p>I dati forniti sono di tipo aggregato, ovvero riportano il numero di osservazioni per antenna ed il risultato della stima della sua posizione. Esistono anche dati grezzi, ovvero corrispondenti alle singole osservazioni dei singoli utenti. Tale dataset però non viene reso pubblicamente disponibile, in quanto contenente diverse informazioni, anche di carattere dinamico, utili a tracciare il singolo individuo. È allo studio un meccanismo di autorizzazioni per permettere agli utenti consci degli eventuali rischi di pubblicare i dati che li riguardano.</p>
 
-<p>I valori di latitudine e longitudine per le coordinate nelle proiezioni geografiche seguono il sistema di riferimento dettato dalla convenzione <em>WSG 84 Web Mercator</em>.</p>
+<p>I valori di latitudine e longitudine, per le coordinate nelle proiezioni geografiche, seguono il sistema di riferimento dettato dalla convenzione <em>WSG 84 Web Mercator</em>.</p>
 
 <h3>Data selection</h3>
 
@@ -279,7 +279,7 @@ mcc == 222
 samples > 1
 </code></pre>
 
-<p>Adesso che il datasample si è ridotto molto possiamo effettuare delle operazioni computazionalmente un po' più pesanti: vogliamo eliminare tutte le rilevazioni al di fuori del Grande Raccordo Anulare, che per semplicità è stato schematizzato come una circonferenza di raggio 10 km con centro esattamente nol Colosseo.</p>
+<p>Adesso che il datasample si è molto ridotto, possiamo effettuare delle operazioni computazionalmente un po' più pesanti: vogliamo eliminare tutte le rilevazioni al di fuori del Grande Raccordo Anulare, che per semplicità è stato schematizzato come una circonferenza di raggio 10 km con centro esattamente nel Colosseo.</p>
 
 <p>Per far questo serve definire una nozione di distanza. Dato che i nostri sono dati geolocalizzati sarebbe naturale introdurre una distanza geodesica. A tal fine abbiamo usato la libreria <code>geopy</code>, che contiene due definizioni differenti:</p>
 
@@ -305,20 +305,20 @@ def euclideanDistace(x,y):
     return numpy.sqrt(numpy.square(x) + numpy.square(y))
 </code></pre>
 
-<p>da notare il fatto che per il calcolo algebrico è stata utilizzata la libreria <code>numpy</code> invece che la libreria <code>math</code> builtin in Python, poiché è più veloce (è scritta in C) e supporta le operazioni direttamente su vettori di coordinate.</p>
+<p>Da notare il fatto che per il calcolo algebrico è stata utilizzata la libreria <code>numpy</code> invece che la libreria <code>math</code> <em>built-in</em> in Python, poiché è più veloce (è scritta in C) e supporta le operazioni direttamente su vettori di coordinate.</p>
 
-<p>I dati sono stati importati in un dataframe tabulare usando la libreria <code>pandas</code>. Questo che ci ha permesso di effettuare facilmente tutte le query necessarie per il filtraggio dei dati.</p>
+<p>I dati sono stati importati in un <em>dataframe</em> tabulare usando la libreria <code>pandas</code>. Questo che ci ha permesso di effettuare facilmente tutte le <em>query</em> necessarie per il filtraggio dei dati.</p>
 
 <a href="../html/dataframe_example_Roma.html">Esempio del dataframe da noi utilizzato</a>
 
 <iframe src="../html/dataframe_example_Roma.html" height=460></iframe>
 
-<p>A questo punto abbiamo finalmente il nostro datasample della città di Roma: circa 7000 antenne in un file csv agevolmente maneggiabile di circa 1MB.</p>
+<p>A questo punto abbiamo finalmente il nostro datasample della città di Roma: circa 7000 antenne in un file csv facilmente maneggiabile di circa 1MB.</p>
 
 <p><a href="../img/map/Roma_non_georeferenziata.svg">
 <img src="../img/map/Roma_non_georeferenziata.svg"/></a></p>
 
-<p>Per visualizzare agevolmente i nostri dati serve una mappa georeferenziata, preferibilmente interattiva. A tal fine per il notebook di IPython abbiamo usato la libreria <code>gmaps</code>, che dà semplice accesso inline alle mappe di Google Maps dando la possibilità di creare una heatmap, mentre per l'HTML di questa presentazione abbiamo usato le analoghe funzioni della libreria <code>gmplot</code>.</p>
+<p>Per visualizzare agevolmente i nostri dati serve una mappa georeferenziata, preferibilmente interattiva. A tal fine, per il notebook di IPython abbiamo usato la libreria <code>gmaps</code>, che dà semplice accesso inline alle mappe di Google Maps dando la possibilità di creare una <em>heatmap</em>, mentre per l'HTML di questa presentazione abbiamo usato le analoghe funzioni della libreria <code>gmplot</code>.</p>
 
 <pre><code>
 roma = pandas.read_csv("../data/Roma_towers.csv")
@@ -346,13 +346,13 @@ mappa.draw("../doc/heatmap.html")
 
 <h3>Analisi del raggio di copertura delle antenne</h3>
 
-<p>Dato che ci servirà fare grafici con scale logaritmiche eliminiamo i dati di antenne che presentano un raggio nullo</p>
+<p>Dato che ci servirà fare grafici con scale logaritmiche, eliminiamo i dati di antenne che presentano un raggio nullo</p>
 
 <pre><code>
 range =! 0
 </code></pre>
 
-<p>Il raggio minimo risulta essere 1m, mentre quello massimo 41832m. Dato che il raggio del Grande Raccordo Anulare è circa 10km questo significa che ci saranno antenne con un grado di connessione totale. Raggi irragionevolmente piccoli probabilmente sono il residuo di misure effettuate con il GPS spento e senza connessione internet, dimodochè il software di acquisizione risulti ingannato assegnando la posizione dell'utente all'antenna più vicina.</p>
+<p>Il raggio minimo risulta essere $1\:m$, mentre quello massimo $41832\:m$. Dato che il raggio del Grande Raccordo Anulare è circa $10\:km$, significa che ci saranno antenne con un grado di connessione totale. Raggi irragionevolmente piccoli probabilmente sono il residuo di misure effettuate con il GPS spento e senza connessione internet, dimodoché il software di acquisizione risulti ingannato assegnando la posizione dell'utente all'antenna più vicina.</p>
 <!-- TODO forse spostare questa considerazione a quando si è spiegato il criterio di linking.
 TODO spiegare la possibile casa di questi valori di raggi così bassi -->
 
@@ -360,7 +360,7 @@ TODO spiegare la possibile casa di questi valori di raggi così bassi -->
 <a href="../img/range/infinite_log_binning.svg"><img src="../img/range/infinite_log_binning.svg"/></a>
 La canalizzazione logaritmica pesata permette di osservare l'andamento ben sotto il singolo conteggio, ampliando di una decade l'intervallo di osservazione.</p>
 
-<p>In figura si può vedere come l'andamento sia abbastanza power-law su diverse decadi, soprattutto fino a <code>conteggio = 1</code>. Per verificare ulteriormente questo fatto abbiamo generato anche la curva del frequency-rank, che risulta seguire senza esitazioni il trend delineato dagli istogrammi.
+<p>In figura si può vedere come l'andamento sia abbastanza power-law su diverse decadi, soprattutto fino a <code>conteggio = 1</code>. Per verificare ulteriormente questo fatto abbiamo generato anche la curva del <em>frequency-rank</em>, che risulta seguire senza esitazioni il trend delineato dagli istogrammi.
 <!-- TODO  cercare di spiegare questa power-law. -->
 Il frequency-rank si ottiene ordinando in maniera decrescente il numero di conteggi per ogni canale unitario e associando un relativo ranking intero decrescente ai raggi corrispondenti.
 <a href="../img/range/range_distribution.svg"><img src="../img/range/range_distribution.svg"/></a></p>
@@ -382,7 +382,7 @@ TODO mettere retta con pendenza con fit a mano spannometrico</p> -->
 <!-- TODO RIORDINARE NUMERI, FIGURE E CORREGGERE E PARAGRAFARE -->
 <!-- TODO mettere ancore per i riferimenti bibliografici nel testo -->
 
-<p>Le <em>reti</em> sono insiemi di oggetti che è possibile connettere tra loro. Gli ultimi 60 anni hanno visto un crescente interesse per esse poiché con le reti è possibile descrivere sistemi dei più disparati tipi nei campi più vari: dalla biologia all'economia, passando per reti elettriche, informatiche, ecosistemi,  e altro ancora. Ancora più importante, negli ultimi vent'anni è stato scoperto che una classe di reti ha proprietà del tutto comuni nonostante l'intrinseca diversità tra i sistemi che la realizzano; queste reti vengono dette scale-free perché presentano manifeste caratteristiche di invarianza di scala e la loro modellizzazione, mediante un processo di crescita preferenziale, è dovuta a Barabasi e Albert [3]. <!-- \textcite{Barbalbert1999} --></p>
+<p>Le reti sono insiemi di oggetti connessi tra loro. Gli ultimi 60 anni hanno visto un crescente interesse per esse, poiché con le reti è possibile descrivere sistemi dei tipi più disparati nei campi più vari: dalla biologia all'economia, passando per reti elettriche, informatiche, ecosistemi,  e altro ancora. Ancora più importante, negli ultimi vent'anni è stato scoperto che una classe di reti ha proprietà del tutto comuni nonostante l'intrinseca diversità tra i sistemi che la realizzano; queste reti vengono dette scale-free perché presentano manifeste caratteristiche di invarianza di scala e la loro modellizzazione, mediante un processo di crescita preferenziale, è dovuta a Barabasi e Albert [3]. <!-- \textcite{Barbalbert1999} --></p>
 
 <p>Per maggior semplicità, nell'esposizione del lavoro svolto verrà sempre assunto che le reti siano dirette e non pesate.</p>
 
@@ -390,7 +390,7 @@ TODO mettere retta con pendenza con fit a mano spannometrico</p> -->
 
 <p>Dal punto di vista matematico una rete è rappresentata da un <em>grafo</em>. Gli oggetti costitutivi di un grafo sono i <em>nodi</em>, i quali vengono collegati opportunamente tra loro con dei <em>link</em> secondo dei criteri che dipendono dal modello (nella costruzione di un grafo teorico) o dalla natura del sistema (per le reti reali). Il numero di nodi della rete, o di una sua sottoparte, è ovviamente la grandezza fondamentale per definirne le dimensioni; il numero e la distribuzione dei link ne descrivono la connettività.</p>
 
-<p>Prima di procedere alla descrizione dei modelli di rete, è utile fornire un glossario delle quantità caratteristiche delle reti, spesso determinanti per riuscire a categorizzare un grafo come scale-free.</p>
+<p>Prima di procedere allo studio della rete di antenne cellulari e alla descrizione dei modelli di rete, è utile fornire un glossario delle quantità caratteristiche delle reti, spesso determinanti per riuscire a categorizzare un grafo come scale-free.</p>
 
 <p><strong>Grado</strong> Il grado di un nodo è il numero di altri nodi a cui è connesso. La connettività di una rete è ben rappresentata dalla <strong>distribuzione del grado</strong>, la cui forma funzionale $P(k)$ è il primo criterio per discriminare una rete scale-free.</p>
 
@@ -405,7 +405,7 @@ TODO mettere retta con pendenza con fit a mano spannometrico</p> -->
 
 <p><strong>Custering</strong> Per misurare quanto i nodi di un grafo tendono a creare degli aggregati, viene definito il coefficiente di clustering $C_i$. Per un vertice $i$ di grado $k_i$, $C_i$ è definito come il rapporto
 $$C_i = \frac{2E_i}{k_i(k_i-1)},$$
-dove $E_i$ è il numero di link tra i $k_i$ primi vicini del vertice e $k_i(k_i-1)/2$ il numero totale di link possibili tra essi: cioè il numero di collegamenti necessari perché $i$ con i suoi vicini sia una porzione di grafo <em>completa</em>, detta anche <em>clique</em>.</p>
+dove $E_i$ è il numero di link tra i $k_i$ primi vicini del vertice e $k_i(k_i-1)/2$ è il numero totale di link possibili tra essi: cioè il numero di collegamenti necessari perché $i$ con i suoi vicini sia una porzione di grafo <em>completa</em>, detta anche <em>clique</em>.</p>
 <!-- TODO scrivere meglio -->
 
 <p>La media su tutti i nodi dei rispettivi $C_i$ dà un'indicazione di quanto la rete sia complessivamente clusterizzata e quindi può essere preso come coefficiente di clustering globale $C$ della rete. Una definizione più recente di $C$, equivalente alla precedente, lo pone uguale al rapporto tra il numero di triplette di nodi completamente collegate $N_\triangle$ e il numero di triplette che vede i tre nodi collegati da almeno due link $N_\wedge$. In entrambi i casi, più $C$ è vicino a $1$, più si ha clusterizzazione.</p>
@@ -427,22 +427,24 @@ dove $E_i$ è il numero di link tra i $k_i$ primi vicini del vertice e $k_i(k_i-
 
 <!-- TODO calcolare tutta la matrice di adiacenza con la distanza geodesica al posto di quella euclidea risulta pesantissimo ($N^2$ elementi) -->
 
-<p>Prese le antenne nell'area selezionata come i nodi della rete, è necessario definire un criterio per stabilire un link. Nell'ottica di una ipotetica mesh network, la scelta è stata di considerare collegate due antenne se nello spazio tra esse vi è continuità di segnale, in modo che qualsiasi utente nel mezzo possa comunicare con altri utenti. Trascurando dislivelli del terreno ed edifici, è stato supposto che la porzione di spazio coperta da un'antenna sia un cerchio di raggio uguale a <code>range</code>. Il criterio scelto è stato quindi che la distanza $\delta_{ij}$ tra due antenne fosse minore della somma dei loro raggi, contando una sovrapposizione di almeno il $20\%$.
+<p>Prese le antenne nell'area selezionata come i nodi della rete, è necessario definire un criterio per stabilire un link. Nell'ottica di una ipotetica mesh network, la scelta è stata di considerare collegate due antenne se, nello spazio tra esse, vi è continuità di segnale, in modo che qualsiasi utente nel mezzo possa comunicare con altri utenti. Trascurando dislivelli del terreno ed edifici, è stato supposto che la porzione di spazio coperta da un'antenna sia un cerchio di raggio uguale a <code>range</code>. Il criterio scelto è stato quindi che la distanza $\delta_{ij}$ tra due antenne fosse minore della somma dei loro raggi, contando una sovrapposizione di almeno il $20\%$.
 $$\delta_{ij} < 0.8(r_i+r_j)$$</P>
 
-<p>Stabilito il criterio, bisogna costruire la rete popolando la matrice di adiacenza. Dato che il criterio di linking richiede la conoscenza della distanza tra due antenne, è stato necessario calcolare le distanze tra ogni coppia di nodi. I dati in nostro possesso forniscono le coordinate geografiche di latitudine e longitudine, quindi ci si è posti il problema di come calcolare le distanze. Inizialmente la scelta è caduta su una funzione della libreria <code>geopy</code>, la quale permette di calcoalare la distanza geodesica le funzioni <code>great-circle</code> e <code>vincenty</code>. Come già detto in precedenza, la prima è più veloce e usa un modello sferico di Terra, la seconda richiede più calcoli perché usa un accurato modello ellissoidale (impiega circa il doppio del tempo).</p>
+<p>Stabilito il criterio, bisogna costruire la rete popolando la matrice di adiacenza. Dato che il criterio di linking richiede la conoscenza della distanza tra due antenne, è stato necessario calcolare le distanze tra ogni coppia di nodi. 
 
-<p>Purtroppo i tempi di calcolo richiesti da queste funzioni risultano piuttosto alti per una matrice di circa $7000^2$ elementi. Per risparmiare tempo, dato che la rete da noi definita non è diretta, è stata modificata la funzione di calcolo della matrice di adiacenza in modo che ne calcolasse soltanto la metà superiore. Il tentativo di diagonalizzare a blocchi la matrice è purtroppo impossibile poiché dai dati risulta che un certo numero di antenne hanno raggi d'azione nell'ordine di decine di km, ricoprendo quindi tutta l'area di Roma selezionata e connettendosi dunque con titte le altre, portando valori molto fuori la diagonale.</p>
+I dati in nostro possesso forniscono le coordinate geografiche di latitudine e longitudine, quindi ci si è posti il problema di come calcolare le distanze. Inizialmente la scelta è caduta su due funzioni della libreria <code>geopy</code>, <code>great-circle</code> e <code>vincenty</code>, le quali permettono di calcoalare la distanza geodesica mediante le rispettive definizioni di distanza geodesica. Come già detto in precedenza, la prima è più veloce e usa un modello sferico di Terra, la seconda richiede più calcoli perché usa un accurato modello ellissoidale (impiega circa il doppio del tempo).</p>
 
-<p>L'unica via praticabile per far calare drasticamente il tempo necessario per calcolare tutte le matrici richieste è stata quindi convertire le coordinate geografiche in cartesiane e usare la distanza euclidea. In questo modo si è ottenuto un guadagno di velocità di un fattore 10.
+<p>Purtroppo i tempi di calcolo richiesti da queste funzioni risultano piuttosto alti, soprattutto per una matrice di circa $7000^2$ elementi. Per risparmiare tempo, dato che la rete da noi definita non è diretta, è stata modificata la funzione di calcolo della matrice di adiacenza in modo che ne calcolasse soltanto la metà superiore. Il tentativo di diagonalizzare a blocchi la matrice è purtroppo impossibile poiché dai dati risulta che un certo numero di antenne hanno raggi d'azione nell'ordine di decine di km, ricoprendo quindi tutta l'area di Roma selezionata e connettendosi dunque con tutte le altre, portando valori molto fuori la diagonale.</p>
+
+<p>L'unica via praticabile per far calare drasticamente il tempo necessario per calcolare tutte le matrici richieste, è stata quindi convertire le coordinate geografiche in cartesiane e usare la distanza euclidea. In questo modo si è riprodotto di nuovo il guadagno di velocità di un fattore 10, già ottenuto nel calcolare le distanze delle antenne dal Colosseo.
+
 Una volta calcolate le matrici definitive per la rete complessiva e per le singole compagnie, sono state salvate su file in formato CVS, in modo da non doverle più ricalcolare.</P>
 
 <h3>Distribuzione del grado</h3>
 
 <p>I vettore di gradi per ogni nodo del grafo si ottiene facilmente con il metodo <code>.degree()</code> della classe <code>Graph</code> di <code>networkx</code>.</p>
 
-<p>Abbiamo dunque fatto un istogramma congiunto di tutti i provider e della rete totale con un canale per ogni possibile numero naturare, ma in scala log-log risultava illegibile.
-Per ridurre un poco il rumore sulle code la canalizzazione è stata ridutta di 8 volte rispetto alle unità naturali. Data la poca estensione delle curve ed il fatto che molte non arrivavano fino ad 1, si è scelto di evitare il log-binning in base 2, in quanto in questo caso risultava troppo grossolano e non in grado di conservare tutta l'informazione sulle code della distribuzione.</p>
+<p>Abbiamo dunque fatto un istogramma congiunto di tutti i provider e della rete totale con un canale per ogni possibile numero naturale, ma in scala log-log risultava illegibile; per ridurre un po' il rumore sulle code, la canalizzazione è stata ridotta di 8 volte rispetto alle unità naturali. Data la poca estensione delle curve ed il fatto che molte non arrivavano fino ad 1, si è scelto di evitare il log-binning in base 2, in quanto in questo caso risultava troppo grossolano e non in grado di conservare tutta l'informazione sulle code della distribuzione.</p>
 
 <p><a href="../img/degree/degreeDistribution.svg"">
 <img src="../img/degree/degreeDistribution.svg" /></a></p>
@@ -462,9 +464,9 @@ Per ridurre un poco il rumore sulle code la canalizzazione è stata ridutta di 8
 
 <h4>Erdős e Rényi</h4><!-- random network -->
 
-<p>Il modello di Erdős e Rényi parte da $N$ nodi ed $n$ link indiretti. Se poniamo che i nodi siano distinguibili, possono esistere $\binom{n}{N(N-1)/2)}$ configurazioni equiprobabili tra le quali può esserne presa una in maniera random. Un'altra maniera per definire una rete random è il criterio binomiale: partire da un set di $N$ nodi e dare a ogni possibile coppia un link con una certa probabilità $P$.</p>
+<p>Il modello di Erdős e Rényi parte da $N$ nodi ed $n$ link indiretti. Se poniamo che i nodi siano distinguibili, possono esistere $\binom{n}{N(N-1)/2)}$ configurazioni equiprobabili, tra le quali può esserne presa una in maniera random. Un'altra maniera per definire una rete random è il criterio binomiale: partire da un set di $N$ nodi e dare a ogni possibile coppia un link con una certa probabilità $p$.</p>
 
-<p>Il punto più importante di un approccio probabilistico alle reti è la scassificazione dei grafi mediante lo studio delle loro proprietà. Ponendo $N \rightarrow \infty$, se la probabilità che una certa proprietà si verifichi tende a 1, si osserva che per reti limitate quella proprietà si verifica con probabilità significativa anche con pochi nodi. Ciò si verifica per molte proprietà e questo fatto permette di poter trattare le reti per categorie secondo le loro proprietà peculiari.</p>
+<p>Il punto più importante di un approccio probabilistico alle reti è la classificazione dei grafi mediante lo studio delle loro proprietà. Ponendo $N \rightarrow \infty$, se la probabilità che una certa proprietà si verifichi tende a 1, si osserva che per reti limitate essa si verifica con probabilità significativa anche con pochi nodi. Ciò si verifica con molte caratteristiche e questo fatto permette di poter trattare le reti per categorie secondo le loro proprietà peculiari.</p>
 
 <p>Nel caso di un grafo di Erdős e Renyi queste sono:</p>
 
@@ -687,7 +689,7 @@ La rete reale ha ovviamente delle contromisure per evitare la caduta delle comun
 
 <p>Per le simulazioni di attacco intenzionale e random failure sulle reti in esame e lo studio approfondito dell'andamento delle grandezze statistiche e topologiche durante l'analisi percolativa abbiamo inizialmente utilizzato <code>networkx</code>, una libreria di Python piuttosto completa dedicata alle reti.</p>
 
-<p>Tuttavia questa si è rivelata una scelta sbagliata, in quanto <code>networkx</code>, pur essendo molto completa e semplice da usare, non è particolarmente ottimizzata dal punto di vista dell'efficienza di calcolo. Questo perché è interamentente scritta in Python, anche per le sue routine più interne e non implementa alcun tipo di parallelismo builtin.</p>
+<p>Tuttavia questa si è rivelata una scelta sbagliata, in quanto <code>networkx</code>, pur essendo molto completa e semplice da usare, non è particolarmente ottimizzata dal punto di vista dell'efficienza di calcolo. Questo perché è interamentente scritta in Python, anche per le sue routine più interne e non implementa alcun tipo di parallelismo built-in.</p>
 
 <p>Creare, manipolare e disegnare i grafi sono operazioni semplici e immediate, ma ma quando si cercano di usare le funzioni più pesanti dal punto di vista del calcolo, come per esempio quella per determinare il diametro della rete, <code>networkx</code> appare del tutto non soddisfacente.</p>
 
@@ -702,7 +704,7 @@ La rete reale ha ovviamente delle contromisure per evitare la caduta delle comun
 <p>In primis si è cercato di evitare operazioni cicliche sui vettori dinamici, come <code>pop()</code> e <code>append()</code> e di utilizzare sempre librerie python ottimizzate e internamente scritte in C, come ad esempio <code>numpy</code>.
 Già questo permette operazioni su grossi vettori con un incremento di prestazioni rispetto al python puro di almeno il doppio.</p>
 
-<p>Inoltre si è tentato di sfruttare i diversi core della macchina, facendo degli esperimenti di rudimentale calcolo parallelo. In pratica si è cercato di rendere il codice non sequenziale, in modo da usare funzioni del tutto indipendenti e poter scrivere tutto in termini di funzioni <code>map()</code> per poi utilizzare la libreria builtin <code>multiprocessing</code> e fare una prima parallelizzazione.
+<p>Inoltre si è tentato di sfruttare i diversi core della macchina, facendo degli esperimenti di rudimentale calcolo parallelo. In pratica si è cercato di rendere il codice non sequenziale, in modo da usare funzioni del tutto indipendenti e poter scrivere tutto in termini di funzioni <code>map()</code> per poi utilizzare la libreria built-in <code>multiprocessing</code> e fare una prima parallelizzazione.
 <pre><code>
 import multiprocessing
 cpus = multiprocessing.cpu_count()
