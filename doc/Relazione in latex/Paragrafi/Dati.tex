@@ -8,9 +8,7 @@
 \label{sec:gps}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Google Location Service}
-
-\subsubsection*{GPS and battery drain}
+\subsection{GPS and battery drain}
 La geolocalizzazione dei dispositivi, soprattutto quelli mobile, sta rapidamente diventando parte intergrante del nostro modo quotidiano di fruire la tecnologia. Si usa nel navigatore stradale, per impostare automaticamente il luogo di cui desideriamo le previsioni del tempo o da cui vogliamo prendere un treno o un aereo, per aggiungere informazioni contestuali alle fotografie che scattiamo e tanto altro ancora.
 
 Il modo storicamente utilizzato per effettuare la geolocalizzazione è per via satellitare, tramite il GPS. Ma il GPS ha due tipi di problemi:
@@ -20,7 +18,7 @@ Il modo storicamente utilizzato per effettuare la geolocalizzazione è per via s
  \item consuma molta energia. 
 \end{itemize}
 
-Soprattutto il secondo punto è in palese conflitto con l'esigenza dei moderni dispositivi portabili di avere una ampia autonomia energerica.
+Soprattutto il secondo punto è in palese conflitto con l'esigenza dei moderni dispositivi portatili di avere un'ampia autonomia energerica.
 
 Per porre rimedio a questo fatto, Google ha via via comiciato ad utilizzare altri tipi alternativi di geolocalizzazione, per comporre un sistema ibrido.
 \begin{enumerate}
@@ -30,7 +28,7 @@ Per porre rimedio a questo fatto, Google ha via via comiciato ad utilizzare altr
 \end{enumerate}
 
 \subsubsection*{Geolocalization via WiFi}
-La diffusione del Wifi è ormai capillare, soprattutto in contesto cittadino. Virtualmente c'è un router WiFi in ogni appartamento. Mentre camminiamo per la città col WiFi dello smartphone acceso, captiamo in ogni punto decine di segnali. Se è nota la posizione di questi router e la potenza del segnale da loro emesso è possibile triangolare la nostra posizione con una notevole precisione, dovuta sia al fatto che un segnale WiFi ha un raggio tipico di una trentina di metri, sia dovuto all'ingente numero di segnali coi quali si sta triangolando, tipicamente più di una decina.
+La diffusione del Wifi è ormai capillare, soprattutto in contesto cittadino. Virtualmente c'è un router WiFi in ogni appartamento. Mentre camminiamo per la città con il WiFi dello smartphone acceso, captiamo in ogni punto decine di segnali. Se è nota la posizione di questi router e la potenza del segnale da loro emesso è possibile triangolare la nostra posizione con una notevole precisione, dovuta sia al fatto che un segnale WiFi ha un raggio tipico di una trentina di metri, sia dovuto all'ingente numero di segnali con i quali si sta triangolando, tipicamente più di una decina.
 
 Quindi per sapere la mia posizione devo avere accesso a una mappa delle posizioni di tutti i router. E come si costruisce questa mappa? Esattamente al contrario: camminando per la città con GPS acceso, avendo dunque un'alta precisione sulla posizione del dispositivo, e triangolando la posizione di tutti i router visibili combinando tutte le rilevazioni del tracciato.
 
@@ -176,7 +174,7 @@ changeable 	&created 		&updated 		&averageSignal\\
 \end{table}
 
 \subsection{Data selection}
-Una volta scaricati i dati aggregati dalla pagina web \lstinline{https://location.services.mozilla.com/downloads} sono cominciate le operazioni di selezione dei dati. Il data sample riguarda tutti i continenti e risulta molto grosso (un file csv di circa 650 MB), per cui è necessario ridurlo il più possibile per poterlo maneggiare col nostro limitato quantitativo di RAM.
+Una volta scaricati i dati aggregati dalla pagina web \lstinline{https://location.services.mozilla.com/downloads} sono cominciate le operazioni di selezione dei dati. Il data sample riguarda tutti i continenti e risulta molto grosso (un file csv di circa 650 MB), per cui è necessario ridurlo il più possibile per poterlo maneggiare con il nostro limitato quantitativo di RAM.
 
 Una prima grossolana ma efficiente scrematura riguarda i dati caratterizzati da un mobile county code non italiano, si è pertanto imposta la condizione
 \begin{lstlisting}
