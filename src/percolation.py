@@ -3,7 +3,7 @@
 
 # # Percolation
 
-# In[1]:
+# In[2]:
 
 
 import numpy, networkx, pandas
@@ -16,7 +16,7 @@ import numpy, networkx, pandas
 # %matplotlib inline
 
 
-# In[2]:
+# In[3]:
 
 
 # simple parallelization
@@ -29,7 +29,7 @@ import numpy, networkx, pandas
 
 # ## Random failure
 
-# In[2]:
+# In[4]:
 
 
 def randomFailure(graph, steps=101):
@@ -73,7 +73,7 @@ def randomFailure(graph, steps=101):
 
 # ## Intentional attack
 
-# In[3]:
+# In[5]:
 
 
 def intentionalAttack(graph, steps=101):
@@ -120,7 +120,7 @@ def intentionalAttack(graph, steps=101):
     return attackDataframe
 
 
-# In[6]:
+# In[7]:
 
 
 #gestori = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
@@ -133,7 +133,7 @@ gestori = ["Roma"]
 colori = ['#004184']
 
 
-# In[8]:
+# In[9]:
 
 
 # data reading, calculations, data writing
@@ -142,20 +142,20 @@ colori = ['#004184']
 for provider in gestori:
     
     # read data
-    adjacencyMatrix = numpy.genfromtxt(("../data/graphs/adiacenzaEuclidea_{0}.csv".format(provider)),
+    adjacencyMatrix = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(provider)),
                                  delimiter=',',
                                  dtype='int')
     providerGraph = networkx.Graph(adjacencyMatrix)
     
     # calculate results
-#    print provider, "random failure:"
-#    %time failureResults = randomFailure(providerGraph, steps=101) # default: steps=101
-    print provider, "intentional attack:"
-    get_ipython().magic(u'time attackResults = intentionalAttack(providerGraph, steps=101)')
+    print provider, "random failure:"
+    get_ipython().magic(u'time failureResults = randomFailure(providerGraph, steps=10) # default: steps=101')
+#    print provider, "intentional attack:"
+#    %time attackResults = intentionalAttack(providerGraph, steps=101)
     
     # write on file
-#    failureResults.to_csv('../data/percolation/randomFailure_{0}.csv'.format(provider), index=False)
-    attackResults.to_csv('../data/percolation/intentionalAttack_{0}.csv'.format(provider), index=False)
+    failureResults.to_csv('../data/percolation/ComparazioneRandom{0}.csv'.format(provider), index=False)
+#    attackResults.to_csv('../data/percolation/intentionalAttack_{0}.csv'.format(provider), index=False)
 
 
 # In[ ]:

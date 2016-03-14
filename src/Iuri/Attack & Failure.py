@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[5]:
 
 import geopy
 from geopy import distance #TODO BUGGONE
@@ -114,7 +114,7 @@ def attaccoPercent(compagnia, steps):
         aziendaFinal.append(compagnia)
 
         graphSize = networkx.number_of_nodes(grafoFinal)
-        diametro.append(networkx.diameter(giantCluster, e=None))
+        #diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
 
 
@@ -147,15 +147,16 @@ def failurePercent(compagnia, steps):
         aziendaFinal.append(compagnia)
 
         graphSize = networkx.number_of_nodes(grafoFinal)
-        diametro.append(networkx.diameter(giantCluster, e=None))
+        #diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
 
 
-# In[4]:
+# In[1]:
 
-colori = ['#004184','#ff3300','#ff8000','#018ECC','#4d4d4d']
-#gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
-gestore = ["Tim", "Vodafone", "Wind", "Tre"]
+#colori = ['#004184','#ff3300','#ff8000','#018ECC','#4d4d4d']
+colori = ['#AA3939','#226666','#7A9F35']
+#gestore = ["Roma"]
+#gestore = ["Tim", "Vodafone", "Wind", "Tre"]
 
 
 # In[20]:
@@ -190,7 +191,7 @@ datiFinal.to_csv("/home/protoss/Documenti/SistemiComplessi/data/Iuri/AttackDataF
 # Wall time: 37.4 s  
 #   
 
-# In[5]:
+# In[6]:
 
 #Failure
 diametro = []
@@ -200,14 +201,15 @@ ascisse = []
 
 for provider in gestore:
     get_ipython().magic(u'time failurePercent(provider, 100)')
-
+#    %time failure(provider)
+        
 datiFinal = pandas.DataFrame()
 
 datiFinal['percent'] = ascisse
 datiFinal['Provider'] = aziendaFinal
-datiFinal['diameter'] = diametro
+#datiFinal['diameter'] = diametro
 datiFinal['GCsize'] = relSizeGC
-datiFinal.to_csv("/home/protoss/Documenti/SistemiComplessi/data/Iuri/FailureDataForSeaborn.csv")
+datiFinal.to_csv("/home/protoss/Documenti/SistemiComplessi/data/Iuri/ComparazioneFailureRoma.csv")
 #datiFinal
 
 
@@ -302,6 +304,31 @@ pyplot.xlim(0, 100)
 pyplot.ylim(0,1.1)
 pyplot.legend()
 pyplot.savefig('../../img/iuri/FailureGC_Final', format='svg', dpi=1000)
+
+
+# In[8]:
+
+#giant cluster
+import seaborn
+import pandas
+
+datiFinal = pandas.read_csv('../../data/Iuri/comparazioneAttacchi.csv')
+
+seaborn.set_context("notebook", font_scale=1.1)
+seaborn.set_style("ticks")
+seaborn.lmplot('percent', 'GC', data=datiFinal, fit_reg=False,
+           size = 9, aspect = 1.3333,
+           legend = False,
+           hue='Strategia', palette = colori,
+           scatter_kws={"marker": "D", "s": 100})
+pyplot.title('Attacco: comparazione metodi')
+pyplot.xlabel("%")
+pyplot.ylabel("Valore")
+pyplot.xlim(0, 100)
+pyplot.ylim(0,1.1)
+pyplot.legend()
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/AttackGC_Compare.svg', format='svg', dpi=1000)
+pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/AttackGC_Compare.eps', format='eps', dpi=1000)
 
 
 # # CALCOLO DEL DIAMETRO DI RETE ROMA IMPOSSIBILE, ANDAMENTO ESPONENZIALE CON L'AUMENTARE DEI NODI
