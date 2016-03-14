@@ -1,18 +1,35 @@
 
-<link rel="stylesheet" type="text/css" href="dataframe.css">
+<head>
+    <link rel="stylesheet" type="text/css" href="dataframe.css">
+
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript">
+        MathJax.Hub.Config({
+            tex2jax: {
+    		inlineMath: [['$','$'], ['\\(','\\)']],
+    		processEscapes: true
+  	    }
+	});
+    </script>
+    <script type="text/x-mathjax-config">
+	MathJax.Hub.Config({
+	    TeX: { equationNumbers: { autoNumber: "AMS" } }
+	});
+    </script>
+</head>
 
 <table>
   <tr>
-    <th>Rete<br></th>
-    <th>N</th>
-    <th>GC%<br></th>
-    <th>D</th>
-    <th>&lt;l&gt;<br></th>
-    <th>C<br></th>
-    <th>&lt;k&gt;<br></th>
-    <th>C/&lt;k&gt;</th>
-    <th>&lt;k^2&gt;/&lt;k&gt;</th>
-    <th>f%</th>
+    <th>Rete</th>
+    <th>$N$</th>
+    <th>$GC \%$</th>
+    <th>$D$</th>
+    <th>$\langle l \rangle$<br></th>
+    <th>$C$<br></th>
+    <th>$\langle k \rangle$<br></th>
+    <th>$C / \langle k \rangle$</th>
+    <th>$\langle k^2 \rangle / \langle k \rangle$</th>
+    <th>$f \%$</th>
   </tr>
   <tr>
     <td>Tim</td>

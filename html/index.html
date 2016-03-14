@@ -715,7 +715,7 @@ La strategia ottimale è quella che, a parità di risultato, coinvolge il minor 
 
 <p>L'unica via praticabile è stata ripiegare su <code>graph_tool</code>: un'altra libreria meno <em>user-friendly</em> ma estremamente più efficiente e sopratutto impostata di default sul calcolo parallelo. Le funzioni di analisi topologica e statistica sono molto più veloci rispetto a <code>networkx</code>, poiché implementate in C con il <em>template programming</em> ed ottimizzate in fase di compilazione. Inoltre la possibilità di usarle nativamente in parallelo su 4 core e 8 thread ci ha permesso di calcolare le singole funzioni con una velocità più di 60 volte superiore a prima.</p>
 
-<p>Considerato ciò, il codice per lo studio percolativo delle reti è stato convertito (con non poco sforzo) per poter fare uso della nuova libreria. Alla fine, per l'analisi percolativa completa di tutte le reti, ovvero con lo studio in funzione dei nodi rimossi delle quantità
+<p>Considerato ciò, il codice per lo studio percolativo delle reti è stato convertito (con non poco sforzo) per poter fare uso della nuova libreria. Alla fine, per l'analisi percolativa completa di tutte le reti, ovvero con lo studio, in funzione dei nodi rimossi, delle quantità
 <ul>
 <li>diametro $D$</li>
 <li>average path lenght $\langle l \rangle$</li>
@@ -728,7 +728,9 @@ da una previsione iniziale di più di 24 ore di tempo di calcolo si è passati a
 
 <p><img src="../img/meme_Obama.jpg" width="80%"/></p>
 
-<h3>Il punto di partenza</h3>
+<!-- <h3>Il punto di partenza</h3> -->
+
+<h3>Random failure</h3>
 
 <p>Le reti da cui è partito lo studio percolativo sono le 5 definite e costruite nel precedente paragrafo. Le grandezze iniziali erano</p>
 
@@ -736,67 +738,54 @@ da una previsione iniziale di più di 24 ore di tempo di calcolo si è passati a
 
 <iframe src="../html/risultatianalisi.html" height=270"></iframe>
 
-<h4>Random failure</h4>
-
-<p>La prima cosa da notare è che le reti delle singole compagnie hanno un rapporto coefficiente di clustering-grado medio in linea con molte altre reti reali</p>
-
-<p>TODO biblioref da sistemare</p>
-
-<p>\parencite{Barbalbert2002}, 
-mentre stranamente la rete costruita con tutte le antenne non vede aumentare particolarmente il suo clustering. Inoltre ci si aspetta che le reti siano tutte particolarmente resistenti sotto random failure, comportamento che sembra più simile a quello di una rete scale free. Tuttavia una rete random con un grado medio alto ha comunque un $f$ molto alto. Per esempio, una rete random avente $N = N<em>{Tim}$ e $\langle k \rangle = \langle k \rangle</em>{Tim}$, avrebbe una $f$ critica di poco inferiore: $\sim 98\%$. Infatti, essendo per una rete random $\langle k \rangle = Np$, perché sia uguale a $\langle k \rangle_{Tim}$ con $\sim 1800$ nodi, deve essere $p \sim 3.7\%$, 
+<p>La prima cosa da notare è che le reti delle singole compagnie hanno un rapporto $C / \langle k \rangle$ in linea con molte altre reti reali [1], mentre stranamente la rete costruita con tutte le antenne non vede aumentare particolarmente il suo clustering. Inoltre ci si aspetta che le reti siano tutte particolarmente resistenti sotto random failure, comportamento che sembra più simile a quello di una rete scale free. Tuttavia una rete random con un grado medio alto ha comunque un $f$ molto alto. Per esempio, una rete random avente $N = N_{Tim}$ e $\langle k \rangle = \langle k \rangle_{Tim}$, avrebbe una $f$ critica di poco inferiore: $\sim 98\%$. Infatti, essendo per una rete random $\langle k \rangle = Np$, perché sia uguale a $\langle k \rangle_{Tim}$ con $\sim 1800$ nodi, deve essere $p \sim 3.7\%$, 
 $$\Rightarrow \sigma^2 = Np(1-p) = \langle k^2 \rangle - \langle k \rangle^2 \sim 62$$
 $$\Rightarrow \frac{\langle k^2 \rangle }{\langle k \rangle} = \frac{Np(1-p)-(Np)^2}{Np} \sim 1+Np = 1+ \langle k \rangle \sim 65$$
 $$\Rightarrow f \sim 1 - \frac{1}{65} \sim 98\%$$</p>
 
 <p>Con una rete random costruita con i parametri della rete totale si ottiene $f = 99.5$. Valori quindi che si distinguono poco dalla soglia per una rete power-law finita, anche nel caso in cui l'esponente sia di poco maggiore di 3: $f \sim 1 - \frac{1}{\frac{\alpha - 2}{\alpha-3}k_{max}} > 90\%$ già per un grado massimo di $\sim10$.</p>
 
-<h4>Attacco intenzionale</h4>
+<h3>Attacco intenzionale</h3>
 
-<p>Nello scenario di attacco intenzionale ci si aspetta una veloce frammentazione della rete. I cluster diverranno rapidamente più piccoli fino a frammentarsi del tutto entro pochi punti percentuali di nodi rimossi. Nel caso di una rete fortemente connessa come quella in esame ci si aspetta una resistenza maggiore, ma comunque una soglia percolativa bassa (approssimativamente entro il $50\%$). Se la rete è di tipo scale-free dovrebbe essere più fragile ad attacchi di questo tipo: mentre in una rete random i nodi più connessi sono solo una coda della distribuzione del grado, una rete a power-law ha in proporzione molti più nodi molto connessi.</p>
+<p>Nello scenario di attacco intenzionale ci si aspetta una veloce frammentazione della rete. I cluster diverranno rapidamente più piccoli fino a frammentarsi del tutto entro pochi punti percentuali di nodi rimossi. Nel caso di una rete fortemente connessa come quella in esame ci si aspetta una resistenza maggiore, ma comunque una soglia percolativa bassa (approssimativamente entro il $50\%$). Se la rete è di tipo scale-free dovrebbe essere più fragile ad attacchi di questo tipo: mentre in una rete random i nodi più connessi sono solo una coda della distribuzione del grado; una rete a power-law ha in proporzione molti più nodi molto connessi.</p>
 
-<p>Dal punto di vista del diametro della rete, levando i nodi più connessi ci si aspetta che esso aumenti, fino a quando la rete diventa tanto frammentata da essere costituita da clusters con pochissimi nodi. Oltrepassata la soglia di frammentazione quindi il diametro dei clusters più grandi decrescerà rapidamente a zero.</p>
+<p>Dal punto di vista del diametro della rete, levando i nodi più connessi ci si aspetta che esso aumenti fino a quando la rete diventa tanto frammentata da essere costituita da cluster con pochissimi nodi. Oltrepassata la soglia di frammentazione quindi il diametro dei cluster più grandi decrescerà rapidamente a zero.</p>
 
 
-<h3>Risultati</h3>
+<h3>Risultati per immagini</h3>
 
-TODO solo immagini
+$GC \%$, $C$, $\langle l \rangle$, $D$, $\langle k \rangle$ e $\langle k^2 \rangle / \langle k \rangle$
 
-<p>TODO DA METTER CAPTION GENERALE {Risultati per rimozione random}
-<img src="fig:failGC" alt="Failure: GC" title="" />
-<img src="fig:failC" alt="Failure: C" title="" />
-<img src="fig:faill" alt="Failure: l" title="" />
-<img src="fig:failD" alt="Failure: D" title="" />
-<img src="fig:failk" alt="Failure: k" title="" />
-<img src="fig:failc" alt="Failure: criterio" title="" /></p>
+<p>Risultati per rimozione random: 
+<img src="../img/Breakdown/gToolFailureGC_Final.svg" alt="Failure: GC" title="fig:failGC" />
+<img src="../img/Breakdown/gToolFailureC_Final.svg" alt="Failure: C" title="fig:failC" />
+<img src="../img/Breakdown/gToolFailurel_Final.svg" alt="Failure: l" title="fig:faill" />
+<img src="../img/Breakdown/gToolFailureD_Final.svg" alt="Failure: D" title="fig:failD" />
+<img src="../img/Breakdown/gToolFailurek_Final.svg" alt="Failure: k" title="fig:failk" />
+<img src="../img/Breakdown/gToolFailurec_Final.svg" alt="Failure: criterio" title="fig:failc" /></p>
 
-<p>TODO DA METTER CAPTION GENERALE {Risultati per rimozione con massima efficienza}
-<img src="fig:atakGC" alt="Attack: GC" title="" />
-<img src="fig:atakC" alt="Attack: C" title="" />
-<img src="fig:atakl" alt="Attack: l" title="" />
-<img src="fig:atakD" alt="Attack: D" title="" />
-<img src="fig:atakk" alt="Attack: k" title="" />
-<img src="fig:atakc" alt="Attack: criterio" title="" /></p>
+<p>Risultati per rimozione con massima efficienza
+<img src="../img/Breakdown/gToolAttackGC_Final.svg" alt="Attack: GC" title="fig:atakGC" />
+<img src="../img/Breakdown/gToolAttackC_Final.svg" alt="Attack: C" title="fig:atakC" />
+<img src="../img/Breakdown/gToolAttackl_Final.svg" alt="Attack: l" title="fig:atakl" />
+<img src="../img/Breakdown/gToolAttackD_Final.svg" alt="Attack: D" title="fig:atakD" />
+<img src="../img/Breakdown/gToolAttackk_Final.svg" alt="Attack: k" title="fig:atakk" />
+<img src="../img/Breakdown/gToolAttackc_Final.svg" alt="Attack: criterio" title="fig:atakc" /></p>
 
 <h2>Conclusioni e prospettive future</h2>
 
-Come abbiamo visto, in regime di alta connettività, dal punto di vista percolativo si notano poco le differenze tra reti generate secondo un modello scale-free o random. La differenza si nota quando il grado medio della rete è più basso. Per esempio una rete random con $\langle k \rangle \sim 2$ ha $f\sim 50\%$, mentre una rete scale free con stesso $\langle k \rangle$ ha $f\sim 80\%$. Una spiegazione qualitativa sta nel fatto che con una distribuzione del grado a legge di potenza, i nodi meno connessi sono in larga maggioranza, quindi è meno probabile che un attacco random riesca a destrutturare la rete, rispetto a un grafo che abbia una $P(k)$ poissoniana. </p>
+Come abbiamo visto, in regime di alta connettività dal punto di vista percolativo si notano poco le differenze tra reti generate secondo un modello scale-free o random. La differenza si nota quando il grado medio della rete è più basso. Per esempio una rete random con $\langle k \rangle \sim 2$ ha $f\sim 50\%$, mentre una rete scale free con stesso $\langle k \rangle$ ha $f\sim 80\%$. Una spiegazione qualitativa sta nel fatto che con una distribuzione del grado a legge di potenza, i nodi meno connessi sono in larga maggioranza, quindi è meno probabile che un attacco random riesca a destrutturare la rete, rispetto a un grafo che abbia una $P(k)$ poissoniana. </p>
 
-<p>Un'altra cosa da notare è che a parità di $N$, una rete di Barabasi-Albert è molto più connessa di una di Erdos-Renyi. Nell'esempio sopra, infatti, con $N=100$ una la prima ha $\sim400$ link, mentre la seconda il doppio; per avere lo stesso numero di link la rete random ha bisogno di una $p \Rightarrow \langle k \rangle$ doppi. Questa differenza va attenuandosi con $N$ più grandi.</p>
+<!-- Un'altra cosa da notare è che a parità di $N$, una rete di Barabasi-Albert è molto più connessa di una di Erdos-Renyi. Nell'esempio sopra, infatti, con $N=100$ una la prima ha $\sim400$ link, mentre la seconda il doppio; per avere lo stesso numero di link la rete random ha bisogno di una $p \Rightarrow \langle k \rangle$ doppi. Questa differenza va attenuandosi con $N$ più grandi. -->
 
-<p>Uno studio percolativo su reti reali, quindi, non aiuta a identificare una eventuale invarianza di scala per reti molto grandi e connesse. Tuttavia può essere decisiva per reti più piccole, come piccole comunità, reti locali, proteine e alcuni ecosistemi: nonostante la bassa statistica, il comportamento di reti con pochi nodi possono essere distinti in maniera significativa da uno studio percolativo.</p>
+<p>Uno studio percolativo su reti reali, quindi, non aiuta a identificare una eventuale invarianza di scala per reti molto grandi e connesse. Tuttavia può essere decisiva per reti più piccole, come piccole comunità, reti locali e alcuni ecosistemi: nonostante la bassa statistica, i comportamento di reti con pochi nodi possono essere distinti in maniera significativa da uno studio percolativo.</p>
 
-<p>Nel caso di reti il cui funzionamento dipende dalla capacità dei nodi di gestire un certo carico, uno studio percolativo dovrebbe anche considerare l'eventualità che con la rimozione di alcuni nodi, altri vadano in sovraccarico e si scolleghino dalla rete, ovvero di un effetto cascata </p>
+<p>Nel caso di reti il cui funzionamento dipende dalla capacità dei nodi di gestire un certo carico, uno studio percolativo dovrebbe anche considerare l'eventualità che con la rimozione di alcuni nodi, altri vadano in sovraccarico e si scolleghino dalla rete, ovvero di un effetto cascata [8][10][11][12]. È il caso delle reti comunicative, come quelle telefoniche cellulari analizzate o una ipotetica rete mesh costruita con i router WiFi, ma anche ovviamente reti di distribuzioni elettriche, ecc.</p>
 
-<p>TODO vari biblioref da sistemare</p>
-
-<p>(Motter \citeyear{Motter2002}, Zhao \citeyear{Zhao2004} e \citeyear{Zhao2005}, Wang \citeyear{Wang2009})
-. È il caso delle reti comunicative, come quelle telefoniche cellulari analizzate, o una ipotetica rete mesh costruita con i router WiFi, ma anche ovviamente reti di distribuzioni elettriche, 
-%valutare se lasciare o rimuovere
-o alcuni ecosistemi dove una catena alimentare che veda la scomparsa di una specie causa una eccessiva riproduzione di una specie predata, che a sua volta porta altre specie all'estinzione.</p>
-
-<p>Una possibile interessante applicazione dei metodi e degli strumenti usati per analizzare la rete di antenne di Roma potrebbe essere lo studio di città molto più grandi e densamente popolate (come New York o Tokyo), ma servirebbero capacità di calcolo e di memoria molto più grandi di quelle a nostra disposizione. Un altro possibile studio potrebbe essere verificare la possibilità di creare una rete distribuita e aperta con i router WiFi. Avendo questi un raggio molto inferiore delle antenne cellulari, la rete sarebbe molto simile a un reticolo, quindi benché uno studio percolativo possa essere interessante, non lo sarebbe dal punto di vista delle reti complesse. 
-%valutare se lasciare o rimuovere
-Una rete di questo tipo sarebbe comunque un nuovo concetto di Internet, che potrebbe avere interessanti sviluppi su reti di altro tipo, per esempio sociali, correlate a essa.</p>
+<p>Una possibile interessante applicazione dei metodi e degli strumenti usati per analizzare la rete di antenne di Roma potrebbe essere lo studio di città molto più grandi e densamente popolate (come New York o Tokyo), ma servirebbero capacità di calcolo e di memoria molto più grandi di quelle a nostra disposizione. Un altro possibile studio potrebbe essere verificare la possibilità di creare una rete distribuita e aperta con i router WiFi.
+<!-- Avendo questi un raggio molto inferiore delle antenne cellulari, la rete sarebbe molto simile a un reticolo, quindi benché uno studio percolativo possa essere interessante, non lo sarebbe dal punto di vista delle reti complesse. 
+%valutare se lasciare o rimuovere -->
+Una rete di questo tipo sarebbe comunque un nuovo concetto di Internet, che potrebbe avere interessanti sviluppi su reti di altro tipo, per esempio quelle sociali.</p>
 
 <h2>Bibliografia</h2>
 
