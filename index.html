@@ -363,13 +363,13 @@ range =! 0
 TODO spiegare la possibile casa di questi valori di raggi così bassi -->
 
 <p>Facciamo un istogramma log-log per la distribusione del raggio di copertura, sia con la canalizzazione lineare sugli interi, sia con una canalizzazione logaritmica in base 2, per ridurre il rumore sulla coda.
-<a href="../img/range/infinite_log_binning.svg"><img src="../img/range/infinite_log_binning.svg"/></a>
+<a href="img/range/infinite_log_binning.svg"><img src="img/range/infinite_log_binning.svg"/></a>
 La canalizzazione logaritmica pesata permette di osservare l'andamento ben sotto il singolo conteggio, ampliando di una decade l'intervallo di osservazione.</p>
 
 <p>In figura si può vedere come l'andamento sia abbastanza power-law su diverse decadi, soprattutto fino a <code>conteggio = 1</code>. Per verificare ulteriormente questo fatto abbiamo generato anche la curva del <em>frequency-rank</em>, che risulta seguire senza esitazioni il trend delineato dagli istogrammi.
 <!-- TODO  cercare di spiegare questa power-law. -->
 Il frequency-rank si ottiene ordinando in maniera decrescente il numero di conteggi per ogni canale unitario e associando un relativo ranking intero decrescente ai raggi corrispondenti.
-<a href="../img/range/range_distribution.svg"><img src="../img/range/range_distribution.svg"/></a></p>
+<a href="img/range/range_distribution.svg"><img src="img/range/range_distribution.svg"/></a></p>
 
 <!-- TODO mettere plugin che se si clicka sull'immagine la visualizza a tutto schermo -->
 
@@ -452,15 +452,15 @@ Una volta calcolate le matrici definitive per la rete complessiva e per le singo
 
 <p>Abbiamo dunque fatto un istogramma congiunto di tutti i provider e della rete totale con un canale per ogni possibile numero naturale, ma in scala log-log risultava illegibile; per ridurre un po' il rumore sulle code, la canalizzazione è stata ridotta di 8 volte rispetto alle unità naturali. Data la poca estensione delle curve ed il fatto che molte non arrivavano fino ad 1, si è scelto di evitare il log-binning in base 2, in quanto in questo caso risultava troppo grossolano e non in grado di conservare tutta l'informazione sulle code della distribuzione.</p>
 
-<p><a href="../img/degree/degreeDistribution.svg"">
-<img src="../img/degree/degreeDistribution.svg" /></a></p>
+<p><a href="img/degree/degreeDistribution.svg"">
+<img src="img/degree/degreeDistribution.svg" /></a></p>
 
 <p>Come si può vedere nella figura, soprattutto per la rete complessiva, l'andamento è circa power law dal massimo in poi. L'esponente è in valore assoluto di poco superiore a 3 nella prima parte e di poco inferiore a 3 nell'ultima parte della coda, estesa per circa mezza decade.</p>
 
 <p>Di seguito viene anche riportato l'andamento del frequency-rank (in forma di scatterplot per migliorarne la legibilità). La differenza nei valori sulle y rispetto all'istogramma precedente è dovuta al fatto che grazie all'ottima visibilità qui è stato possibile riprendere la canalizzazione sui numeri naturali, non aggregata.</p>
 
-<p><a href="../img/degree/degree_frequencyRank.svg"">
-<img src="../img/degree/degree_frequencyRank.svg" /></a></p>
+<p><a href="img/degree/degree_frequencyRank.svg"">
+<img src="img/degree/degree_frequencyRank.svg" /></a></p>
 
 <h3>Modelli di rete</h3>
 
@@ -492,7 +492,7 @@ Molte reti reali presentano simili caratteristiche nei gradi di separazione, che
 
 <p>Il fatto che il coefficiente di clustering non dipenda dal numero di nodi è caratteristico dei reticoli, pertanto il punto di partenza del modello di Watts e Strogatz è un reticolo con condizioni al contorno cicliche, i cui $N$ nodi sono collegati ai primi $n$ vicini. Se poniamo, per esempio, $n = 2$, si configura così un anello del tipo:</p>
 
-<p><img src="../img/Teoria/zoomring.svg" title="fig:ring" width="70%" /></p>
+<p><img src="img/Teoria/zoomring.svg" title="fig:ring" width="70%" /></p>
 <!-- <figure>
 <figcaption>Reticolo ciclico. Il punto di partenza del modello Watts-Strogatz: un reticolo con condizioni al contorno cicliche.</figcaption>
 </figure> -->
@@ -504,13 +504,13 @@ Molte reti reali presentano simili caratteristiche nei gradi di separazione, che
 <!-- TODO fare subplot a 4, col caption complessivo -->
 <p>
 $p = 0$:
-<img src="../img/Teoria/ringnet.svg" title="fig:WSp0" width="50%"/>
+<img src="img/Teoria/ringnet.svg" title="fig:WSp0" width="50%"/>
 $p = 0.03$:
-<img src="../img/Teoria/smallworld.svg" title="fig:WSp3" width="50%"/>
+<img src="img/Teoria/smallworld.svg" title="fig:WSp3" width="50%"/>
 $p = 0.3$:
-<img src="../img/Teoria/random-smallworld.svg" title="fig:WSp30" width="50%"/>
+<img src="img/Teoria/random-smallworld.svg" title="fig:WSp30" width="50%"/>
 $p = 1$:
-<img src="../img/Teoria/totalrandomwatts.svg" title="fig:WSp100" width="50%"/></p>
+<img src="img/Teoria/totalrandomwatts.svg" title="fig:WSp100" width="50%"/></p>
 
 
 <p>Con questo metodo, a seguito del <em>rewiring</em> si ha il rischio che parti del grafo non siano più connesse. Ponendo $n>1$ ciò può essere evitato, abbassando di molto la probabilità di avere un grafo non connesso già con $n=2$.</p>
@@ -520,11 +520,11 @@ $p = 1$:
 <!-- TODO da mettere un caption unico e tutte le figure assieme -->
 <p>
 Esempio di grafo random
-<img src="../img/Teoria/Erdosmodel.svg" title="fig:confrontoGraforandom" width="60%"/>
+<img src="img/Teoria/Erdosmodel.svg" title="fig:confrontoGraforandom" width="60%"/>
 Esempio di grafo small-world con $p=1$
-<img src="../img/Teoria/Wattsmodel.svg" title="fig:confrontoGrafosmall" width="60%"/>
+<img src="img/Teoria/Wattsmodel.svg" title="fig:confrontoGrafosmall" width="60%"/>
 Confronto $P(k)$
-<img src="../img/Teoria/ComparDegExp.svg" title="fig:confrontoGradigauss"/></p>
+<img src="img/Teoria/ComparDegExp.svg" title="fig:confrontoGradigauss"/></p>
 
 <p>Per avere una rete tipica, che abbia un numero di connessioni non troppo elevato, ma non così poco da rischiare da avere un grafo non connesso a seguito dell'operazione di rewiring, possono essere considerati degli $N$ ed $n$ tali che $N>>n>>ln(N)>>1$. Con queste condizioni la distribuzione del grado $P(k)$ ha una forma gaussiana la cui media coincide con $2n$, con $\sigma$ più piccole per $p$ basse, tendente a una delta di Dirac per $p \rightarrow 0$. Infatti, mentre con $p = 0$ si ha un reticolo con grado uguale per ogni nodo, l'operazione di random rewiring introduce una casualità sulla $P(K)$ ben descritta da una gaussiana per $N$ grandi, che però ha una larghezza sensibilmente inferiore a quella di una rete random, portando a una rete ancora più omogenea.</p>
 
@@ -536,7 +536,7 @@ $$C(p) \propto N_\triangle (p) \Rightarrow C(p) \sim C(0)(1-p)^3, $$
 con $C(0) \sim 0.75$ per $N$ grande. Ricordando che per il modello di Erdős-Renyi $C_{ER}=p_{ER}$, e che per modellizzare una rete reale $p$ solitamente è abbastanza piccola, dato che $\langle k \rangle = Np$, risulta che per valori di $p \lesssim 0.25$ si hanno velocemente $C_{WS}$ sensibilmente maggiori di $C_{ER}$. Inoltre, con un rewiring moderato il coefficiente di clustering può variare poco al variare di $N$, essendo ancora non troppo dissimile da un reticolo.</p>
 
 <p>Confronto tra i coefficienti di clustering teorici dei due modelli, al variare del rispettivo parametro $p$.
-<img src="../img/Teoria/ConfrontoC.svg" alt="Confronto clustering." title="fig:confrontoC" /></p>
+<img src="img/Teoria/ConfrontoC.svg" alt="Confronto clustering." title="fig:confrontoC" /></p>
 
 <p>Concludendo, un grafo è considerato small-world se ha contemporaneamente piccole distanze medie e, a differenza dei grafi random, una clusterizzazione relativamente elevata. Pertanto il modello di Watts e Strogatz descrive in maniera soddisfacente reti che abbiano queste caratteristiche, purché non siano scale-free.</p>
 
@@ -558,7 +558,7 @@ $$ k_i(t) = m \sqrt{\frac{t}{t_i}}. $$</p>
 $$ P(k)\sim 2m^2 k^{-3}. $$</p>
 
 <p>A seguito un esempio di grafo generato con il modello di Barabasi-Albert. Con $m=1$ è evidente la struttura frattale, ma essendo un grafo ad albero il clustering è nullo.
-<img src="../img/Teoria/Barabalbert1.svg" alt="Albero scale-free" title="fig:barabalbero" /></p>
+<img src="img/Teoria/Barabalbert1.svg" alt="Albero scale-free" title="fig:barabalbero" /></p>
 
 <p>Il modello di Barabasi e Albert è un modello minimale, importantissimo perché il primo in grado di riprodurre un grafo che mostrasse un'invarianza di scala, ma che in alcuni aspetti mal si accorda con quelle reti reali con caratteristiche scale-free. Per cominciare la distribuzione del grado è una legge di potenza con esponente 3, ma le reti scale-free solitamente hanno un esponente inferiore, seppur maggiore di 2. </p>
 
@@ -566,7 +566,7 @@ $$ P(k)\sim 2m^2 k^{-3}. $$</p>
 Per tutti questi motivi il modello iniziale è stato negli anni integrato e reso più complesso.</p>
 
 <p>Confronto tra le distribuzioni del grado dei tre modelli esposti.
-<img src="../img/Teoria/CompareSameN.svg" alt="Confronto $P(k)$" title="fig:confrontoGradi" /></p>
+<img src="img/Teoria/CompareSameN.svg" alt="Confronto $P(k)$" title="fig:confrontoGradi" /></p>
 
 <h2>Teoria della percolazione</h2>
 
@@ -607,8 +607,8 @@ Questa è una equazione parametrica e ricorsiva, per ottenere la soluzione $q = 
 
 <!-- TODO da mettere un caption unico e tutte le figure assieme -->
 <p>Esistenza soluzione non banale. Confronto tra il caso in cui $F(q)=q$ ha solo la soluzione banale $q=1$, e il caso in cui esiste una soluzione per $q &lt; 1$.
-<img src="../img/Teoria/Banale.svg" alt="Soluzione banale." title="fig:banale" />
-<img src="../img/Teoria/Nonbanale.svg" alt="Soluzione non banale." title="fig:nonbanale" /></p>
+<img src="img/Teoria/Banale.svg" alt="Soluzione banale." title="fig:banale" />
+<img src="img/Teoria/Nonbanale.svg" alt="Soluzione non banale." title="fig:nonbanale" /></p>
 
 <p>Dato che uno dei due deve sempre essere $F(1)=1$, se $F'(q=1) \geq 1$ significa che l'altro punto di intersezione, con $F'(q) &lt; 1$, esiste per $q &lt;1$ e quindi esiste il giant cluster. Svolgendo $d_qF|_{q=1} \geq 1$ si ottiene la condizione di esistenza dello spanning cluster in termini del grado, o criterio di Molloy-Reed [7]:
 \begin{equation}
@@ -659,7 +659,7 @@ $$\frac{\langle k^2\rangle}{\langle k \rangle} = c \frac{2-\gamma}{3-\gamma},$$
 
 <p>Abbiamo osservato che i tempi scalano all'incirca quadraticamente con il numero di nodi, per cui per lo studio della rete complessiva di tutta Roma sarebbero richiesti 20 minuti per una iterazione e quasi 30 ore di calcolo per l'analisi completa. Queste considerazioni rendevano di fatto impraticabile questa strada.</p>
 
-<p><img src="../img/meme_Leonida.jpg"/></p>
+<p><img src="img/meme_Leonida.jpg"/></p>
 
 <p>Dato che i tempi di calcolo richiesti per l'analisi percolativa risultavano spropositati, soprattutto nel caso di random failure, abbiamo cercato dei modi per velocizzare il calcolo ed aggirare il problema.</p>
 
@@ -678,7 +678,7 @@ pool.map(function, array)
 
 <p>Purtroppo peò nel nostro caso questo approccio non si è rivelato adatto. Nel fare i tentativi vedevamo che i processori lavoravano insieme al 100% per un primo periodo, per poi ibernarsi in una eterna fase di stallo al 20% del carico, probabilmente per incongruenze nel messaging tra le varie istanze di python. Non possedendo sufficienti conoscenze su calcolo parallelo e cloud computing per poter risolvere velocemente il problema, abbiamo dunque abbandonato questo aproccio.</p>
 
-<p><img src="../img/meme_Boromir.jpg" width="90%"/></p>
+<p><img src="img/meme_Boromir.jpg" width="90%"/></p>
 
 <h3>Strategie di attacco</h3>
 
@@ -697,7 +697,7 @@ La strategia ottimale è quella che, a parità di risultato, coinvolge il minor 
 
 <p>Tale strategia può essere evidenziata solo da una simulazione <strong>sequenziale</strong>, fatta facendo evolvere la rete passo per passo, secondo una strategia di <em>steepest descent</em>. Questo garantisce di trovare la strategia ottimale, soprattutto se vengono inclusi anche gli effetti a cascata dovuti all'overload e alla saturazione di banda. Dal grafico sottostante (attacco intenzionale) si evince comunque che non c'è molta differenza tra procedere sequenzialmente con un campionamento all'1% o eseguire una simulazione di attacco nodo per nodo, per cui ad ogni modo il costo computazionale complessivo non risulta eccessivo.</p>
 
-<p><img src="../img/Breakdown/AttackGC_Compare.svg"/></p>
+<p><img src="img/Breakdown/AttackGC_Compare.svg"/></p>
 <!-- TODO in futuro inserire nel plot anche gli affetti a cascata, per far vedere che la curva crolla prima -->
 
 <p>Nel caso di random failure (escludendo gli effetti di saturazione a cascata) non c'è invece alcuna differenza tra l'approccio sequenziale e quello <strong>parallelo</strong>, rendendo il secondo algorimo preferibile nel caso si voglia sfruttare tutta la potenza delle moderne cpu multicore.</p>
@@ -727,7 +727,7 @@ La strategia ottimale è quella che, a parità di risultato, coinvolge il minor 
 </ul>
 da una previsione iniziale di più di 24 ore di tempo di calcolo si è passati a circa $3/4$ d'ora, con uno speedup di circa un fattore 30.</p>
 
-<p><img src="../img/meme_Obama.jpg" width="80%"/></p>
+<p><img src="img/meme_Obama.jpg" width="80%"/></p>
 
 <!-- <h3>Il punto di partenza</h3> -->
 
@@ -735,9 +735,9 @@ da una previsione iniziale di più di 24 ore di tempo di calcolo si è passati a
 
 <p>Le reti da cui è partito lo studio percolativo sono le 5 definite e costruite nel precedente paragrafo. Le grandezze iniziali erano</p>
 
-<a href="../html/risultatianalisi.html">Dati iniziali delle reti studiate</a>
+<a href="html/risultatianalisi.html">Dati iniziali delle reti studiate</a>
 
-<iframe src="../html/risultatianalisi.html" height=270"></iframe>
+<iframe src="html/risultatianalisi.html" height=270"></iframe>
 
 <p>La prima cosa da notare è che le reti delle singole compagnie hanno un rapporto $C / \langle k \rangle$ in linea con molte altre reti reali [1], mentre stranamente la rete costruita con tutte le antenne non vede aumentare particolarmente il suo clustering. Inoltre ci si aspetta che le reti siano tutte particolarmente resistenti sotto random failure, comportamento che sembra più simile a quello di una rete scale free. Tuttavia una rete random con un grado medio alto ha comunque un $f$ molto alto. Per esempio, una rete random avente $N = N_{Tim}$ e $\langle k \rangle = \langle k \rangle_{Tim}$, avrebbe una $f$ critica di poco inferiore: $\sim 98\%$. Infatti, essendo per una rete random $\langle k \rangle = Np$, perché sia uguale a $\langle k \rangle_{Tim}$ con $\sim 1800$ nodi, deve essere $p \sim 3.7\%$, 
 $$\Rightarrow \sigma^2 = Np(1-p) = \langle k^2 \rangle - \langle k \rangle^2 \sim 62$$
@@ -758,20 +758,20 @@ $$\Rightarrow f \sim 1 - \frac{1}{65} \sim 98\%$$</p>
 $GC \%$, $C$, $\langle l \rangle$, $D$, $\langle k \rangle$ e $\langle k^2 \rangle / \langle k \rangle$
 
 <p>Risultati per rimozione random: 
-<img src="../img/Breakdown/gToolFailureGC_Final.svg" alt="Failure: GC" title="fig:failGC" />
-<img src="../img/Breakdown/gToolFailureC_Final.svg" alt="Failure: C" title="fig:failC" />
-<img src="../img/Breakdown/gToolFailurel_Final.svg" alt="Failure: l" title="fig:faill" />
-<img src="../img/Breakdown/gToolFailureD_Final.svg" alt="Failure: D" title="fig:failD" />
-<img src="../img/Breakdown/gToolFailurek_Final.svg" alt="Failure: k" title="fig:failk" />
-<img src="../img/Breakdown/gToolFailurec_Final.svg" alt="Failure: criterio" title="fig:failc" /></p>
+<img src="img/Breakdown/gToolFailureGC_Final.svg" alt="Failure: GC" title="fig:failGC" />
+<img src="img/Breakdown/gToolFailureC_Final.svg" alt="Failure: C" title="fig:failC" />
+<img src="img/Breakdown/gToolFailurel_Final.svg" alt="Failure: l" title="fig:faill" />
+<img src="img/Breakdown/gToolFailureD_Final.svg" alt="Failure: D" title="fig:failD" />
+<img src="img/Breakdown/gToolFailurek_Final.svg" alt="Failure: k" title="fig:failk" />
+<img src="img/Breakdown/gToolFailurec_Final.svg" alt="Failure: criterio" title="fig:failc" /></p>
 
 <p>Risultati per rimozione con massima efficienza
-<img src="../img/Breakdown/gToolAttackGC_Final.svg" alt="Attack: GC" title="fig:atakGC" />
-<img src="../img/Breakdown/gToolAttackC_Final.svg" alt="Attack: C" title="fig:atakC" />
-<img src="../img/Breakdown/gToolAttackl_Final.svg" alt="Attack: l" title="fig:atakl" />
-<img src="../img/Breakdown/gToolAttackD_Final.svg" alt="Attack: D" title="fig:atakD" />
-<img src="../img/Breakdown/gToolAttackk_Final.svg" alt="Attack: k" title="fig:atakk" />
-<img src="../img/Breakdown/gToolAttackc_Final.svg" alt="Attack: criterio" title="fig:atakc" /></p>
+<img src="img/Breakdown/gToolAttackGC_Final.svg" alt="Attack: GC" title="fig:atakGC" />
+<img src="img/Breakdown/gToolAttackC_Final.svg" alt="Attack: C" title="fig:atakC" />
+<img src="img/Breakdown/gToolAttackl_Final.svg" alt="Attack: l" title="fig:atakl" />
+<img src="img/Breakdown/gToolAttackD_Final.svg" alt="Attack: D" title="fig:atakD" />
+<img src="img/Breakdown/gToolAttackk_Final.svg" alt="Attack: k" title="fig:atakk" />
+<img src="img/Breakdown/gToolAttackc_Final.svg" alt="Attack: criterio" title="fig:atakc" /></p>
 
 <h2>Conclusioni e prospettive future</h2>
 
