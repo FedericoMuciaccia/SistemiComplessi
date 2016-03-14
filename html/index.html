@@ -40,36 +40,13 @@
 
 
 <h2>Sommario</h2>
-<p>Lo scopo di questo lavoro è fare un'analisi di rete usando un campione di antenne telefoniche cellulari, ipotizzando di voler costruire una ipotetica *mesh network* con esse. Abbiamo scelto di analizzare il sistema delle antenne comprese entro il Raccordo Anulare di Roma. Non sapendo a priori di quale tipo di rete si tratta, e che tipo di grafo si costruisce da essa, sono state studiate alcune proprietà topologiche e comportamentali dell'insieme di antenne studiate.
-Dopo aver definito il criterio con cui dare un link a due nodi, sono state calcolate le matrici di adiacenza della rete complessiva e di quelle composte solo dalle antenne dei singoli gestori presenti in Italia. La prima parte dell'analisi consiste nell'estrapolare dai grafi ottenuti le distribuzioni dei gradi e nell'affidare all'istogramma dei gradi la forma funzionale che meglio gli si adatti. Avendo così ottenuto indicazioni significative sui tipi di rete in analisi, le abbiamo verficate studiando il comportamento percolativo della rete, mediante rimozione di nodi in due diversi scenari: un attacco intenzionale, che rimuovesse le antenne a partire da quelle con maggior grado, e una caduta random del sistema. I risultati ottenuti sono stati confrontati con modelli di rete esponenziali e scale-free.
-L'esposizione è articolata nel seguente modo:</p>
+<p>Lo scopo di questo lavoro è fare un'analisi di rete usando un campione di antenne per la telefonia cellulare, avendo in mente la costruzione di una ipotetica <em>mesh network</em> che copra l'intera area della città di Roma, schematicamente delimitata dal Grande Raccordo Anulare.</p>
 
-TODO rivedere ordine
+<p>Dopo aver definito il criterio con cui dare un link a due nodi, sono state calcolate le matrici di adiacenza della rete complessiva e di quelle relative ai singoli gestori telefonici. Si è dunque proceduto ad uno studio della topologia di tali reti, estraendone le distribuzioni del grado e cercando la forma funzionale che meglio vi si adatti. Una volta ottenute indicazioni significative sui tipi di rete in analisi, le abbiamo verficate studiando il comportamento percolativo della rete, mediante rimozione di nodi in due diversi scenari: un attacco intenzionale, con rimozione delle antenne a partire da quelle con maggior grado, e una serie di failure random nel sistema. I risultati ottenuti sono stati confrontati coi principali modelli di rete.</p>
 
-<p><strong>Nel paragrafo 1</strong> verranno esposte le basi teoriche dello studio effettuato, con particolare accento ai modelli di rete utilizzati come riferimento e ai concetti di percolazione e soglia percolativa.</p>
+<p>L'esposizione è articolata nel seguente modo: inizialmente si spiega come sono stati raccolti e organizzati i dati, come è stata definita la rete e quindi con quali criteri è stata costruita la matrice di adiacenza, accennando ai problemi computazionali avuti durante l'analisi. Dopodichè vengono esposte le basi teoriche dello studio effettuato, con particolare accento ai modelli di rete utilizzati come riferimento e ai concetti di percolazione e soglia percolativa. Infine si illustra lo studio percolativo numerico nei due scenari di rimozione di nodi, analizzando l'andamento del diametro e delle dimensioni del cluster più grande con la progressiva caduta delle antenne. I risultati sono poi stati confrontati con quelli ottenuti dai modelli, rivelando alcune ambiguità.</p><!-- Nel caso di attacco random è stato testato infine un ipotetico effetto cascata causato dall'overload delle antenne rimaste (previa rimozione dei grossi hub che servono proprio a scongiurare tale evenienza). -->
 
-<p><strong>Nel paragrafo 2</strong> si spiega come sono stati raccolti e organizzati i dati, come è stata definita la rete e quindi con quali criteri è stata definita la matrice di adiacenza. Successivamente, accennando ai problemi computazionali avuti nel gestire la rete complessiva da circa 7000 nodi, verranno calcolate le matrici di adiacenza e le distribuzioni del grado.</p>
-
-<p><strong>Nel paragrafo 3</strong> viene effettuato lo studio percolativo mediante i due scenari di rimozione di nodi,  analizzando l'andamento del diametro e delle dimensioni del cluster più grande con la progressiva caduta delle antenne. I risultati sono stati confrontati con quelli ottenuti dai modelli, i quali hanno rivelato delle ambiguità. Nel caso di attacco random è stato testato infine un ipotetico effetto cascata causato dall'overload delle antenne rimaste (previa rimozione dei grossi hub che servono proprio a scongiurare tale evenienza).</p>
-
-<h2>TODO Cosa vogliamo fare</h2>
-
-
-
-TODO FEDERICO in treno:
-* rank-size wikipedia
-* esponente cumulata
-* figure, sublot e caption
-* immagine 3 metodi di attacco ../img/breakdown/asdfghjkl.svg
-attack and failure con incluse conclusioni
-percolazione ancora da scrivere?
-
-
-
-
-
-
-<h2>1) Going beyond GPS geolocalization</h2><!-- Google Location Service -->
+<h2>Going beyond GPS geolocalization</h2><!-- Google Location Service -->
 
 <h3>GPS and battery drain</h3>
 
@@ -149,7 +126,7 @@ I dati forniti da Mozilla sono un'estensione di quelli già disponibili sulla pi
 
 <p>Questi sono dunque i dati che abbiamo analizzato in questa nostra tesina.</p>
 
-<h2>2) MLS dataset</h2><!-- Struttura dei dati -->
+<h2>MLS dataset</h2><!-- Struttura dei dati -->
 
 <p>I dati <a href="https://location.services.mozilla.com/downloads">scaricabili</a> dal sito del progetto Mozilla Location Service appaiono così:</p>
 
@@ -299,7 +276,7 @@ samples > 1
 <p>Per far questo serve definire una nozione di distanza. Dato che i nostri sono dati geolocalizzati sarebbe naturale introdurre una distanza geodesica. A tal fine abbiamo usato la libreria <code>geopy</code>, che contiene due definizioni differenti:</p>
 
 <ul>
-<li>Grat circe distance: la distanza geodesica su una sfera. Per due punti non agli antipodi passa sempre una circonferenza di raggio massimo lungo cui scorre la geodesica, ovvero il cammino di minima distanza.</li>
+<li>Great circe distance: la distanza geodesica su una sfera. Per due punti non agli antipodi passa sempre una circonferenza di raggio massimo lungo cui scorre la geodesica, ovvero il cammino di minima distanza.</li>
 <li>Vincenty distance: la distanza geodesica su un ellissoide oblato. Tale distanza tiene in conto che la Terra non è una sfera perfetta ma è invece leggermente schiacciata ai poli. Delle due è quella più accurata, ma anche quella più difficile da calcolare numericamente.</li>
 </ul>
 
@@ -357,7 +334,7 @@ mappa.draw("../doc/heatmap.html")
 
 <p>Dalla mappa si capisce bene quanto sia fitta le rete di antenne Romana.</p>
 
-<p>TODO creare il notebook ordinato "data selection"</p>
+<!-- TODO creare il notebook ordinato "data selection" -->
 
 <h3>Analisi del raggio di copertura delle antenne</h3>
 
@@ -367,22 +344,22 @@ mappa.draw("../doc/heatmap.html")
 range =! 0
 </code></pre>
 
-<p>Il raggio minimo risulta essere 1m, mentre quello massimo 20341m. Dato che il raggio del Grande Raccordo Anulare è circa 10km questo significa che ci saranno antenne con un grado di connessione totale.
-TODO forse spostare questa considerazione a quando si è spiegato il criterio di linking.
-TODO spiegare la possibile casa di questi valori di raggi così bassi</p>
+<p>Il raggio minimo risulta essere 1m, mentre quello massimo 41832m. Dato che il raggio del Grande Raccordo Anulare è circa 10km questo significa che ci saranno antenne con un grado di connessione totale. Raggi irragionevolmente piccoli probabilmente sono il residuo di misure effettuate col GPS spento e senza connessione internet, dimodochè il software di acquisizione risulti ingannato assegnando la posizione dell'utente all'antenna più vicina.</p>
+<!-- TODO forse spostare questa considerazione a quando si è spiegato il criterio di linking.
+TODO spiegare la possibile casa di questi valori di raggi così bassi -->
 
 <p>Facciamo un istogramma log-log per la distribusione del raggio di copertura, sia con la canalizzazione lineare sugli interi, sia con una canalizzazione logaritmica in base 2, per ridurre il rumore sulla coda.
 <a href="../img/range/infinite_log_binning.svg"><img src="../img/range/infinite_log_binning.svg"/></a>
 La canalizzazione logaritmica pesata permette di osservare l'andamento ben sotto il singolo conteggio, ampliando di una decade l'intervallo di osservazione.</p>
 
 <p>In figura si può vedere come l'andamento sia abbastanza power-law su diverse decadi, soprattutto fino a <code>conteggio = 1</code>. Per verificare ulteriormente questo fatto abbiamo generato anche la curva del frequency-rank, che risulta seguire senza esitazioni il trend delineato dagli istogrammi.
-TODO  cercare di spiegare questa power-law.
+<!-- TODO  cercare di spiegare questa power-law. -->
 Il frequency-rank si ottiene ordinando in maniera decrescente il numero di conteggi per ogni canale unitario e associando un relativo ranking intero decrescente ai raggi corrispondenti.
 <a href="../img/range/range_distribution.svg"><img src="../img/range/range_distribution.svg"/></a></p>
 
-TODO mettere plugin che se si clicka sull'immagine la visualizza a tutto schermo
+<!-- TODO mettere plugin che se si clicka sull'immagine la visualizza a tutto schermo -->
 
-<p>Si è infine analizzata la distribuzione cumulata, lasciata nel grafico seguente non normalizzata.
+<!-- <p>Si è infine analizzata la distribuzione cumulata, lasciata nel grafico seguente non normalizzata.
 La distribuzione cumulata $C(x)$ rappresenta la probabilità che la variabile random assuma un valore minore o uguale a $x$.
 <a href="../img/range/range_cumulated_distribution.svg"><img src="../img/range/range_cumulated_distribution.svg"/></a>
 TODO capire l'andamento della cumulata</p>
@@ -390,9 +367,9 @@ TODO capire l'andamento della cumulata</p>
 <p>TODO mettere caption nell'html delle figure</p>
 
 <p>TODO Facendo un fit TODO abbiamo ottenuto il seguerte esponente per l'andamento a potenza: TODO
-TODO mettere retta con pendenza con fit a mano spannometrico</p>
+TODO mettere retta con pendenza con fit a mano spannometrico</p> -->
 
-<h2>3) Teoria delle reti e loro analisi</h2>
+<h2>Graph theory and network analysis</h2><!-- teoria delle reti -->
 
 TODO RIORDINARE NUMERI, FIGURE E CORREGGERE E PARAGRAFARE
 
@@ -430,13 +407,6 @@ dove $E_i$ è il numero di link tra i $k_i$ primi vicini del vertice e $k_i(k_i-
 <p>In reti dirette, benché non siano <em>matematicamente</em> uguali, betweenness e page-rank sono statisticamente molto correlati al grado, pertanto non verranno analizzati. </p>
 
 <p>TODO (fare grafico correlazione grado-betweenness-pagerank)</p>
-
-
-
-
-
-
-
 
 <h3>Matrice di adiacenza e costruzione del grafo</h3>
 
@@ -579,30 +549,7 @@ $$ P(k)\sim 2m^2 k^{-3}. $$</p>
 
 <p><img src="fig:confrontoGradi" alt="Confronto $P(k)$" title="" /></p>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2>4) Teoria della percolazione</h2>
+<h2>Teoria della percolazione</h2>
 
 <p>Per percolazione, in analogia con i liquidi, si intende il passaggio di informazione da un lato all'altro di una rete. Nello specifico, quando si fa uno studio percolativo di una rete, si cerca l'esistenza o meno di un cluster che ricopra l'intera rete (<em>spanning cluster</em>, o <em>giant cluster</em>). Il giant cluster è definito come quella componente di una rete le cui dimensioni sono dello stesso ordine della dimensione della rete complessiva (e quindi gli altri nodi o cluster minori hanno dimensioni di ordini inferiore), cioè il rapporto tra le sue dimensioni e le dimensioni dell'intera rete è $\sim 1$.</p>
 
@@ -712,44 +659,7 @@ TODO \caption[Confronto grafi random.]{Confronto tra due grafi da 100 nodi: uno 
 [fig:banale]: ./img/Teoria/Banale.svg "Solo $q=1$"
 [fig:nonbanale]: ./img/Teoria/Bonbanale.svg "Esistenza di $q&amp; (minore)1$"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2>5) Network breakdown</h2><!--analisi percolativa -->
+<h2>Network breakdown</h2><!--analisi percolativa -->
 
 <p>Una volta osservate le distribuzioni del grado nelle reti delle quattro compagnie e nella rete complessiva formata da tutte le antenne comprese nell'area metropolitana di Roma, procediamo con lo studio percolativo. In riferimento al lavoro fatto da </p>
 
@@ -766,6 +676,89 @@ TODO \caption[Confronto grafi random.]{Confronto tra due grafi da 100 nodi: uno 
 La rete reale ha ovviamente delle contromisure per evitare la caduta delle comunicazioni. Le antenne trasmettono segnali tra loro su due bande di frequenza: una <em>user-side</em>, dedicata alle normali trasmissioni tra utenti del servizio, e una dedicata a un complesso sistema di feedback gestito da degli <em>hub</em> (grosse antenne con raggio sui 20 km). Questa struttura gerarchica permette, nel caso di caduta di una antenna o di un improvviso eccessivo carico in una zona circoscritta, che gli hub gestiscano potenza e capacità delle antenne circostanti mentre vengono inviati tecnici per un intervento sul luogo.</p>
 
 <p>Questo sistema ha un certo tempo di reazione. L'analisi da noi svolta pertanto suppone che la caduta della rete avvenga in un tempo inferiore, in una sorta di approssimazione adiabatica. Inoltre, la sola caduta degli hub sarebbe già sufficiente a compromettere seriamente l'integrità della rete (le antenne avrebbero difficoltà a coordinare le comunicazioni tra loro), ma nella nostra ipotesi di mesh-network distribuita ci interessano soltanto le comunicazioni nelle frequenze user-side. Usando questo modello semplificato siamo riusciti a ottenere alcune informazioni su una ipotetica rete wireless di questa natura.</p>
+
+<h3>Speedup del codice (parte 1: multiprocessing)</h3>
+
+<p>Per le simulazioni di attacco intenzionale e random failure sulle reti in esame e lo studio approfondito dell'andamento delle grandezze statistiche e topologiche durante l'analisi percolativa abbiamo inizialmente utilizzato <code>networkx</code>, una libreria di Python piuttosto completa dedicata alle reti.</p>
+
+<p>Tuttavia questa si è rivelata una scelta sbagliata, in quanto <code>networkx</code>, pur essendo molto completa e semplice da usare, non è particolarmente ottimizzata dal punto di vista dell'efficienza di calcolo. Questo perché è interamentente scritta in Python, anche per le sue routine più interne e non implementa alcun tipo di parallelismo builtin.</p>
+
+<p>Creare, manipolare e disegnare i grafi sono operazioni semplici e immediate, ma ma quando si cercano di usare le funzioni più pesanti dal punto di vista del calcolo, come per esempio quella per determinare il diametro della rete, <code>networkx</code> appare del tutto non soddisfacente.</p>
+
+<p>Per esempio, il calcolo di diametro, average path lenght, coefficiente di clustering e dimensioni del giant cluster impiegava 20 secondi per una singola iterazione con la rete Tre (la più piccola, circa 1400 nodi), 50 secondi per Tim e Vodafone (circa 1800 nodi entrambe) mentre con la rete Wind (la più grande, con circa 2350 nodi) impiegava ben 2.5 minuti. Questo dato, moltiplicato per i 100 passi richiesti, porta ad una previsione di più di 6 ore di calcolo per l'analisi percolativa di tutte le singole reti.</p>
+
+<p>Abbiamo osservato che i tempi scalano all'incirca quadraticamente col numero di nodi, per cui per lo studio della rete complessiva di tutta Roma sarebbero richiesti 20 minuti per una iterazione e quasi 30 ore di calcolo per l'analisi completa. Queste considerazioni rendevano di fatto impraticabile questa strada.</p>
+
+<p><img src="../img/meme_Leonida.jpg"/></p>
+
+<p>Dato che i tempi di calcolo richiesti per l'analisi percolativa risultavano spropositati, soprattutto nel caso di random failure, abbiamo cercato dei modi per velocizzare il calcolo ed aggirare il problema.</p>
+
+<p>In primis si è cercato di evitare operazioni cicliche sui vettori dinamici, come <code>pop()</code> e <code>append()</code> e di utilizzare sempre librerie python ottimizzate e internamente scritte in C, come ad esempio <code>numpy</code>.
+Già questo permette operazioni su grossi vettori con un incremento di prestazioni rispetto al python puro di almeno il doppio.</p>
+
+<p>Inoltre si è tentato di sfruttare i diversi core della macchina, facendo degli esperimenti di rudimentale calcolo parallelo. In pratica si è cercato di rendere il codice non sequenziale, in modo da usare funzioni del tutto indipendenti e poter scrivere tutto in termini di funzioni <code>map()</code> per poi utilizzare la libreria builtin <code>multiprocessing</code> e fare una prima parallelizzazione.
+<pre><code>
+import multiprocessing
+cpus = multiprocessing.cpu_count()
+pool = multiprocessing.Pool(processes=cpus)
+pool.map(function, array)
+</code></pre></p>
+
+<p>Abbandonare il paradigma sequenziale rendendo le funzioni totalmente indipendenti tra loro fa sì che esse possano girare in contemporarea riducendo il tempo di calcolo, ma nel contempo aumenta il quantitativo di RAM richiesta dal programma, quasi dello stesso fattore. Pertanto bisogna fare attenzione a far girare il programma su una macchina adeguata sotto tutti i punti di vista.</p>
+
+<p>Purtroppo peò nel nostro caso questo approccio non si è rivelato adeguato. Nel fare i tentativi vedevamo che i processori lavoravano insieme al 100% per un primo periodo, per poi ibernarsi in una eterna fase di stallo al 20% del carico, probabilmente per incongruenze nel messaging tra le varie istanze di python. Non possedendo sufficienti conoscenze sul calcolo parallelo e il cloud computing per poter risolvere velocemente il problema, abbiamo dunque abbandonato questo aproccio.</p>
+
+<p><img src="../img/meme_Boromir.jpg" width="90%"/></p>
+
+<h3>Strategie di attacco</h3>
+
+<p>L'esigenza di provare a parallelizzare il codice ci ha portato a due versioni differenti della funzione di attacco intenzionale: una sequenziale e una parallela. Entrambe le varianti rimuovono circa l'1% dei nodi per volta:
+<ul>
+<li>la funzione sequenziale elimina l'insieme dell'1% dei nodi più importanti, analizza la rete e calcola il prossimo insieme di 1% di nodi da rimuove;</li>
+<li>la funzione parallela ha invece un comportamento più adiabatico: guarda il grafo iniziale e fa una classifica assoluta dei nodi per importanza, rimuovendone di volta in volta l'1% in maniera ordinata;</li></ul></p>
+
+<p>Possiamo supporre che un reale attacco alla rete sia portato avanti con modalità adiabatiche: un ipotetico terrorista piazza nella notte delle cariche esplosive sotto le antenne che ritiene fondamentali e poi le fa scoppiare durante il giorno tutte in una volta.
+A titolo di esempio, possiamo immaginare che l'attacco si consideri riuscito quando metà dell'area metropolitana rimane isolata senza possibilità di comunicare. Questo è il parametro finale in base al quale viene scelta la sequenza di antenne da far esplodere.</p>
+
+<p>Ma chi garantisce che questa sequenza coincide con gli N nodi di grado maggior all'istante iniziale?
+In altre parole: è questa una strategia <em>ottimale</em>? <br />
+La risposta è no!
+la strategia ottimale è quella che, a parità di risultato, coinvolge il minor numero di antenne fatte eplodere, anche per minimizzare il rischio di essere scoperto nella notte mentre piazza l'esplosivo in giro per la città.</p>
+
+<p>Tale strategia può essere evidenziata solo da una simulazione <strong>sequenziale</strong>, fatta facendo evolvere la rete passo per passo, secondo una strategia di <em>steepest descent</em>. Questo garantisce di trovare la strategia ottimale, soprattutto se vengono inclusi anche gli effetti a cascata dovuti all'overload e alla saturazione di banda. Dal grafico sottostante si evince comunque che non c'è molta differenza tra procedere con un campionamento all'1% o eseguire una simulazione di attacco nodo per nodo, per cui ad ogni modo il costo computazionale complessivo non risulta eccessivo.</p>
+
+<p>TODO inserire grafico di confronto per "Roma totale" tra parallelo 1%, sequenziale 1% e sequenziale step-by-step</p>
+
+<p>TODO in futuro inserire nel plot anche gli affetti a cascata, per far vedere che la curva crolla prima</p>
+
+<p>Nel caso di random failure (escludendo gli effetti di saturazione a cascata) non c'è invece alcuna differenza tra l'approccio sequenziale e quello <strong>parallelo</strong>, rendendo il secondo algorimo preferibile nel caso si voglia sfruttare tutta la potenza delle moderne cpu multicore.</p>
+
+<p>Riassumendo:
+<ul>
+<li>Nel caso di intentional attack è doveroso usare un approccio sequenziale.</li>
+<li>Nel caso di random failure è consigliabile utilizzare un approccio parallelo.</li>
+</ul></p>
+
+<h3>Speedup del codice (parte 2: graph-tool)</h3>
+
+<p>Come già detto la prima soluzione al problema dei tempi è stata tentare una parallelizzazione del codice in Python: dato che <code>networkx</code> non supporta il calcolo parallelo interno, si è tentato di parallelizzare le funzioni di attacco intenzionale e random failure. Abbiamo però mostrato come alcuni degli algoritmi siano intrinsecamente sequenziali.</p>
+
+<p>Un possibile metodo per ovviare a ciò sarebbe potuto essere generare e salvare in memoria tutte le reti a tutte le iterazioni e successivamente usare delle funzioni parallelizzabili per l'analisi. Tuttavia con <code>networkx</code> la richiesta di tempo di calcolo rimane comunque alta e si aggiungerebbe anche il problema della memoria RAM, dello spazio su disco e dei tempi di lettura e scrittura.</p>
+
+<p>L'unica via praticabile è stata ripiegare su <code>graph_tool</code>: un'altra libreria meno user-friendly ma estremamente più efficiente e sopratutto impostata di default sul calcolo parallelo. Le funzioni di analisi topologica e statistica sono molto più veloci rispetto a <code>networkx</code>, poiché implementate in C col <em>template programming</em> ed ottimizzate in fase di compilazione. Inoltre la possibilità di usarle nativamente in parallelo su 4 core e 8 thread ci ha permesso di calcolare le singole funzioni con una velocità più di 60 volte superiore a prima.</p>
+
+<p>Considerato ciò, il codice per lo studio percolativo delle reti è stato convertito (con non poco sforzo) per poter fare uso della nuova libreria. Alla fine, per l'analisi percolativa completa di tutte le reti, ovvero con lo studio in funzione dei nodi rimossi delle quantità
+<ul>
+<li>diametro $D$</li>
+<li>average path lenght $\langle l \rangle$</li>
+<li>clustering coefficient $C$</li>
+<li>average degree \langle k \rangle</li>
+<li>dimensioni del giant cluster</li>
+<li>criterio di soglia percolativa (andamento di $\langle k^2 \rangle / \langle k \rangle$)</li>
+</ul>
+da una previsione iniziale di più di 24 ore di tempo di calcolo si è passati a circa $3/4$ d'ora, con uno speedup di circa un fattore 30.</p>
+
+<p><img src="../img/meme_Obama.jpg" width="80%"/></p>
 
 <h3>Il punto di partenza</h3>
 
@@ -823,14 +816,13 @@ TODO solo immagini
 
 <h2>Conclusioni e prospettive future</h2>
 
-
 Come abbiamo visto, in regime di alta connettività, dal punto di vista percolativo si notano poco le differenze tra reti generate secondo un modello scale-free o random. La differenza si nota quando il grado medio della rete è più basso. Per esempio una rete random con $\langle k \rangle \sim 2$ ha $f\sim 50\%$, mentre una rete scale free con stesso $\langle k \rangle$ ha $f\sim 80\%$. Una spiegazione qualitativa sta nel fatto che con una distribuzione del grado a legge di potenza, i nodi meno connessi sono in larga maggioranza, quindi è meno probabile che un attacco random riesca a destrutturare la rete, rispetto a un grafo che abbia una $P(k)$ poissoniana. </p>
 
 <p>Un'altra cosa da notare è che a parità di $N$, una rete di Barabasi-Albert è molto più connessa di una di Erdos-Renyi. Nell'esempio sopra, infatti, con $N=100$ una la prima ha $\sim400$ link, mentre la seconda il doppio; per avere lo stesso numero di link la rete random ha bisogno di una $p \Rightarrow \langle k \rangle$ doppi. Questa differenza va attenuandosi con $N$ più grandi.</p>
 
 <p>Uno studio percolativo su reti reali, quindi, non aiuta a identificare una eventuale invarianza di scala per reti molto grandi e connesse. Tuttavia può essere decisiva per reti più piccole, come piccole comunità, reti locali, proteine e alcuni ecosistemi: nonostante la bassa statistica, il comportamento di reti con pochi nodi possono essere distinti in maniera significativa da uno studio percolativo.</p>
 
-<p>Nel caso di reti il cui funzionamento dipende dalla capacità dei nodi di gestire un certo carico, uno studio percolativo dovrebbe anche considerare l'eventualità che con la rimozione di alcuni nodi, altri vadano in sovraccarico e si scolleghino dalla rete </p>
+<p>Nel caso di reti il cui funzionamento dipende dalla capacità dei nodi di gestire un certo carico, uno studio percolativo dovrebbe anche considerare l'eventualità che con la rimozione di alcuni nodi, altri vadano in sovraccarico e si scolleghino dalla rete, ovvero di un effetto cascata </p>
 
 <p>TODO vari biblioref da sistemare</p>
 
@@ -842,156 +834,6 @@ o alcuni ecosistemi dove una catena alimentare che veda la scomparsa di una spec
 <p>Una possibile interessante applicazione dei metodi e degli strumenti usati per analizzare la rete di antenne di Roma potrebbe essere lo studio di città molto più grandi e densamente popolate (come New York o Tokyo), ma servirebbero capacità di calcolo e di memoria molto più grandi di quelle a nostra disposizione. Un altro possibile studio potrebbe essere verificare la possibilità di creare una rete distribuita e aperta con i router WiFi. Avendo questi un raggio molto inferiore delle antenne cellulari, la rete sarebbe molto simile a un reticolo, quindi benché uno studio percolativo possa essere interessante, non lo sarebbe dal punto di vista delle reti complesse. 
 %valutare se lasciare o rimuovere
 Una rete di questo tipo sarebbe comunque un nuovo concetto di Internet, che potrebbe avere interessanti sviluppi su reti di altro tipo, per esempio sociali, correlate a essa.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h3>TODO 3.2.3 Effetto cascata</h3>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2>3.3 Speedup del codice (parte 1: multiprocessing)</h2>
-
-<p>Per le simulazioni di attacco intenzionale e random failure sulle reti in esame e lo studio approfondito dell'andamento delle grandezze statistiche e topologiche durante l'analisi percolativa abbiamo inizialmente utilizzato <code>networkx</code>, una libreria di Python piuttosto completa dedicata alle reti.</p>
-
-<p>Tuttavia questa si è rivelata una scelta sbagliata, in quanto <code>networkx</code>, pur essendo molto completa e semplice da usare, non è particolarmente ottimizzata dal punto di vista dell'efficienza di calcolo. Questo perché è interamentente scritta in Python, anche per le sue routine più interne e non implementa alcun tipo di parallelismo builtin.</p>
-
-<p>Creare, manipolare e disegnare i grafi sono operazioni semplici e immediate, ma ma quando si cercano di usare le funzioni più pesanti dal punto di vista del calcolo, come per esempio quella per determinare il diametro della rete, <code>networkx</code> appare del tutto non soddisfacente.</p>
-
-<p>Per esempio, il calcolo di diametro, average path lenght, coefficiente di clustering e dimensioni del giant cluster impiegava 20 secondi per una singola iterazione con la rete Tre (la più piccola, circa 1400 nodi), 50 secondi per Tim e Vodafone (circa 1800 nodi entrambe) mentre con la rete Wind (la più grande, con circa 2350 nodi) impiegava ben 2.5 minuti. Questo dato, moltiplicato per i 100 passi richiesti, porta ad una previsione di più di 6 ore di calcolo per l'analisi percolativa di tutte le singole reti.</p>
-
-<p>Abbiamo osservato che i tempi scalano all'incirca quadraticamente col numero di nodi, per cui per lo studio della rete complessiva di tutta Roma sarebbero richiesti 20 minuti per una iterazione e quasi 30 ore di calcolo per l'analisi completa. Queste considerazioni rendevano di fatto impraticabile questa strada.</p>
-
-<p><img src="../img/meme_Leonida.jpg"/></p>
-
-<p>Dato che i tempi di calcolo richiesti per l'analisi percolativa risultavano spropositati, soprattutto nel caso di random failure, abbiamo cercato dei modi per velocizzare il calcolo ed aggirare il problema.</p>
-
-<p>In primis si è cercato di evitare operazioni cicliche sui vettori dinamici, come <code>pop()</code> e <code>append()</code> e di utilizzare sempre librerie python ottimizzate e internamente scritte in C, come ad esempio <code>numpy</code>.
-Già questo permette operazioni su grossi vettori con un incremento di prestazioni rispetto al python puro di almeno il doppio.</p>
-
-<p>Inoltre si è tentato di sfruttare i diversi core della macchina, facendo degli esperimenti di rudimentale calcolo parallelo. In pratica si è cercato di rendere il codice non sequenziale, in modo da usare funzioni del tutto indipendenti e poter scrivere tutto in termini di funzioni <code>map()</code> per poi utilizzare la libreria builtin <code>multiprocessing</code> e fare una prima parallelizzazione.
-<pre><code>
-import multiprocessing
-cpus = multiprocessing.cpu_count()
-pool = multiprocessing.Pool(processes=cpus)
-pool.map(function, array)
-</code></pre></p>
-
-<p>Abbandonare il paradigma sequenziale rendendo le funzioni totalmente indipendenti tra loro fa sì che esse possano girare in contemporarea riducendo il tempo di calcolo, ma nel contempo aumenta il quantitativo di RAM richiesta dal programma, quasi dello stesso fattore. Pertanto bisogna fare attenzione a far girare il programma su una macchina adeguata sotto tutti i punti di vista.</p>
-
-<p>Purtroppo peò nel nostro caso questo approccio non si è rivelato adeguato. Nel fare i tentativi vedevamo che i processori lavoravano insieme al 100% per un primo periodo, per poi ibernarsi in una eterna fase di stallo al 20% del carico, probabilmente per incongruenze nel messaging tra le varie istanze di python. Non possedendo sufficienti conoscenze sul calcolo parallelo e il cloud computing per poter risolvere velocemente il problema, abbiamo dunque abbandonato questo aproccio.</p>
-
-<p><img src="../img/meme_Boromir.jpg" width="90%"/></p>
-
-<h2>3.4 Strategie di attacco</h2>
-
-<p>L'esigenza di provare a parallelizzare il codice ci ha portato a due versioni differenti della funzione di attacco intenzionale: una sequenziale e una parallela. Entrambe le varianti rimuovono circa l'1% dei nodi per volta:
-<ul>
-<li>la funzione sequenziale elimina l'insieme dell'1% dei nodi più importanti, analizza la rete e calcola il prossimo insieme di 1% di nodi da rimuove;</li>
-<li>la funzione parallela ha invece un comportamento più adiabatico: guarda il grafo iniziale e fa una classifica assoluta dei nodi per importanza, rimuovendone di volta in volta l'1% in maniera ordinata;</li></ul></p>
-
-<p>Possiamo supporre che un reale attacco alla rete sia portato avanti con modalità adiabatiche: un ipotetico terrorista piazza nella notte delle cariche esplosive sotto le antenne che ritiene fondamentali e poi le fa scoppiare durante il giorno tutte in una volta.
-A titolo di esempio, possiamo immaginare che l'attacco si consideri riuscito quando metà dell'area metropolitana rimane isolata senza possibilità di comunicare. Questo è il parametro finale in base al quale viene scelta la sequenza di antenne da far esplodere.</p>
-
-<p>Ma chi garantisce che questa sequenza coincide con gli N nodi di grado maggior all'istante iniziale?
-In altre parole: è questa una strategia <em>ottimale</em>? <br />
-La risposta è no!
-la strategia ottimale è quella che, a parità di risultato, coinvolge il minor numero di antenne fatte eplodere, anche per minimizzare il rischio di essere scoperto nella notte mentre piazza l'esplosivo in giro per la città.</p>
-
-<p>Tale strategia può essere evidenziata solo da una simulazione <strong>sequenziale</strong>, fatta facendo evolvere la rete passo per passo, secondo una strategia di <em>steepest descent</em>. Questo garantisce di trovare la strategia ottimale, soprattutto se vengono inclusi anche gli effetti a cascata dovuti all'overload e alla saturazione di banda. Dal grafico sottostante si evince comunque che non c'è molta differenza tra procedere con un campionamento all'1% o eseguire una simulazione di attacco nodo per nodo, per cui ad ogni modo il costo computazionale complessivo non risulta eccessivo.</p>
-
-<p>TODO inserire grafico di confronto per "Roma totale" tra parallelo 1%, sequenziale 1% e sequenziale step-by-step</p>
-
-<p>TODO in futuro inserire nel plot anche gli affetti a cascata, per far vedere che la curva crolla prima</p>
-
-<p>Nel caso di random failure (escludendo gli effetti di saturazione a cascata) non c'è invece alcuna differenza tra l'approccio sequenziale e quello <strong>parallelo</strong>, rendendo il secondo algorimo preferibile nel caso si voglia sfruttare tutta la potenza delle moderne cpu multicore.</p>
-
-<p>Riassumendo:
-<ul>
-<li>Nel caso di intentional attack è doveroso usare un approccio sequenziale.</li>
-<li>Nel caso di random failure è consigliabile utilizzare un approccio parallelo.</li>
-</ul></p>
-
-<h2>3.5 Speedup del codice (parte 2: graph-tool)</h2>
-
-<p>Come già detto la prima soluzione al problema dei tempi è stata tentare una parallelizzazione del codice in Python: dato che <code>networkx</code> non supporta il calcolo parallelo interno, si è tentato di parallelizzare le funzioni di attacco intenzionale e random failure. Abbiamo però mostrato come alcuni degli algoritmi siano intrinsecamente sequenziali.</p>
-
-<p>Un possibile metodo per ovviare a ciò sarebbe potuto essere generare e salvare in memoria tutte le reti a tutte le iterazioni e successivamente usare delle funzioni parallelizzabili per l'analisi. Tuttavia con <code>networkx</code> la richiesta di tempo di calcolo rimane comunque alta e si aggiungerebbe anche il problema della memoria RAM, dello spazio su disco e dei tempi di lettura e scrittura.</p>
-
-<p>L'unica via praticabile è stata ripiegare su <code>graph_tool</code>: un'altra libreria meno user-friendly ma estremamente più efficiente e sopratutto impostata di default sul calcolo parallelo. Le funzioni di analisi topologica e statistica sono molto più veloci rispetto a <code>networkx</code>, poiché implementate in C col <em>template programming</em> ed ottimizzate in fase di compilazione. Inoltre la possibilità di usarle nativamente in parallelo su 4 core e 8 thread ci ha permesso di calcolare le singole funzioni con una velocità più di 60 volte superiore a prima.</p>
-
-<p>Considerato ciò, il codice per lo studio percolativo delle reti è stato convertito (con non poco sforzo) per poter fare uso della nuova libreria. Alla fine, per l'analisi percolativa completa di tutte le reti, ovvero con lo studio in funzione dei nodi rimossi delle quantità
-<ul>
-<li>diametro $D$</li>
-<li>average path lenght $\langle l \rangle$</li>
-<li>clustering coefficient $C$</li>
-<li>average degree \langle k \rangle</li>
-<li>dimensioni del giant cluster</li>
-<li>criterio di soglia percolativa (andamento di $\langle k^2 \rangle / \langle k \rangle$)</li>
-</ul>
-da una previsione iniziale di più di 24 ore di tempo di calcolo si è passati a circa $3/4$ d'ora, con uno speedup di circa un fattore 30.</p>
-
-<p><img src="../img/meme_Obama.jpg" width="80%"/></p>
-
-<h2>TODO Analisi percolativa</h2>
-
-
-
-
-
-
-
-<h2>TODO Conclusioni e prospettive future</h2>
-
-
-
-vedere l'effetto cascata
-
-http://www.html.it/pag/51161/location-services/
-
-
-
-
 
 <h2>Bibliografia</h2>
 
