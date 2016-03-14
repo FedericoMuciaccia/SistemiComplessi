@@ -464,7 +464,7 @@ pyplot.xlabel("%")
 pyplot.ylabel("Valore")
 pyplot.xlim(0, 100)
 pyplot.ylim(0, 15)
-pyplot.legend(loc = 2)
+#pyplot.legend(loc = 2)
 #pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/gToolFailureD_Final.eps', format='eps', dpi=1000)
 pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/gToolFailureD_Final.svg', format='svg', dpi=1000)
 
