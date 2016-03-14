@@ -20,6 +20,102 @@ La rete reale ha ovviamente delle contromisure per evitare la caduta delle comun
 
 Questo sistema ha un certo tempo di reazione. L'analisi da noi svolta pertanto suppone che la caduta della rete avvenga in un tempo inferiore, in una sorta di approssimazione adiabatica. Inoltre, la sola caduta degli hub sarebbe già sufficiente a compromettere seriamente l'integrità della rete (le antenne avrebbero difficoltà a coordinare le comunicazioni tra loro), ma nella nostra ipotesi di mesh-network distribuita ci interessano soltanto le comunicazioni nelle frequenze user-side. Usando questo modello semplificato siamo riusciti a ottenere alcune informazioni su una ipotetica rete wireless di questa natura.
 
+
+\subsection{Speedup del codice (parte 1: multiprocessing)}
+
+Per le simulazioni di attacco intenzionale e random failure sulle reti in esame e lo studio approfondito dell'andamento delle grandezze statistiche e topologiche durante l'analisi percolativa abbiamo inizialmente utilizzato \emph{networkx}, una libreria di Python piuttosto completa dedicata alle reti.
+
+Tuttavia questa si è rivelata una scelta sbagliata, in quanto networkx, pur essendo molto completa e semplice da usare, non è particolarmente ottimizzata dal punto di vista dell'efficienza di calcolo. Questo perché è interamentente scritta in Python, anche per le sue routine più interne e non implementa alcun tipo di parallelismo \emph{built-in}.
+
+Creare, manipolare e disegnare i grafi sono operazioni semplici e immediate, ma ma quando si cercano di usare le funzioni più pesanti dal punto di vista del calcolo, come per esempio quella per determinare il diametro della rete, networkx appare del tutto non soddisfacente.
+
+Per esempio, il calcolo di diametro, average path lenght, coefficiente di clustering e dimensioni del giant cluster impiegava 20 secondi per una singola iterazione con la rete Tre (la più piccola, circa 1400 nodi), 50 secondi per Tim e Vodafone (circa 1800 nodi entrambe) mentre con la rete Wind (la più grande, con circa 2350 nodi) impiegava ben 2.5 minuti. Questo dato, moltiplicato per i 100 passi richiesti, porta ad una previsione di più di 6 ore di calcolo per l'analisi percolativa di tutte le singole reti.
+
+Abbiamo osservato che i tempi scalano all'incirca quadraticamente col numero di nodi, per cui per lo studio della rete complessiva di tutta Roma sarebbero richiesti 20 minuti per una iterazione e quasi 30 ore di calcolo per l'analisi completa. Queste considerazioni rendevano di fatto impraticabile questa strada.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./Immagini/Attack/meme_Leonida.jpg}
+\end{figure}
+
+Dato che i tempi di calcolo richiesti per l'analisi percolativa risultavano spropositati, soprattutto nel caso di random failure, abbiamo cercato dei modi per velocizzare il calcolo ed aggirare il problema.
+
+In primis si è cercato di evitare operazioni cicliche sui vettori dinamici, come \lstinline{pop()} e \lstinline{append()} e di utilizzare sempre librerie python ottimizzate e internamente scritte in C, come ad esempio \emph{numpy}. Già questo permette operazioni su grossi vettori con un incremento di prestazioni rispetto al python puro di almeno il doppio.
+
+Inoltre si è tentato di sfruttare i diversi core della macchina, facendo degli esperimenti di rudimentale calcolo parallelo. In pratica si è cercato di rendere il codice non sequenziale, in modo da usare funzioni del tutto indipendenti e poter scrivere tutto in termini di funzioni \lstinline{map()} per poi utilizzare la libreria built-in multiprocessing e fare una prima parallelizzazione. 
+
+\begin{lstlisting}
+import multiprocessing
+cpus = multiprocessing.cpu_count()
+pool = multiprocessing.Pool(processes=cpus)
+pool.map(function, array)
+\end{lstlisting}
+
+Abbandonare il paradigma sequenziale rendendo le funzioni totalmente indipendenti tra loro fa sì che esse possano girare in contemporarea riducendo il tempo di calcolo, ma nel contempo aumenta il quantitativo di RAM richiesta dal programma, quasi dello stesso fattore. Pertanto bisogna fare attenzione a far girare il programma su una macchina adeguata sotto tutti i punti di vista.
+
+Purtroppo peò nel nostro caso questo approccio non si è rivelato adeguato. Nel fare i tentativi vedevamo che i processori lavoravano insieme al 100\% per un primo periodo, per poi ibernarsi in una eterna fase di stallo al 20\% del carico, probabilmente per incongruenze nel messaging tra le varie istanze di python. Non possedendo sufficienti conoscenze sul calcolo parallelo e il cloud computing per poter risolvere velocemente il problema, abbiamo dunque abbandonato questo aproccio.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./Immagini/Attack/meme_Boromir.jpg}
+\end{figure}
+
+\subsubsection{Strategie di attacco}
+L'esigenza di provare a parallelizzare il codice ci ha portato a due versioni differenti della funzione di attacco intenzionale: una sequenziale e una parallela. Entrambe le varianti rimuovono circa l'1\% dei nodi per volta: 
+
+\begin{itemize}
+ \item la funzione sequenziale elimina l'insieme dell'1\% dei nodi più importanti, analizza la rete e calcola il prossimo insieme di 1\% di nodi da rimuove;
+ \item la funzione parallela ha invece un comportamento più adiabatico: guarda il grafo iniziale e fa una classifica assoluta dei nodi per importanza, rimuovendone di volta in volta l'1\% in maniera ordinata;
+\end{itemize}
+
+Possiamo supporre che un reale attacco alla rete sia portato avanti con modalità adiabatiche: un ipotetico terrorista piazza nella notte delle cariche esplosive sotto le antenne che ritiene fondamentali e poi le fa scoppiare durante il giorno tutte in una volta. A titolo di esempio, possiamo immaginare che l'attacco si consideri riuscito quando metà dell'area metropolitana rimane isolata senza possibilità di comunicare. Questo è il parametro finale in base al quale viene scelta la sequenza di antenne da far esplodere.
+
+Ma chi garantisce che questa sequenza coincide con gli N nodi di grado maggior all'istante iniziale? In altre parole: è questa una strategia \emph{ottimale}?\\
+La risposta è no! La strategia ottimale è quella che, a parità di risultato, coinvolge il minor numero di antenne fatte eplodere, anche per minimizzare il rischio di essere scoperto nella notte mentre piazza l'esplosivo in giro per la città.
+
+Tale strategia può essere evidenziata solo da una simulazione \textbf{sequenziale}, fatta facendo evolvere la rete passo per passo, secondo una strategia di \emph{steepest descent}. Questo garantisce di trovare la strategia ottimale, soprattutto se vengono inclusi anche gli effetti a cascata dovuti all'overload e alla saturazione di banda. Dal grafico sottostante si evince comunque che non c'è molta differenza tra procedere con un campionamento all'1\% o eseguire una simulazione di attacco nodo per nodo, per cui ad ogni modo il costo computazionale complessivo non risulta eccessivo.
+
+\begin{figure}[p!]
+	\centering
+	\includegraphics[width=0.46\textwidth]{./Immagini/Attack/AttackGC_Compare}
+	\caption[Confronto metodi.]{Confronto sugli effetti dei tre metodi di attacco sulla dimensione del giant cluster.}
+	\label{fig:compattack}
+\end{figure}
+
+Nel caso di random failure (escludendo gli effetti di saturazione a cascata) non c'è invece alcuna differenza tra l'approccio sequenziale e quello parallelo, rendendo il secondo algorimo preferibile nel caso si voglia sfruttare tutta la potenza delle moderne cpu multicore.
+
+Riassumendo:
+\begin{itemize}
+ \item Nel caso di intentional attack è doveroso usare un approccio sequenziale. 
+ \item Nel caso di random failure è consigliabile utilizzare un approccio parallelo.
+\end{itemize}
+
+\subsubsection{Speedup del codice (parte 2: graph-tool}
+Come già detto la prima soluzione al problema dei tempi è stata tentare una parallelizzazione del codice in Python: dato che networkx non supporta il calcolo parallelo interno, si è tentato di parallelizzare le funzioni di attacco intenzionale e random failure. Abbiamo però mostrato come alcuni degli algoritmi siano intrinsecamente sequenziali.
+
+Un possibile metodo per ovviare a ciò sarebbe potuto essere generare e salvare in memoria tutte le reti a tutte le iterazioni e successivamente usare delle funzioni parallelizzabili per l'analisi. Tuttavia con networkx la richiesta di tempo di calcolo rimane comunque alta e si aggiungerebbe anche il problema della memoria RAM, dello spazio su disco e dei tempi di lettura e scrittura.
+
+L'unica via praticabile è stata ripiegare su graph-tool: un'altra libreria meno user-friendly ma estremamente più efficiente e sopratutto impostata di default sul calcolo parallelo. Le funzioni di analisi topologica e statistica sono molto più veloci rispetto a networkx, poiché implementate in C col \emph{template programming} ed ottimizzate in fase di compilazione. Inoltre la possibilità di usarle nativamente in parallelo su 4 core e 8 thread ci ha permesso di calcolare le singole funzioni con una velocità più di 60 volte superiore a prima.
+
+Considerato ciò, il codice per lo studio percolativo delle reti è stato convertito (con non poco sforzo) per poter fare uso della nuova libreria. Alla fine, per l'analisi percolativa completa di tutte le reti, ovvero con lo studio in funzione dei nodi rimossi delle quantità:
+
+\begin{itemize}
+ \item   diametro $D$
+ \item   average path lenght $\langle l \rangle$
+ \item   clustering coefficient $C$
+ \item   average degree $\langle k \rangle$
+ \item   dimensioni relative del giant cluster
+ \item   criterio di soglia percolativa (andamento di $\langle k^2 \rangle / \langle k \rangle$)
+\end{itemize}
+
+da una previsione iniziale di più di 24 ore di tempo di calcolo si è passati a circa $3/4$ d'ora, con uno speedup di circa un fattore 30.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./Immagini/Attack/meme_Obama.jpg}
+\end{figure}
+\clearpage
+
 \subsection{Il punto di partenza}
 Le reti da cui è partito lo studio percolativo sono le 5 definite e costruite nel precedente paragrafo. Le grandezze iniziali erano
 
@@ -45,11 +141,13 @@ La prima cosa da notare è che le reti delle singole compagnie hanno un rapporto
 $$\Rightarrow \sigma^2 = Np(1-p) = \langle k^2 \rangle - \langle k \rangle^2 \sim 62$$
 $$\Rightarrow \frac{\langle k^2 \rangle }{\langle k \rangle} = \frac{Np(1-p)-(Np)^2}{Np} \sim 1+Np = 1+ \langle k \rangle \sim 65$$
 $$\Rightarrow f \sim 1 - \frac{1}{65} \sim 98\%$$
+
 Con una rete random costruita con i parametri della rete totale si ottiene $f = 99.5$. Valori quindi che si distinguono poco dalla soglia per una rete power-law finita, anche nel caso in cui l'esponente sia di poco maggiore di 3: $f \sim 1 - \frac{1}{\frac{\alpha - 2}{\alpha-3}k_{max}} > 90\%$ già per un grado massimo di $\sim10$.
 
 
 \subsubsection{Attacco intenzionale}
 Nello scenario di attacco intenzionale ci si aspetta una veloce frammentazione della rete. I cluster diverranno rapidamente più piccoli fino a frammentarsi del tutto entro pochi punti percentuali di nodi rimossi. Nel caso di una rete fortemente connessa come quella in esame ci si aspetta una resistenza maggiore, ma comunque una soglia percolativa bassa (approssimativamente entro il $50\%$). Se la rete è di tipo scale-free dovrebbe essere più fragile ad attacchi di questo tipo: mentre in una rete random i nodi più connessi sono solo una coda della distribuzione del grado, una rete a power-law ha in proporzione molti più nodi molto connessi.
+
 Dal punto di vista del diametro della rete, levando i nodi più connessi ci si aspetta che esso aumenti, fino a quando la rete diventa tanto frammentata da essere costituita da clusters con pochissimi nodi. Oltrepassata la soglia di frammentazione quindi il diametro dei clusters più grandi decrescerà rapidamente a zero.
 
 \subsection{Risultati}

@@ -87,16 +87,16 @@ Una possibile interessante applicazione dei metodi e degli strumenti usati per a
 Una rete di questo tipo sarebbe comunque un nuovo concetto di Internet, che potrebbe avere interessanti sviluppi su reti di altro tipo, per esempio sociali, correlate a essa.
 
 
-[fig:failGC]: ./Immagini/Attack/gToolFailureGC_Final "Failure: GC](fig:f"
-[fig:failC]: ./Immagini/Attack/gToolFailureC_Final "Failure: $C$"
-[fig:faill]: ./Immagini/Attack/gToolFailurel_Final "Failure: $\langle l \rangle$"
-[fig:failD]: ./Immagini/Attack/gToolFailureD_Final "Failure: $D$"
-[fig:failk]: ./Immagini/Attack/gToolFailurek_Final "Failure: $\langle k \rangle$"
-[fig:failc]: ./Immagini/Attack/gToolFailurec_Final "Failure: $\langle k^2 \rangle/ \langle k \rangle$"
+[fig:failGC]: ./Immagini/Breakdown/gToolFailureGC_Final "Failure: GC](fig:f"
+[fig:failC]: ./Immagini/Breakdown/gToolFailureC_Final "Failure: $C$"
+[fig:faill]: ./Immagini/Breakdown/gToolFailurel_Final "Failure: $\langle l \rangle$"
+[fig:failD]: ./Immagini/Breakdown/gToolFailureD_Final "Failure: $D$"
+[fig:failk]: ./Immagini/Breakdown/gToolFailurek_Final "Failure: $\langle k \rangle$"
+[fig:failc]: ./Immagini/Breakdown/gToolFailurec_Final "Failure: $\langle k^2 \rangle/ \langle k \rangle$"
 
-[fig:atakGC]: ./Immagini/Attack/gToolAttackGC_Final "Attack: GC](fig:f"
-[fig:atakC]: ./Immagini/Attack/gToolAttackC_Final "Attack: $C$"
-[fig:atakl]: ./Immagini/Attack/gToolAttackl_Final "Attack: $\langle l \rangle$"
-[fig:atakD]: ./Immagini/Attack/gToolAttackD_Final "Attack: $D$"
-[fig:atakk]: ./Immagini/Attack/gToolAttackk_Final "Attack: $\langle k \rangle$"
-[fig:atakc]: ./Immagini/Attack/gToolAttackc_Final "Attack: $\langle k^2 \rangle/ \langle k \rangle$"
+[fig:atakGC]: ./Immagini/Breakdown/gToolAttackGC_Final "Attack: GC](fig:f"
+[fig:atakC]: ./Immagini/Breakdown/gToolAttackC_Final "Attack: $C$"
+[fig:atakl]: ./Immagini/Breakdown/gToolAttackl_Final "Attack: $\langle l \rangle$"
+[fig:atakD]: ./Immagini/Breakdown/gToolAttackD_Final "Attack: $D$"
+[fig:atakk]: ./Immagini/Breakdown/gToolAttackk_Final "Attack: $\langle k \rangle$"
+[fig:atakc]: ./Immagini/Breakdown/gToolAttackc_Final "Attack: $\langle k^2 \rangle/ \langle k \rangle$"
