@@ -18,6 +18,11 @@
   	    }
 	});
     </script>
+    <script type="text/x-mathjax-config">
+	MathJax.Hub.Config({
+	    TeX: { equationNumbers: { autoNumber: "AMS" } }
+	});
+    </script>
   </head>
 
   <body>
@@ -49,6 +54,7 @@
 
 
 <h2>Sommario</h2>
+
 <p>Lo scopo di questo lavoro è fare un'analisi di rete usando un campione di antenne per la telefonia cellulare, avendo in mente la costruzione di una ipotetica <em>mesh network</em> che copra l'intera area della città di Roma, schematicamente delimitata dal Grande Raccordo Anulare.</p>
 
 <p>Dopo aver definito il criterio con cui dare un link a due nodi, sono state calcolate le matrici di adiacenza della rete complessiva e di quelle relative ai singoli gestori telefonici. Si è dunque proceduto ad uno studio della topologia di tali reti, estraendone le distribuzioni del grado e cercando la forma funzionale che meglio vi si adatti. Una volta ottenute indicazioni significative sui tipi di rete in analisi, le abbiamo verficate studiando il comportamento percolativo della rete, mediante rimozione di nodi in due diversi scenari: un attacco intenzionale, con rimozione delle antenne a partire da quelle con maggior grado, e una serie di failure random nel sistema. I risultati ottenuti sono stati confrontati con i principali modelli di rete.</p>
@@ -464,96 +470,95 @@ Per ridurre un poco il rumore sulle code la canalizzazione è stata ridutta di 8
 
 <p>Il modello di Erdős e Rényi parte da $N$ nodi ed $n$ link indiretti. Se poniamo che i nodi siano distinguibili, possono esistere $\binom{n}{N(N-1)/2)}$ configurazioni equiprobabili tra le quali può esserne presa una in maniera random. Un'altra maniera per definire una rete random è il criterio binomiale: partire da un set di $N$ nodi e dare a ogni possibile coppia un link con una certa probabilità $P$.</p>
 
-<p>Il punto più importante di un approccio probabilistico alle reti è la scassificazione dei grafi mediante lo studio delle loro proprietà. Ponendo $N \rightarrow \infty$, se la probabilità che una certa proprietà si verifichi tende a 1, si osserva che per reti limitate quella proprietà si verifica con probabilità significativa anche con pochi nodi. Ciò si verifica per molte proprietà e questo fatto permette di poter trattare le reti per categorie secondo le loro proprietà peculiari.</p>
+<p>Il punto più importante di un approccio probabilistico alle reti è la cassificazione dei grafi mediante lo studio delle loro proprietà. Se la probabilità che una certa proprietà si verifichi tende a 1 con $N \rightarrow \infty$, si osserva che per reti limitate quella proprietà si verifica con probabilità significativa anche con pochi nodi. Ciò si verifica per molte proprietà e questo fatto permette di poter trattare le reti per categorie in base alle loro proprietà peculiari.</p>
 
-<p>Nel caso di un grafo di Erdős e Renyi queste sono:</p>
-
-<p>
+<p>Nel caso di un grafo di Erdős e Renyi si ha che:
 <ul>
-<li>la distribuzione del grado ha una forma di distribuzione binomiale, la quale tende a una poissoniana per $p$ piccole, e a una gaussiana per $\langle k \rangle$ grandi. Questo implica che la topologia della rete è abbastanza omogenea, con molti nodi che hanno approssimativamente lo stesso grado;</li>
-<li>con $N$ grande, il diametro tende a essere piccolo, come l'average path length. Con $p$ non troppo piccolo il numero di nodi che abbiano una certa distanza una lunghezza $l$ si può approssimare a $\langle k\rangle^l$; uguagliandolo a $N$ deriva che diametro e average path length scalano con buona approssimazione con il logaritmo di N, secondo la relazione</li>
+<li>La distribuzione del grado ha una forma di distribuzione binomiale, la quale tende a una poissoniana per $P$ piccole, e a una gaussiana per $\langle k \rangle$ grandi. Questo implica che la topologia della rete è abbastanza omogenea, con molti nodi che hanno approssimativamente lo stesso grado.</li>
+<li>Con $N$ grande, il diametro tende a essere piccolo, come l'average path length. Con $P$ non troppo piccola il numero di nodi che abbiano una certa distanza di lunghezza $l$ si può approssimare a $\langle k\rangle^l$; uguagliandolo ad $N$ si deriva che diametro e average path length scalano con buona approssimazione con il logaritmo di N, secondo la relazione
+\begin{equation}
+  l \sim \frac{ln(N)}{ln(\langle k \rangle)}
+   \label{eq:lunghezze}
+\end{equation}
+Molte reti reali presentano simili caratteristiche nei gradi di separazione, che hanno portato alla definizione del termine "small world" per esse.</li>
+<li>Il clustering di una rete ramdom tende a essere molto basso. Infatti, preso un nodo e i suoi primi vicini, la probabilità una coppia di essi sia connessa è $P$. Pertanto su tutto il grafo, il coefficiente di clustering medio è proprio $P$, il quale di solito è abbastanza minore di 1 (con $P = 0.1$ un grafo random diventa già molto connesso: per esempio con $10^4$ nodi avrebbe $\langle k\rangle = 10^3$). Contrariamente a quanto avviene per il diametro, questo fatto si pone in contrasto con le reti reali, le quali hanno quasi sempre un $C$ sensibilmente più alto.</li>
 </ul></p>
-
-<p>TODO \label{eq:lunghezze}</p>
-
-<p>$$l \sim \frac{ln(N)}{ln(\langle k \rangle)}$$
-Molte reti reali presentano simili caratteristiche nei gradi di separazione, che hanno portato alla definizione del termine "small world" per esse;</p>
-
-<ul>
-<li>il clustering di una rete ramdom tende a essere molto basso. Infatti, preso un nodo e i suoi primi vicini, la probabilità una coppia di essi sia connessa è $p$. Pertanto su tutto il grafo, il coefficiente di clustering medio è proprio $p$, il quale di solito è abbastanza minore di 1 (con $p = 0.1$ un grafo random diventa già molto connesso, per esempio con $10^4$ nodi avrebbe $\langle k\rangle = 10^3$). Questo fatto, al contrario del diametro, si pone in contrasto con le reti reali, le quali hanno quasi sempre un $\langle C \rangle$ sensibilmente più alto.</li>
-</ul>
 
 <h4>Watts e Strogatz</h4><!-- small world -->
 
-<p>Come abbiamo visto il modello di Erdős e Renyi descrive bene il piccolo diametro delle reti reali, ma non il loro elevato grado di clusterizzazione. Inoltre il coefficiente di clustering di esse è simile per reti con numero di nodi molto diverso. Notando per primi ciò, Watts e Strogatz hanno formulato un modello che meglio si adattasse alle caratteristiche reali delle reti. </p>
+<p>Come abbiamo visto il modello di Erdős e Renyi descrive bene il piccolo diametro delle reti reali, ma non il loro elevato grado di clusterizzazione. Inoltre il loro coefficiente di clustering è simile per reti con numero di nodi molto diverso. Notando per primi ciò, Watts e Strogatz hanno formulato un modello che meglio si adatta alle caratteristiche reali delle reti. </p>
 
 <p>Il fatto che il coefficiente di clustering non dipende dal numero di nodi è caratteristico dei reticoli, pertanto il punto di partenza del modello di Watts e Strogatz è un reticolo con condizioni al contorno cicliche, i cui $N$ nodi sono collegati ai primi $n$ vicini. Se poniamo, per esempio, $n = 2$, si configura così un anello del tipo:</p>
 
-<p><img src="fig:ring" alt="Reticolo ciclico." title="" /></p>
+<p><img src="../img/Teoria/zoomring.svg" title="fig:ring" /></p>
+<!-- <figure>
+<figcaption>Reticolo ciclico. Il punto di partenza del modello Watts-Strogatz: un reticolo con condizioni al contorno cicliche.</figcaption>
+</figure> -->
 
-<p>Successivamente si procede a riarrangiare in maniera random i link tra i nodi, con una probabilità $p$ per ogni link di venire modificato. In questo modo si hanno un certo numero di link (in media $pnN$) che invece di essere tra nodi in prossimità, saranno tra nodi più lontani, come nel grafo:</p>
+<p>Successivamente si procede a riarrangiare in maniera random i link tra i nodi, con una probabilità $P$ per ogni link di venire modificato. In questo modo si hanno un certo numero di link (in media $PnN$) che invece di essere tra nodi in prossimità, saranno tra nodi più lontani, come nei grafi in figura, per $P$ uguale 0, 0.03, 0.3, 1.</p>
+<!--TODO da mettere un caption unico e tutte le figure assieme 
+\caption[Generazione con modello Watts-Strogatz.]{Generazione di grafi con il modello Watts-Strogatz a differenti $p$ di rewiring. -->
 
-<p><img src="fig:WSp0" alt="p=0" title="" />
-<img src="fig:WSp3" alt="p=0.03" title="" />
-<img src="fig:WSp30" alt="p=0.3" title="" />
-<img src="fig:WSp100" alt="p=1" title="" /></p>
+<!-- TODO fare subplot a 4, col caption complessivo -->
+<p><img src="../img/Teoria/ringnet.svg" title="fig:WSp0" />
+<img src="../img/Teoria/smallworld.svg" title="fig:WSp3" />
+<img src="../img/Teoria/random-smallworld.svg" title="fig:WSp30" />
+<img src="../img/Teoria/totalrandomwatts.svg" title="fig:WSp100" /></p>
 
-<p>Con questo metodo, a seguito del <em>rewiring</em> si ha il rischio che il grafo non sia più connesso. Ponendo $n>1$ ciò può essere evitato, portando la probabilità di avere un grafo non connesso quasi a zero già con $n=2$.
-Con $p \rightarrow 1$ il grafo diventa simile a quello di una rete di Erdős-Renyi:</p>
+<p>Con questo metodo, a seguito del <em>rewiring</em> si ha il rischio che parti del grafo non sia più connesse. Ponendo $n>1$ ciò può essere evitato, portando la probabilità di avere un grafo non connesso quasi a zero già con $n=2$.
+Con $P \rightarrow 1$ il grafo diventa simile a quello di una rete di Erdős-Renyi. Nelle figure viene mostrato il confronto tra due grafi da 100 nodi: uno generato con il modello Erdos-Renyi ($P=7\%$) e uno con il modello Watts-Strogatz partendo da un reticolo con nodi connessi ai primi 3 vicini e il 100\% di probabilità di rewiring. A parte la somiglianza dei grafi, le distribuzioni del grado hanno simile comportamento.</p>
 
-<p><img src="fig:confrontoGraforandom" alt="Grafo random" title="" />
-<img src="fig:confrontoGrafosmall" alt="Grafo small-world" title="" />
-<img src="fig:confrontoGradigauss" alt="Confronto $P(k)$" title="" /></p>
+<!-- TODO da mettere un caption unico e tutte le figure assieme -->
+<p>
+Grafo random
+<img src="../img/Teoria/Erdosmodel.svg" title="fig:confrontoGraforandom"/>
+Grafo small-world
+<img src="../img/Teoria/Wattsmodel.svg" title="fig:confrontoGrafosmall"/>
+Confronto $P(k)$
+<img src="../img/Teoria/ComparDegExp.svg" title="fig:confrontoGradigauss"/></p>
 
-<p>Per avere una rete tipica che abbia un numero di connessioni non troppo elevato, ma non così poco da rischiare da avere un grafo non connesso a seguito dell'operazione di rewiring, possono essere considerati degli $N$ e $n$ tali che $N>>n>>ln(N)>>1$. Con queste condizioni la distribuzione del grado $P(k)$ ha una forma gaussiana la cui media coincide con $n$, con $\sigma$ più piccole per $p$ basse, tendente a una delta di Dirac per $p \rightarrow 0$. Infatti, mentre con $p=0$ si ha un reticolo con grado uguale per ogni nodo, l'operazione random di rewiring introduce una casualità sulla $P(K)$ ben descritta da una gaussiana per $N$ grandi, che però ha una larghezza sensibilmente inferiore a quella di una rete random, portando a una rete ancora più omogenea.</p>
+<p>Per avere una rete tipica che abbia un numero di connessioni non troppo elevato, ma non così poco da rischiare da avere un grafo non connesso a seguito dell'operazione di rewiring, possono essere considerati degli $N$ ed $n$ tali che $N>>n>>ln(N)>>1$. Con queste condizioni la distribuzione del grado $P(k)$ ha una forma gaussiana la cui media coincide con $n$, con $\sigma$ più piccole per $P$ basse, tendente a una delta di Dirac per $P \rightarrow 0$. Infatti, mentre con $P=0$ si ha un reticolo con grado uguale per ogni nodo, l'operazione di random rewiring introduce una casualità sulla $P(K)$ ben descritta da una gaussiana per $N$ grandi, che però ha una larghezza sensibilmente inferiore a quella di una rete random, portando a una rete ancora più omogenea.</p>
 
-<p>Valori tipici di $\langle l \rangle$ per le reti reali sono ben descritti dal modello di Erdős e Renyi secondo l'equazione 
-\ref{eq:lunghezze}</p>
+<p>Valori tipici di $\langle l \rangle$ per le reti reali sono ben descritti dal modello di Erdős e Renyi secondo l'equazione (\ref{eq:lunghezze}) [1], cioè ci si aspetta scali in modo logaritmico fissato $\langle k \rangle$. In una rete generata secondo il modello di Watts-Strogatz, le lunghezze dei cammini, fissato $n \equiv \langle k \rangle$, scalano in media in modo diverso al variare di $P$. Per $P$ molto basse ($p &lt;&lt; 1/nN$) le lunghezze caratteristiche sono proporzionali alla dimensione del grafo, il quale è ancora molto simile a una reticolo. Abbastanza presto, per $P >> 1/nN$, vi è invece un largo intervallo di $P$ che vede già verificarsi il fenomeno small-world, con le lunghezze dei cammini che scalano come $ln(N)$ in accordo con le reti reali.</p>
+<!-- TODO \footnote{$p >> 10^(-4)$ per una rete con $10^3$ nodi e $P(k)$ centrata in 10} </p> -->
 
-<p>TODO REF A EQUAZIONE DA SISTEMARE</p>
+<p>L'altra caratteristica fondamentale di uno small-world è che abbia un clustering abbastanza alto in relazione a una rete puramente random. Per $P = 0$ il reticolo ha un $C(P = 0)$ costante al variare di $N$; all'aumentare di $P$, presa una tripletta chiusa, la probabilità che tutti e tre i link rimangano inalterati è $(1-P)^3$ e i suoi due primi vicini hanno probabilità $P^3$ di vedere almeno uno dei loro link riarrangiato. Dato che $C=N_\triangle/N_\wedge$ e che $N_\wedge$ rimane costante con il rewiring, si può porre 
+$$C(P) \propto N_\triangle (P) \Rightarrow C(P) \sim C(0)(1-P)^3, $$
+con $C(0) \sim 0.75$ per $N$ grande. Ricordando che per il modello di Erdős-Renyi $C_{ER}=P$, e che per modellizzare una rete reale $P$ solitamente è abbastanza piccola dato che $\langle k \rangle = NP$, risulta che per valori di $P \lesssim 0.25$ si hanno velocemente $C_{WS}$ sensibilmente maggiori di $C_{ER}$.</p>
 
-<p>\parencite{Barbalbert2002}, cioè ci si aspetta scali in modo logaritmico fissato $\langle k \rangle$. In una rete generata secondo il modello di Watts-Strogatz le lunghezze dei cammini, fissato $n \equiv \langle k \rangle$, scalano in media in modo diverso al variare di $p$. Per $p$ molto basse ($p &lt;&lt; (molto minore) 1/nN$) le lunghezze caratteristiche sono proporzionali alla dimensione del grafo, il quale è ancora molto simile a una reticolo; abbastanza presto, per $p >> 1/nN$, 
-\footnote{$p >> 10^(-4)$ per una rete con $10^3$ nodi e $P(k)$ centrata in 10} </p>
+<p>Confronto tra i coefficienti di clustering teorici dei due modelli, al variare del rispettivo parametro $P$.
+<img src="../img/Teoria/ConfrontoC.svg" alt="Confronto clustering." title="fig:confrontoC" /></p>
 
-<p>TODO COSA FARE CON NOTA A PIE?</p>
-
-<p>vi è invece un largo intervallo di $p$ che vede già verificarsi il fenomeno small-world, con le lunghezze dei cammini che scalano come $ln(N)$ in accordo con le reti reali.</p>
-
-<p>L'altra caratteristica fondamentale di uno small-world è che abbia un clustering abbastanza alto in relazione a una rete puramente random. Per $p = 0$ il reticolo ha un $C(0)$ costante al variare di $N$; all'aumentare di $p$, presa una tripletta chiusa, la probabilità che tutti e tre i link rimangano inalterati è $(1-p)^3$  e i suoi due primi vicini hanno probabilità $p^3$ di vedere almeno uno dei loro link riarrangiato. Dato che $C=N_\triangle/N_\wedge$ e che $N_\wedge$ rimane costante con il rewiring, si può porre 
-$$C(p) \propto N_\triangle (p) \Rightarrow C(p) \sim C(0)(1-p)^3, $$
-con $C(0) \sim 0.75$ per $N$ grande. Ricordando che per il modello di Erdős-Renyi $C_{ER}=p$, e che per modellizzare una rete reale $p$ solitamente è abbastanza piccola dato che $\langle k \rangle = Np$, risulta che per valori di $p \lesssim 0.25$ si hanno velocemente $C_{WS}$ sensibilmente maggiori di $C_{ER}$.</p>
-
-<p><img src="fig:confrontoC" alt="Confronto clustering." title="" /></p>
-
-<p>Concludendo, un grafo è considerato small-world se ha contemporaneamente piccole distanze medie e, a differenza dei grafi random,  una clusterizzazione relativamente elevata. Pertanto il modello di Watts e Strogatz descrive in maniera soddisfacente reti che abbiano queste caratteristiche, purché non siano scale-free.</p>
+<p>Concludendo, un grafo è considerato small-world se ha contemporaneamente piccole distanze medie e, a differenza dei grafi random, una clusterizzazione relativamente elevata. Pertanto il modello di Watts e Strogatz descrive in maniera soddisfacente reti che abbiano queste caratteristiche, purché non siano scale-free.</p>
 
 <h4>Barabasi e Albert</h4><!-- scale-free -->
 
-<p>Molte importanti reti reali di grandi dimensioni hanno la notevole caratteristica di avere un certo livello di invarianza di scala. Questa è manifestata da una distribuzione del grado che segue una funzione a legge di potenza $P(k)\sim k^{-\gamma}$, con $\gamma$ compreso quasi sempre tra $2$ e $3$, in maniera sempre più esatta al crescere di $k$. Mentre le reti random possono riprodurre una $P(k)$ arbitrario, e quindi anche una <em>power-law</em>, ma non riescono a generare grafi connessi e con $\langle l \rangle$ non definibile \parencite{Barbalbert2002}, le reti small-world riproducono bene le proprietà di clustering e cammini medi, ma non possono portare a $P(k)$ power-law. Serve pertanto un modello che riproduca piccoli diametri, grandi clustering e $P(k)$ a legge di potenza.</p>
+<p>Molte importanti reti reali di grandi dimensioni hanno la notevole caratteristica di avere un certo livello di invarianza di scala. Questa è manifestata da una distribuzione del grado che segue una funzione a legge di potenza $P(k)\sim k^{-\gamma}$, con $\gamma$ compreso quasi sempre tra $2$ e $3$, in maniera sempre più esatta al crescere di $k$.</p>
 
-<p>I modelli di Erdős-Renyi e Watts-Strogatz partono da una configurazione di nodi e poi distribuiscono o riarrangiano i link con una certa probabilità <em>uniforme</em> per tutti i link. Le reti reali, tuttavia, spesso partono da un certo numero piccolo di nodi e successivamente crescono. Il primo punto chiave del modello formulato da Barabasi e Albert è proprio il concetto di crescita: la rete parte a $t=0$ con $m_0$ nodi e a ogni step temporale si aggiunge alla rete un nodo con un certo numero $m &lt; (minore) m_0$ di link da assegnare agli altri nodi esistenti. Il secondo riguarda il fatto che la probabilità di <em>attachment</em> di un nuovo nodo agli altri non è uniforme su tutti i nodi ma preferenziale: il <em>preferential attachment</em> dà quindi una maggiore probabilità $\Pi (k_i)$ di collegamento di un nodo nuovo a un certo nodo $i$ in maniera proporzionale al suo grado, secondo la formula
-$$\Pi (k_i) = \frac{k_i}{\sum_j k_j}.$$</p>
+<p>Le reti random possono riprodurre una $P(k)$ arbitraria, e quindi anche una <em>power-law</em>, ma per $\alpha > 2$ risultano non connesse, rendendo $\langle l \rangle$ non facilmente definibile [1]. Le reti small-world invece riproducono bene le proprietà di clustering e cammini medi, ma non possono portare a $P(k)$ power-law. Serve pertanto un modello che riproduca piccoli diametri, grandi clustering e $P(k)$ a legge di potenza.</p>
 
-<p>La costruzione della rete avviene in modo dinamico, pertanto il grado di un nodo $i$ sarà funzione crescente del suo tempo di vita nella rete, con una probabilità di attachment dei nuovi nodi a $i$ anch'essa dipendente da $t$. Pertanto, con l'andare del tempo il grado di $i$ aumenterà sempre più velocemente. Approssimando $k_i$ a una variabile continua per $t$ grandi, dato che 
+<p>I modelli di Erdős-Renyi e Watts-Strogatz partono da una configurazione di nodi e poi distribuiscono o riarrangiano i link con una certa probabilità <em>uniforme</em> per tutti i link. Le reti reali, tuttavia, spesso partono da un certo numero piccolo di nodi e successivamente crescono. Il primo punto chiave del modello formulato da Barabasi e Albert è proprio il concetto di crescita: la rete parte a $t=0$ con $m_0$ nodi e a ogni step temporale si aggiunge alla rete un nodo con un certo numero $m &lt; m_0$ di link da assegnare agli altri nodi esistenti. Il secondo riguarda il fatto che la probabilità di <em>attachment</em> di un nuovo nodo agli altri non è uniforme su tutti i nodi ma preferenziale: il <em>preferential attachment</em> dà quindi una maggiore probabilità $\Pi (k_i)$ di collegamento di un nodo nuovo a un certo nodo $i$ in maniera proporzionale al suo grado, secondo la formula
+$$\Pi (k_i) = \frac{k_i}{\sum_j k_j}$$</p>
+
+<p>La costruzione della rete avviene in modo dinamico, pertanto il grado di un nodo $i$ sarà funzione crescente del suo tempo di vita nella rete, con una probabilità di attachment dei nuovi nodi a $i$ anch'essa dipendente da $t$. Pertanto, con l'andare del tempo il grado di $i$ aumenterà sempre più velocemente. Approssimando $k_i$ a una variabile continua per $t$ grandi, si ha che 
 $$\frac{dk_i}{dt} = m \Pi (k_i) = m \frac{k_i}{\sum_{j=1}^{N-1} k_j} = m \frac{k_i}{2mt - m} = \frac{k_i}{2t - 1} \sim \frac{k_i}{2t},$$
-dove $m$ è il numero di link aggiunti per iterazione, ponendo quindi la condizione iniziale per il nodo $i$, $k_i(t_i) = m$
-$$ \Rightarrow k_i(t) = m (\frac{t}{t_i})^\frac{1}{2}. $$</p>
+dove $m$ è il numero di link aggiunti ad ogni iterazione. Ponendo quindi la condizione iniziale per il nodo $i$, $k_i(t_i) = m$ si ottiene infine
+$$ k_i(t) = m \sqrt{\frac{t}{t_i}}. $$</p>
 
-<p>Ovviamente se il grado di un nodo è funzione di $t$, anche la $P(k)$ lo sarà. Definendo $P(k_i(t) &lt; (minore) k)$ la probabilità che un nodo $i$ abbia un grado minore di un certo valore $k$, la distribuzione del grado $P(k)$ può essere derivata ponendola uguale a $dP(k_i(t) &lt; (minore) k)/dk$, ottenendo per $t\rightarrow \infty$:
+<p>Ovviamente se il grado di un nodo è funzione di $t$, anche la $P(k)$ lo sarà. Definendo $P(k_i(t) &lt; k)$ la probabilità che un nodo $i$ abbia un grado minore di un certo valore $k$, la distribuzione del grado $P(k)$ può essere derivata ponendola uguale a $dP(k_i(t) &lt; k)/dk$, ottenendo per $t\rightarrow \infty$ la formula
 $$ P(k)\sim 2m^2 k^{-3}. $$</p>
 
-<p><img src="fig:barabalbero" alt="Albero scale-free" title="" /></p>
+<p>Esempio di grafo generato con il modello di Barabasi-Albert. Con $m=1$ è evidente la struttura frattale, ma essendo un grafo ad albero il clustering è nullo.
+<img src="../img/Teoria/Barabalbert1.svg" alt="Albero scale-free" title="fig:barabalbero" /></p>
 
-<p>Il modello di Barabasi e Albert è un modello minimale, importantissimo perché il primo in grado di riprodurre un grafo che mostrasse un'invarianza di scala, ma che in alcuni aspetti mal si accorda con quelle reti reali con caratteristiche scale-free. Per cominciare la distribuzione del grado è una legge di potenza con esponente $3$,ma le reti scale-free solitamente hanno un esponente inferiore, seppur maggiore di $2$. Benché non sia possibile calcolare in modo analitico $\langle l\rangle$ e $C$ per una rete di Barabasi-Albert, da simulazioni numeriche è possibile ottenerne quantità caratteristiche. </p>
+<p>Il modello di Barabasi e Albert è un modello minimale, importantissimo perché il primo in grado di riprodurre un grafo che mostrasse un'invarianza di scala, ma che in alcuni aspetti mal si accorda con quelle reti reali con caratteristiche scale-free. Per cominciare la distribuzione del grado è una legge di potenza con esponente 3, ma le reti scale-free solitamente hanno un esponente inferiore, seppur maggiore di 2. Benché non sia possibile calcolare in modo analitico $\langle l\rangle$ e $C$ per una rete di Barabasi-Albert, da simulazioni numeriche è possibile ottenerne quantità caratteristiche. </p>
 
-<p>Il cammino medio risulta sottostimato rispetto alle reti reali e il coefficiente di clustering non è costante con l'aumentare di $N$ come per le reti reali ma diminuisce, anche se più lentamente di una rete random
-\footnote{Ovviamente il coefficiente di clustering dipende dal numero $m$ di link generati per ogni nuovo nodo. Con $m = 1$ il clustering è nullo dato che il grafo è un albero, mentre $C \neq 0$ per $m>1$ e cresce all'aumentare di $m$, mantenendosi comunque al di sotto dei valori di reti reali con parametri simili.} </p>
+<p>Il cammino medio risulta sottostimato rispetto alle reti reali e il coefficiente di clustering non è costante con l'aumentare di $N$ come per le reti reali ma diminuisce, anche se più lentamente di una rete random [1]. Ovviamente il coefficiente di clustering dipende dal numero $m$ di link generati per ogni nuovo nodo. Con $m = 1$ il clustering è nullo dato che il grafo è un albero, mentre si ha $C \neq 0$ per $m>1$, che cresce all'aumentare di $m$, mantenendosi comunque al di sotto dei valori di reti reali con parametri simili.</p>
 
-<p>TODO CHE FARE CON NOTA</p>
+<p>Per tutti questi motivi il modello iniziale è stato negli anni integrato e reso più complesso.</p>
 
-<p>\parencite{Barbalbert2002}. Per questo motivo il modello iniziale è stato integrato e reso più complesso.</p>
-
-<p><img src="fig:confrontoGradi" alt="Confronto $P(k)$" title="" /></p>
+<p>Confronto tra le distribuzioni del grado dei tre modelli esposti.
+<img src="../img/Teoria/CompareSameN.svg" alt="Confronto $P(k)$" title="fig:confrontoGradi" /></p>
 
 <h2>Teoria della percolazione</h2>
 
@@ -636,28 +641,7 @@ con
 
 TODO mettere ancore HTML a tutte le seguenti figure
 
-[fig:ring]: ./img/Teoria/zoomring.svg "Il punto di partenza del modello Watts-Strogatz: un reticolo con condizioni al contorno cicliche."
 
-<p>TODO da mettere un caption unico e tutte le figure assieme 
-\caption[Generazione con modello Watts-Strogatz.]{Generazione di grafi con il modello Watts-Strogatz a differenti $p$ di rewiring.}
-
-[fig:WSp0]: ./img/Teoria/ringnet.svg "$p = 0$"
-[fig:WSp3]: ./img/Teoria/smallworld.svg "$p = 0.03$"
-[fig:WSp30]: ./img/Teoria/random-smallworld.svg "$p = 0.3$"
-[fig:WSp100]: ./img/Teoria/totalrandomwatts.svg "$p = 1$"
-
-TODO da mettere un caption unico e tutte le figure assieme 
-TODO \caption[Confronto grafi random.]{Confronto tra due grafi da 100 nodi: uno generato con il modello Erdos-Renyi ($p=7\%$) e uno con il modello Watts-Strogatz partendo da un reticolo con nodi connessi ai primi 3 vicini e il 100\% di probabilità di rewiring. A parte la somiglianza dei grafi, le distribuzioni del grado hanno simile comportamento.}</p>
-
-[fig:confrontoGraforandom]: ./img/Teoria/Erdosmodel.svg "Grafo random"
-[fig:confrontoGrafosmall]: ./img/Teoria/Wattsmodel.svg "Grafo small-world"
-[fig:confrontoGradigauss]: ./img/Teoria/ComparDegExp.svg "Confronto $P(k)$"
-
-[fig:confrontoC]: ./img/Teoria/ConfrontoC.svg "Confronto tra i coefficienti di clustering teorici dei due modelli, al variare del rispettivo parametro $p$."
-
-[fig:barabalbero]: ./img/Teoria/Barabalbert1.svg "Esempio di grafo generato con il modello di Barabasi-Albert. Con $m=1$ è evidente la struttura frattale, ma essendo un grafo ad albero il clustering è nullo."
-
-[fig:confrontoGradi]: ./img/Teoria/CompareSameN.svg "Confronto tra le distribuzioni del grado dei tre modelli esposti."
 
 <p>TODO da mettere un caption unico e tutte le figure assieme
 \caption[Esistenza soluzione non banale.]{Confronto tra il caso in cui $F(q)=q$ ha solo la soluzione banale $q=1$, e il caso in cui esiste una soluzione per $q&lt; (minore) 1$.}</p>
