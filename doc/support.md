@@ -62,7 +62,10 @@ arancio #C03E27
 verde acqua #18625B
 oliva ascolana #534F2C
 
-
+## Reveal.js
+[homepage](https://github.com/hakimel/reveal.js/)
+[demo](http://lab.hakim.se/reveal-js/#/)
+[online editor](https://slides.com/)
 
 altri link vari:
 http://pandas.pydata.org/pandas-docs/stable/10min.html#min
