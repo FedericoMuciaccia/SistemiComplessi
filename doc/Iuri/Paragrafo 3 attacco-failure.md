@@ -1,8 +1,10 @@
 ## 3 Network breakdown
-<!-- ###### (formerly "Analisi percolativa" ma questo è un titolo noioso, meglio una roba più deep impact ogliea)  -->
+<!--###### (formerly "Analisi percolativa" ma questo è un titolo noioso, meglio una roba più deep impact ogliea)  -->
 
 Una volta osservate le distribuzioni del grado nelle reti delle quattro compagnie e nella rete complessiva formata da tutte le antenne comprese nell'area metropolitana di Roma, procediamo con lo studio percolativo. In riferimento al lavoro fatto da 
-<!-- TODO biblioref da sistemrare -->
+
+TODO biblioref da sistemrare
+
 \textcite{Barbalbert2000}
 , la scelta è stata di simulare due differenti scenari in cui i nodi della rete vengono disabilitati. Nel primo scenario si è ipotizzato un attacco intenzionale che cominciasse dai nodi con maggior grado, nel secondo una rimozione random. 
 
@@ -10,7 +12,7 @@ Lo scopo è studiare l'andamento, in funzione della percentuale di nodi rimossi,
 
 In tutti e cinque i campioni di rete che abbiamo analizzato sono stati conteggiati gli andamenti di alcune grandezze topologiche e statistiche di interesse: dimensione del giant cluster, $D$ e $\langle l \rangle$, coefficiente di clustering globale $C$, $\langle k \rangle$ e $\langle k^2 \rangle/\langle k \rangle$. I grafici ottenuti sono stati messi a confronto a quelli ottenuti con le reti generate secondo i modelli.
 
-<!-- TODO **DA DECIDERE SE TAGLIARE O SINTETIZZARE**  -->
+TODO **DA DECIDERE SE TAGLIARE O SINTETIZZARE**
 La rete reale ha ovviamente delle contromisure per evitare la caduta delle comunicazioni. Le antenne trasmettono segnali tra loro su due bande di frequenza: una *user-side*, dedicata alle normali trasmissioni tra utenti del servizio, e una dedicata a un complesso sistema di feedback gestito da degli *hub* (grosse antenne con raggio sui 20 km). Questa struttura gerarchica permette, nel caso di caduta di una antenna o di un improvviso eccessivo carico in una zona circoscritta, che gli hub gestiscano potenza e capacità delle antenne circostanti mentre vengono inviati tecnici per un intervento sul luogo.
 
 Questo sistema ha un certo tempo di reazione. L'analisi da noi svolta pertanto suppone che la caduta della rete avvenga in un tempo inferiore, in una sorta di approssimazione adiabatica. Inoltre, la sola caduta degli hub sarebbe già sufficiente a compromettere seriamente l'integrità della rete (le antenne avrebbero difficoltà a coordinare le comunicazioni tra loro), ma nella nostra ipotesi di mesh-network distribuita ci interessano soltanto le comunicazioni nelle frequenze user-side. Usando questo modello semplificato siamo riusciti a ottenere alcune informazioni su una ipotetica rete wireless di questa natura.
@@ -29,8 +31,10 @@ Le reti da cui è partito lo studio percolativo sono le 5 definite e costruite n
 	Roma		|7287	|1		|2	|1.97			|0.89	|239			|0.004				|1353							|99.9
 
 #### Random failure
-La prima cosa da notare è che le reti delle singole compagnie hanno un rapporto coefficiente di clustering-grado medio in linea con molte altre reti reali 
-<!-- TODO biblioref da sistemare -->
+La prima cosa da notare è che le reti delle singole compagnie hanno un rapporto coefficiente di clustering-grado medio in linea con molte altre reti reali
+
+TODO biblioref da sistemare
+
 \parencite{Barbalbert2002}, 
 mentre stranamente la rete costruita con tutte le antenne non vede aumentare particolarmente il suo clustering. Inoltre ci si aspetta che le reti siano tutte particolarmente resistenti sotto random failure, comportamento che sembra più simile a quello di una rete scale free. Tuttavia una rete random con un grado medio alto ha comunque un $f$ molto alto. Per esempio, una rete random avente $N = N_{Tim}$ e $\langle k \rangle = \langle k \rangle_{Tim}$, avrebbe una $f$ critica di poco inferiore: $\sim 98\%$. Infatti, essendo per una rete random $\langle k \rangle = Np$, perché sia uguale a $\langle k \rangle_{Tim}$ con $\sim 1800$ nodi, deve essere $p \sim 3.7\%$, 
 $$\Rightarrow \sigma^2 = Np(1-p) = \langle k^2 \rangle - \langle k \rangle^2 \sim 62$$
@@ -45,7 +49,7 @@ Nello scenario di attacco intenzionale ci si aspetta una veloce frammentazione d
 
 Dal punto di vista del diametro della rete, levando i nodi più connessi ci si aspetta che esso aumenti, fino a quando la rete diventa tanto frammentata da essere costituita da clusters con pochissimi nodi. Oltrepassata la soglia di frammentazione quindi il diametro dei clusters più grandi decrescerà rapidamente a zero.
 
-<!-- TODO DA METTER CAPTION GENERALE {Risultati per rimozione random} -->
+TODO DA METTER CAPTION GENERALE {Risultati per rimozione random}
 ![Failure: GC](fig:failGC)
 ![Failure: C](fig:failC)
 ![Failure: l](fig:faill)
@@ -53,7 +57,7 @@ Dal punto di vista del diametro della rete, levando i nodi più connessi ci si a
 ![Failure: k](fig:failk)
 ![Failure: criterio](fig:failc)
 
-<!-- TODO DA METTER CAPTION GENERALE {Risultati per rimozione con massima efficienza} -->
+TODO DA METTER CAPTION GENERALE {Risultati per rimozione con massima efficienza}
 ![Attack: GC](fig:atakGC)
 ![Attack: C](fig:atakC)
 ![Attack: l](fig:atakl)
@@ -70,7 +74,9 @@ Un'altra cosa da notare è che a parità di $N$, una rete di Barabasi-Albert è 
 Uno studio percolativo su reti reali, quindi, non aiuta a identificare una eventuale invarianza di scala per reti molto grandi e connesse. Tuttavia può essere decisiva per reti più piccole, come piccole comunità, reti locali, proteine e alcuni ecosistemi: nonostante la bassa statistica, il comportamento di reti con pochi nodi possono essere distinti in maniera significativa da uno studio percolativo.
 
 Nel caso di reti il cui funzionamento dipende dalla capacità dei nodi di gestire un certo carico, uno studio percolativo dovrebbe anche considerare l'eventualità che con la rimozione di alcuni nodi, altri vadano in sovraccarico e si scolleghino dalla rete 
-<!-- TODO vari biblioref da sistemare -->
+
+TODO vari biblioref da sistemare
+
 (Motter \citeyear{Motter2002}, Zhao \citeyear{Zhao2004} e \citeyear{Zhao2005}, Wang \citeyear{Wang2009})
 . È il caso delle reti comunicative, come quelle telefoniche cellulari analizzate, o una ipotetica rete mesh costruita con i router wi-fi, ma anche ovviamente reti di distribuzioni elettriche, 
 %valutare se lasciare o rimuovere
