@@ -9,6 +9,15 @@
     <link rel="stylesheet" type="text/css" media="screen" href="relazione.css">
 <link rel="stylesheet" type="text/css" media="screen" href="dataframe.css">
     <title>Analisi di rete per le antenne telefoniche di Roma</title>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript">
+        MathJax.Hub.Config({
+            tex2jax: {
+    		inlineMath: [['$','$'], ['\\(','\\)']],
+    		processEscapes: true
+  	    }
+	});
+    </script>
   </head>
 
   <body>
@@ -371,56 +380,58 @@ TODO mettere retta con pendenza con fit a mano spannometrico</p> -->
 
 <h2>Graph theory and network analysis</h2><!-- teoria delle reti -->
 
-TODO RIORDINARE NUMERI, FIGURE E CORREGGERE E PARAGRAFARE
+<!-- TODO RIORDINARE NUMERI, FIGURE E CORREGGERE E PARAGRAFARE -->
+<!-- TODO mettere ancore per i riferimenti bibliografici nel testo -->
 
-<p>Le reti sono insiemi di oggetti per i quali è possibile una connessione. Gli ultimi 60 anni hanno visto un crescente interesse per esse, perché con le reti è possibile descrivere sistemi dei più disparati tipi nei campi più vari, dalla biologia all'economia, passando per reti elettriche, informatiche, ecosistemi,  e altro ancora. Ancora più importante, negli ultimi vent'anni è stato scoperto che una classe di reti ha proprietà del tutto comuni nonostante l'intrinseca diversità tra sistemi; la modellizzazione di queste reti, come crescita con caratteristiche preferenziali, è dovuta a \textcite{Barbalbert1999}, e vengono dette scale-free.</p>
+<p>Le <em>reti</em> sono insiemi di oggetti che è possibile connettere tra loro. Gli ultimi 60 anni hanno visto un crescente interesse per esse poiché con le reti è possibile descrivere sistemi dei più disparati tipi nei campi più vari: dalla biologia all'economia, passando per reti elettriche, informatiche, ecosistemi,  e altro ancora. Ancora più importante, negli ultimi vent'anni è stato scoperto che una classe di reti ha proprietà del tutto comuni nonostante l'intrinseca diversità tra i sistemi che la realizzano; queste reti vengono dette scale-free perché presentano manifeste caratteristiche di invarianza di scala e la loro modellizzazione, mediante un processo di crescita preferenziale, è dovuta a Barabasi e Albert [3]. <!-- \textcite{Barbalbert1999} --></p>
 
 <p>Per maggior semplicità, nell'esposizione del lavoro svolto verrà sempre assunto che le reti siano dirette e non pesate.</p>
 
 <h3>Proprietà e grandezze caratteristiche</h3>
 
-<p>Dal punto di vista matematico una rete è rappresentata da un grafo. Gli oggetti costitutivi di un grafo sono i <strong>nodi</strong>, i quali vengono collegati opportunamente tra loro con dei <strong>link</strong> secondo dei criteri che dipendono dal modello (nella costruzione di un grafo teorico) o dalla natura del sistema (per le reti reali). Il numero di nodi della rete, o di una sua parte, è ovviamente la grandezza fondamentale per definirne le dimensioni; il numero e la distribuzione dei link ne descrivono la connettività.</p>
+<p>Dal punto di vista matematico una rete è rappresentata da un <em>grafo</em>. Gli oggetti costitutivi di un grafo sono i <em>nodi</em>, i quali vengono collegati opportunamente tra loro con dei <em>link</em> secondo dei criteri che dipendono dal modello (nella costruzione di un grafo teorico) o dalla natura del sistema (per le reti reali). Il numero di nodi della rete, o di una sua sottoparte, è ovviamente la grandezza fondamentale per definirne le dimensioni; il numero e la distribuzione dei link ne descrivono la connettività.</p>
 
-<p>Prima di procedere alla descrizione dei modelli di rete sopracitati, è utile elencare un glossario di caratteristiche delle reti, spesso determinanti per distinguere un grafo scale-free dagli altri nello studio delle reti reali.</p>
+<p>Prima di procedere alla descrizione dei modelli di rete, è utile fornire un glossario delle quantità caratteristiche delle reti, spesso determinanti per riuscire a categorizzare un grafo come scale-free.</p>
 
-<p><strong>Grado</strong> Il grado di un nodo è il numero di altri nodi a cui è connesso. La connettività di una rete è ben rappresentata dalla <strong>distribuzione del grado</strong>, la cui forma funzionale $P(k)$ la cui forma funzionale è il primo criterio per discriminare una rete scale-free. </p>
+<p><strong>Grado</strong> Il grado di un nodo è il numero di altri nodi a cui è connesso. La connettività di una rete è ben rappresentata dalla <strong>distribuzione del grado</strong>, la cui forma funzionale $P(k)$ è il primo criterio per discriminare una rete scale-free.</p>
 
 <p><strong>Distanze</strong> Alla base di ogni topologia c'è il concetto di distanza. La distanza tra due nodi di un grafo è definita come il numero di link che li separa nel più piccolo cammino possibile lungo la rete. Altre quantità topologiche importanti sono:
 <ul>
-<li>l'<strong>eccentricità di un nodo</strong>, è la massima delle distanze tra un nodo scelto e tutti gli altri nodi della rete;</li>
-<li>il <strong>diametro</strong> è la massima eccentricità tra quelle di tutti i nodi del grafo; detto in termini più generali, il diametro è il minor cammino più grande tra tutte le possibili coppie di nodi della rete;</li>
-<li>l'<strong>average path length</strong>, cioè la distanza media tra tutte le possibili coppie di nodi della rete.</li>
+<li>L'<strong>eccentricità di un nodo</strong>: la massima delle distanze tra un nodo scelto e tutti gli altri nodi della rete.</li>
+<li>Il <strong>diametro</strong>: la massima eccentricità tra quelle di tutti i nodi del grafo. Detto in termini più generali, il diametro è il minor cammino più grande tra tutte le possibili coppie di nodi della rete.</li>
+<li>L'<strong>average path length</strong>: la distanza media tra tutte le possibili coppie di nodi della rete.</li>
 </ul></p>
 
-<p>TODO (correlazione con diametro?)</p>
+<!-- TODO (correlazione con diametro?) -->
 
-<p><strong>Custering</strong> Per misurare quanto i nodi di un grafo tendono a creare dei clusters, viene definito il coefficiente di clustering $C_i$. Dal punto di vista di un vertice $i$ di grado $k_i$, quindi, considerando i nodi a esso collegato, $C_i$ è definito come il rapporto
+<p><strong>Custering</strong> Per misurare quanto i nodi di un grafo tendono a creare degli aggregati, viene definito il coefficiente di clustering $C_i$. Per un vertice $i$ di grado $k_i$, $C_i$ è definito come il rapporto
 $$C_i = \frac{2E_i}{k_i(k_i-1)},$$
-dove $E_i$ è il numero di link tra i $k_i$ primi vicini del vertice e $k_i(k_i-1)/2$ il numero di link possibili tra essi: cioè il numero di collegamenti necessari perché $i$ con i suoi vicini sia una porzione di grafo <em>completa</em>, detta anche <em>clique</em>.</p>
+dove $E_i$ è il numero di link tra i $k_i$ primi vicini del vertice e $k_i(k_i-1)/2$ il numero totale di link possibili tra essi: cioè il numero di collegamenti necessari perché $i$ con i suoi vicini sia una porzione di grafo <em>completa</em>, detta anche <em>clique</em>.</p>
+<!-- TODO scrivere meglio -->
 
-<p>La media su tutti i nodi dei rispettivi $C_i$ dà un'indicazione su quanto la rete sia complessivamente clusterizzata e quindi può essere preso come coefficiente di clustering globale $C$ della rete. Una definizione più recente di $C$, equivalente alla precedente, lo pone uguale al rapporto tra il numero di triplette di nodi completamente collegate $N_\triangle$ e il numero di triplette che vede i tre nodi collegati da almeno due link $N_\wedge$. In entrambi i casi, più $C$ è vicino a $1$, più si ha clusterizzazione.</p>
+<p>La media su tutti i nodi dei rispettivi $C_i$ dà un'indicazione di quanto la rete sia complessivamente clusterizzata e quindi può essere preso come coefficiente di clustering globale $C$ della rete. Una definizione più recente di $C$, equivalente alla precedente, lo pone uguale al rapporto tra il numero di triplette di nodi completamente collegate $N_\triangle$ e il numero di triplette che vede i tre nodi collegati da almeno due link $N_\wedge$. In entrambi i casi, più $C$ è vicino a $1$, più si ha clusterizzazione.</p>
 
-<p>Il coefficiente di clustering svolge un ruolo importante nel distinguere una rete completamente random da una che presenta caratteristiche di <em>small-world</em>: infatti un rete con piccolo diametro tende a avere un $\langle C\rangle$ maggiore di una simile rete puramente casuale costruita con lo stesso numero di nodi e con il medesimo cammino più corto medio. Questo comportamento è stato notato in molte reti reali \parencite{Watts1998}.</p>
+<p>Il coefficiente di clustering svolge un ruolo importante nel distinguere una rete completamente random da una che presenta caratteristiche di <em>small-world</em>: infatti un rete con piccolo diametro tende a avere un $C$ maggiore di una simile rete puramente casuale costruita con lo stesso numero di nodi e con il medesimo cammino più corto medio. Questo comportamento è stato notato in molte reti reali [9]. <!-- \parencite{Watts1998} --></p>
+<!-- TODO non si è ancora detto cosa è lo small-world -->
 
-<p><strong>Centralità</strong> Esistono vari modi per definire quando un nodo è centrale rispetto ad altri. Il primo è più immediato è il suo grado. Altri due tra i più importanti sono la <strong>betweenness</strong> e il <strong>page-rank</strong>. Preso un nodo $i$, il primo è definito come il numero di cammini più corti che è possibile tracciare tra due qualsiasi nodi della rete, purché passino per $i$; il secondo dà una maggior centralità a $i$ maggiore è il numero di link <em>diretti</em> verso di esso, tenendo conto anche del rank dei nodi che si collegano a esso. </p>
+<p><strong>Centralità</strong> Esistono vari modi per definire quando un nodo è centrale rispetto ad altri. Il primo e più immediato è il suo grado. Altri due tra i più importanti sono la <strong>betweenness</strong> e il <strong>page-rank</strong>. Preso un nodo $i$, il primo è definito come il numero di cammini più corti che è possibile tracciare tra due qualsiasi nodi della rete, purché passino per $i$; il secondo dà una misura della centralità di $i$ molto dipendente dal numero di link <em>diretti</em> verso di esso, tenendo conto anche del ranking dei nodi che si collegano a esso. </p>
 
-<p>In reti dirette, benché non siano <em>matematicamente</em> uguali, betweenness e page-rank sono statisticamente molto correlati al grado, pertanto non verranno analizzati. </p>
+<p>In reti indirette, benché non siano <em>matematicamente</em> uguali, betweenness e page-rank sono statisticamente molto correlati al grado, pertanto non verranno analizzati. </p>
 
-<p>TODO (fare grafico correlazione grado-betweenness-pagerank)</p>
+<!-- TODO (fare grafico correlazione grado-betweenness-pagerank) -->
 
 <h3>Matrice di adiacenza e costruzione del grafo</h3>
 
-<p>TODO correggere, mettere formule e spezzare in paragrafi</p>
+<!-- TODO correggere e spezzare in paragrafi -->
 
 <p>TODO prime ottimizzazioni (RAM e CPU) astuzie e approssimazioni. splitting della matrice, approssimazione distanza, stampa su file</p>
 
 <p>TODO calcolare tutta la matrice di adiacenza con la distanza geodesica al posto di quella euclidea risulta pesantissimo ($N^2$ elementi)</p>
 
-<p>TODO spiegare il criterio di linking</p>
+<p>Prese le antenne nell'area selezionata come i nodi della rete, è necessario definire un criterio per stabilire un link. Nell'ottica di una ipotetica mesh network, la scelta è stata di considerare collegate due antenne se nello spazio tra esse vi è continuità di segnale, in modo che qualsiasi utente nel mezzo possa comunicare con altri utenti. Trascurando dislivelli del terreno ed edifici, è stato supposto che la porzione di spazio coperta da un'antenna sia un cerchio di raggio uguale a <code>range</code>. Il criterio scelto è stato quindi che la distanza $\delta_{ij}$ tra due antenne fosse minore della somma dei loro raggi, contando una sovrapposizione di almeno il $20\%$.
+$$\delta_{ij} < 0.8(r_i+r_j)$$</P>
 
-<p>Prese le antenne nell'area selezionata come i nodi della rete, è necessario definire un criterio per stabilire un link. Nell'ottica di una ipotetica mesh network, la scelta è stata di considerare collegate due antenne se non hanno zone d'ombra del segnale nello spazio tra di esse, in modo che qualsiasi utente al suo interno possa comunicare con altri utenti (si suppone quindi un diverso metodo di comunicazione tra antenne, come cavo, altri canali WiFi). Trascurando dislivelli del terreno e edifici, è stato supposto che la porzione di spazio coperta da un'antenna sia un cilindro del raggio fornito dai dati. Il criterio scelto è stato quindi che la distanza $\delta_{ij}$ tra due antenne fosse minore dei loro raggi in modo tale che essi si sovrappongano per il $20\%$: $\delta_{ij} < 0.8(r_i+r_j)$.</P>
-
-<p>Stabilito il criterio, bisogna costruire la rete, popolando la matrice di adiacenza dei nodi. Dato che il criterio di linking richiede la conoscenza della distanza tra due antenne, è stato necessario calcolare le distanze tra ogni coppia di nodi. I dati in nostro possesso forniscono le coordinate geografiche, che sono delle coordinate sferiche, e quindi ci si è posti il problema di come calcolare le distanze. Inizialmente la scelta è caduta su una funzione della libreria <code>geopy</code>, la quale permette di calcoalare la distanza geodesica con il metodo <code>great-circle</code> e con la formula <code>vincenty</code>. La prima è più veloce e usa un modello sferico di Terra, la seconda richiede più calcoli perché usa un accurato modello ellissoidale (impiega circa il doppio del tempo del metodo <code>great-circle</code>).
+<p>Stabilito il criterio, bisogna costruire la rete popolando la matrice di adiacenza. Dato che il criterio di linking richiede la conoscenza della distanza tra due antenne, è stato necessario calcolare le distanze tra ogni coppia di nodi. I dati in nostro possesso forniscono le coordinate geografiche di latitudine e longitudine, e quindi ci si è posti il problema di come calcolare le distanze. Inizialmente la scelta è caduta su una funzione della libreria <code>geopy</code>, la quale permette di calcoalare la distanza geodesica con il metodo <code>great-circle</code> e con la formula <code>vincenty</code>. La prima è più veloce e usa un modello sferico di Terra, la seconda richiede più calcoli perché usa un accurato modello ellissoidale (impiega circa il doppio del tempo del metodo <code>great-circle</code>).
 Purtroppo, tuttavia, i tempi di calcolo richiesti da queste funzioni sono piuttosto alti in prospettiva di calcolare una matrice di $7000^2$ elementi. Per risparmiare tempo, dato che la rete definita non è diretta, per prima cosa è stata modificata la funzione di calcolo della matrice di adiacenza in modo che calcolasse soltanto la metà superiore. Successivamente si poteva tentare di diagonalizzare a blocchi la matrice, cosa purtroppo impossibile poiché dai dati risulta che un certo numero di antenne hanno raggi d'azione nell'ordine dei 10-20 km, ricoprendo quindi tutta l'area di Roma selezionata. 
 L'unica via praticabile per far calare drasticamente il tempo necessario per calcolare tutte le matrici necessarie per l'analisi è stata quindi convertire le coordinate geografiche in cartesiane e usare la distanza euclidea. In questo modo si è ottenuto un guadagno di velocità di un fattore 10.
 Calcolate le matrici definitive per la rete complessiva e per quelle delle singole compagnie, sono state salvate su file in modo da non doverle più ricalcolare.</P>
