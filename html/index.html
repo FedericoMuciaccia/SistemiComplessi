@@ -109,7 +109,7 @@ C'è un solo grande problema: i dati sono chiusi.</p>
 
 <p>Il progetto è ormai maturo e, come si può osservare dalle mappe sopra e sotto, la copertura del mondo è molto capillare.</p>
 <ul>
-<li>La prima mostra un esempio di utilizzo del programma a San Lorenzo, nel percorso tra le nostre due abitazioni. I pallini verdi sono i punti GPS delle rilevazioni complete (WiFi + rete cellulare) effettuate durante il tragitto. Come si può notare sono piuttosto fitti: 4 0 5 per ogni isolato. Le aree sfumate in blu mostrano invece, in maniera approssimata per motivi di privacy, l'esito dell'eleborazione di tutte le precedenti osservazoni nell'area, ovvero tutti i router WiFi e le antenne ricostruiti fin ora. La mappa è fittissima, ma questo non deve trarre in inganno: è ancora incompleta e per certi versi inaffidabile. Un esempio diretto sono le numerose ricostruzioni che appaiono in mezzo ai binari della stazione Termini: quelle derivano dai WiFi all'interno dei treni a cui si collegano i viaggiatori, ma che essendo oggetti in moto non possono essere usati ai fini della geolocalizzazione e pertanto dovrebbero essere filtrati ed esclusi dal database.</li>
+<li>La prima mostra un esempio di utilizzo del programma a San Lorenzo, in un normale percorso cittadino. I pallini verdi sono i punti GPS delle rilevazioni complete (WiFi + rete cellulare) effettuate durante il tragitto. Come si può notare sono piuttosto fitti: 4 o 5 per ogni isolato. Le aree sfumate in blu mostrano invece, in maniera approssimata per motivi di privacy, l'esito dell'eleborazione di tutte le precedenti osservazoni nell'area, ovvero tutti i router WiFi e le antenne ricostruiti fin ora. La mappa è fittissima, ma questo non deve trarre in inganno: è ancora incompleta e per certi versi inaffidabile. Un esempio diretto sono le numerose ricostruzioni che appaiono in mezzo ai binari della stazione Termini: quelle derivano dai WiFi all'interno dei treni a cui si collegano i viaggiatori, ma che essendo oggetti in moto non possono essere usati ai fini della geolocalizzazione e pertanto dovrebbero essere filtrati ed esclusi dal database.</li>
 <li>La seconda mappa (interattiva) mostra invece la copertura globale raggiunta dal progetto. Sebbene risulti uno stadio abbastanza avanzato, si può notare come ci siano ancora delle disparità di mappatura anche tra gli stati ad alta presenza tecnologica: si confrontino ad esempio le capitali della Cina e del Giappone. Inoltre, essendo un progetto collaborativo open source e con sede negli Stati Uniti, sì può vedere come gli stati in cui la cultura open è meno diffusa o quelli in tensione con gli USA per quanto riguarda la politica estera risultino globalmente meno mappati. Un esempio emblematico potrebbe essere la differenza tra Nord Korea e Sud Korea.</li>
 </ul>
 
@@ -424,29 +424,31 @@ dove $E_i$ è il numero di link tra i $k_i$ primi vicini del vertice e $k_i(k_i-
 
 <!-- TODO correggere e spezzare in paragrafi -->
 
-<p>TODO prime ottimizzazioni (RAM e CPU) astuzie e approssimazioni. splitting della matrice, approssimazione distanza, stampa su file</p>
+<!-- TODO prime ottimizzazioni (RAM e CPU) astuzie e approssimazioni -->
 
-<p>TODO calcolare tutta la matrice di adiacenza con la distanza geodesica al posto di quella euclidea risulta pesantissimo ($N^2$ elementi)</p>
+<!-- TODO calcolare tutta la matrice di adiacenza con la distanza geodesica al posto di quella euclidea risulta pesantissimo ($N^2$ elementi) -->
 
 <p>Prese le antenne nell'area selezionata come i nodi della rete, è necessario definire un criterio per stabilire un link. Nell'ottica di una ipotetica mesh network, la scelta è stata di considerare collegate due antenne se nello spazio tra esse vi è continuità di segnale, in modo che qualsiasi utente nel mezzo possa comunicare con altri utenti. Trascurando dislivelli del terreno ed edifici, è stato supposto che la porzione di spazio coperta da un'antenna sia un cerchio di raggio uguale a <code>range</code>. Il criterio scelto è stato quindi che la distanza $\delta_{ij}$ tra due antenne fosse minore della somma dei loro raggi, contando una sovrapposizione di almeno il $20\%$.
 $$\delta_{ij} < 0.8(r_i+r_j)$$</P>
 
-<p>Stabilito il criterio, bisogna costruire la rete popolando la matrice di adiacenza. Dato che il criterio di linking richiede la conoscenza della distanza tra due antenne, è stato necessario calcolare le distanze tra ogni coppia di nodi. I dati in nostro possesso forniscono le coordinate geografiche di latitudine e longitudine, e quindi ci si è posti il problema di come calcolare le distanze. Inizialmente la scelta è caduta su una funzione della libreria <code>geopy</code>, la quale permette di calcoalare la distanza geodesica con il metodo <code>great-circle</code> e con la formula <code>vincenty</code>. La prima è più veloce e usa un modello sferico di Terra, la seconda richiede più calcoli perché usa un accurato modello ellissoidale (impiega circa il doppio del tempo del metodo <code>great-circle</code>).
-Purtroppo, tuttavia, i tempi di calcolo richiesti da queste funzioni sono piuttosto alti in prospettiva di calcolare una matrice di $7000^2$ elementi. Per risparmiare tempo, dato che la rete definita non è diretta, per prima cosa è stata modificata la funzione di calcolo della matrice di adiacenza in modo che calcolasse soltanto la metà superiore. Successivamente si poteva tentare di diagonalizzare a blocchi la matrice, cosa purtroppo impossibile poiché dai dati risulta che un certo numero di antenne hanno raggi d'azione nell'ordine dei 10-20 km, ricoprendo quindi tutta l'area di Roma selezionata. 
-L'unica via praticabile per far calare drasticamente il tempo necessario per calcolare tutte le matrici necessarie per l'analisi è stata quindi convertire le coordinate geografiche in cartesiane e usare la distanza euclidea. In questo modo si è ottenuto un guadagno di velocità di un fattore 10.
-Calcolate le matrici definitive per la rete complessiva e per quelle delle singole compagnie, sono state salvate su file in modo da non doverle più ricalcolare.</P>
+<p>Stabilito il criterio, bisogna costruire la rete popolando la matrice di adiacenza. Dato che il criterio di linking richiede la conoscenza della distanza tra due antenne, è stato necessario calcolare le distanze tra ogni coppia di nodi. I dati in nostro possesso forniscono le coordinate geografiche di latitudine e longitudine, quindi ci si è posti il problema di come calcolare le distanze. Inizialmente la scelta è caduta su una funzione della libreria <code>geopy</code>, la quale permette di calcoalare la distanza geodesica le funzioni <code>great-circle</code> e <code>vincenty</code>. Come già detto in precedenza, la prima è più veloce e usa un modello sferico di Terra, la seconda richiede più calcoli perché usa un accurato modello ellissoidale (impiega circa il doppio del tempo).</p>
+
+<p>Purtroppo i tempi di calcolo richiesti da queste funzioni risultano piuttosto alti per una matrice di circa $7000^2$ elementi. Per risparmiare tempo, dato che la rete da noi definita non è diretta, è stata modificata la funzione di calcolo della matrice di adiacenza in modo che ne calcolasse soltanto la metà superiore. Il tentativo di diagonalizzare a blocchi la matrice è purtroppo impossibile poiché dai dati risulta che un certo numero di antenne hanno raggi d'azione nell'ordine di decine di km, ricoprendo quindi tutta l'area di Roma selezionata e connettendosi dunque con titte le altre, portando valori molto fuori la diagonale.</p>
+
+<p>L'unica via praticabile per far calare drasticamente il tempo necessario per calcolare tutte le matrici richieste è stata quindi convertire le coordinate geografiche in cartesiane e usare la distanza euclidea. In questo modo si è ottenuto un guadagno di velocità di un fattore 10.
+Una volta calcolate le matrici definitive per la rete complessiva e per le singole compagnie, sono state salvate su file in formato CVS, in modo da non doverle più ricalcolare.</P>
 
 <h3>Distribuzione del grado</h3>
 
 <p>I vettore di gradi per ogni nodo del grafo si ottiene facilmente con il metodo <code>.degree()</code> della classe <code>Graph</code> di <code>networkx</code>.</p>
 
 <p>Abbiamo dunque fatto un istogramma congiunto di tutti i provider e della rete totale con un canale per ogni possibile numero naturare, ma in scala log-log risultava illegibile.
-Per ridurre un poco il rumore sulle code la canalizzazione è stata ridutta di 8 volte rispetto alle unità naturali. Data la poca estensione delle curve ed il fatto che molte non arrivavano fino ad 1, si è scelto di evitare il log-binning in base 2, in quanto in questo caso troppo grossolano e non in grado di conservare tutta l'informazione sulle code della distribuzione.</p>
+Per ridurre un poco il rumore sulle code la canalizzazione è stata ridutta di 8 volte rispetto alle unità naturali. Data la poca estensione delle curve ed il fatto che molte non arrivavano fino ad 1, si è scelto di evitare il log-binning in base 2, in quanto in questo caso risultava troppo grossolano e non in grado di conservare tutta l'informazione sulle code della distribuzione.</p>
 
 <p><a href="../img/degree/degreeDistribution.svg"">
 <img src="../img/degree/degreeDistribution.svg" /></a></p>
 
-<p>Come si può vedere nella figura, soprattutto per la rete complessiva l'andamento è circa power law dal massimo in poi. L'esponente è in valore assoluto di poco superiore a 3 nella prima parte e di poco inferiore a 3 nell'ultima parte della coda, estesa per circa mezza decade.</p>
+<p>Come si può vedere nella figura, soprattutto per la rete complessiva, l'andamento è circa power law dal massimo in poi. L'esponente è in valore assoluto di poco superiore a 3 nella prima parte e di poco inferiore a 3 nell'ultima parte della coda, estesa per circa mezza decade.</p>
 
 <p>Di seguito viene anche riportato l'andamento del frequency-rank (in forma di scatterplot per migliorarne la legibilità). La differenza nei valori sulle y rispetto all'istogramma precedente è dovuta al fatto che grazie all'ottima visibilità qui è stato possibile riprendere la canalizzazione sui numeri naturali, non aggregata.</p>
 
@@ -455,21 +457,15 @@ Per ridurre un poco il rumore sulle code la canalizzazione è stata ridutta di 8
 
 <h3>Modelli di rete</h3>
 
-<p>Lo studio delle reti random nasce dagli ungheresi \textcite{Erdos1959}, i quali per primi modellizzarono la definizione di una rete usando criteri probabilistici. Nel corso dei 40 anni successivi è stato osservato che molte reti reali, a dispetto delle dimensioni, avessero un diametro molto piccolo, portando alla definizione del concetto di <em>small-worlds</em> e al modello di \textcite{Watts1998}.</p>
+<p>Lo studio delle reti random nasce dagli ungheresi Erdős e Rényi [6], i quali per primi modellizzarono la definizione di una rete usando criteri probabilistici. Nel corso dei 40 anni successivi è stato osservato come molte reti reali, a dispetto delle dimensioni, avessero un diametro molto piccolo, portando alla definizione del concetto di <em>small-worlds</em> e al modello di Watts e Strogatz [9].</p>
 
-<p>In entrambi i casi si parte da una configurazione iniziale di nodi per poi randomizzare i link tra essi. Per questo motivo la distribuzione del grado segue una Poissoniana, con una coda destra caratteristica di forma esponenziale; con un numero sufficiente di nodi e link, la distribuzione del grado si approssima a una gaussiana con un grado medio ben definito.</p>
+<p>In entrambi i casi si parte da una configurazione iniziale di nodi per poi creare o riarrangiare randomicamente i link tra essi. Per questo motivo la distribuzione del grado segue una Poissoniana, con la caratteristica coda destra esponenziale. Con un numero sufficiente di nodi e link, la distribuzione del grado si approssima a una gaussiana con un grado medio ben definito.</p>
 
 <h4>Erdős e Rényi</h4><!-- random network -->
 
-<p>Il modello di Erdős e Rényi parte da un certo numero $N$ di nodi e $n$ di link. Se poniamo che i nodi siano distinguibili, possono esistere $\binom{n}{N(N-1)/2)}$</p>
+<p>Il modello di Erdős e Rényi parte da $N$ nodi ed $n$ link indiretti. Se poniamo che i nodi siano distinguibili, possono esistere $\binom{n}{N(N-1)/2)}$ configurazioni equiprobabili tra le quali può esserne presa una in maniera random. Un'altra maniera per definire una rete random è il criterio binomiale: partire da un set di $N$ nodi e dare a ogni possibile coppia un link con una certa probabilità $P$.</p>
 
-<p>TODO DA CONTROLLARE NUM CONF POSS, DISTINGUIBILITÀ</p>
-
-<p>configurazioni equiprobabili tra le quali può esserne presa una in maniera random. Una maniera più articolata per definire una rete random è il criterio binomiale: partire da un set di $N$ nodi e dare a ogni possibile coppia un link con una certa probabilità  $p$. </p>
-
-<p>TODO VALUTARE SE TENERE SOLO QUESTA DEFINIZIONE</p>
-
-<p>Il punto più importante di un approccio probabilistico alle reti è lo studio di proprietà dei grafi: ponendo $N \rightarrow \infty$, se la probabilità che una certa proprietà si verifichi tende a 1, si osserva che per reti limitate quella proprietà si verifica con probabilità significativa anche con pochi nodi. Ciò si verifica per molte proprietà, e questo fatto permette di poter trattare le reti per categorie secondo le loro proprietà peculiari.</p>
+<p>Il punto più importante di un approccio probabilistico alle reti è la scassificazione dei grafi mediante lo studio delle loro proprietà. Ponendo $N \rightarrow \infty$, se la probabilità che una certa proprietà si verifichi tende a 1, si osserva che per reti limitate quella proprietà si verifica con probabilità significativa anche con pochi nodi. Ciò si verifica per molte proprietà e questo fatto permette di poter trattare le reti per categorie secondo le loro proprietà peculiari.</p>
 
 <p>Nel caso di un grafo di Erdős e Renyi queste sono:</p>
 
