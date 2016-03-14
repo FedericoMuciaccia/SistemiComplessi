@@ -33,7 +33,7 @@ Per esempio, il calcolo di diametro, average path lenght, coefficiente di cluste
 
 Abbiamo osservato che i tempi scalano all'incirca quadraticamente col numero di nodi, per cui per lo studio della rete complessiva di tutta Roma sarebbero richiesti 20 minuti per una iterazione e quasi 30 ore di calcolo per l'analisi completa. Queste considerazioni rendevano di fatto impraticabile questa strada.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 	\centering
 	\includegraphics[width=0.5\textwidth]{./Immagini/Attack/meme_Leonida.jpg}
 \end{figure}
@@ -60,7 +60,7 @@ Purtroppo peò nel nostro caso questo approccio non si è rivelato adeguato. Nel
 	\includegraphics[width=0.5\textwidth]{./Immagini/Attack/meme_Boromir.jpg}
 \end{figure}
 
-\subsubsection{Strategie di attacco}
+\subsection{Strategie di attacco}
 L'esigenza di provare a parallelizzare il codice ci ha portato a due versioni differenti della funzione di attacco intenzionale: una sequenziale e una parallela. Entrambe le varianti rimuovono circa l'1\% dei nodi per volta: 
 
 \begin{itemize}
@@ -90,7 +90,7 @@ Riassumendo:
  \item Nel caso di random failure è consigliabile utilizzare un approccio parallelo.
 \end{itemize}
 
-\subsubsection{Speedup del codice (parte 2: graph-tool}
+\subsection{Speedup del codice (parte 2: graph-tool)}
 Come già detto la prima soluzione al problema dei tempi è stata tentare una parallelizzazione del codice in Python: dato che networkx non supporta il calcolo parallelo interno, si è tentato di parallelizzare le funzioni di attacco intenzionale e random failure. Abbiamo però mostrato come alcuni degli algoritmi siano intrinsecamente sequenziali.
 
 Un possibile metodo per ovviare a ciò sarebbe potuto essere generare e salvare in memoria tutte le reti a tutte le iterazioni e successivamente usare delle funzioni parallelizzabili per l'analisi. Tuttavia con networkx la richiesta di tempo di calcolo rimane comunque alta e si aggiungerebbe anche il problema della memoria RAM, dello spazio su disco e dei tempi di lettura e scrittura.
@@ -197,7 +197,7 @@ Dal punto di vista del diametro della rete, levando i nodi più connessi ci si a
 	\label{fig:atak}
 \end{figure}
 
-\subsection{Conclusioni}
+\section{Conclusioni}
 Come abbiamo visto, in regime di alta connettività, dal punto di vista percolativo si notano poco le differenze tra reti generate secondo un modello scale-free o random. La differenza si nota quando il grado medio della rete è più basso. Per esempio una rete random con $\langle k \rangle \sim 2$ ha $f\sim 50\%$, mentre una rete scale free con stesso $\langle k \rangle$ ha $f\sim 80\%$. Una spiegazione qualitativa sta nel fatto che con una distribuzione del grado a legge di potenza, i nodi meno connessi sono in larga maggioranza, quindi è meno probabile che un attacco random riesca a destrutturare la rete, rispetto a un grafo che abbia una $P(k)$ poissoniana. 
 
 Un'altra cosa da notare è che a parità di $N$, una rete di Barabasi-Albert è molto più connessa di una di Erdos-Renyi. Nell'esempio sopra, infatti, con $N=100$ una la prima ha $\sim400$ link, mentre la seconda il doppio; per avere lo stesso numero di link la rete random ha bisogno di una $p \Rightarrow \langle k \rangle$ doppi. Questa differenza va attenuandosi con $N$ più grandi.

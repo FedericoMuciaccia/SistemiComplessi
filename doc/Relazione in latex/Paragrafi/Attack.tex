@@ -2,7 +2,7 @@
 % !TEX TS-program = pdflatex
 % !TEX root = ../Relazione.tex
 % !TEX spellcheck = it-IT
-
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%
 \section{Network breakdown}
 \label{sec:attaack}
@@ -60,7 +60,8 @@ Purtroppo peò nel nostro caso questo approccio non si è rivelato adeguato. Nel
 	\includegraphics[width=0.5\textwidth]{./Immagini/Attack/meme_Boromir.jpg}
 \end{figure}
 
-\subsubsection{Strategie di attacco}
+\subsection{Strategie di attacco}
+\label{subsec:atakstrat}
 L'esigenza di provare a parallelizzare il codice ci ha portato a due versioni differenti della funzione di attacco intenzionale: una sequenziale e una parallela. Entrambe le varianti rimuovono circa l'1\% dei nodi per volta: 
 
 \begin{itemize}
@@ -68,19 +69,21 @@ L'esigenza di provare a parallelizzare il codice ci ha portato a due versioni di
  \item la funzione parallela ha invece un comportamento più adiabatico: guarda il grafo iniziale e fa una classifica assoluta dei nodi per importanza, rimuovendone di volta in volta l'1\% in maniera ordinata;
 \end{itemize}
 
+
+
 Possiamo supporre che un reale attacco alla rete sia portato avanti con modalità adiabatiche: un ipotetico terrorista piazza nella notte delle cariche esplosive sotto le antenne che ritiene fondamentali e poi le fa scoppiare durante il giorno tutte in una volta. A titolo di esempio, possiamo immaginare che l'attacco si consideri riuscito quando metà dell'area metropolitana rimane isolata senza possibilità di comunicare. Questo è il parametro finale in base al quale viene scelta la sequenza di antenne da far esplodere.
 
 Ma chi garantisce che questa sequenza coincide con gli N nodi di grado maggior all'istante iniziale? In altre parole: è questa una strategia \emph{ottimale}?\\
 La risposta è no! La strategia ottimale è quella che, a parità di risultato, coinvolge il minor numero di antenne fatte eplodere, anche per minimizzare il rischio di essere scoperto nella notte mentre piazza l'esplosivo in giro per la città.
 
-Tale strategia può essere evidenziata solo da una simulazione \textbf{sequenziale}, fatta facendo evolvere la rete passo per passo, secondo una strategia di \emph{steepest descent}. Questo garantisce di trovare la strategia ottimale, soprattutto se vengono inclusi anche gli effetti a cascata dovuti all'overload e alla saturazione di banda. Dal grafico sottostante si evince comunque che non c'è molta differenza tra procedere con un campionamento all'1\% o eseguire una simulazione di attacco nodo per nodo, per cui ad ogni modo il costo computazionale complessivo non risulta eccessivo.
-
-\begin{figure}[p!]
+\begin{figure}[t!]
 	\centering
-	\includegraphics[width=0.46\textwidth]{./Immagini/Attack/AttackGC_Compare}
+	\includegraphics[width=0.6\textwidth]{./Immagini/Attack/AttackGC_Compare}
 	\caption[Confronto metodi.]{Confronto sugli effetti dei tre metodi di attacco sulla dimensione del giant cluster.}
 	\label{fig:compattack}
 \end{figure}
+
+Tale strategia può essere evidenziata solo da una simulazione \textbf{sequenziale}, fatta facendo evolvere la rete passo per passo, secondo una strategia di \emph{steepest descent}. Questo garantisce di trovare la strategia ottimale, soprattutto se vengono inclusi anche gli effetti a cascata dovuti all'overload e alla saturazione di banda. Dal grafico sottostante si evince comunque che non c'è molta differenza tra procedere con un campionamento all'1\% o eseguire una simulazione di attacco nodo per nodo, per cui ad ogni modo il costo computazionale complessivo non risulta eccessivo.
 
 Nel caso di random failure (escludendo gli effetti di saturazione a cascata) non c'è invece alcuna differenza tra l'approccio sequenziale e quello parallelo, rendendo il secondo algorimo preferibile nel caso si voglia sfruttare tutta la potenza delle moderne cpu multicore.
 
@@ -90,7 +93,7 @@ Riassumendo:
  \item Nel caso di random failure è consigliabile utilizzare un approccio parallelo.
 \end{itemize}
 
-\subsubsection{Speedup del codice (parte 2: graph-tool)}
+\subsection{Speedup del codice (parte 2: graph-tool)}
 Come già detto la prima soluzione al problema dei tempi è stata tentare una parallelizzazione del codice in Python: dato che networkx non supporta il calcolo parallelo interno, si è tentato di parallelizzare le funzioni di attacco intenzionale e random failure. Abbiamo però mostrato come alcuni degli algoritmi siano intrinsecamente sequenziali.
 
 Un possibile metodo per ovviare a ciò sarebbe potuto essere generare e salvare in memoria tutte le reti a tutte le iterazioni e successivamente usare delle funzioni parallelizzabili per l'analisi. Tuttavia con networkx la richiesta di tempo di calcolo rimane comunque alta e si aggiungerebbe anche il problema della memoria RAM, dello spazio su disco e dei tempi di lettura e scrittura.
@@ -114,14 +117,14 @@ da una previsione iniziale di più di 24 ore di tempo di calcolo si è passati a
 	\centering
 	\includegraphics[width=0.5\textwidth]{./Immagini/Attack/meme_Obama.jpg}
 \end{figure}
-\clearpage
 
 \subsection{Il punto di partenza}
-Le reti da cui è partito lo studio percolativo sono le 5 definite e costruite nel precedente paragrafo. Le grandezze iniziali erano
+Le reti da cui è partito lo studio percolativo sono le 5 definite e costruite nel precedente paragrafo. Le grandezze iniziali erano:
 
 
-\begin{table}[t]
-\caption{Dati iniziali delle reti studiate.}
+\begin{table}[ht!]
+\centering
+% \caption{Dati iniziali delle reti studiate.}
 	\begin{tabular}{cccccccccc}
 	\toprule
 	Rete		&N		&$GC\%$	&$D$	&$\langle l\rangle$	&$C$		&$\langle k\rangle$	&$C/\langle k\rangle$	&$\langle k^2\rangle/\langle k\rangle$	&$f\%$\\
@@ -151,25 +154,25 @@ Nello scenario di attacco intenzionale ci si aspetta una veloce frammentazione d
 Dal punto di vista del diametro della rete, levando i nodi più connessi ci si aspetta che esso aumenti, fino a quando la rete diventa tanto frammentata da essere costituita da clusters con pochissimi nodi. Oltrepassata la soglia di frammentazione quindi il diametro dei clusters più grandi decrescerà rapidamente a zero.
 
 \subsection{Risultati}
-\begin{figure}[p!]
+\begin{figure}[hp!]
 	\centering
 	\subfloat[$GC$]
-	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolFailureGC_Final}}
+	{\includegraphics[width=0.47\textwidth]{./Immagini/Attack/gToolFailureGC_Final}}
 	$\;$
 	\subfloat[$C$]
-	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolFailureC_Final}}
+	{\includegraphics[width=0.47\textwidth]{./Immagini/Attack/gToolFailureC_Final}}
 	\\
 	\subfloat[$\langle l \rangle$]
-	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolFailurel_Final}}
+	{\includegraphics[width=0.47\textwidth]{./Immagini/Attack/gToolFailurel_Final}}
 	$\;$
 	\subfloat[$D$]
-	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolFailureD_Final}}
+	{\includegraphics[width=0.47\textwidth]{./Immagini/Attack/gToolFailureD_Final}}
 	\\
 	\subfloat[$\langle k \rangle$]
-	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolFailurek_Final}}
+	{\includegraphics[width=0.47\textwidth]{./Immagini/Attack/gToolFailurek_Final}}
 	$\;$
 	\subfloat[$\langle k^2 \rangle/\langle k \rangle$]
-	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolFailurec_Final}}
+	{\includegraphics[width=0.47\textwidth]{./Immagini/Attack/gToolFailurec_Final}}
 	\caption[Risultati random.]{Risultati per rimozione random}
 	\label{fig:fail}
 \end{figure}
@@ -177,37 +180,37 @@ Dal punto di vista del diametro della rete, levando i nodi più connessi ci si a
 \begin{figure}[p!]
 	\centering
 	\subfloat[$GC$]
-	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolAttackGC_Final}}
+	{\includegraphics[width=0.47\textwidth]{./Immagini/Attack/gToolAttackGC_Final}}
 	$\;$
 	\subfloat[$C$]
-	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolAttackC_Final}}
+	{\includegraphics[width=0.47\textwidth]{./Immagini/Attack/gToolAttackC_Final}}
 	\\
 	\subfloat[$\langle l \rangle$]
-	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolAttackl_Final}}
+	{\includegraphics[width=0.47\textwidth]{./Immagini/Attack/gToolAttackl_Final}}
 	$\;$
 	\subfloat[$D$]
-	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolAttackD_Final}}
+	{\includegraphics[width=0.47\textwidth]{./Immagini/Attack/gToolAttackD_Final}}
 	\\
 	\subfloat[$\langle k \rangle$]
-	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolAttackk_Final}}
+	{\includegraphics[width=0.47\textwidth]{./Immagini/Attack/gToolAttackk_Final}}
 	$\;$
 	\subfloat[$\langle k^2 \rangle/\langle k \rangle$]
-	{\includegraphics[width=0.46\textwidth]{./Immagini/Attack/gToolAttackc_Final}}
+	{\includegraphics[width=0.47\textwidth]{./Immagini/Attack/gToolAttackc_Final}}
 	\caption[Risultati attacco.]{Risultati per rimozione con massima efficienza}
 	\label{fig:atak}
 \end{figure}
-
-\subsection{Conclusioni}
+\clearpage
+\section{Conclusioni}
 Come abbiamo visto, in regime di alta connettività, dal punto di vista percolativo si notano poco le differenze tra reti generate secondo un modello scale-free o random. La differenza si nota quando il grado medio della rete è più basso. Per esempio una rete random con $\langle k \rangle \sim 2$ ha $f\sim 50\%$, mentre una rete scale free con stesso $\langle k \rangle$ ha $f\sim 80\%$. Una spiegazione qualitativa sta nel fatto che con una distribuzione del grado a legge di potenza, i nodi meno connessi sono in larga maggioranza, quindi è meno probabile che un attacco random riesca a destrutturare la rete, rispetto a un grafo che abbia una $P(k)$ poissoniana. 
 
 Un'altra cosa da notare è che a parità di $N$, una rete di Barabasi-Albert è molto più connessa di una di Erdos-Renyi. Nell'esempio sopra, infatti, con $N=100$ una la prima ha $\sim400$ link, mentre la seconda il doppio; per avere lo stesso numero di link la rete random ha bisogno di una $p \Rightarrow \langle k \rangle$ doppi. Questa differenza va attenuandosi con $N$ più grandi.
 
 Uno studio percolativo su reti reali, quindi, non aiuta a identificare una eventuale invarianza di scala per reti molto grandi e connesse. Tuttavia può essere decisiva per reti più piccole, come piccole comunità, reti locali, proteine e alcuni ecosistemi: nonostante la bassa statistica, il comportamento di reti con pochi nodi possono essere distinti in maniera significativa da uno studio percolativo.
 
-Nel caso di reti il cui funzionamento dipende dalla capacità dei nodi di gestire un certo carico, uno studio percolativo dovrebbe anche considerare l'eventualità che con la rimozione di alcuni nodi, altri vadano in sovraccarico e si scolleghino dalla rete (Motter \citeyear{Motter2002}, Zhao \citeyear{Zhao2004} e \citeyear{Zhao2005}, Wang \citeyear{Wang2009}). È il caso delle reti comunicative, come quelle telefoniche cellulari analizzate, o una ipotetica rete mesh costruita con i router wi-fi, ma anche ovviamente reti di distribuzioni elettriche, 
+Nel caso di reti il cui funzionamento dipende dalla capacità dei nodi di gestire un certo carico, uno studio percolativo dovrebbe anche considerare l'eventualità che con la rimozione di alcuni nodi, altri vadano in sovraccarico e si scolleghino dalla rete (Motter \citeyear{Motter2002}, Zhao \citeyear{Zhao2004} e \citeyear{Zhao2005}, Wang \citeyear{Wang2009}). È il caso delle reti comunicative, come quelle telefoniche cellulari analizzate, o una ipotetica rete mesh costruita con i router WiFi, ma anche ovviamente reti di distribuzioni elettriche, 
 %valutare se lasciare o rimuovere
 o alcuni ecosistemi dove una catena alimentare che veda la scomparsa di una specie causa una eccessiva riproduzione di una specie predata, che a sua volta porta altre specie all'estinzione.
 
-Una possibile interessante applicazione dei metodi e degli strumenti usati per analizzare la rete di antenne di Roma potrebbe essere lo studio di città molto più grandi e densamente popolate (come New York o Tokyo), ma servirebbero capacità di calcolo e di memoria molto più grandi di quelle a nostra disposizione. Un altro possibile studio potrebbe essere verificare la possibilità di creare una rete distribuita e aperta con i router wi-fi. Avendo questi un raggio molto inferiore delle antenne cellulari, la rete sarebbe molto simile a un reticolo, quindi benché uno studio percolativo possa essere interessante, non lo sarebbe dal punto di vista delle reti complesse. 
+Una possibile interessante applicazione dei metodi e degli strumenti usati per analizzare la rete di antenne di Roma potrebbe essere lo studio di città molto più grandi e densamente popolate (come New York o Tokyo), ma servirebbero capacità di calcolo e di memoria molto più grandi di quelle a nostra disposizione. Un altro possibile studio potrebbe essere verificare la possibilità di creare una rete distribuita e aperta con i router WiFi. Avendo questi un raggio molto inferiore delle antenne cellulari, la rete sarebbe molto simile a un reticolo, quindi benché uno studio percolativo possa essere interessante, non lo sarebbe dal punto di vista delle reti complesse. 
 %valutare se lasciare o rimuovere
 Una rete di questo tipo sarebbe comunque un nuovo concetto di Internet, che potrebbe avere interessanti sviluppi su reti di altro tipo, per esempio sociali, correlate a essa.

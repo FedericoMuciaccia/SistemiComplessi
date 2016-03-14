@@ -4,60 +4,80 @@
 \defcounter {refsection}{0}\relax 
 \select@language {italian}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Reticolo ciclico.}}{7}{figure.caption.6}
+\contentsline {figure}{\numberline {1}{\ignorespaces Logo del MLS\relax }}{5}{figure.caption.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2}{\ignorespaces Generazione con modello Watts-Strogatz.}}{8}{figure.caption.7}
+\contentsline {figure}{\numberline {2}{\ignorespaces \emph {Screen} dell'applicazione attiva\relax }}{6}{figure.caption.9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$p = 0$}}}{8}{subfigure.2.1}
+\contentsline {figure}{\numberline {3}{\ignorespaces Immagine della mappa fornita da Mozilla\relax }}{6}{figure.caption.10}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$p = 0.03$}}}{8}{subfigure.2.2}
+\contentsline {figure}{\numberline {4}{\ignorespaces Scatterplot non georeferenziato delle antenne di Roma.\relax }}{11}{figure.caption.14}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$p = 0.3$}}}{8}{subfigure.2.3}
+\contentsline {figure}{\numberline {5}{\ignorespaces Heatmap delle antenne telefoniche di Roma\relax }}{12}{figure.caption.15}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {$p = 1$}}}{8}{subfigure.2.4}
+\contentsline {figure}{\numberline {6}{\ignorespaces Istogramma log-log dei raggi con log-binning.\relax }}{12}{figure.caption.16}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3}{\ignorespaces Confronto grafi random.}}{9}{figure.caption.8}
+\contentsline {figure}{\numberline {7}{\ignorespaces Frequency rank dei raggi in scala log-log\relax }}{13}{figure.caption.17}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Grafo random}}}{9}{subfigure.3.1}
+\contentsline {figure}{\numberline {8}{\ignorespaces Distribuzione dei gradi per le 5 reti analizzate\relax }}{16}{figure.caption.18}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Grafo small-world}}}{9}{subfigure.3.2}
+\contentsline {figure}{\numberline {9}{\ignorespaces Frequency rank dei gradi per le 5 reti analizzate\relax }}{17}{figure.caption.19}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4}{\ignorespaces Confronto clustering.}}{10}{figure.caption.9}
+\contentsline {figure}{\numberline {10}{\ignorespaces Reticolo ciclico.}}{19}{figure.caption.20}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5}{\ignorespaces Confronto $P(k)$}}{11}{figure.caption.10}
+\contentsline {figure}{\numberline {11}{\ignorespaces Generazione con modello Watts-Strogatz.}}{19}{figure.caption.21}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6}{\ignorespaces Esistenza soluzione non banale.}}{14}{figure.caption.11}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$p = 0$}}}{19}{subfigure.11.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Solo $q=1$}}}{14}{subfigure.6.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$p = 0.03$}}}{19}{subfigure.11.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Esistenza di $q<1$}}}{14}{subfigure.6.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$p = 0.3$}}}{19}{subfigure.11.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {7}{\ignorespaces Confronto metodi.}}{19}{figure.caption.14}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {$p = 1$}}}{19}{subfigure.11.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {8}{\ignorespaces Risultati random.}}{22}{figure.caption.17}
+\contentsline {figure}{\numberline {12}{\ignorespaces Confronto grafi random.}}{20}{figure.caption.22}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$GC$}}}{22}{subfigure.8.1}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Grafo random}}}{20}{subfigure.12.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$C$}}}{22}{subfigure.8.2}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Grafo small-world}}}{20}{subfigure.12.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$\delimiter "426830A l \delimiter "526930B $}}}{22}{subfigure.8.3}
+\contentsline {figure}{\numberline {13}{\ignorespaces Confronto clustering.}}{21}{figure.caption.23}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {$D$}}}{22}{subfigure.8.4}
+\contentsline {figure}{\numberline {14}{\ignorespaces Albero scale-free}}{22}{figure.caption.24}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {$\delimiter "426830A k \delimiter "526930B $}}}{22}{subfigure.8.5}
+\contentsline {figure}{\numberline {15}{\ignorespaces Confronto $P(k)$}}{24}{figure.caption.25}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {$\delimiter "426830A k^2 \delimiter "526930B /\delimiter "426830A k \delimiter "526930B $}}}{22}{subfigure.8.6}
+\contentsline {figure}{\numberline {16}{\ignorespaces Esistenza soluzione non banale.}}{26}{figure.caption.26}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {9}{\ignorespaces Risultati attacco.}}{23}{figure.caption.18}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Solo $q=1$}}}{26}{subfigure.16.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$GC$}}}{23}{subfigure.9.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Esistenza di $q<1$}}}{26}{subfigure.16.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$C$}}}{23}{subfigure.9.2}
+\contentsline {figure}{\numberline {17}{\ignorespaces Confronto metodi.}}{31}{figure.caption.29}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$\delimiter "426830A l \delimiter "526930B $}}}{23}{subfigure.9.3}
+\contentsline {figure}{\numberline {18}{\ignorespaces Risultati random.}}{34}{figure.caption.32}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {$D$}}}{23}{subfigure.9.4}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$GC$}}}{34}{subfigure.18.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {$\delimiter "426830A k \delimiter "526930B $}}}{23}{subfigure.9.5}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$C$}}}{34}{subfigure.18.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {$\delimiter "426830A k^2 \delimiter "526930B /\delimiter "426830A k \delimiter "526930B $}}}{23}{subfigure.9.6}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$\delimiter "426830A l \delimiter "526930B $}}}{34}{subfigure.18.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {$D$}}}{34}{subfigure.18.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {$\delimiter "426830A k \delimiter "526930B $}}}{34}{subfigure.18.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {$\delimiter "426830A k^2 \delimiter "526930B /\delimiter "426830A k \delimiter "526930B $}}}{34}{subfigure.18.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {19}{\ignorespaces Risultati attacco.}}{35}{figure.caption.33}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {$GC$}}}{35}{subfigure.19.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {$C$}}}{35}{subfigure.19.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {$\delimiter "426830A l \delimiter "526930B $}}}{35}{subfigure.19.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {$D$}}}{35}{subfigure.19.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {$\delimiter "426830A k \delimiter "526930B $}}}{35}{subfigure.19.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {$\delimiter "426830A k^2 \delimiter "526930B /\delimiter "426830A k \delimiter "526930B $}}}{35}{subfigure.19.6}
