@@ -669,25 +669,19 @@ TODO \caption[Confronto grafi random.]{Confronto tra due grafi da 100 nodi: uno 
 
 <h2>Network breakdown</h2><!--analisi percolativa -->
 
-<p>Una volta osservate le distribuzioni del grado nelle reti delle quattro compagnie e nella rete complessiva formata da tutte le antenne comprese nell'area metropolitana di Roma, procediamo con lo studio percolativo. In riferimento al lavoro fatto da </p>
+<p>Una volta osservate le distribuzioni del grado nelle reti delle quattro compagnie e nella rete complessiva formata da tutte le antenne comprese nell'area metropolitana di Roma, procediamo con lo studio percolativo. In riferimento al lavoro fatto da [2], la scelta è stata di simulare due differenti scenari in cui i nodi della rete vengono disabilitati. Nel primo scenario si è ipotizzato un attacco intenzionale che cominciasse dai nodi con maggior grado, nel secondo una rimozione random. </p>
 
-<p>TODO biblioref da sistemrare</p>
+<p>Lo scopo è studiare l'andamento, in funzione della percentuale di nodi rimossi, del diametro $D$ della rete e della dimensione del cluster più grande (ipotizzando, o meglio, verificando che esso sia il Giant Cluster della rete) rapportata al numero totale di nodi sopravvissuti. A seconda di come la rete si comporterà, sarà possibile dedurne la robustezza nei due scenari, in modo tale da poter confrontare meglio tale comportamento con quello di una rete scale-free o random di pari grado medio $\langle k \rangle$.</p>
 
-<p>\textcite{Barbalbert2000}
-, la scelta è stata di simulare due differenti scenari in cui i nodi della rete vengono disabilitati. Nel primo scenario si è ipotizzato un attacco intenzionale che cominciasse dai nodi con maggior grado, nel secondo una rimozione random. </p>
+<p>In tutti e cinque i campioni di rete che abbiamo analizzato, sono stati conteggiati gli andamenti di alcune grandezze topologiche e statistiche di interesse: oltre a dimensione del giant cluster, $D$, anche $\langle l \rangle$, coefficiente di clustering globale $C$, $\langle k \rangle$ e $\langle k^2 \rangle/\langle k \rangle$. I grafici ottenuti sono stati messi a confronto a quelli ottenuti con le reti generate secondo i modelli.</p>
 
-<p>Lo scopo è studiare l'andamento, in funzione della percentuale di nodi rimossi, del diametro $D$ della rete e della dimensione del cluster più grande (ipotizzando, o meglio verificando, che esso sia il Giant Cluster della rete) rapportata al numero totale di nodi sopravvissuti. A seconda di come la rete si comporterà, sarà possibile dedurne la robustezza nei due scenari, in modo tale da poter confrontare meglio tale comportamento con quello di una rete scale-free o random, di pari grado medio $\langle k \rangle$.</p>
-
-<p>In tutti e cinque i campioni di rete che abbiamo analizzato sono stati conteggiati gli andamenti di alcune grandezze topologiche e statistiche di interesse: dimensione del giant cluster, $D$ e $\langle l \rangle$, coefficiente di clustering globale $C$, $\langle k \rangle$ e $\langle k^2 \rangle/\langle k \rangle$. I grafici ottenuti sono stati messi a confronto a quelli ottenuti con le reti generate secondo i modelli.</p>
-
-<p>TODO <strong>DA DECIDERE SE TAGLIARE O SINTETIZZARE</strong>
-La rete reale ha ovviamente delle contromisure per evitare la caduta delle comunicazioni. Le antenne trasmettono segnali tra loro su due bande di frequenza: una <em>user-side</em>, dedicata alle normali trasmissioni tra utenti del servizio, e una dedicata a un complesso sistema di feedback gestito da degli <em>hub</em> (grosse antenne con raggio sui 20 km). Questa struttura gerarchica permette, nel caso di caduta di una antenna o di un improvviso eccessivo carico in una zona circoscritta, che gli hub gestiscano potenza e capacità delle antenne circostanti mentre vengono inviati tecnici per un intervento sul luogo.</p>
+È importante ricordare che la rete reale ha ovviamente delle contromisure per evitare la caduta delle comunicazioni. Le antenne trasmettono segnali tra loro su due bande di frequenza: una <em>user-side</em>, dedicata alle normali trasmissioni tra utenti del servizio, e una dedicata a un complesso sistema di feedback gestito da degli <em>hub</em> (grosse antenne con raggio sui 20 km). Questa struttura gerarchica permette, nel caso di caduta di una antenna o di un improvviso eccessivo carico in una zona circoscritta, che gli hub gestiscano potenza e capacità delle antenne circostanti mentre vengono inviati tecnici per un intervento sul luogo.</p>
 
 <p>Questo sistema ha un certo tempo di reazione. L'analisi da noi svolta pertanto suppone che la caduta della rete avvenga in un tempo inferiore, in una sorta di approssimazione adiabatica. Inoltre, la sola caduta degli hub sarebbe già sufficiente a compromettere seriamente l'integrità della rete (le antenne avrebbero difficoltà a coordinare le comunicazioni tra loro), ma nella nostra ipotesi di mesh-network distribuita ci interessano soltanto le comunicazioni nelle frequenze user-side. Usando questo modello semplificato siamo riusciti a ottenere alcune informazioni su una ipotetica rete wireless di questa natura.</p>
 
 <h3>Speedup del codice (parte 1: multiprocessing)</h3>
 
-<p>Per le simulazioni di attacco intenzionale e random failure sulle reti in esame e lo studio approfondito dell'andamento delle grandezze statistiche e topologiche durante l'analisi percolativa abbiamo inizialmente utilizzato <code>networkx</code>, una libreria di Python piuttosto completa dedicata alle reti.</p>
+<p>Per le simulazioni di attacco intenzionale e random failure sulle reti in esame, e lo studio approfondito dell'andamento delle grandezze statistiche e topologiche durante l'analisi percolativa, abbiamo inizialmente utilizzato <code>networkx</code>, una libreria di Python piuttosto completa dedicata alle reti.</p>
 
 <p>Tuttavia questa si è rivelata una scelta sbagliata, in quanto <code>networkx</code>, pur essendo molto completa e semplice da usare, non è particolarmente ottimizzata dal punto di vista dell'efficienza di calcolo. Questo perché è interamentente scritta in Python, anche per le sue routine più interne e non implementa alcun tipo di parallelismo built-in.</p>
 
@@ -714,7 +708,7 @@ pool.map(function, array)
 
 <p>Abbandonare il paradigma sequenziale rendendo le funzioni totalmente indipendenti tra loro fa sì che esse possano girare in contemporarea riducendo il tempo di calcolo, ma nel contempo aumenta il quantitativo di RAM richiesta dal programma, quasi dello stesso fattore. Pertanto bisogna fare attenzione a far girare il programma su una macchina adeguata sotto tutti i punti di vista.</p>
 
-<p>Purtroppo peò nel nostro caso questo approccio non si è rivelato adeguato. Nel fare i tentativi vedevamo che i processori lavoravano insieme al 100% per un primo periodo, per poi ibernarsi in una eterna fase di stallo al 20% del carico, probabilmente per incongruenze nel messaging tra le varie istanze di python. Non possedendo sufficienti conoscenze sul calcolo parallelo e il cloud computing per poter risolvere velocemente il problema, abbiamo dunque abbandonato questo aproccio.</p>
+<p>Purtroppo peò nel nostro caso questo approccio non si è rivelato adatto. Nel fare i tentativi vedevamo che i processori lavoravano insieme al 100% per un primo periodo, per poi ibernarsi in una eterna fase di stallo al 20% del carico, probabilmente per incongruenze nel messaging tra le varie istanze di python. Non possedendo sufficienti conoscenze sul calcolo parallelo e il cloud computing per poter risolvere velocemente il problema, abbiamo dunque abbandonato questo aproccio.</p>
 
 <p><img src="../img/meme_Boromir.jpg" width="90%"/></p>
 
@@ -725,15 +719,15 @@ pool.map(function, array)
 <li>la funzione sequenziale elimina l'insieme dell'1% dei nodi più importanti, analizza la rete e calcola il prossimo insieme di 1% di nodi da rimuove;</li>
 <li>la funzione parallela ha invece un comportamento più adiabatico: guarda il grafo iniziale e fa una classifica assoluta dei nodi per importanza, rimuovendone di volta in volta l'1% in maniera ordinata;</li></ul></p>
 
-<p>Possiamo supporre che un reale attacco alla rete sia portato avanti con modalità adiabatiche: un ipotetico terrorista piazza nella notte delle cariche esplosive sotto le antenne che ritiene fondamentali e poi le fa scoppiare durante il giorno tutte in una volta.
+<p>Possiamo supporre che un reale attacco alla rete sia portato avanti con modalità adiabatiche: un ipotetico terrorista piazza nella notte delle cariche esplosive sotto le antenne che ritiene fondamentali e poi le fa scoppiare in un secondo momento tutte in una volta.
 A titolo di esempio, possiamo immaginare che l'attacco si consideri riuscito quando metà dell'area metropolitana rimane isolata senza possibilità di comunicare. Questo è il parametro finale in base al quale viene scelta la sequenza di antenne da far esplodere.</p>
 
 <p>Ma chi garantisce che questa sequenza coincide con gli N nodi di grado maggior all'istante iniziale?
 In altre parole: è questa una strategia <em>ottimale</em>? <br />
 La risposta è no!
-la strategia ottimale è quella che, a parità di risultato, coinvolge il minor numero di antenne fatte eplodere, anche per minimizzare il rischio di essere scoperto nella notte mentre piazza l'esplosivo in giro per la città.</p>
+La strategia ottimale è quella che, a parità di risultato, coinvolge il minor numero di antenne fatte eplodere, anche per minimizzare il rischio di essere scoperto nella notte mentre piazza l'esplosivo in giro per la città.</p>
 
-<p>Tale strategia può essere evidenziata solo da una simulazione <strong>sequenziale</strong>, fatta facendo evolvere la rete passo per passo, secondo una strategia di <em>steepest descent</em>. Questo garantisce di trovare la strategia ottimale, soprattutto se vengono inclusi anche gli effetti a cascata dovuti all'overload e alla saturazione di banda. Dal grafico sottostante si evince comunque che non c'è molta differenza tra procedere con un campionamento all'1% o eseguire una simulazione di attacco nodo per nodo, per cui ad ogni modo il costo computazionale complessivo non risulta eccessivo.</p>
+<p>Tale strategia può essere evidenziata solo da una simulazione <strong>sequenziale</strong>, fatta facendo evolvere la rete passo per passo, secondo una strategia di <em>steepest descent</em>. Questo garantisce di trovare la strategia ottimale, soprattutto se vengono inclusi anche gli effetti a cascata dovuti all'overload e alla saturazione di banda. Dal grafico sottostante si evince comunque che non c'è molta differenza tra procedere sequenzialmente con un campionamento all'1% o eseguire una simulazione di attacco nodo per nodo, per cui ad ogni modo il costo computazionale complessivo non risulta eccessivo.</p>
 
 <p>TODO inserire grafico di confronto per "Roma totale" tra parallelo 1%, sequenziale 1% e sequenziale step-by-step</p>
 
@@ -753,14 +747,14 @@ la strategia ottimale è quella che, a parità di risultato, coinvolge il minor 
 
 <p>Un possibile metodo per ovviare a ciò sarebbe potuto essere generare e salvare in memoria tutte le reti a tutte le iterazioni e successivamente usare delle funzioni parallelizzabili per l'analisi. Tuttavia con <code>networkx</code> la richiesta di tempo di calcolo rimane comunque alta e si aggiungerebbe anche il problema della memoria RAM, dello spazio su disco e dei tempi di lettura e scrittura.</p>
 
-<p>L'unica via praticabile è stata ripiegare su <code>graph_tool</code>: un'altra libreria meno user-friendly ma estremamente più efficiente e sopratutto impostata di default sul calcolo parallelo. Le funzioni di analisi topologica e statistica sono molto più veloci rispetto a <code>networkx</code>, poiché implementate in C con il <em>template programming</em> ed ottimizzate in fase di compilazione. Inoltre la possibilità di usarle nativamente in parallelo su 4 core e 8 thread ci ha permesso di calcolare le singole funzioni con una velocità più di 60 volte superiore a prima.</p>
+<p>L'unica via praticabile è stata ripiegare su <code>graph_tool</code>: un'altra libreria meno <em>user-friendly</em> ma estremamente più efficiente e sopratutto impostata di default sul calcolo parallelo. Le funzioni di analisi topologica e statistica sono molto più veloci rispetto a <code>networkx</code>, poiché implementate in C con il <em>template programming</em> ed ottimizzate in fase di compilazione. Inoltre la possibilità di usarle nativamente in parallelo su 4 core e 8 thread ci ha permesso di calcolare le singole funzioni con una velocità più di 60 volte superiore a prima.</p>
 
 <p>Considerato ciò, il codice per lo studio percolativo delle reti è stato convertito (con non poco sforzo) per poter fare uso della nuova libreria. Alla fine, per l'analisi percolativa completa di tutte le reti, ovvero con lo studio in funzione dei nodi rimossi delle quantità
 <ul>
 <li>diametro $D$</li>
 <li>average path lenght $\langle l \rangle$</li>
 <li>clustering coefficient $C$</li>
-<li>average degree \langle k \rangle</li>
+<li>average degree $\langle k \rangle$</li>
 <li>dimensioni del giant cluster</li>
 <li>criterio di soglia percolativa (andamento di $\langle k^2 \rangle / \langle k \rangle$)</li>
 </ul>
@@ -772,14 +766,9 @@ da una previsione iniziale di più di 24 ore di tempo di calcolo si è passati a
 
 <p>Le reti da cui è partito lo studio percolativo sono le 5 definite e costruite nel precedente paragrafo. Le grandezze iniziali erano</p>
 
-<p>[Dati iniziali delle reti studiate.][tab:datiInitial]
-    Rete        |N      |$GC\%$ |$D$    |$\langle l\rangle$ |$C$        |$\langle k\rangle$ |$C/\langle k\rangle$   |$\langle k^2\rangle/\langle k\rangle$  |$f\%$
-    :--     |--     |--     |-- |--             |--     |--             |--                 |--                         |--: <br />
-    Tim     |1756   |1      |2  |1.96           |0.89   |64.3           |0.014              |359                            |99.7
-    Vodafone    |1771   |1      |2  |1.97           |0.87   |52.9           |0.016              |243                            |99.6
-    Wind        |2365   |1      |2  |1.96           |0.89   |97.3           |0.009              |478                            |99.8
-    Tre     |1395   |1      |2  |1.97           |0.88   |41.4           |0.021              |239                            |99.6
-    Roma        |7287   |1      |2  |1.97           |0.89   |239            |0.004              |1353                           |99.9</p>
+<a href="../html/risultatianalisi.html">Dati iniziali delle reti studiate</a>
+
+<iframe src="../html/risultatianalisi.html" height=270"></iframe>
 
 <h4>Random failure</h4>
 
