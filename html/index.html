@@ -55,11 +55,9 @@ L'esposizione è articolata nel seguente modo:</p>
 
 
 TODO FEDERICO in treno:
-* paragrafo 1 teorico.md
-* bigliografia relazione.md UPDATED
 * rank-size wikipedia
 * esponente cumulata
-conclusioni? (ex Telegram)
+attack and failure con incluse conclusioni
 percolazione ancora da scrivere?
 
 
@@ -742,53 +740,137 @@ Per ridurre un poco il rumore sulle code la canalizzazione è stata ridutta di 8
 
 
 
-<h2>3 Network breakdown TODO INCOMPLETO DA RIPRENDERE DAL MARKDOWN DI IURI AGGIORNATO</h2>
 
-<p>TODO (formerly "Analisi percolativa" ma questo è un titolo noioso, meglio una roba più deep impact ogliea)</p>
 
-<p>Una volta osservate le distribuzioni del grado nelle reti delle quattro compagnie e nella rete complessiva formata da tutte le antenne comprese nell'area metropolitana di Roma, procediamo con lo studio percolativo. In riferimento al lavoro fatto da Albert, Jeong e Barabasi nel 1999, la scelta è stata di simulare due differenti scenari in cui i nodi della rete vengono disabilitati. Nel primo scenario si è ipotizzato un attacco intenzionale che cominciasse dai nodi con maggior grado, nel secondo una rimozione random. 
-Lo scopo è studiare l'andamento, in funzione della percentuale di nodi rimossi, del diametro $D$ della rete e della dimensione del cluster più grande (ipotizzando, o meglio verificando, che esso sia il <em>Giant Cluster</em> della rete) rapportata al numero totale di nodi sopravvissuti. A seconda di come la rete si comporterà, sarà possibile dedurne la robustezza nei due scenari, in modo tale da poter confrontare meglio tale comportamento con quello di una rete scale-free, o di una di tipo random.
-Per poter fare questo confronto sono state generate, usando le funzioni di <em>networkx</em>, delle reti con i modelli di rete scale free (<em>preferential attachment</em>, Barabasi, Albert 1999) e di rete esponenziale (<em>random network</em>, Erdős, Renyi 1959 e <em>small world</em>, Watts, Strogatz, 1998) e su tutti e tre i modelli abbiamo simulato i due scenari di caduta progressiva della rete. In tutti e cinque i campioni di rete che abbiamo analizzato è stato conteggiata la variazione di $D$ e $GC$ e i grafici ottenuti sono stati messi a confronto a quelli ottenuti con le reti generate secondo i modelli.</p>
 
-<p>TODO DA DECIDERE SE TAGLIARE O SINTETIZZARE</p>
 
-<p>La rete reale ha ovviamente delle contromisure per evitare la caduta delle comunicazioni. Le antenne trasmettono segnali tra loro su due bande di frequenza: una <em>user-side</em>, dedicata alle normali trasmissioni tra utenti del servizio, e una dedicata a un complesso sistema di feedback gestito da degli hub (grosse antenne con raggio sui 20 km). Questa struttura gerarchica permette, nel caso di caduta di una antenna o di un improvviso eccessivo carico in una zona circoscritta, che gli hub gestiscano potenza e capacità delle antenne circostanti mentre vengono inviati tecnici per un intervento sul luogo. 
-Questo sistema ha un certo tempo di reazione. L'analisi da noi svolta pertanto suppone che la caduta della rete avvenga in un tempo inferiore, in una sorta di approssimazione adiabatica. Inoltre, la sola caduta degli hub sarebbe già sufficiente a compromettere seriamente l'integrità della rete (le antenne avrebbero difficoltà a coordinare le comunicazioni tra loro), ma nella nostra ipotesi di mesh-network distribuita ci interessano soltanto le comunicazioni nelle frequenze user-side. Usando questo modello semplificato siamo riusciti a ottenere alcune informazioni su una ipotetica rete wireless di questa natura.</p>
 
-<h2>3.1 Attacco intenzionale</h2>
+<h2>3 Network breakdown</h2>
 
-<p>TODO NB quando dico "ci si aspetta" forse va fatto riferimento a condizione di percolazione teorica</p>
+<!--###### (formerly "Analisi percolativa" ma questo è un titolo noioso, meglio una roba più deep impact ogliea)  -->
 
-<p>Nello scenario di attacco intenzionale ci si aspetta una veloce frammentazione della rete. I cluster diverranno rapidamente più piccoli fino a frammentarsi del tutto entro pochi punti percentuali di nodi rimossi. Nel caso di una rete fortemente connessa come quella in esame ci si aspetta una resistenza maggiore, ma comunque una soglia percolativa bassa (approssimativamente entro il 50%). Se la rete è di tipo scale-free dovrebbe essere più fragile ad attacchi di questo tipo: mentre in una rete random i nodi più connessi sono solo una coda della distribuzione del grado, una rete a power-law ha in proporzione molti più nodi molto connessi.
-Dal punto di vista del diametro della rete, levando i nodi più connessi ci si aspetta che esso aumenti, fino a quando la rete diventa tanto frammentata da essere costituita da clusters con pochissimi nodi. Oltrepassata la soglia di frammentazione quindi il diametro dei clusters più grandi decrescerà rapidamente a zero.</p>
+<p>Una volta osservate le distribuzioni del grado nelle reti delle quattro compagnie e nella rete complessiva formata da tutte le antenne comprese nell'area metropolitana di Roma, procediamo con lo studio percolativo. In riferimento al lavoro fatto da </p>
 
-<h3>3.1.1 Risultati</h3>
+<p>TODO biblioref da sistemrare</p>
 
-<p><strong>inserisci grafici con caption</strong></p>
+<p>\textcite{Barbalbert2000}
+, la scelta è stata di simulare due differenti scenari in cui i nodi della rete vengono disabilitati. Nel primo scenario si è ipotizzato un attacco intenzionale che cominciasse dai nodi con maggior grado, nel secondo una rimozione random. </p>
 
-<h3>3.1.2 Confronto con i modelli</h3>
+<p>Lo scopo è studiare l'andamento, in funzione della percentuale di nodi rimossi, del diametro $D$ della rete e della dimensione del cluster più grande (ipotizzando, o meglio verificando, che esso sia il Giant Cluster della rete) rapportata al numero totale di nodi sopravvissuti. A seconda di come la rete si comporterà, sarà possibile dedurne la robustezza nei due scenari, in modo tale da poter confrontare meglio tale comportamento con quello di una rete scale-free o random, di pari grado medio $\langle k \rangle$.</p>
 
-<p><strong>inserisci grafici con caption</strong></p>
+<p>In tutti e cinque i campioni di rete che abbiamo analizzato sono stati conteggiati gli andamenti di alcune grandezze topologiche e statistiche di interesse: dimensione del giant cluster, $D$ e $\langle l \rangle$, coefficiente di clustering globale $C$, $\langle k \rangle$ e $\langle k^2 \rangle/\langle k \rangle$. I grafici ottenuti sono stati messi a confronto a quelli ottenuti con le reti generate secondo i modelli.</p>
 
-<p>NB fare calcolo con rete scale free e random con gradi medi attorno a valori delle nostre reti
-Vedede eventuali discrepanze con quanto atteso</p>
+<p>TODO <strong>DA DECIDERE SE TAGLIARE O SINTETIZZARE</strong>
+La rete reale ha ovviamente delle contromisure per evitare la caduta delle comunicazioni. Le antenne trasmettono segnali tra loro su due bande di frequenza: una <em>user-side</em>, dedicata alle normali trasmissioni tra utenti del servizio, e una dedicata a un complesso sistema di feedback gestito da degli <em>hub</em> (grosse antenne con raggio sui 20 km). Questa struttura gerarchica permette, nel caso di caduta di una antenna o di un improvviso eccessivo carico in una zona circoscritta, che gli hub gestiscano potenza e capacità delle antenne circostanti mentre vengono inviati tecnici per un intervento sul luogo.</p>
 
-<h2>3.2 Caduta random</h2>
+<p>Questo sistema ha un certo tempo di reazione. L'analisi da noi svolta pertanto suppone che la caduta della rete avvenga in un tempo inferiore, in una sorta di approssimazione adiabatica. Inoltre, la sola caduta degli hub sarebbe già sufficiente a compromettere seriamente l'integrità della rete (le antenne avrebbero difficoltà a coordinare le comunicazioni tra loro), ma nella nostra ipotesi di mesh-network distribuita ci interessano soltanto le comunicazioni nelle frequenze user-side. Usando questo modello semplificato siamo riusciti a ottenere alcune informazioni su una ipotetica rete wireless di questa natura.</p>
 
-<h3>3.2.1 Risultati</h3>
+<h3>Il punto di partenza</h3>
 
-<p><strong>inserisci grafici con caption</strong></p>
+<p>Le reti da cui è partito lo studio percolativo sono le 5 definite e costruite nel precedente paragrafo. Le grandezze iniziali erano</p>
 
-<h3>3.2.2 Confronto con i modelli</h3>
+<p>[Dati iniziali delle reti studiate.][tab:datiInitial]
+    Rete        |N      |$GC\%$ |$D$    |$\langle l\rangle$ |$C$        |$\langle k\rangle$ |$C/\langle k\rangle$   |$\langle k^2\rangle/\langle k\rangle$  |$f\%$
+    :--     |--     |--     |-- |--             |--     |--             |--                 |--                         |--: <br />
+    Tim     |1756   |1      |2  |1.96           |0.89   |64.3           |0.014              |359                            |99.7
+    Vodafone    |1771   |1      |2  |1.97           |0.87   |52.9           |0.016              |243                            |99.6
+    Wind        |2365   |1      |2  |1.96           |0.89   |97.3           |0.009              |478                            |99.8
+    Tre     |1395   |1      |2  |1.97           |0.88   |41.4           |0.021              |239                            |99.6
+    Roma        |7287   |1      |2  |1.97           |0.89   |239            |0.004              |1353                           |99.9</p>
 
-<p><strong>inserisci grafici con caption</strong></p>
+<h4>Random failure</h4>
 
-<p><strong>mettere anche grafico della distr del grado dei modelli quando si fa il discorso del modello che non va</strong></p>
+<p>La prima cosa da notare è che le reti delle singole compagnie hanno un rapporto coefficiente di clustering-grado medio in linea con molte altre reti reali</p>
 
-<p>Qui va fatto un lungo discorso dato che non appatta nulla. Far vedere che con modello scale free di bar e alb con pendenza 3 in realtà non hai alcuna scalefreeness dato che cade tutto in praticamente una sola decade. Far vedere che comportamento è UGUALE ai modelli esponenziali, e che dipende SOLO dal grado medio, e che quindi l'articolo del 2000 è truffaldino. Testare reti modello più grandi, fino a 10000 per non far fondere il pc e solo andamento gc
-Vedere che succede con preferential attachment generalizzato con esponenti 1,5/2/2,5 a vari valori di gradomedio.</p>
+<p>TODO biblioref da sistemare</p>
+
+<p>\parencite{Barbalbert2002}, 
+mentre stranamente la rete costruita con tutte le antenne non vede aumentare particolarmente il suo clustering. Inoltre ci si aspetta che le reti siano tutte particolarmente resistenti sotto random failure, comportamento che sembra più simile a quello di una rete scale free. Tuttavia una rete random con un grado medio alto ha comunque un $f$ molto alto. Per esempio, una rete random avente $N = N<em>{Tim}$ e $\langle k \rangle = \langle k \rangle</em>{Tim}$, avrebbe una $f$ critica di poco inferiore: $\sim 98\%$. Infatti, essendo per una rete random $\langle k \rangle = Np$, perché sia uguale a $\langle k \rangle_{Tim}$ con $\sim 1800$ nodi, deve essere $p \sim 3.7\%$, 
+$$\Rightarrow \sigma^2 = Np(1-p) = \langle k^2 \rangle - \langle k \rangle^2 \sim 62$$
+$$\Rightarrow \frac{\langle k^2 \rangle }{\langle k \rangle} = \frac{Np(1-p)-(Np)^2}{Np} \sim 1+Np = 1+ \langle k \rangle \sim 65$$
+$$\Rightarrow f \sim 1 - \frac{1}{65} \sim 98\%$$</p>
+
+<p>Con una rete random costruita con i parametri della rete totale si ottiene $f = 99.5$. Valori quindi che si distinguono poco dalla soglia per una rete power-law finita, anche nel caso in cui l'esponente sia di poco maggiore di 3: $f \sim 1 - \frac{1}{\frac{\alpha - 2}{\alpha-3}k_{max}} > 90\%$ già per un grado massimo di $\sim10$.</p>
+
+<h4>Attacco intenzionale</h4>
+
+<p>Nello scenario di attacco intenzionale ci si aspetta una veloce frammentazione della rete. I cluster diverranno rapidamente più piccoli fino a frammentarsi del tutto entro pochi punti percentuali di nodi rimossi. Nel caso di una rete fortemente connessa come quella in esame ci si aspetta una resistenza maggiore, ma comunque una soglia percolativa bassa (approssimativamente entro il $50\%$). Se la rete è di tipo scale-free dovrebbe essere più fragile ad attacchi di questo tipo: mentre in una rete random i nodi più connessi sono solo una coda della distribuzione del grado, una rete a power-law ha in proporzione molti più nodi molto connessi.</p>
+
+<p>Dal punto di vista del diametro della rete, levando i nodi più connessi ci si aspetta che esso aumenti, fino a quando la rete diventa tanto frammentata da essere costituita da clusters con pochissimi nodi. Oltrepassata la soglia di frammentazione quindi il diametro dei clusters più grandi decrescerà rapidamente a zero.</p>
+
+<p>TODO DA METTER CAPTION GENERALE {Risultati per rimozione random}
+<img src="fig:failGC" alt="Failure: GC" title="" />
+<img src="fig:failC" alt="Failure: C" title="" />
+<img src="fig:faill" alt="Failure: l" title="" />
+<img src="fig:failD" alt="Failure: D" title="" />
+<img src="fig:failk" alt="Failure: k" title="" />
+<img src="fig:failc" alt="Failure: criterio" title="" /></p>
+
+<p>TODO DA METTER CAPTION GENERALE {Risultati per rimozione con massima efficienza}
+<img src="fig:atakGC" alt="Attack: GC" title="" />
+<img src="fig:atakC" alt="Attack: C" title="" />
+<img src="fig:atakl" alt="Attack: l" title="" />
+<img src="fig:atakD" alt="Attack: D" title="" />
+<img src="fig:atakk" alt="Attack: k" title="" />
+<img src="fig:atakc" alt="Attack: criterio" title="" /></p>
+
+<p>\subsection{Conclusioni}
+Come abbiamo visto, in regime di alta connettività, dal punto di vista percolativo si notano poco le differenze tra reti generate secondo un modello scale-free o random. La differenza si nota quando il grado medio della rete è più basso. Per esempio una rete random con $\langle k \rangle \sim 2$ ha $f\sim 50\%$, mentre una rete scale free con stesso $\langle k \rangle$ ha $f\sim 80\%$. Una spiegazione qualitativa sta nel fatto che con una distribuzione del grado a legge di potenza, i nodi meno connessi sono in larga maggioranza, quindi è meno probabile che un attacco random riesca a destrutturare la rete, rispetto a un grafo che abbia una $P(k)$ poissoniana. </p>
+
+<p>Un'altra cosa da notare è che a parità di $N$, una rete di Barabasi-Albert è molto più connessa di una di Erdos-Renyi. Nell'esempio sopra, infatti, con $N=100$ una la prima ha $\sim400$ link, mentre la seconda il doppio; per avere lo stesso numero di link la rete random ha bisogno di una $p \Rightarrow \langle k \rangle$ doppi. Questa differenza va attenuandosi con $N$ più grandi.</p>
+
+<p>Uno studio percolativo su reti reali, quindi, non aiuta a identificare una eventuale invarianza di scala per reti molto grandi e connesse. Tuttavia può essere decisiva per reti più piccole, come piccole comunità, reti locali, proteine e alcuni ecosistemi: nonostante la bassa statistica, il comportamento di reti con pochi nodi possono essere distinti in maniera significativa da uno studio percolativo.</p>
+
+<p>Nel caso di reti il cui funzionamento dipende dalla capacità dei nodi di gestire un certo carico, uno studio percolativo dovrebbe anche considerare l'eventualità che con la rimozione di alcuni nodi, altri vadano in sovraccarico e si scolleghino dalla rete </p>
+
+<p>TODO vari biblioref da sistemare</p>
+
+<p>(Motter \citeyear{Motter2002}, Zhao \citeyear{Zhao2004} e \citeyear{Zhao2005}, Wang \citeyear{Wang2009})
+. È il caso delle reti comunicative, come quelle telefoniche cellulari analizzate, o una ipotetica rete mesh costruita con i router wi-fi, ma anche ovviamente reti di distribuzioni elettriche, 
+%valutare se lasciare o rimuovere
+o alcuni ecosistemi dove una catena alimentare che veda la scomparsa di una specie causa una eccessiva riproduzione di una specie predata, che a sua volta porta altre specie all'estinzione.</p>
+
+<p>Una possibile interessante applicazione dei metodi e degli strumenti usati per analizzare la rete di antenne di Roma potrebbe essere lo studio di città molto più grandi e densamente popolate (come New York o Tokyo), ma servirebbero capacità di calcolo e di memoria molto più grandi di quelle a nostra disposizione. Un altro possibile studio potrebbe essere verificare la possibilità di creare una rete distribuita e aperta con i router wi-fi. Avendo questi un raggio molto inferiore delle antenne cellulari, la rete sarebbe molto simile a un reticolo, quindi benché uno studio percolativo possa essere interessante, non lo sarebbe dal punto di vista delle reti complesse. 
+%valutare se lasciare o rimuovere
+Una rete di questo tipo sarebbe comunque un nuovo concetto di Internet, che potrebbe avere interessanti sviluppi su reti di altro tipo, per esempio sociali, correlate a essa.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <h3>TODO 3.2.3 Effetto cascata</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -901,8 +983,25 @@ http://www.html.it/pag/51161/location-services/
 
 
 
-<h2>TODO Bibliografia</h2>
 
+<h2>Bibliografia</h2>
+
+<ol>
+<li><a href="http://arxiv.org/pdf/cond-mat/0106096">Albert, R. and A. L. Barabasi (2002), <em>Statistical mechanic of complex networks</em>, Reviews of modern phyisics <strong>74</strong>, 47.</a> </li>
+<li><a href="http://www.nature.com/nature/journal/v406/n6794/pdf/406378a0.pdf">Albert, R., H. Jeong, and A. L. Barabasi (2000), <em>Error and attack tolerance of complex networks</em>, Nature <strong>406</strong>, 378.</a></li>
+<li><a href="http://arxiv.org/pdf/cond-mat/9910332">Barabasi, A. L. and R. Albert (1999), <em>Emergence of scaling in random networks</em>, Science <strong>286</strong>, 509.</a></li>
+<li><a href="http://arxiv.org/pdf/cond-mat/0007048">Cohen, R. K. Erez, D. ben-Avraham and S. Havlin (2000), <em>Resilience of the internet to random breakdown</em>, Physical Review letters <strong>85</strong>, 4626.</a></li>
+<li><a href="http://arxiv.org/pdf/cond-mat/0010251">Cohen, R. K. Erez, D. ben-Avraham and S. Havlin (2001), <em>Breakdown of the internet under intentional attack</em>, Physical Review letters <strong>86</strong>, 3682.</a></li>
+<li><a href="http://www.renyi.hu/~p_erdos/1959-11.pdf">Erdős, P. and A. Rényi (1959), <em>On random graph I.</em>, Publicationes Mathematicae Debrecen <strong>6</strong>, 290.</a></li>
+<li><a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.24.6195&amp;rep=rep1&amp;type=pdf">Molloy, M. e B. Reed (1995). <em>A critical point for random graphs with a given degree sequence</em>. Random structures and algorithms <strong>6</strong>, 161.</a></li>
+<li><a href="http://arxiv.org/pdf/cond-mat/0301086">Motter, A. E: and Y. C. Lai (2002), <em>Cascade-based attacks on complex networks</em>, Physical Review E <strong>66</strong>, p. 065102.</a></li>
+<li><a href="http://www.nature.com/nature/journal/v393/n6684/pdf/393440a0.pdf">Watts, J. and H. Strogatz (1998), <em>Collective dynamics of 'small-world' networks</em>, Nature <strong>393</strong>, 440.</a></li>
+<li><a href="http://staffweb.worc.ac.uk/DrC/Courses%202010-11/Comp%203104/Tutor%20Inputs/Session%207%20Prep/Small%20World%20networks/PRE_04_ZPL.pdf">Zhao, L., Park, K., and Lai, Y. C. (2004), <em>Attack vulnerability of scale-free networks due to cascading breakdown</em>, Physical review E, <strong>70</strong>, 035101.</a></li>
+<li><a href="http://chaos1.la.asu.edu/~yclai/papers/PRE_05_ZPLY.pdf">Zhao, L., Park, K., Lai, Y. C., and Ye, N. (2005), <em>Tolerance of scale-free networks against attack-induced cascades</em>, Physical Review E, <strong>72</strong>, 025104.</a></li>
+<li><a href="http://kexue.com.cn/upload/blog/file/2010/3/2010328195832179667.pdf">Wang, J. W., and Rong, L. L. (2009). <em>Cascade-based attack vulnerability on the US power grid</em>, Safety Science, <strong>47</strong>, 1332.</a></li>
+<li><a href="http://opencellid.org/"><em>OpenCellID</em> (ENAiKOON).</a></li>
+<li><a href="https://location.services.mozilla.com/"><em>Mozilla Location Service</em> (Mozilla Foundation).</a></li>
+</ol>
 
 
 
