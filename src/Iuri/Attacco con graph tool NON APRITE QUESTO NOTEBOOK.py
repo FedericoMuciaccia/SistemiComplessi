@@ -275,8 +275,8 @@ def failurePercent(compagnia, steps):
 
 # <codecell>
 
-gestore = ["Tim", "Vodafone", "Wind", "Tre", "Roma"]
-#gestore = ["Tim", "Vodafone", "Wind", "Tre"]
+gestore = ["Tim", "Vodafone", "Wind", "Tre"]
+#gestore = ["Roma"]
 #compagnia = "Tre"
 
 indice = []
@@ -306,7 +306,7 @@ datiFinal['average degree'] = gradomedio
 datiFinal['soglia percolativa'] = criterio
 
 datiFinal['GCsize'] = relSizeGC
-datiFinal.to_csv("/home/protoss/Documenti/SistemiComplessi/data/Iuri/GtoolAttackDataForSeaborn.csv")
+#datiFinal.to_csv("/home/protoss/Documenti/SistemiComplessi/data/Iuri/GtoolAttackDataForSeaborn.csv")
 datiFinal.head()
 
 # <codecell>

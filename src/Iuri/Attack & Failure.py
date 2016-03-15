@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[5]:
+# In[1]:
 
 import geopy
 from geopy import distance #TODO BUGGONE
@@ -17,7 +17,7 @@ get_ipython().magic(u'matplotlib inline')
 
 # # Simulazione attacco, andamento D e GC in funzione dei nodi rimossi
 
-# In[2]:
+# In[8]:
 
 #Funzioni step-by-step
 def attacco(compagnia):
@@ -30,7 +30,7 @@ def attacco(compagnia):
     i = 0
     ascisse.append(i)
     aziendaFinal.append(compagnia)
-#    diametro.append(2)
+    diametro.append(2)
     relSizeGC.append(1)
 
     while (networkx.number_of_nodes(grafoFinal) > passo):
@@ -47,7 +47,7 @@ def attacco(compagnia):
         aziendaFinal.append(compagnia)
 
         newGraphSize = networkx.number_of_nodes(grafoFinal)
-#        diametro.append(networkx.diameter(giantCluster, e=None))
+        diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(newGraphSize)))
 
 def failure(compagnia):
@@ -77,11 +77,11 @@ def failure(compagnia):
         aziendaFinal.append(compagnia)
 
         graphSize = networkx.number_of_nodes(grafoFinal)
-#        diametro.append(networkx.diameter(giantCluster, e=None))
+        diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
 
 
-# In[3]:
+# In[9]:
 
 #Funzioni percentuali
 def attaccoPercent(compagnia, steps):
@@ -114,7 +114,7 @@ def attaccoPercent(compagnia, steps):
         aziendaFinal.append(compagnia)
 
         graphSize = networkx.number_of_nodes(grafoFinal)
-        #diametro.append(networkx.diameter(giantCluster, e=None))
+        diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
 
 
@@ -147,19 +147,19 @@ def failurePercent(compagnia, steps):
         aziendaFinal.append(compagnia)
 
         graphSize = networkx.number_of_nodes(grafoFinal)
-        #diametro.append(networkx.diameter(giantCluster, e=None))
+        diametro.append(networkx.diameter(giantCluster, e=None))
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
 
 
-# In[1]:
+# In[10]:
 
 #colori = ['#004184','#ff3300','#ff8000','#018ECC','#4d4d4d']
 colori = ['#AA3939','#226666','#7A9F35']
 #gestore = ["Roma"]
-#gestore = ["Tim", "Vodafone", "Wind", "Tre"]
+gestore = ["Tim", "Vodafone", "Wind", "Tre"]
 
 
-# In[20]:
+# In[12]:
 
 #Attacco
 diametro = []
@@ -177,7 +177,7 @@ datiFinal['percent'] = ascisse
 datiFinal['Provider'] = aziendaFinal
 datiFinal['diameter'] = diametro
 datiFinal['GCsize'] = relSizeGC
-datiFinal.to_csv("/home/protoss/Documenti/SistemiComplessi/data/Iuri/AttackDataForSeaborn.csv")
+#datiFinal.to_csv("/home/protoss/Documenti/SistemiComplessi/data/Iuri/AttackDataForSeaborn.csv")
 #datiFinal.head()
 
 
