@@ -105,7 +105,7 @@
 
 <section>
   <h2 style="text-transform: none;">Antenne di Roma</h2>
-  <iframe data-src="../../html/heatmap.html" height=100 width=550></iframe>
+  <iframe data-src="../../html/heatmap.html" height=550 width=550></iframe>
 </section>
 
 <section>
@@ -113,32 +113,132 @@
   <img src="../../img/range/range_distribution.svg"/>
 </section>
 
+<!--
 <section data-background="https://upload.wikimedia.org/wikipedia/commons/f/fb/718smiley.svg">
   <h2 style="text-transform: none;">Prova</h2>
   <img src="../../img/range/range_distribution.svg"/>
 </section>
+-->
 
 <section>
   <h2 style="text-transform: none;">Matrice di adiacenza</h2>
   <p>$$d_{ij} < 0.8 \: (r_i+r_j)$$</p>
+  <img src="../../img/determined-fumanchu-computer-stare.svg"/>
   <p><code>vincenty</code>?</p>
   <p><code>great_circle</code>?</p>
-  <p><img src="../../img/determined-fumanchu-computer-stare.svg"/><img class="fragment" src="../../img/determined-fumanchu-computer-stare.svg"/></p>
+</section>
+
+<section>
+  <img src="../../img/meme_desk.jpg" width=55%/>
   <p><code>euclidea</code>!!</p>
+</section>
+
+<section>
+  <h2 style="text-transform: none;">Degree distribution</h2>
+  <img src="../../img/degree/degreeDistribution.svg" />
+</section>
+
+<section>
+  <img src="../../img/degree/degree_frequencyRank.svg" />
+</section>
+
+<section>
+  <h2 style="text-transform: none;">Confronto tra i modelli</h2>
+  <img src="../../img/Teoria/CompareSameN.svg"/>
+</section>
+
+<!--
+<section>
+<h2 style="text-transform: none;">Watts-Strogatz</h2>
+<p><img src="../../img/Teoria/ringnet.svg" width="30%"/>
+<img src="../../img/Teoria/smallworld.svg" width="30%"/></p>
+<p><img src="../../img/Teoria/random-smallworld.svg" width="30%"/>
+<img src="../../img/Teoria/totalrandomwatts.svg" width="30%"/></p>
+</section>
+
+<section>
+<h2 style="text-transform: none;">Barabasi-Albert</h2>
+<img src="../../img/Teoria/Barabalbert1.svg" width="80%"/>
+</section>
+-->
+
+<section>
+  <h2 style="text-transform: none;">Random failure & intentional attack</h2>
+  <p><img src="../../img/ripetitore-wind-rotto_alberobello.jpg" height=300/><img src="../../img/pcgamer1.jpg" height=300/></p>
+</section>
+
+<section>
+  <h2 style="text-transform: none;">Speedup del codice</h3>
+  <h3 style="text-transform: none;">(parte 1: multiprocessing)</h3>
+  <img src="../../img/meme_Leonida.jpg"/>
+</section>
+
+<section>
+  <pre><code>
+  import multiprocessing
+  cpus = multiprocessing.cpu_count()
+  pool = multiprocessing.Pool(processes=cpus)
+  pool.map(function, array)
+  </code></pre>
+  <img src="../../img/meme_Boromir.jpg"/>
+</section>
+
+<section>
+  <h2 style="text-transform: none;">Strategie di attacco</h2>
+  <img src="../../img/Breakdown/AttackGC_Compare.svg"/>
+</section>
+
+
+<section>
+  <h2 style="text-transform: none;">Speedup del codice</h2>
+  <h3 style="text-transform: none;">(parte 2: graph-tool)</h3>
+  <img class="fragment" src="../../img/meme_Obama.jpg" width="80%"/>
+</section>
+
+<section>
+  <h3 style="text-transform: none;">Reti a $t = 0$</h3>
+  <iframe src="../../html/risultatianalisi.html" height=500 width=700></iframe>
+</section>
+
+<section>
+<h2 style="text-transform: none;">Risultati per rimozione random</h2>
+<img src="../../img/Breakdown/gToolFailureGC_Final.svg" />
+<h3 style="text-transform: none;">Giant cluster relative size</h3>
+</section>
+
+<section>
+<h2 style="text-transform: none;">Risultati per rimozione random</h2>
+<img src="../../img/Breakdown/gToolFailureD_Final.svg" />
+<h3 style="text-transform: none;">Diametro</h3>
+</section>
+
+<section>
+<h2 style="text-transform: none;">Risultati per rimozione intenzionale</h2>
+<img src="../../img/Breakdown/gToolAttackGC_Final.svg" />
+<h3 style="text-transform: none;">Giant cluster relative size</h3>
+</section>
+
+<section>
+<h2 style="text-transform: none;">Risultati per rimozione intenzionale</h2>
+<img src="../../img/Breakdown/gToolAttackD_Final.svg" />
+<h3 style="text-transform: none;">Diametro</h3>
 </section>
 
 
 
 
 
+
+<!--
 				<section>
 					<h2>Hello There</h2>
 					<p>
 						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
 					</p>
 				</section>
-
+-->
 				<!-- Example of nested vertical slides -->
+<!--
 				<section>
 					<section>
 						<h2>Vertical Slides</h2>
@@ -245,7 +345,9 @@
 					<h2>Themes</h2>
 					<p>
 						reveal.js comes with a few themes built in: <br>
+-->
 						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
+<!--
 						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
 						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
 						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
@@ -457,6 +559,8 @@ Reveal.addEventListener( 'customevent', function() {
 						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
 					</p>
 				</section>
+
+-->
 
 			</div>
 
