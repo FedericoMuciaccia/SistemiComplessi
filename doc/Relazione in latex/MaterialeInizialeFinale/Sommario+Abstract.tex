@@ -10,22 +10,17 @@
 \pdfbookmark{Sommario}{Sommario}
 \section*{Sommario}
 
-Lo scopo di questo lavoro è fare un'analisi di rete usando un campione di antenne telefoniche cellulari, ipotizzando di voler costruire una ipotetica *mesh network* con esse. Abbiamo scelto di analizzare il sistema delle antenne comprese entro il Raccordo Anulare di Roma. Non sapendo a priori di quale tipo di rete si possa trattare, e che tipo di grafo si costruisce da essa, sono state studiate alcune proprietà topologiche e comportamentali dell'insieme di antenne studiate.
+Lo scopo di questo lavoro è fare un'analisi di rete usando un campione di antenne per la telefonia cellulare, avendo in mente la costruzione di una ipotetica mesh network che copra l'intera area della città di Roma, schematicamente delimitata dal Grande Raccordo Anulare.
 
-Dopo aver definito il criterio con cui dare un link a due nodi, sono state calcolate le matrici di adiacenza della rete complessiva e di quelle composte solo dalle antenne dei singoli gestori presenti in Italia. La prima parte dell'analisi consiste nell'estrapolare dai grafi ottenuti le distribuzioni dei gradi e nell'affidare all'istogramma dei gradi la forma funzionale che meglio gli si adatti. Avendo così ottenuto indicazioni significative sui tipi di rete in analisi, le abbiamo verficate studiando il comportamento percolativo della rete, mediante rimozione di nodi in due diversi scenari: un attacco intenzionale, che rimuovesse le antenne a partire da quelle con maggior grado, e una caduta random del sistema. I risultati ottenuti sono stati confrontati con modelli di rete esponenziali e scale-free.
-L'esposizione è articolata nel seguente modo:
+Dopo aver definito il criterio con cui dare un link a due nodi, sono state calcolate le matrici di adiacenza della rete complessiva e di quelle relative ai singoli gestori telefonici. Si è dunque proceduto ad uno studio della topologia di tali reti, estraendone le distribuzioni del grado e cercando la forma funzionale che meglio vi si adatti. Una volta ottenute indicazioni significative sui tipi di rete in analisi, le abbiamo verficate studiando il comportamento percolativo della rete, mediante rimozione di nodi in due diversi scenari: un attacco intenzionale, con rimozione delle antenne a partire da quelle con maggior grado, e una serie di failure random nel sistema. I risultati ottenuti sono stati confrontati con i principali modelli di rete.L'esposizione è articolata nel seguente modo:
 
 \begin{description}
-\item[{\hyperref[sec:gps]{Nella sezione \ref{sec:gps}}}] verrà fatta una panoramica sui moderni servizi di geolocalizzazione non basati sul GPS, usati da Google prima e ora in forma più aperta dalla Mozilla Foundation.
+\item[Nelle sezioni {\hyperref[sec:gps]{\ref{sec:gps}}} e {\hyperref[sec:mls]{\ref{sec:mls}}}] si spiega da dove provengono e come sono stati raccolti e organizzati i dati, come è stata definita la rete e quindi con quali criteri è stata costruita la matrice di adiacenza, accennando ai problemi computazionali avuti durante l'analisi.
 
-\item[{\hyperref[sec:mls]{Nella sezione \ref{sec:mls}}}] verranno esposti i dati sulle antenne cellulari fornite dal Mozilla Location Service, e ne verrà analizzato in dettaglio il campione relativo alla città di Roma, entro il raccordo anulare.
+\item[Nella sezione {\hyperref[sec:teoria]{\ref{sec:teoria}}}] si esporranno le basi della teoria delle reti e dei più importanti modelli di generazione, applicandole allo studio del grado delle reti definite dalle antenne cellualari. 
 
-\item[{\hyperref[sec:gps]{Nella sezione \ref{sec:gps}}}] verrà fatta una panoramica sui moderni servizi di geolocalizzazione non basati sul GPS, usati da Google prima e ora in forma più aperta dalla Mozilla Foundation.
+\item[Nella sezione {\hyperref[sec:percola]{\ref{sec:percola}}}] si spiegherà come usare la teoria percolativa nello studio di una rete complessa già costruita. Si studierà quindi, piuttosto che la soglia critica di percolazione in costruzione, quale soglia si possa avere quando alla rete si tolgono nodi.
 
-\item[{\hyperref[sec:teoria]{Nella sezione \ref{sec:teoria}}}] si esporranno le basi della teoria delle reti e dei più importanti modelli di generazione, applicati allo studio della rete definita dalle antenne cellualari. 
-
-\item[{\hyperref[sec:percola]{Nella sezione \ref{sec:percola}}}] si spiegherà come usare la teoria percolativa nello studio di una rete complessa già costruita. Si studierà quindi, piuttosto che la soglia critica di percolazione in costruzione, quale soglia si possa avere quando alla rete si tolgono nodi.
-
-\item[{\hyperref[sec:attaack]{Nella sezione \ref{sec:attaack}}}] viene effettuato lo studio percolativo mediante i due scenari di rimozione di nodi,  analizzando in particolare l'andamento del diametro e delle dimensioni del cluster più grande con la progressiva caduta delle antenne.
+\item[Nella sezione {\hyperref[sec:attaack]{\ref{sec:attaack}}}] viene effettuato lo studio percolativo mediante i due scenari di rimozione di nodi,  analizzando in particolare l'andamento del diametro e delle dimensioni del cluster più grande con la progressiva caduta delle antenne. I risultati sono poi stati confrontati con quelli ottenuti dai modelli, rivelando alcune ambiguità.
 
 \end{description}

@@ -419,7 +419,7 @@ dove $E_i$ è il numero di link tra i $k_i$ primi vicini del vertice e $k_i(k_i-
 <p>Il coefficiente di clustering svolge un ruolo importante nel distinguere una rete completamente random da una che presenta caratteristiche di <em>small-world</em>: infatti un rete con piccolo diametro tende a avere un $C$ maggiore di una simile rete puramente casuale costruita con lo stesso numero di nodi e con il medesimo cammino più corto medio. Questo comportamento è stato notato in molte reti reali [9]. <!-- \parencite{Watts1998} --></p>
 <!-- TODO non si è ancora detto cosa è lo small-world -->
 
-<p><strong>Centralità</strong> Esistono vari modi per definire quando un nodo è centrale rispetto ad altri. Il primo e più immediato è il suo grado. Altri due tra i più importanti sono la <strong>betweenness</strong> e il <strong>page-rank</strong>. Preso un nodo $i$, il primo è definito come il numero di cammini più corti che è possibile tracciare tra due qualsiasi nodi della rete, purché passino per $i$; il secondo dà una misura della centralità di $i$ molto dipendente dal numero di link <em>diretti</em> verso di esso, tenendo conto anche del ranking dei nodi che si collegano a esso. </p>
+<p><strong>Centralità</strong> Esistono vari modi per definire quanto un nodo è centrale rispetto ad altri. Il primo e più immediato è il suo grado. Altri due tra i più importanti sono la <strong>betweenness</strong> e il <strong>page-rank</strong>. Preso un nodo $i$, il primo è definito come il numero di cammini più corti che è possibile tracciare tra due qualsiasi nodi della rete, purché passino per $i$; il secondo dà una misura della centralità di $i$ molto dipendente dal numero di link <em>diretti</em> verso di esso, tenendo conto anche del ranking dei nodi che si collegano a esso. </p>
 
 <p>In reti indirette, benché non siano <em>matematicamente</em> uguali, betweenness e page-rank sono statisticamente molto correlati al grado, pertanto non verranno analizzati. </p>
 
@@ -433,8 +433,8 @@ dove $E_i$ è il numero di link tra i $k_i$ primi vicini del vertice e $k_i(k_i-
 
 <!-- TODO calcolare tutta la matrice di adiacenza con la distanza geodesica al posto di quella euclidea risulta pesantissimo ($N^2$ elementi) -->
 
-<p>Prese le antenne nell'area selezionata come i nodi della rete, è necessario definire un criterio per stabilire un link. Nell'ottica di una ipotetica mesh network, la scelta è stata di considerare collegate due antenne se, nello spazio tra esse, vi è continuità di segnale, in modo che qualsiasi utente nel mezzo possa comunicare con altri utenti. Trascurando dislivelli del terreno ed edifici, è stato supposto che la porzione di spazio coperta da un'antenna sia un cerchio di raggio uguale a <code>range</code>. Il criterio scelto è stato quindi che la distanza $\delta_{ij}$ tra due antenne fosse minore della somma dei loro raggi, contando una sovrapposizione di almeno il $20\%$.
-$$\delta_{ij} < 0.8(r_i+r_j)$$</P>
+<p>Prese le antenne nell'area selezionata come i nodi della rete, è necessario definire un criterio per stabilire un link. Nell'ottica di una ipotetica mesh network, la scelta è stata di considerare collegate due antenne se, nello spazio tra esse, vi è continuità di segnale, in modo che qualsiasi utente nel mezzo possa comunicare con altri utenti. Trascurando dislivelli del terreno ed edifici, è stato supposto che la porzione di spazio coperta da un'antenna sia un cerchio di raggio uguale a <code>range</code>. Il criterio scelto è stato quindi che la distanza $\d_{ij}$ tra due antenne fosse minore della somma dei loro raggi, contando una sovrapposizione di almeno il $20\%$.
+$$\d_{ij} < 0.8(r_i+r_j)$$</P>
 
 <p>Stabilito il criterio, bisogna costruire la rete popolando la matrice di adiacenza. Dato che il criterio di linking richiede la conoscenza della distanza tra due antenne, è stato necessario calcolare le distanze tra ogni coppia di nodi. 
 
@@ -444,7 +444,7 @@ I dati in nostro possesso forniscono le coordinate geografiche di latitudine e l
 
 <p>L'unica via praticabile per far calare drasticamente il tempo necessario per calcolare tutte le matrici richieste, è stata quindi convertire le coordinate geografiche in cartesiane e usare la distanza euclidea. In questo modo si è riprodotto di nuovo il guadagno di velocità di un fattore 10, già ottenuto nel calcolare le distanze delle antenne dal Colosseo.
 
-Una volta calcolate le matrici definitive per la rete complessiva e per le singole compagnie, sono state salvate su file in formato CVS, in modo da non doverle più ricalcolare.</P>
+Una volta calcolate le matrici definitive per la rete complessiva e per le singole compagnie, sono state salvate su file in formato CSV, in modo da non doverle più ricalcolare.</P>
 
 <h3>Distribuzione del grado</h3>
 
@@ -483,7 +483,7 @@ Una volta calcolate le matrici definitive per la rete complessiva e per le singo
    \label{eq:lunghezze}
 \end{equation}
 Molte reti reali presentano simili caratteristiche nei gradi di separazione, che hanno portato alla definizione del termine "small world" per esse.</li>
-<li>Il clustering di una rete random tende a essere molto basso. Infatti, preso un nodo e i suoi primi vicini, la probabilità una coppia di essi sia connessa è $p$. Pertanto su tutto il grafo, il coefficiente di clustering medio è proprio $p$, il quale di solito è abbastanza minore di 1 (con $p = 0.1$ un grafo random diventa già molto connesso: per esempio con $10^4$ nodi avrebbe $\langle k\rangle = 10^3$). Contrariamente a quanto avviene per il diametro, questo fatto si pone in contrasto con le reti reali, le quali hanno quasi sempre un $C$ sensibilmente più alto.</li>
+<li>Il clustering di una rete random tende a essere molto basso. Infatti, preso un nodo e i suoi primi vicini, la probabilità che una coppia di questi sia connessa è $p$. Pertanto su tutto il grafo, il coefficiente di clustering medio è proprio $p$, il quale di solito è abbastanza minore di 1 (con $p = 0.1$ un grafo random diventa già molto connesso: per esempio con $10^4$ nodi avrebbe $\langle k\rangle = 10^3$). Contrariamente a quanto avviene per il diametro, questo fatto si pone in contrasto con le reti reali, le quali hanno quasi sempre un $C$ sensibilmente più alto.</li>
 </ul></p>
 
 <h4>Watts e Strogatz</h4><!-- small world -->
@@ -497,7 +497,7 @@ Molte reti reali presentano simili caratteristiche nei gradi di separazione, che
 <figcaption>Reticolo ciclico. Il punto di partenza del modello Watts-Strogatz: un reticolo con condizioni al contorno cicliche.</figcaption>
 </figure> -->
 
-<p>Successivamente si procede a riarrangiare in maniera random i link tra i nodi, con una probabilità $p$ per ogni link di venire modificato. In questo modo si hanno un certo numero di link (in media $2pnN$) che invece di essere tra nodi in prossimità, saranno tra nodi più lontani, come nei grafi in figura, per differenti $p$ di rewiring.</p>
+<p>Successivamente si procede a riarrangiare in maniera random i link tra i nodi, con una probabilità $p$ per ogni link di venire modificato. In questo modo si hanno un certo numero di link (in media $2pnN$) che invece di essere tra nodi in prossimità, saranno tra nodi più lontani, come nei grafi in figura, per differenti $p$ di <em>rewiring</em>.</p>
 <!--TODO da mettere un caption unico e tutte le figure assieme 
 \caption[Generazione con modello Watts-Strogatz.]{Generazione di grafi con il modello Watts-Strogatz a differenti $p$ di rewiring. -->
 
@@ -513,7 +513,7 @@ $p = 1$:
 <img src="../img/Teoria/totalrandomwatts.svg" title="fig:WSp100" width="50%"/></p>
 
 
-<p>Con questo metodo, a seguito del <em>rewiring</em> si ha il rischio che parti del grafo non siano più connesse. Ponendo $n>1$ ciò può essere evitato, abbassando di molto la probabilità di avere un grafo non connesso già con $n=2$.</p>
+<p>Con questo metodo, a seguito del rewiring si ha il rischio che parti del grafo non siano più connesse. Ponendo $n>1$ ciò può essere evitato, abbassando di molto la probabilità di avere un grafo non connesso già con $n=2$.</p>
 
 <p>Con $p \rightarrow 1$ il grafo diventa simile a quello di una rete di Erdős-Renyi. Nelle figure viene mostrato il confronto tra due grafi da 100 nodi: uno generato con il modello Erdos-Renyi ($p = 7\%$) e uno con il modello Watts-Strogatz partendo da un reticolo con nodi connessi ai primi 3 vicini e il 100% di probabilità di rewiring. A parte la somiglianza dei grafi, le distribuzioni del grado hanno simile comportamento.</p>
 
@@ -631,7 +631,7 @@ $$\frac{\langle k^2\rangle}{\langle k \rangle} = c \frac{2-\gamma}{3-\gamma},$$
 <li>Con <strong>$\gamma &lt; 3 \Rightarrow c=c(K)$</strong>, la transizione dipende dal valore di $K$, per cui esiste per reti finite, ma per $K \rightarrow \infty$, $f\rightarrow1$.</li>
 </ul></p>
 
-<p>Nel caso dell'attacco intenzionale la percentuale $f$ è ottenuta per via numerica. Dato inoltre che verrà usato un metodo di attacco sequenziale (v. paragrafo Strategie di attacco), sarebbe necessario uno studio progressivo che a ogni iterazione tenga conto del taglio dei $k$ più grandi e ricalcoli la $P(k)$ per ottenere il rapporto ${\langle k^2 \rangle}/{\langle k \rangle}$. Risulterebbe pertanto più conveniente effettuare simulazioni numeriche direttamente sui modelli [5].</p>
+<p>Nel caso dell'attacco intenzionale la percentuale $f$ è ottenuta per via numerica. Dato inoltre che verrà usato un metodo di attacco sequenziale (v. paragrafo Strategie di attacco), sarebbe necessario uno studio progressivo che a ogni iterazione tenga conto del taglio dei $k$ più grandi e ricalcoli la $P(k)$ per ottenere il rapporto ${\langle k^2 \rangle}/{\langle k \rangle}$[5]. Risulterebbe pertanto più conveniente effettuare simulazioni numeriche direttamente sui modelli.</p>
 
 <p>In ogni caso, a livello qualitativo, come nel caso di attacco random ci si aspettava una maggiore resistenza da parte delle reti scale-free, a causa del grande numero di nodi poco connessi che garantisce una $P(k)\propto k^{-\gamma}$, nel caso dell'attacco intenzionale ci si aspetta una certa fragilità. Infatti le reti scale free sono costruite attorno ai nodi più connessi; si può supporre quindi che rimuoverli per primi provochi un deterioramento più veloce rispetto a una rete random con uguale grado medio [1].
 
@@ -643,7 +643,7 @@ $$\frac{\langle k^2\rangle}{\langle k \rangle} = c \frac{2-\gamma}{3-\gamma},$$
 
 <p>In tutti e cinque i campioni di rete che abbiamo analizzato, sono stati conteggiati gli andamenti di alcune grandezze topologiche e statistiche di interesse: oltre a dimensione del giant cluster, $D$, anche $\langle l \rangle$, coefficiente di clustering globale $C$, $\langle k \rangle$ e $\langle k^2 \rangle/\langle k \rangle$. I grafici ottenuti sono stati messi a confronto a quelli ottenuti con le reti generate secondo i modelli.</p>
 
-È importante ricordare che la rete reale ha ovviamente delle contromisure per evitare la caduta delle comunicazioni. Le antenne trasmettono segnali tra loro su due bande di frequenza: una <em>user-side</em>, dedicata alle normali trasmissioni tra utenti del servizio, e una dedicata a un complesso sistema di feedback gestito da degli <em>hub</em> (grosse antenne con raggio sui 20 km). Questa struttura gerarchica permette, nel caso di caduta di una antenna o di un improvviso eccessivo carico in una zona circoscritta, che gli hub gestiscano potenza e capacità delle antenne circostanti mentre vengono inviati tecnici per un intervento sul luogo.</p>
+<p>È importante ricordare che la rete reale ha ovviamente delle contromisure per evitare la caduta delle comunicazioni. Le antenne trasmettono segnali tra loro su due bande di frequenza: una <em>user-side</em>, dedicata alle normali trasmissioni tra utenti del servizio, e una dedicata a un complesso sistema di feedback gestito da degli <em>hub</em> (grosse antenne con raggio sui $20\:km$). Questa struttura gerarchica permette, nel caso di caduta di una antenna o di un improvviso eccessivo carico in una zona circoscritta, che gli hub gestiscano potenza e capacità delle antenne circostanti mentre vengono inviati tecnici per un intervento sul luogo.</p>
 
 <p>Questo sistema ha un certo tempo di reazione. L'analisi da noi svolta pertanto suppone che la caduta della rete avvenga in un tempo inferiore, in una sorta di approssimazione adiabatica. Inoltre, la sola caduta degli hub sarebbe già sufficiente a compromettere seriamente l'integrità della rete (le antenne avrebbero difficoltà a coordinare le comunicazioni tra loro), ma nella nostra ipotesi di mesh-network distribuita ci interessano soltanto le comunicazioni nelle frequenze user-side. Usando questo modello semplificato siamo riusciti a ottenere alcune informazioni su una ipotetica rete cittadina di questa natura.</p>
 
@@ -695,7 +695,7 @@ In altre parole: è questa una strategia <em>ottimale</em>? <br />
 La risposta è no!
 La strategia ottimale è quella che, a parità di risultato, coinvolge il minor numero di antenne fatte eplodere, anche per minimizzare il rischio di essere scoperto nella notte mentre piazza l'esplosivo in giro per la città.</p>
 
-<p>Tale strategia può essere evidenziata solo da una simulazione <strong>sequenziale</strong>, fatta facendo evolvere la rete passo per passo, secondo una strategia di <em>steepest descent</em>. Questo garantisce di trovare la strategia ottimale, soprattutto se vengono inclusi anche gli effetti a cascata dovuti all'overload e alla saturazione di banda. Dal grafico sottostante (attacco intenzionale) si evince comunque che non c'è molta differenza tra procedere sequenzialmente con un campionamento all'1% o eseguire una simulazione di attacco nodo per nodo, per cui ad ogni modo il costo computazionale complessivo non risulta eccessivo.</p>
+<p>Tale strategia può essere evidenziata solo da una simulazione <strong>sequenziale</strong>, attuata facendo evolvere la rete passo per passo, secondo una strategia di <em>steepest descent</em>. Questo garantisce di trovare la strategia ottimale, soprattutto se vengono inclusi anche gli effetti a cascata dovuti all'overload e alla saturazione di banda. Dal grafico sottostante (attacco intenzionale) si evince comunque che non c'è molta differenza tra procedere sequenzialmente con un campionamento all'1% o eseguire una simulazione di attacco nodo per nodo, per cui ad ogni modo il costo computazionale complessivo non risulta eccessivo.</p>
 
 <p><img src="../img/Breakdown/AttackGC_Compare.svg"/></p>
 <!-- TODO in futuro inserire nel plot anche gli affetti a cascata, per far vedere che la curva crolla prima -->
@@ -739,7 +739,7 @@ da una previsione iniziale di più di 24 ore di tempo di calcolo si è passati a
 
 <iframe src="../html/risultatianalisi.html" height=270"></iframe>
 
-<p>La prima cosa da notare è che le reti delle singole compagnie hanno un rapporto $C / \langle k \rangle$ in linea con molte altre reti reali [1], mentre stranamente la rete costruita con tutte le antenne non vede aumentare particolarmente il suo clustering. Inoltre ci si aspetta che le reti siano tutte particolarmente resistenti sotto random failure, comportamento che sembra più simile a quello di una rete scale free. Tuttavia una rete random con un grado medio alto ha comunque un $f$ molto alto. Per esempio, una rete random avente $N = N_{Tim}$ e $\langle k \rangle = \langle k \rangle_{Tim}$, avrebbe una $f$ critica di poco inferiore: $\sim 98\%$. Infatti, essendo per una rete random $\langle k \rangle = Np$, perché sia uguale a $\langle k \rangle_{Tim}$ con $\sim 1800$ nodi, deve essere $p \sim 3.7\%$, 
+<p>La prima cosa da notare è che le reti delle singole compagnie hanno un rapporto $C / \langle k \rangle$ in linea con molte altre reti reali [1], e che la rete costruita con tutte le antenne non vede aumentare particolarmente il suo clustering. Inoltre ci si aspetta che le reti siano tutte particolarmente resistenti sotto random failure, comportamento che sembra più simile a quello di una rete scale free. Tuttavia una rete random con un grado medio alto ha comunque un $f$ molto alto. Per esempio, una rete random avente $N = N_{Tim}$ e $\langle k \rangle = \langle k \rangle_{Tim}$, avrebbe una $f$ critica di poco inferiore: $\sim 98\%$. Infatti, essendo per una rete random $\langle k \rangle = Np$, perché sia uguale a $\langle k \rangle_{Tim}$ con $\sim 1800$ nodi, deve essere $p \sim 3.7\%$, 
 $$\Rightarrow \sigma^2 = Np(1-p) = \langle k^2 \rangle - \langle k \rangle^2 \sim 62$$
 $$\Rightarrow \frac{\langle k^2 \rangle }{\langle k \rangle} = \frac{Np(1-p)-(Np)^2}{Np} \sim 1+Np = 1+ \langle k \rangle \sim 65$$
 $$\Rightarrow f \sim 1 - \frac{1}{65} \sim 98\%$$</p>
@@ -775,7 +775,7 @@ $GC \%$, $C$, $\langle l \rangle$, $D$, $\langle k \rangle$ e $\langle k^2 \rang
 
 <h2>Conclusioni e prospettive future</h2>
 
-Come abbiamo visto, in regime di alta connettività dal punto di vista percolativo si notano poco le differenze tra reti generate secondo un modello scale-free o random. La differenza si nota quando il grado medio della rete è più basso. Per esempio una rete random con $\langle k \rangle \sim 2$ ha $f\sim 50\%$, mentre una rete scale free con stesso $\langle k \rangle$ ha $f\sim 80\%$. Una spiegazione qualitativa sta nel fatto che con una distribuzione del grado a legge di potenza, i nodi meno connessi sono in larga maggioranza, quindi è meno probabile che un attacco random riesca a destrutturare la rete, rispetto a un grafo che abbia una $P(k)$ poissoniana. </p>
+<p>Come abbiamo visto, in regime di alta connettività dal punto di vista percolativo si notano poco le differenze tra reti generate secondo un modello scale-free o random. La differenza si nota quando il grado medio della rete è più basso. Per esempio una rete random con $\langle k \rangle \sim 2$ ha $f\sim 50\%$, mentre una rete scale free con stesso $\langle k \rangle$ ha $f\sim 80\%$. Una spiegazione qualitativa sta nel fatto che con una distribuzione del grado a legge di potenza, i nodi meno connessi sono in larga maggioranza, quindi è meno probabile che un attacco random riesca a destrutturare la rete, rispetto a un grafo che abbia una $P(k)$ poissoniana. </p>
 
 <!-- Un'altra cosa da notare è che a parità di $N$, una rete di Barabasi-Albert è molto più connessa di una di Erdos-Renyi. Nell'esempio sopra, infatti, con $N=100$ una la prima ha $\sim400$ link, mentre la seconda il doppio; per avere lo stesso numero di link la rete random ha bisogno di una $p \Rightarrow \langle k \rangle$ doppi. Questa differenza va attenuandosi con $N$ più grandi. -->
 

@@ -2248,19 +2248,18 @@
     <bcf:citekey order="10">Barbalbert2002</bcf:citekey>
     <bcf:citekey order="11">Barbalbert2002</bcf:citekey>
     <bcf:citekey order="12">Barbalbert2002</bcf:citekey>
-    <bcf:citekey order="13">Cohen2000</bcf:citekey>
+    <bcf:citekey order="13">Molloy1995</bcf:citekey>
     <bcf:citekey order="14">Molloy1995</bcf:citekey>
-    <bcf:citekey order="15">Molloy1995</bcf:citekey>
-    <bcf:citekey order="16">Cohen2000</bcf:citekey>
-    <bcf:citekey order="17">Cohen2001</bcf:citekey>
-    <bcf:citekey order="18">Barbalbert2002</bcf:citekey>
+    <bcf:citekey order="15">Cohen2000</bcf:citekey>
+    <bcf:citekey order="16">Cohen2001</bcf:citekey>
+    <bcf:citekey order="17">Barbalbert2002</bcf:citekey>
+    <bcf:citekey order="18">Barbalbert2000</bcf:citekey>
     <bcf:citekey order="19">Barbalbert2000</bcf:citekey>
-    <bcf:citekey order="20">Barbalbert2000</bcf:citekey>
-    <bcf:citekey order="21">Barbalbert2002</bcf:citekey>
-    <bcf:citekey order="22">Motter2002</bcf:citekey>
-    <bcf:citekey order="23">Zhao2004</bcf:citekey>
-    <bcf:citekey order="24">Zhao2005</bcf:citekey>
-    <bcf:citekey order="25">Wang2009</bcf:citekey>
+    <bcf:citekey order="20">Barbalbert2002</bcf:citekey>
+    <bcf:citekey order="21">Motter2002</bcf:citekey>
+    <bcf:citekey order="22">Zhao2004</bcf:citekey>
+    <bcf:citekey order="23">Zhao2005</bcf:citekey>
+    <bcf:citekey order="24">Wang2009</bcf:citekey>
     <bcf:citekey order="0">*</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nyt" type="entry" sortscheme="nyt">

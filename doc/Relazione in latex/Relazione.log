@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.11.21)  14 MAR 2016 05:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.11.21)  15 MAR 2016 18:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1326,7 +1326,7 @@ LaTeX Info: Redefining \Ref on input line 72.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 11.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 19.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 18.
 ) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 ] (./MaterialeInizialeFinale/Indici.tex
@@ -1372,45 +1372,51 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@lof=\write5
 \openout5 = `Relazione.lof'.
 
-) [3
+ (./Relazione.lot)
+\tf@lot=\write6
+\openout6 = `Relazione.lot'.
 
-] (./Paragrafi/Dati.tex
+ [3
+
+]) (./Paragrafi/Dati.tex
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 11.
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 19.
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 17.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [4]
-<./Immagini/Dati/MLSlogo.png, id=131, 301.125pt x 301.125pt>
+) [4
+
+]
+<./Immagini/Dati/MLSlogo.png, id=135, 301.125pt x 301.125pt>
 File: ./Immagini/Dati/MLSlogo.png Graphic file (type png)
 
 <use ./Immagini/Dati/MLSlogo.png>
-Package pdftex.def Info: ./Immagini/Dati/MLSlogo.png used on input line 48.
+Package pdftex.def Info: ./Immagini/Dati/MLSlogo.png used on input line 45.
 (pdftex.def)             Requested size: 126.00128pt x 126.00296pt.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 49.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 46.
 
-<./Immagini/Dati/appmap.jpg, id=133, 1284.8pt x 803.0pt>
+<./Immagini/Dati/appmap.jpg, id=137, 1284.8pt x 803.0pt>
 File: ./Immagini/Dati/appmap.jpg Graphic file (type jpg)
 
 <use ./Immagini/Dati/appmap.jpg>
-Package pdftex.def Info: ./Immagini/Dati/appmap.jpg used on input line 59.
+Package pdftex.def Info: ./Immagini/Dati/appmap.jpg used on input line 55.
 (pdftex.def)             Requested size: 336.00128pt x 210.00035pt.
  [5 <./Immagini/Dati/MLSlogo.png>]
-<./Immagini/Dati/MLSmap.png, id=141, 685.85648pt x 422.99207pt>
+<./Immagini/Dati/MLSmap.png, id=145, 685.85648pt x 422.99207pt>
 File: ./Immagini/Dati/MLSmap.png Graphic file (type png)
 
 <use ./Immagini/Dati/MLSmap.png>
-Package pdftex.def Info: ./Immagini/Dati/MLSmap.png used on input line 71.
+Package pdftex.def Info: ./Immagini/Dati/MLSmap.png used on input line 67.
 (pdftex.def)             Requested size: 336.00128pt x 207.22273pt.
 
-Overfull \hbox (23.69992pt too wide) in paragraph at lines 94--94
+Overfull \hbox (23.69992pt too wide) in paragraph at lines 90--90
  [][] 
  []
 
 
-Overfull \hbox (18.32393pt too wide) in paragraph at lines 109--109
+Overfull \hbox (18.32393pt too wide) in paragraph at lines 105--105
  [][] 
  []
 
@@ -1418,67 +1424,72 @@ Overfull \hbox (18.32393pt too wide) in paragraph at lines 109--109
 [7] [8
 
 ]
-LaTeX Font Info:    Try loading font information for T1+fvm on input line 179.
+LaTeX Font Info:    Try loading font information for T1+fvm on input line 174.
  (/usr/share/texlive/texmf-dist/tex/latex/bera/t1fvm.fd
 File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
 )
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
-(Font)              scaled to size 9.85492pt on input line 179.
+(Font)              scaled to size 9.85492pt on input line 174.
  [9]
 LaTeX Font Info:    Font shape `T1/fvm/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/fvm/b/n' tried instead on input line 206.
+(Font)              Font shape `T1/fvm/b/n' tried instead on input line 201.
 LaTeX Font Info:    Font shape `T1/fvm/b/n' will be
-(Font)              scaled to size 9.85492pt on input line 206.
+(Font)              scaled to size 9.85492pt on input line 201.
  [10]
-<./Immagini/Dati/roma.pdf, id=178, 621.00446pt x 593.23506pt>
+<./Immagini/Dati/roma.pdf, id=181, 621.00446pt x 593.23506pt>
 File: ./Immagini/Dati/roma.pdf Graphic file (type pdf)
 
 <use ./Immagini/Dati/roma.pdf>
-Package pdftex.def Info: ./Immagini/Dati/roma.pdf used on input line 231.
+Package pdftex.def Info: ./Immagini/Dati/roma.pdf used on input line 241.
 (pdftex.def)             Requested size: 210.0pt x 200.60196pt.
 
-<./Immagini/Dati/Ourmap.png, id=179, 641.92764pt x 632.00824pt>
+<./Immagini/Dati/Ourmap.png, id=182, 641.92764pt x 660.34941pt>
 File: ./Immagini/Dati/Ourmap.png Graphic file (type png)
 
 <use ./Immagini/Dati/Ourmap.png>
-Package pdftex.def Info: ./Immagini/Dati/Ourmap.png used on input line 253.
-(pdftex.def)             Requested size: 210.0pt x 206.75035pt.
+Package pdftex.def Info: ./Immagini/Dati/Ourmap.png used on input line 244.
+(pdftex.def)             Requested size: 193.20282pt x 198.74113pt.
  [11
 
- <./Immagini/Dati/roma.pdf>]
-<./Immagini/Dati/logbin.pdf, id=245, 627.23843pt x 624.32877pt>
+ <./Immagini/Dati/roma.pdf> <./Immagini/Dati/Ourmap.png>] <./Immagini/Dati/logb
+in.pdf, id=251, 627.23843pt x 624.32877pt>
 File: ./Immagini/Dati/logbin.pdf Graphic file (type pdf)
 
 <use ./Immagini/Dati/logbin.pdf>
-Package pdftex.def Info: ./Immagini/Dati/logbin.pdf used on input line 272.
-(pdftex.def)             Requested size: 210.0pt x 209.02043pt.
- [12 <./Immagini/Dati/Ourmap.png (PNG copy)> <./Immagini/Dati/logbin.pdf>]
-<./Immagini/Dati/rangefreqrank.pdf, id=265, 1185.0412pt x 624.32877pt>
+Package pdftex.def Info: ./Immagini/Dati/logbin.pdf used on input line 264.
+(pdftex.def)             Requested size: 201.5982pt x 200.65619pt.
+
+<./Immagini/Dati/rangefreqrank.pdf, id=252, 1185.0412pt x 624.32877pt>
 File: ./Immagini/Dati/rangefreqrank.pdf Graphic file (type pdf)
 
 <use ./Immagini/Dati/rangefreqrank.pdf>
 Package pdftex.def Info: ./Immagini/Dati/rangefreqrank.pdf used on input line 2
-85.
-(pdftex.def)             Requested size: 336.00128pt x 177.01147pt.
-) (./Paragrafi/Teoria.tex [13 <./Immagini/Dati/rangefreqrank.pdf>] [14
+67.
+(pdftex.def)             Requested size: 252.00256pt x 132.76099pt.
+) (./Paragrafi/Teoria.tex [12 <./Immagini/Dati/logbin.pdf> <./Immagini/Dati/ran
+gefreqrank.pdf
 
-] [15]
-<./Immagini/Dati/degreeDistribution.pdf, id=298, 736.65816pt x 568.31946pt>
+pdfTeX warning: /usr/bin/pdflatex (file ./Immagini/Dati/rangefreqrank.pdf): PDF
+ inclusion: multiple pdfs with page group included in a single page
+>] [13
+
+] [14]
+<./Immagini/Dati/degreeDistribution.pdf, id=296, 736.65816pt x 568.31946pt>
 File: ./Immagini/Dati/degreeDistribution.pdf Graphic file (type pdf)
 
 <use ./Immagini/Dati/degreeDistribution.pdf>
 Package pdftex.def Info: ./Immagini/Dati/degreeDistribution.pdf used on input l
-ine 53.
+ine 55.
 (pdftex.def)             Requested size: 336.00128pt x 259.2188pt.
- [16 <./Immagini/Dati/degreeDistribution.pdf>] <./Immagini/Dati/kfreqrank.pdf, 
-id=325, 736.48906pt x 509.99472pt>
+ [15 <./Immagini/Dati/degreeDistribution.pdf>] <./Immagini/Dati/kfreqrank.pdf, 
+id=323, 736.48906pt x 509.99472pt>
 File: ./Immagini/Dati/kfreqrank.pdf Graphic file (type pdf)
 
 <use ./Immagini/Dati/kfreqrank.pdf>
-Package pdftex.def Info: ./Immagini/Dati/kfreqrank.pdf used on input line 64.
+Package pdftex.def Info: ./Immagini/Dati/kfreqrank.pdf used on input line 70.
 (pdftex.def)             Requested size: 336.00128pt x 232.6705pt.
- [17 <./Immagini/Dati/kfreqrank.pdf>]
-[18]
+ [16 <./Immagini/Dati/kfreqrank.pdf>]
+[17]
 Package epstopdf Info: Source file: <./Immagini/Teoria/zoomring.eps>
 (epstopdf)                    date: 2016-03-03 13:41:25
 (epstopdf)                    size: 644228 bytes
@@ -1488,15 +1499,15 @@ o.pdf>
 (epstopdf)                    size: 561693 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Teoria/zoomring
 -eps-converted-to.pdf ./Immagini/Teoria/zoomring.eps>
-(epstopdf)             \includegraphics on input line 112.
+(epstopdf)             \includegraphics on input line 110.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/zoomring-eps-converted-to.pdf, id=365, 951.555pt x 897.3525p
+<./Immagini/Teoria/zoomring-eps-converted-to.pdf, id=364, 951.555pt x 897.3525p
 t>
 File: ./Immagini/Teoria/zoomring-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Immagini/Teoria/zoomring-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Teoria/zoomring-eps-converted-to.pdf used o
-n input line 112.
+n input line 110.
 (pdftex.def)             Requested size: 167.99744pt x 158.42197pt.
 Package epstopdf Info: Source file: <./Immagini/Teoria/ringnet.eps>
 (epstopdf)                    date: 2016-03-14 04:48:18
@@ -1507,24 +1518,24 @@ Package epstopdf Info: Source file: <./Immagini/Teoria/ringnet.eps>
 (epstopdf)                    size: 14143 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Teoria/ringnet-
 eps-converted-to.pdf ./Immagini/Teoria/ringnet.eps>
-(epstopdf)             \includegraphics on input line 122.
+(epstopdf)             \includegraphics on input line 120.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/ringnet-eps-converted-to.pdf, id=367, 474.77374pt x 475.7775
+<./Immagini/Teoria/ringnet-eps-converted-to.pdf, id=366, 474.77374pt x 475.7775
 pt>
 File: ./Immagini/Teoria/ringnet-eps-converted-to.pdf Graphic file (type pdf)
  <use ./Immagini/Teoria/ringnet-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Teoria/ringnet-eps-converted-to.pdf used on
- input line 122.
+ input line 120.
 (pdftex.def)             Requested size: 126.00128pt x 126.26918pt.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 122.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 120.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 122.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 120.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 122.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 120.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 122.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 120.
 Package epstopdf Info: Source file: <./Immagini/Teoria/smallworld.eps>
 (epstopdf)                    date: 2016-03-14 04:47:56
 (epstopdf)                    size: 74785 bytes
@@ -1534,16 +1545,16 @@ Package epstopdf Info: Source file: <./Immagini/Teoria/smallworld.eps>
 (epstopdf)                    size: 14146 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Teoria/smallwor
 ld-eps-converted-to.pdf ./Immagini/Teoria/smallworld.eps>
-(epstopdf)             \includegraphics on input line 125.
+(epstopdf)             \includegraphics on input line 123.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/smallworld-eps-converted-to.pdf, id=368, 474.77374pt x 475.7
+<./Immagini/Teoria/smallworld-eps-converted-to.pdf, id=367, 474.77374pt x 475.7
 775pt>
 File: ./Immagini/Teoria/smallworld-eps-converted-to.pdf Graphic file (type pdf)
 
  <use ./Immagini/Teoria/smallworld-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Teoria/smallworld-eps-converted-to.pdf used
- on input line 125.
+ on input line 123.
 (pdftex.def)             Requested size: 126.00128pt x 126.26918pt.
 Package epstopdf Info: Source file: <./Immagini/Teoria/random-smallworld1.eps>
 (epstopdf)                    date: 2016-03-14 04:46:19
@@ -1554,16 +1565,16 @@ onverted-to.pdf>
 (epstopdf)                    size: 17405 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Teoria/random-s
 mallworld1-eps-converted-to.pdf ./Immagini/Teoria/random-smallworld1.eps>
-(epstopdf)             \includegraphics on input line 128.
+(epstopdf)             \includegraphics on input line 126.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/random-smallworld1-eps-converted-to.pdf, id=369, 474.77374pt
+<./Immagini/Teoria/random-smallworld1-eps-converted-to.pdf, id=368, 474.77374pt
  x 475.7775pt>
 File: ./Immagini/Teoria/random-smallworld1-eps-converted-to.pdf Graphic file (t
 ype pdf)
  <use ./Immagini/Teoria/random-smallworld1-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Teoria/random-smallworld1-eps-converted-to.
-pdf used on input line 128.
+pdf used on input line 126.
 (pdftex.def)             Requested size: 126.00128pt x 126.26918pt.
 Package epstopdf Info: Source file: <./Immagini/Teoria/totalrandomwatts.eps>
 (epstopdf)                    date: 2016-03-14 04:47:41
@@ -1574,23 +1585,23 @@ verted-to.pdf>
 (epstopdf)                    size: 17474 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Teoria/totalran
 domwatts-eps-converted-to.pdf ./Immagini/Teoria/totalrandomwatts.eps>
-(epstopdf)             \includegraphics on input line 131.
+(epstopdf)             \includegraphics on input line 129.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/totalrandomwatts-eps-converted-to.pdf, id=370, 474.77374pt x
+<./Immagini/Teoria/totalrandomwatts-eps-converted-to.pdf, id=369, 474.77374pt x
  475.7775pt>
 File: ./Immagini/Teoria/totalrandomwatts-eps-converted-to.pdf Graphic file (typ
 e pdf)
  <use ./Immagini/Teoria/totalrandomwatts-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Teoria/totalrandomwatts-eps-converted-to.pd
-f used on input line 131.
+f used on input line 129.
 (pdftex.def)             Requested size: 126.00128pt x 126.26918pt.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 132.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 130.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 132.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 130.
 
-[19
+[18
 
  <./Immagini/Teoria/zoomring-eps-converted-to.pdf> <./Immagini/Teoria/ringnet-e
 ps-converted-to.pdf> <./Immagini/Teoria/smallworld-eps-converted-to.pdf> <./Imm
@@ -1605,16 +1616,16 @@ Package epstopdf Info: Source file: <./Immagini/Teoria/Erdosmodel.eps>
 (epstopdf)                    size: 3610076 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Teoria/Erdosmod
 el-eps-converted-to.pdf ./Immagini/Teoria/Erdosmodel.eps>
-(epstopdf)             \includegraphics on input line 142.
+(epstopdf)             \includegraphics on input line 139.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/Erdosmodel-eps-converted-to.pdf, id=775, 889.3225pt x 953.56
+<./Immagini/Teoria/Erdosmodel-eps-converted-to.pdf, id=773, 889.3225pt x 953.56
 25pt>
 File: ./Immagini/Teoria/Erdosmodel-eps-converted-to.pdf Graphic file (type pdf)
 
  <use ./Immagini/Teoria/Erdosmodel-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Teoria/Erdosmodel-eps-converted-to.pdf used
- on input line 142.
+ on input line 139.
 (pdftex.def)             Requested size: 126.00128pt x 135.09836pt.
 Package epstopdf Info: Source file: <./Immagini/Teoria/Wattsmodel.eps>
 (epstopdf)                    date: 2016-03-08 17:56:20
@@ -1625,16 +1636,16 @@ Package epstopdf Info: Source file: <./Immagini/Teoria/Wattsmodel.eps>
 (epstopdf)                    size: 3406077 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Teoria/Wattsmod
 el-eps-converted-to.pdf ./Immagini/Teoria/Wattsmodel.eps>
-(epstopdf)             \includegraphics on input line 145.
+(epstopdf)             \includegraphics on input line 142.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/Wattsmodel-eps-converted-to.pdf, id=776, 953.5625pt x 949.54
+<./Immagini/Teoria/Wattsmodel-eps-converted-to.pdf, id=774, 953.5625pt x 949.54
 75pt>
 File: ./Immagini/Teoria/Wattsmodel-eps-converted-to.pdf Graphic file (type pdf)
 
  <use ./Immagini/Teoria/Wattsmodel-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Teoria/Wattsmodel-eps-converted-to.pdf used
- on input line 145.
+ on input line 142.
 (pdftex.def)             Requested size: 126.00128pt x 125.45946pt.
 Package epstopdf Info: Source file: <./Immagini/Teoria/ComparGradeModel.eps>
 (epstopdf)                    date: 2016-03-09 00:27:20
@@ -1645,19 +1656,19 @@ verted-to.pdf>
 (epstopdf)                    size: 16636 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Teoria/ComparGr
 adeModel-eps-converted-to.pdf ./Immagini/Teoria/ComparGradeModel.eps>
-(epstopdf)             \includegraphics on input line 148.
+(epstopdf)             \includegraphics on input line 145.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/ComparGradeModel-eps-converted-to.pdf, id=777, 710.655pt x 5
+<./Immagini/Teoria/ComparGradeModel-eps-converted-to.pdf, id=775, 710.655pt x 5
 48.0475pt>
 File: ./Immagini/Teoria/ComparGradeModel-eps-converted-to.pdf Graphic file (typ
 e pdf)
  <use ./Immagini/Teoria/ComparGradeModel-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Teoria/ComparGradeModel-eps-converted-to.pd
-f used on input line 148.
+f used on input line 145.
 (pdftex.def)             Requested size: 336.00128pt x 259.12943pt.
 
-[20
+[19
 
  <./Immagini/Teoria/Erdosmodel-eps-converted-to.pdf> <./Immagini/Teoria/Wattsmo
 del-eps-converted-to.pdf> <./Immagini/Teoria/ComparGradeModel-eps-converted-to.
@@ -1671,26 +1682,32 @@ Package epstopdf Info: Source file: <./Immagini/Teoria/confrontoC.eps>
 (epstopdf)                    size: 7135 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Teoria/confront
 oC-eps-converted-to.pdf ./Immagini/Teoria/confrontoC.eps>
-(epstopdf)             \includegraphics on input line 165.
+(epstopdf)             \includegraphics on input line 160.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/confrontoC-eps-converted-to.pdf, id=843, 569.12625pt x 426.5
+<./Immagini/Teoria/confrontoC-eps-converted-to.pdf, id=842, 569.12625pt x 426.5
 9375pt>
 File: ./Immagini/Teoria/confrontoC-eps-converted-to.pdf Graphic file (type pdf)
 
  <use ./Immagini/Teoria/confrontoC-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Teoria/confrontoC-eps-converted-to.pdf used
- on input line 165.
+ on input line 160.
 (pdftex.def)             Requested size: 252.00256pt x 188.89302pt.
- [21 <./Immagini/Teoria/confrontoC-eps-converted-to.pdf>]
-<./Immagini/Teoria/Barabalbert1.pdf, id=858, 1003.75pt x 1003.75pt>
+ [20 <./Immagini/Teoria/confrontoC-eps-converted-to.pdf>]
+Overfull \hbox (7.86533pt too wide) in paragraph at lines 170--171
+[]\T1/ptm/m/n/12 Le re-ti ran-dom pos-so-no ri-pro-dur-re una $\OML/ptmcm/m/it/
+12 P\OT1/ptmcm/m/n/12 (\OML/ptmcm/m/it/12 k\OT1/ptmcm/m/n/12 )$ \T1/ptm/m/n/12 
+ar-bi-tra-ria, e quin-di an-che una <em>power-
+ []
+
+<./Immagini/Teoria/Barabalbert1.pdf, id=857, 1003.75pt x 1003.75pt>
 File: ./Immagini/Teoria/Barabalbert1.pdf Graphic file (type pdf)
 
 <use ./Immagini/Teoria/Barabalbert1.pdf>
 Package pdftex.def Info: ./Immagini/Teoria/Barabalbert1.pdf used on input line 
 178.
 (pdftex.def)             Requested size: 377.99744pt x 377.99818pt.
- [22 <./Immagini/Teoria/Barabalbert1.pdf>]
+ [21]
 Package epstopdf Info: Source file: <./Immagini/Teoria/compareSameN.eps>
 (epstopdf)                    date: 2016-03-08 21:14:14
 (epstopdf)                    size: 51299 bytes
@@ -1700,57 +1717,57 @@ ed-to.pdf>
 (epstopdf)                    size: 19608 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Teoria/compareS
 ameN-eps-converted-to.pdf ./Immagini/Teoria/compareSameN.eps>
-(epstopdf)             \includegraphics on input line 201.
+(epstopdf)             \includegraphics on input line 199.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Teoria/compareSameN-eps-converted-to.pdf, id=91459, 934.49126pt x 5
-48.0475pt>
+<./Immagini/Teoria/compareSameN-eps-converted-to.pdf, id=865, 934.49126pt x 548
+.0475pt>
 File: ./Immagini/Teoria/compareSameN-eps-converted-to.pdf Graphic file (type pd
 f)
  <use ./Immagini/Teoria/compareSameN-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Teoria/compareSameN-eps-converted-to.pdf us
-ed on input line 201.
+ed on input line 199.
 (pdftex.def)             Requested size: 377.99744pt x 221.68205pt.
- [23]
-[24 <./Immagini/Teoria/compareSameN-eps-converted-to.pdf>] [25
+ [22 <./Immagini/Teoria/Barabalbert1.pdf>] [23 <./Immagini/Teoria/compareSameN-
+eps-converted-to.pdf>] [24
 
 ]
-<./Immagini/Teoria/banale.pdf, id=91482, 372.07457pt x 301.25674pt>
+<./Immagini/Teoria/banale.pdf, id=91479, 372.07457pt x 301.25674pt>
 File: ./Immagini/Teoria/banale.pdf Graphic file (type pdf)
 
 <use ./Immagini/Teoria/banale.pdf>
-Package pdftex.def Info: ./Immagini/Teoria/banale.pdf used on input line 228.
+Package pdftex.def Info: ./Immagini/Teoria/banale.pdf used on input line 233.
 (pdftex.def)             Requested size: 167.99744pt x 136.02396pt.
 
-<./Immagini/Teoria/nonbanale.pdf, id=91483, 372.07457pt x 302.06755pt>
+<./Immagini/Teoria/nonbanale.pdf, id=91480, 372.07457pt x 302.06755pt>
 File: ./Immagini/Teoria/nonbanale.pdf Graphic file (type pdf)
 
 <use ./Immagini/Teoria/nonbanale.pdf>
-Package pdftex.def Info: ./Immagini/Teoria/nonbanale.pdf used on input line 231
+Package pdftex.def Info: ./Immagini/Teoria/nonbanale.pdf used on input line 236
 .
 (pdftex.def)             Requested size: 167.99744pt x 136.39005pt.
- [26 <./Immagini/Teoria/banale.pdf> <./Immagini/Teoria/nonbanale.pdf
+ [25 <./Immagini/Teoria/banale.pdf> <./Immagini/Teoria/nonbanale.pdf
 
 pdfTeX warning: /usr/bin/pdflatex (file ./Immagini/Teoria/nonbanale.pdf): PDF i
 nclusion: multiple pdfs with page group included in a single page
->]) (./Paragrafi/Attack.tex [27] [28
+>]) (./Paragrafi/Attack.tex [26] [27
 
 ]
-<./Immagini/Attack/meme_Leonida.jpg, id=91525, 622.325pt x 349.305pt>
+<./Immagini/Attack/meme_Leonida.jpg, id=91522, 622.325pt x 349.305pt>
 File: ./Immagini/Attack/meme_Leonida.jpg Graphic file (type jpg)
 
 <use ./Immagini/Attack/meme_Leonida.jpg>
 Package pdftex.def Info: ./Immagini/Attack/meme_Leonida.jpg used on input line 
-38.
-(pdftex.def)             Requested size: 210.0pt x 117.87202pt.
- [29 <./Immagini/Attack/meme_Leonida.jpg>] <./Immagini/Attack/meme_Boromir.jpg,
- id=91536, 891.33pt x 500.87125pt>
+36.
+(pdftex.def)             Requested size: 231.00128pt x 129.65656pt.
+ [28 <./Immagini/Attack/meme_Leonida.jpg>] <./Immagini/Attack/meme_Boromir.jpg,
+ id=91533, 891.33pt x 500.87125pt>
 File: ./Immagini/Attack/meme_Boromir.jpg Graphic file (type jpg)
 
 <use ./Immagini/Attack/meme_Boromir.jpg>
 Package pdftex.def Info: ./Immagini/Attack/meme_Boromir.jpg used on input line 
-60.
-(pdftex.def)             Requested size: 210.0pt x 118.0028pt.
+58.
+(pdftex.def)             Requested size: 231.00128pt x 129.8031pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/AttackGC_Compare.eps>
 (epstopdf)                    date: 2016-03-14 00:39:04
 (epstopdf)                    size: 727099 bytes
@@ -1760,39 +1777,40 @@ verted-to.pdf>
 (epstopdf)                    size: 792676 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/AttackGC
 _Compare-eps-converted-to.pdf ./Immagini/Attack/AttackGC_Compare.eps>
-(epstopdf)             \includegraphics on input line 81.
+(epstopdf)             \includegraphics on input line 77.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Attack/AttackGC_Compare-eps-converted-to.pdf, id=91537, 865.2325pt 
+<./Immagini/Attack/AttackGC_Compare-eps-converted-to.pdf, id=91534, 865.2325pt 
 x 650.43pt>
 File: ./Immagini/Attack/AttackGC_Compare-eps-converted-to.pdf Graphic file (typ
 e pdf)
  <use ./Immagini/Attack/AttackGC_Compare-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/AttackGC_Compare-eps-converted-to.pd
-f used on input line 81.
-(pdftex.def)             Requested size: 252.00256pt x 189.43369pt.
+f used on input line 77.
+(pdftex.def)             Requested size: 272.99744pt x 205.22397pt.
 
-[30 <./Immagini/Attack/meme_Boromir.jpg>] [31 <./Immagini/Attack/AttackGC_Compa
+[29 <./Immagini/Attack/meme_Boromir.jpg>] [30 <./Immagini/Attack/AttackGC_Compa
 re-eps-converted-to.pdf>]
-<./Immagini/Attack/meme_Obama.jpg, id=91585, 691.58376pt x 501.875pt>
+<./Immagini/Attack/meme_Obama.jpg, id=91581, 691.58376pt x 501.875pt>
 File: ./Immagini/Attack/meme_Obama.jpg Graphic file (type jpg)
 
 <use ./Immagini/Attack/meme_Obama.jpg>
 Package pdftex.def Info: ./Immagini/Attack/meme_Obama.jpg used on input line 11
-8.
-(pdftex.def)             Requested size: 210.0pt x 152.3939pt.
- [32 <./Immagini/Attack/meme_Obama.jpg>]
+4.
+(pdftex.def)             Requested size: 231.00128pt x 167.6333pt.
+ [31 <./Immagini/Attack/meme_Obama.jpg>]
+[32]
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolFailureGC_Final.eps
 >
-(epstopdf)                    date: 2016-03-13 13:56:21
+(epstopdf)                    date: 2016-03-14 16:59:51
 (epstopdf)                    size: 41381 bytes
 (epstopdf)             Output file: <./Immagini/Attack/gToolFailureGC_Final-eps
 -converted-to.pdf>
-(epstopdf)                    date: 2016-03-13 20:43:03
+(epstopdf)                    date: 2016-03-15 13:02:59
 (epstopdf)                    size: 76595 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolFai
 lureGC_Final-eps-converted-to.pdf ./Immagini/Attack/gToolFailureGC_Final.eps>
-(epstopdf)             \includegraphics on input line 160.
+(epstopdf)             \includegraphics on input line 156.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Immagini/Attack/gToolFailureGC_Final-eps-converted-to.pdf, id=91594, 865.232
@@ -1802,19 +1820,19 @@ File: ./Immagini/Attack/gToolFailureGC_Final-eps-converted-to.pdf Graphic file
 
 <use ./Immagini/Attack/gToolFailureGC_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolFailureGC_Final-eps-converted-t
-o.pdf used on input line 160.
+o.pdf used on input line 156.
 (pdftex.def)             Requested size: 197.40051pt x 148.39485pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolFailureC_Final.eps>
 
-(epstopdf)                    date: 2016-03-13 13:56:21
+(epstopdf)                    date: 2016-03-14 16:59:52
 (epstopdf)                    size: 41299 bytes
 (epstopdf)             Output file: <./Immagini/Attack/gToolFailureC_Final-eps-
 converted-to.pdf>
-(epstopdf)                    date: 2016-03-13 20:43:04
-(epstopdf)                    size: 88218 bytes
+(epstopdf)                    date: 2016-03-15 13:02:59
+(epstopdf)                    size: 88212 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolFai
 lureC_Final-eps-converted-to.pdf ./Immagini/Attack/gToolFailureC_Final.eps>
-(epstopdf)             \includegraphics on input line 163.
+(epstopdf)             \includegraphics on input line 159.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Immagini/Attack/gToolFailureC_Final-eps-converted-to.pdf, id=91595, 865.2325
@@ -1824,41 +1842,40 @@ type pdf)
 
 <use ./Immagini/Attack/gToolFailureC_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolFailureC_Final-eps-converted-to
-.pdf used on input line 163.
+.pdf used on input line 159.
 (pdftex.def)             Requested size: 197.40051pt x 148.39485pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolFailurel_Final.eps>
 
-(epstopdf)                    date: 2016-03-13 13:56:21
-(epstopdf)                    size: 42593 bytes
+(epstopdf)                    date: 2016-03-14 17:01:02
+(epstopdf)                    size: 43488 bytes
 (epstopdf)             Output file: <./Immagini/Attack/gToolFailurel_Final-eps-
 converted-to.pdf>
-(epstopdf)                    date: 2016-03-13 20:43:04
-(epstopdf)                    size: 89200 bytes
+(epstopdf)                    date: 2016-03-15 13:03:00
+(epstopdf)                    size: 89954 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolFai
 lurel_Final-eps-converted-to.pdf ./Immagini/Attack/gToolFailurel_Final.eps>
-(epstopdf)             \includegraphics on input line 166.
+(epstopdf)             \includegraphics on input line 162.
 Package epstopdf Info: Output file is already uptodate.
 
-<./Immagini/Attack/gToolFailurel_Final-eps-converted-to.pdf, id=91596, 865.2325
-pt x 650.43pt>
+<./Immagini/Attack/gToolFailurel_Final-eps-converted-to.pdf, id=91596, 951.555p
+t x 650.43pt>
 File: ./Immagini/Attack/gToolFailurel_Final-eps-converted-to.pdf Graphic file (
 type pdf)
-
-<use ./Immagini/Attack/gToolFailurel_Final-eps-converted-to.pdf>
+ <use ./Immagini/Attack/gToolFailurel_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolFailurel_Final-eps-converted-to
-.pdf used on input line 166.
-(pdftex.def)             Requested size: 197.40051pt x 148.39485pt.
+.pdf used on input line 162.
+(pdftex.def)             Requested size: 197.40051pt x 134.92697pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolFailureD_Final.eps>
 
-(epstopdf)                    date: 2016-03-13 13:56:20
-(epstopdf)                    size: 38753 bytes
+(epstopdf)                    date: 2016-03-14 16:59:51
+(epstopdf)                    size: 38748 bytes
 (epstopdf)             Output file: <./Immagini/Attack/gToolFailureD_Final-eps-
 converted-to.pdf>
-(epstopdf)                    date: 2016-03-13 20:43:05
-(epstopdf)                    size: 72168 bytes
+(epstopdf)                    date: 2016-03-15 13:03:00
+(epstopdf)                    size: 72165 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolFai
 lureD_Final-eps-converted-to.pdf ./Immagini/Attack/gToolFailureD_Final.eps>
-(epstopdf)             \includegraphics on input line 169.
+(epstopdf)             \includegraphics on input line 165.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Immagini/Attack/gToolFailureD_Final-eps-converted-to.pdf, id=91597, 865.2325
@@ -1868,19 +1885,19 @@ type pdf)
 
 <use ./Immagini/Attack/gToolFailureD_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolFailureD_Final-eps-converted-to
-.pdf used on input line 169.
+.pdf used on input line 165.
 (pdftex.def)             Requested size: 197.40051pt x 148.39485pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolFailurek_Final.eps>
 
-(epstopdf)                    date: 2016-03-13 13:56:22
+(epstopdf)                    date: 2016-03-14 16:59:52
 (epstopdf)                    size: 41316 bytes
 (epstopdf)             Output file: <./Immagini/Attack/gToolFailurek_Final-eps-
 converted-to.pdf>
-(epstopdf)                    date: 2016-03-13 20:43:05
+(epstopdf)                    date: 2016-03-15 13:03:01
 (epstopdf)                    size: 89622 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolFai
 lurek_Final-eps-converted-to.pdf ./Immagini/Attack/gToolFailurek_Final.eps>
-(epstopdf)             \includegraphics on input line 172.
+(epstopdf)             \includegraphics on input line 168.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Immagini/Attack/gToolFailurek_Final-eps-converted-to.pdf, id=91598, 865.2325
@@ -1890,19 +1907,19 @@ type pdf)
 
 <use ./Immagini/Attack/gToolFailurek_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolFailurek_Final-eps-converted-to
-.pdf used on input line 172.
+.pdf used on input line 168.
 (pdftex.def)             Requested size: 197.40051pt x 148.39485pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolFailurec_Final.eps>
 
-(epstopdf)                    date: 2016-03-13 13:56:22
+(epstopdf)                    date: 2016-03-14 16:59:53
 (epstopdf)                    size: 32119 bytes
 (epstopdf)             Output file: <./Immagini/Attack/gToolFailurec_Final-eps-
 converted-to.pdf>
-(epstopdf)                    date: 2016-03-13 20:43:06
-(epstopdf)                    size: 33213 bytes
+(epstopdf)                    date: 2016-03-15 13:03:02
+(epstopdf)                    size: 33221 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolFai
 lurec_Final-eps-converted-to.pdf ./Immagini/Attack/gToolFailurec_Final.eps>
-(epstopdf)             \includegraphics on input line 175.
+(epstopdf)             \includegraphics on input line 171.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Immagini/Attack/gToolFailurec_Final-eps-converted-to.pdf, id=91599, 865.2325
@@ -1912,19 +1929,19 @@ type pdf)
 
 <use ./Immagini/Attack/gToolFailurec_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolFailurec_Final-eps-converted-to
-.pdf used on input line 175.
+.pdf used on input line 171.
 (pdftex.def)             Requested size: 197.40051pt x 148.39485pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolAttackGC_Final.eps>
 
-(epstopdf)                    date: 2016-03-13 14:01:05
-(epstopdf)                    size: 41841 bytes
+(epstopdf)                    date: 2016-03-14 16:55:31
+(epstopdf)                    size: 32655 bytes
 (epstopdf)             Output file: <./Immagini/Attack/gToolAttackGC_Final-eps-
 converted-to.pdf>
-(epstopdf)                    date: 2016-03-13 20:43:06
-(epstopdf)                    size: 90534 bytes
+(epstopdf)                    date: 2016-03-15 13:03:02
+(epstopdf)                    size: 87920 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolAtt
 ackGC_Final-eps-converted-to.pdf ./Immagini/Attack/gToolAttackGC_Final.eps>
-(epstopdf)             \includegraphics on input line 183.
+(epstopdf)             \includegraphics on input line 179.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Immagini/Attack/gToolAttackGC_Final-eps-converted-to.pdf, id=91600, 865.2325
@@ -1934,18 +1951,18 @@ type pdf)
 
 <use ./Immagini/Attack/gToolAttackGC_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolAttackGC_Final-eps-converted-to
-.pdf used on input line 183.
+.pdf used on input line 179.
 (pdftex.def)             Requested size: 197.40051pt x 148.39485pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolAttackC_Final.eps>
-(epstopdf)                    date: 2016-03-13 14:01:06
-(epstopdf)                    size: 41430 bytes
+(epstopdf)                    date: 2016-03-14 16:55:32
+(epstopdf)                    size: 31420 bytes
 (epstopdf)             Output file: <./Immagini/Attack/gToolAttackC_Final-eps-c
 onverted-to.pdf>
-(epstopdf)                    date: 2016-03-13 20:43:07
-(epstopdf)                    size: 84471 bytes
+(epstopdf)                    date: 2016-03-15 13:03:03
+(epstopdf)                    size: 81078 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolAtt
 ackC_Final-eps-converted-to.pdf ./Immagini/Attack/gToolAttackC_Final.eps>
-(epstopdf)             \includegraphics on input line 186.
+(epstopdf)             \includegraphics on input line 182.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Immagini/Attack/gToolAttackC_Final-eps-converted-to.pdf, id=91601, 865.2325p
@@ -1954,18 +1971,18 @@ File: ./Immagini/Attack/gToolAttackC_Final-eps-converted-to.pdf Graphic file (t
 ype pdf)
  <use ./Immagini/Attack/gToolAttackC_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolAttackC_Final-eps-converted-to.
-pdf used on input line 186.
+pdf used on input line 182.
 (pdftex.def)             Requested size: 197.40051pt x 148.39485pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolAttackl_Final.eps>
-(epstopdf)                    date: 2016-03-13 14:01:06
-(epstopdf)                    size: 42395 bytes
+(epstopdf)                    date: 2016-03-14 16:55:31
+(epstopdf)                    size: 31902 bytes
 (epstopdf)             Output file: <./Immagini/Attack/gToolAttackl_Final-eps-c
 onverted-to.pdf>
-(epstopdf)                    date: 2016-03-13 20:43:07
-(epstopdf)                    size: 87049 bytes
+(epstopdf)                    date: 2016-03-15 13:03:04
+(epstopdf)                    size: 83052 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolAtt
 ackl_Final-eps-converted-to.pdf ./Immagini/Attack/gToolAttackl_Final.eps>
-(epstopdf)             \includegraphics on input line 189.
+(epstopdf)             \includegraphics on input line 185.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Immagini/Attack/gToolAttackl_Final-eps-converted-to.pdf, id=91602, 865.2325p
@@ -1974,18 +1991,18 @@ File: ./Immagini/Attack/gToolAttackl_Final-eps-converted-to.pdf Graphic file (t
 ype pdf)
  <use ./Immagini/Attack/gToolAttackl_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolAttackl_Final-eps-converted-to.
-pdf used on input line 189.
+pdf used on input line 185.
 (pdftex.def)             Requested size: 197.40051pt x 148.39485pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolAttackD_Final.eps>
-(epstopdf)                    date: 2016-03-13 14:01:05
-(epstopdf)                    size: 40988 bytes
+(epstopdf)                    date: 2016-03-14 16:55:31
+(epstopdf)                    size: 31410 bytes
 (epstopdf)             Output file: <./Immagini/Attack/gToolAttackD_Final-eps-c
 onverted-to.pdf>
-(epstopdf)                    date: 2016-03-13 20:43:07
-(epstopdf)                    size: 80930 bytes
+(epstopdf)                    date: 2016-03-15 13:03:04
+(epstopdf)                    size: 77903 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolAtt
 ackD_Final-eps-converted-to.pdf ./Immagini/Attack/gToolAttackD_Final.eps>
-(epstopdf)             \includegraphics on input line 192.
+(epstopdf)             \includegraphics on input line 188.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Immagini/Attack/gToolAttackD_Final-eps-converted-to.pdf, id=91603, 865.2325p
@@ -1994,18 +2011,18 @@ File: ./Immagini/Attack/gToolAttackD_Final-eps-converted-to.pdf Graphic file (t
 ype pdf)
  <use ./Immagini/Attack/gToolAttackD_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolAttackD_Final-eps-converted-to.
-pdf used on input line 192.
+pdf used on input line 188.
 (pdftex.def)             Requested size: 197.40051pt x 148.39485pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolAttackk_Final.eps>
-(epstopdf)                    date: 2016-03-13 14:01:06
-(epstopdf)                    size: 40310 bytes
+(epstopdf)                    date: 2016-03-14 16:55:32
+(epstopdf)                    size: 29980 bytes
 (epstopdf)             Output file: <./Immagini/Attack/gToolAttackk_Final-eps-c
 onverted-to.pdf>
-(epstopdf)                    date: 2016-03-13 20:43:08
-(epstopdf)                    size: 87015 bytes
+(epstopdf)                    date: 2016-03-15 13:03:05
+(epstopdf)                    size: 83164 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolAtt
 ackk_Final-eps-converted-to.pdf ./Immagini/Attack/gToolAttackk_Final.eps>
-(epstopdf)             \includegraphics on input line 195.
+(epstopdf)             \includegraphics on input line 191.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Immagini/Attack/gToolAttackk_Final-eps-converted-to.pdf, id=91604, 865.2325p
@@ -2014,18 +2031,18 @@ File: ./Immagini/Attack/gToolAttackk_Final-eps-converted-to.pdf Graphic file (t
 ype pdf)
  <use ./Immagini/Attack/gToolAttackk_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolAttackk_Final-eps-converted-to.
-pdf used on input line 195.
+pdf used on input line 191.
 (pdftex.def)             Requested size: 197.40051pt x 148.39485pt.
 Package epstopdf Info: Source file: <./Immagini/Attack/gToolAttackc_Final.eps>
-(epstopdf)                    date: 2016-03-13 14:01:07
-(epstopdf)                    size: 33508 bytes
+(epstopdf)                    date: 2016-03-14 16:55:32
+(epstopdf)                    size: 23149 bytes
 (epstopdf)             Output file: <./Immagini/Attack/gToolAttackc_Final-eps-c
 onverted-to.pdf>
-(epstopdf)                    date: 2016-03-13 20:43:08
-(epstopdf)                    size: 47873 bytes
+(epstopdf)                    date: 2016-03-15 13:03:06
+(epstopdf)                    size: 44101 bytes
 (epstopdf)             Command: <repstopdf --outfile=./Immagini/Attack/gToolAtt
 ackc_Final-eps-converted-to.pdf ./Immagini/Attack/gToolAttackc_Final.eps>
-(epstopdf)             \includegraphics on input line 198.
+(epstopdf)             \includegraphics on input line 194.
 Package epstopdf Info: Output file is already uptodate.
 
 <./Immagini/Attack/gToolAttackc_Final-eps-converted-to.pdf, id=91605, 865.2325p
@@ -2034,25 +2051,27 @@ File: ./Immagini/Attack/gToolAttackc_Final-eps-converted-to.pdf Graphic file (t
 ype pdf)
  <use ./Immagini/Attack/gToolAttackc_Final-eps-converted-to.pdf>
 Package pdftex.def Info: ./Immagini/Attack/gToolAttackc_Final-eps-converted-to.
-pdf used on input line 198.
+pdf used on input line 194.
 (pdftex.def)             Requested size: 197.40051pt x 148.39485pt.
 
-[33] [34 <./Immagini/Attack/gToolFailureGC_Final-eps-converted-to.pdf> <./Immag
-ini/Attack/gToolFailureC_Final-eps-converted-to.pdf> <./Immagini/Attack/gToolFa
-ilurel_Final-eps-converted-to.pdf> <./Immagini/Attack/gToolFailureD_Final-eps-c
-onverted-to.pdf> <./Immagini/Attack/gToolFailurek_Final-eps-converted-to.pdf> <
-./Immagini/Attack/gToolFailurec_Final-eps-converted-to.pdf>] [35 <./Immagini/At
-tack/gToolAttackGC_Final-eps-converted-to.pdf> <./Immagini/Attack/gToolAttackC_
-Final-eps-converted-to.pdf> <./Immagini/Attack/gToolAttackl_Final-eps-converted
--to.pdf> <./Immagini/Attack/gToolAttackD_Final-eps-converted-to.pdf> <./Immagin
-i/Attack/gToolAttackk_Final-eps-converted-to.pdf> <./Immagini/Attack/gToolAttac
-kc_Final-eps-converted-to.pdf>]) [36
+[33
 
-]
-(./MaterialeInizialeFinale/Bibliografia.tex)
+ <./Immagini/Attack/gToolFailureGC_Final-eps-converted-to.pdf> <./Immagini/Atta
+ck/gToolFailureC_Final-eps-converted-to.pdf> <./Immagini/Attack/gToolFailurel_F
+inal-eps-converted-to.pdf> <./Immagini/Attack/gToolFailureD_Final-eps-converted
+-to.pdf> <./Immagini/Attack/gToolFailurek_Final-eps-converted-to.pdf> <./Immagi
+ni/Attack/gToolFailurec_Final-eps-converted-to.pdf>] [34 <./Immagini/Attack/gTo
+olAttackGC_Final-eps-converted-to.pdf> <./Immagini/Attack/gToolAttackC_Final-ep
+s-converted-to.pdf> <./Immagini/Attack/gToolAttackl_Final-eps-converted-to.pdf>
+ <./Immagini/Attack/gToolAttackD_Final-eps-converted-to.pdf> <./Immagini/Attack
+/gToolAttackk_Final-eps-converted-to.pdf> <./Immagini/Attack/gToolAttackc_Final
+-eps-converted-to.pdf>]) [35
+
+] (./MaterialeInizialeFinale/Bibliografia.tex)
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
 (Font)              scaled to size 10.79993pt on input line 10.
- [37
+
+[36
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 99.
@@ -2065,13 +2084,13 @@ Package logreq Info: Writing requests to 'Relazione.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18938 strings out of 493085
- 295585 string characters out of 6136916
- 766780 words of memory out of 5000000
- 21795 multiletter control sequences out of 15000+600000
+ 18942 strings out of 493085
+ 295590 string characters out of 6136916
+ 767567 words of memory out of 5000000
+ 21796 multiletter control sequences out of 15000+600000
  91666 words of font info for 148 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 44i,11n,67p,1154b,2582s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,11n,67p,1154b,1273s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
@@ -2084,10 +2103,10 @@ live/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
 /times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Relazione.pdf (37 pages, 22818247 bytes).
+Output written on Relazione.pdf (36 pages, 22963938 bytes).
 PDF statistics:
- 92208 PDF objects out of 95282 (max. 8388607)
- 60655 compressed objects within 607 object streams
+ 92170 PDF objects out of 95282 (max. 8388607)
+ 60650 compressed objects within 607 object streams
  171 named destinations out of 1000 (max. 500000)
- 383 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 391 words of extra memory for PDF output out of 10000 (max. 10000000)
 

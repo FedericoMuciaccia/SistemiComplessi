@@ -8,37 +8,34 @@
 \label{sec:gps}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Google Location Service}
-
-\subsubsection*{GPS and battery drain}
+\subsection{GPS and battery drain}
 La geolocalizzazione dei dispositivi, soprattutto quelli mobile, sta rapidamente diventando parte intergrante del nostro modo quotidiano di fruire la tecnologia. Si usa nel navigatore stradale, per impostare automaticamente il luogo di cui desideriamo le previsioni del tempo o da cui vogliamo prendere un treno o un aereo, per aggiungere informazioni contestuali alle fotografie che scattiamo e tanto altro ancora.
 
 Il modo storicamente utilizzato per effettuare la geolocalizzazione è per via satellitare, tramite il GPS. Ma il GPS ha due tipi di problemi:
 
 \begin{itemize}
  \item è \emph{davvero} lento ad agganciare un numero congruo di satelliti, tali da poter registrare una posizione accurata,
- \item consuma molta energia. 
+ \item consuma un ingente consumo di energia. 
 \end{itemize}
 
-Soprattutto il secondo punto è in palese conflitto con l'esigenza dei moderni dispositivi portabili di avere una ampia autonomia energerica.
+Soprattutto il secondo punto è in palese conflitto con l'esigenza dei moderni dispositivi portatili di avere un'ampia autonomia energerica. Per porre rimedio a questo fatto, Google ha via via comiciato ad utilizzare altri tipi alternativi di geolocalizzazione, per comporre un sistema ibrido.
 
-Per porre rimedio a questo fatto, Google ha via via comiciato ad utilizzare altri tipi alternativi di geolocalizzazione, per comporre un sistema ibrido.
 \begin{enumerate}
  \item Un primo grado di grossolana geolocalizzazione avviene tramite le celle della rete telefonica, a cui tutti gli smartphone sono connessi. La precisione è dell'ordine delle centinaia di metri.
  \item Un secondo grado, molto più accurato, viene realizzato tramite le reti wifi visibili in quell'istante dal dispositivo. La precisione è dell'ordine di qualche decina di metri.
- \item Infine, solo se il compito richiesto richiede una precisione ulteriore, si accende il GPS, per un risultato con la precisione inferiore al metro. Il cominciare da una stima della posizione più che accettabile riduce di molto la durata delle operazioni a GPS acceso, consentendo un drastico risparmio della batteria.
+ \item Infine, solo se il compito richiesto richiede una precisione ulteriore, si accende il GPS, per un risultato con la precisione inferiore al metro. Cominciare da una stima della posizione più che accettabile riduce di molto la durata delle operazioni a GPS acceso, consentendo un drastico risparmio della batteria.
 \end{enumerate}
 
 \subsubsection*{Geolocalization via WiFi}
-La diffusione del Wifi è ormai capillare, soprattutto in contesto cittadino. Virtualmente c'è un router WiFi in ogni appartamento. Mentre camminiamo per la città col WiFi dello smartphone acceso, captiamo in ogni punto decine di segnali. Se è nota la posizione di questi router e la potenza del segnale da loro emesso è possibile triangolare la nostra posizione con una notevole precisione, dovuta sia al fatto che un segnale WiFi ha un raggio tipico di una trentina di metri, sia dovuto all'ingente numero di segnali coi quali si sta triangolando, tipicamente più di una decina.
+La diffusione del Wifi è ormai capillare, soprattutto in contesto cittadino. Virtualmente c'è un router WiFi in ogni appartamento. Mentre camminiamo per la città con il WiFi dello smartphone acceso, captiamo in ogni punto decine di segnali. Se sono note la posizione di questi router e la potenza del segnale da loro emesso, è possibile triangolare la nostra posizione con una notevole precisione. Ciò è dovuto sia al fatto che un segnale WiFi ha un raggio tipico di una trentina di metri, sia per l'ingente numero di segnali con i quali si sta triangolando, tipicamente più di una decina.
 
 Quindi per sapere la mia posizione devo avere accesso a una mappa delle posizioni di tutti i router. E come si costruisce questa mappa? Esattamente al contrario: camminando per la città con GPS acceso, avendo dunque un'alta precisione sulla posizione del dispositivo, e triangolando la posizione di tutti i router visibili combinando tutte le rilevazioni del tracciato.
 
-Dunque Google ha mappato tutti i WiFi di tutto il globo per dare la possibilità agli utenti dei suoi servizi come Google Maps (e delle applicazioni che si appoggiano alle sue API) di ottenere la propria localizzazione con una buona precisione è un consumo di batteria risibile. La precisione è arrivata ad essere dell'ordine dei 5 metri e i tempi di accesso pressoché istantanei: di fatto rendendo inutile accendere il GPS nella maggior parte dei casi.
+Dunque Google ha mappato tutti i WiFi di tutto il globo per dare la possibilità agli utenti dei suoi servizi come Google Maps (e delle applicazioni che si appoggiano alle sue API) di ottenere la propria localizzazione con una buona precisione e un consumo di batteria risibile. La precisione è arrivata ad essere dell'ordine dei 5 metri e i tempi di accesso pressoché istantanei: di fatto rendendo inutile accendere il GPS nella maggior parte dei casi.
 
 Questo tipo di localizzazione ha inoltre un altro grande vantaggio: funziona anche sottoterra e dentro gli edifici, luoghi normalmente inaccessibili al segnale GPS, di natura satellitare.
 
-Ovviamente la mappa dei router WiFi è in continua evoluzione, per cui il modo più conveniente per redigerla è sfruttando il crowdsourcing: ai milioni di utenti ignari giornalmente in moto per la città viene acceso il GPS un paio di volte al giorno per pochi secondi, in un momento di inutilizzo del dispositivo, e in questo modo si crea velocemente una mappa complessiva e quotidianamente aggiornata, a beneficio di tutti.
+Ovviamente la mappa dei router WiFi è in continua evoluzione, per cui il modo più conveniente per redigerla è sfruttando il crowdsourcing: ai milioni di utenti ignari, giornalmente in moto per la città, viene acceso il GPS un paio di volte al giorno per pochi secondi, in un momento di inutilizzo del dispositivo, e in questo modo si crea velocemente una mappa complessiva e quotidianamente aggiornata, a beneficio di tutti.
 
 Tutto questo è tremendamente intelligente ed efficiente. C'è un solo grande problema: i dati sono chiusi.
 
@@ -48,8 +45,7 @@ Tutto questo è tremendamente intelligente ed efficiente. C'è un solo grande pr
 	\includegraphics[width=0.3\textwidth]{./Immagini/Dati/MLSlogo.png}
 	\caption{Logo del MLS}
 \end{wrapfloat}
-Mozilla è da sempre impegnata nello svilutto di tecnologie web aperte e standardizzate. Avendo riconosciuta la centralità della geolocalizzazione e la crescita esponenziale di siti ed 
-applicazioni location-aware, ha deciso di ricalcare le orme di Google e fondare il suo servizio di geolocalizzazione usando WiFi ed antenne cellulari: \citetitle{mozilla}.
+Mozilla è da sempre impegnata nello sviluppo di tecnologie web aperte e standardizzate. Avendo riconosciuta la centralità della geolocalizzazione e la crescita esponenziale di siti ed applicazioni location-aware, ha deciso di ricalcare le orme di Google e fondare il suo servizio di geolocalizzazione usando WiFi ed antenne cellulari: \citetitle{mozilla}.
 
 
 L'obbiettivo è quello di geolocalizzare gli utenti sulla base dell'ambiente radio che li circonda: MLS è un progetto collaborativo per creare un database mondiale aperto di Cell ID e WiFi georeferenziati. La mappatura viene fatta dagli utenti su base puramente volontaria, utilizzando l'apposita applicazione \emph{Mozilla Stumbler}.
@@ -62,8 +58,8 @@ L'obbiettivo è quello di geolocalizzare gli utenti sulla base dell'ambiente rad
 \end{figure}
 Il progetto è ormai maturo e, come si può osservare nelle mappe in fig. \ref{fig:mapp} e \ref{fig:wapp} la copertura del mondo è molto capillare.
 \begin{itemize}
- \item La prima mostra un esempio di utilizzo del programma a San Lorenzo, nel percorso tra le nostre due abitazioni. I pallini verdi sono i punti GPS delle rilevazioni complete (WiFi + rete cellulare) effettuate durante il tragitto. Come si può notare sono piuttosto fitti: 4 0 5 per ogni isolato. Le aree sfumate in blu mostrano invece, in maniera approssimata per motivi di privacy, l'esito dell'eleborazione di tutte le precedenti osservazoni nell'area, ovvero tutti i router WiFi e le antenne ricostruiti fin ora. La mappa è fittissima, ma questo non deve trarre in inganno: è ancora incompleta e per certi versi inaffidabile. Un esempio diretto sono le numerose ricostruzioni che appaiono in mezzo ai binari della stazione Termini: quelle derivano dai WiFi all'interno dei treni a cui si collegano i viaggiatori, ma che essendo oggetti in moto non possono essere usati ai fini della geolocalizzazione e pertanto dovrebbero essere filtrati ed esclusi dal database.
-  \item La seconda mappa mostra invece la copertura globale raggiunta dal progetto. Sebbene risulti uno stadio abbastanza avanzato, si può notare come ci siano ancora delle disparità di mappatura anche tra gli stati ad alta presenza tecnologica: si confrontino ad esempio le capitali della Cina e del Giappone. Inoltre, essendo un progetto collaborativo open source e con sede negli Stati Uniti, sì può vedere come gli stati in cui la cultura open è meno diffusa o quelli in tensione con gli USA per quanto riguarda la politica estera risultino globalmente meno mappati. Un esempio emblematico potrebbe essere la differenza tra Nord Korea e Sud Korea.
+	\item La prima mostra un esempio di utilizzo del programma a San Lorenzo, in un normale percorso cittadino. I pallini verdi sono i punti GPS delle rilevazioni complete (WiFi + rete cellulare) effettuate durante il tragitto. Come si può notare sono piuttosto fitti: 4 o 5 per ogni isolato. Le aree sfumate in blu mostrano invece, in maniera approssimata per motivi di privacy, l'esito dell'eleborazione di tutte le precedenti osservazoni nell'area, ovvero tutti i router WiFi e le antenne ricostruiti fin ora. La mappa è fittissima, ma questo non deve trarre in inganno: è ancora incompleta e per certi versi inaffidabile. Un esempio diretto sono le numerose ricostruzioni che appaiono in mezzo ai binari della stazione Termini: quelle derivano dai WiFi all'interno dei treni a cui si collegano i viaggiatori, ma che essendo oggetti in moto non possono essere usati ai fini della geolocalizzazione e pertanto dovrebbero essere filtrati ed esclusi dal database.
+	\item La seconda mappa (interattiva) mostra invece la copertura globale raggiunta dal progetto. Sebbene risulti uno stadio abbastanza avanzato, si può notare come ci siano ancora delle disparità di mappatura anche tra gli stati ad alta presenza tecnologica: si confrontino ad esempio le capitali della Cina e del Giappone. Inoltre, essendo un progetto collaborativo open source e con sede negli Stati Uniti, sì può vedere come gli stati in cui la cultura open è meno diffusa o quelli in tensione con gli USA per quanto riguarda la politica estera risultino globalmente meno mappati. Un esempio emblematico potrebbe essere la differenza tra Nord Korea e Sud Korea.
 \end{itemize}
 
 \begin{figure}[b!]
@@ -73,7 +69,7 @@ Il progetto è ormai maturo e, come si può osservare nelle mappe in fig. \ref{f
 	\label{fig:wapp}
 \end{figure}
 
-Dato l'approccio di \emph{crouwdsourcing} collaborativo, i dati sono tanti e la copertura mondiale, continuamente aggiornati, aperti, facilmente scaricabili in database ordinati, puliti e ben documentati. Di seguito sono elencate alcune statistiche per avere un'idea dei numeri in gioco:
+Dato l'approccio di \emph{crouwdsourcing} collaborativo, i dati sono tanti e a copertura mondiale, continuamente aggiornati, aperti, facilmente scaricabili in database ordinati, puliti e ben documentati. Di seguito sono elencate alcune statistiche per avere un'idea dei numeri in gioco:
 \begin{table}[t]
 \centering
 \caption{Alcune statistiche dei dati forniti da MLS}
@@ -176,7 +172,7 @@ changeable 	&created 		&updated 		&averageSignal\\
 \end{table}
 
 \subsection{Data selection}
-Una volta scaricati i dati aggregati dalla pagina web \lstinline{https://location.services.mozilla.com/downloads} sono cominciate le operazioni di selezione dei dati. Il data sample riguarda tutti i continenti e risulta molto grosso (un file csv di circa 650 MB), per cui è necessario ridurlo il più possibile per poterlo maneggiare col nostro limitato quantitativo di RAM.
+Una volta scaricati i dati aggregati dalla pagina web \lstinline{https://location.services.mozilla.com/downloads} sono cominciate le operazioni di selezione dei dati. Il data sample riguarda tutti i continenti e risulta molto grosso (un file csv di circa 650 MB), per cui è necessario ridurlo il più possibile per poterlo maneggiare con il nostro limitato quantitativo di RAM.
 
 Una prima grossolana ma efficiente scrematura riguarda i dati caratterizzati da un mobile county code non italiano, si è pertanto imposta la condizione
 \begin{lstlisting}

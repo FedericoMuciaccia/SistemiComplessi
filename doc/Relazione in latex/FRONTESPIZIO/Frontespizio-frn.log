@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.11.21)  9 MAR 2016 00:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.11.21)  15 MAR 2016 16:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -349,18 +349,18 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 No auxiliary output files.
 
 No file Frontespizio-frn.aux.
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -458,14 +458,14 @@ e
 File: ../Immagini/Sigillo.pdf Graphic file (type pdf)
 
 <use ../Immagini/Sigillo.pdf>
-Package pdftex.def Info: ../Immagini/Sigillo.pdf used on input line 26.
+Package pdftex.def Info: ../Immagini/Sigillo.pdf used on input line 27.
 (pdftex.def)             Requested size: 139.32204pt x 42.67912pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 26.
+(Font)              <12> on input line 27.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 26.
+(Font)              <8> on input line 27.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 26.
+(Font)              <6> on input line 27.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <../Immagini/Sigillo.pdf>] 
@@ -473,7 +473,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 Here is how much of TeX's memory you used:
  3135 strings out of 493085
  43688 string characters out of 6136916
- 120774 words of memory out of 5000000
+ 120786 words of memory out of 5000000
  6579 multiletter control sequences out of 15000+600000
  7598 words of font info for 27 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -482,7 +482,7 @@ Here is how much of TeX's memory you used:
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on Frontespizio-frn.pdf (1 page, 61368 bytes).
+Output written on Frontespizio-frn.pdf (1 page, 61275 bytes).
 PDF statistics:
  27 PDF objects out of 1000 (max. 8388607)
  18 compressed objects within 1 object stream
