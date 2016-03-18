@@ -3,7 +3,7 @@
 
 # ### Importo tutte le librerie necessarie
 
-# In[1]:
+# In[3]:
 
 import geopy
 from geopy import distance
@@ -128,10 +128,8 @@ treCell.to_csv("../../data/Tre_towers.csv", index= False)
 
 # In[10]:
 
-#EUCLID DON'T TAUCH
-#istruzione che fa selezione alcune righe con criteri su alcune colonne, 
-#ne seleziona alcune e restituisce un array nompy di valori desiderati
-
+#istruzione che seleziona alcune righe con criteri su alcune colonne, 
+#e restituisce un array numpy di valori desiderati
 coordinate = dataframe[criterioMCC & criterioMinsamples][['lat', 'lon']].values
 
 get_ipython().magic(u'time distanza = numpy.array(map(euclidDistance, coordinate), dtype=int)')
@@ -179,6 +177,7 @@ def matriceSupEuclid(datiCoordinate, datiRaggi):
             a[i,j+i+1] = a[j+i+1,i] = (euclidDistance(datiCoordinate[i], datiCoordinate[j+i+1]) <= 0.8*sommaraggi)
     return a
 
+#attenzione: molto lenta!
 def matriceSupGeodetic(datiCoordinate, datiRaggi):
     a = numpy.zeros((numdati,numdati))
     for i in xrange(numdati):
@@ -190,13 +189,13 @@ def matriceSupGeodetic(datiCoordinate, datiRaggi):
 
 
 
-#dataframe = pandas.read_csv("../data/roma_towers.csv")
 gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
 for aziende in gestore:
     dataframe = pandas.read_csv("../../data/{0}_towers.csv".format(aziende))
     coordinate = dataframe[['lat', 'lon']].values
     raggio = dataframe['range'].values
-    
+
+# for che mette a tutti i raggi sotto i 500 metri, il valore minimo di 500 metri
 #    for i in range(len(raggio)):
 #        if(raggio[i] < 500):
 #            raggio[i] = 500
@@ -209,7 +208,7 @@ for aziende in gestore:
     numpy.savetxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(aziende)),adiacenzaEuclid, fmt='%d',delimiter=',',newline='\n')
 
 
-# ## Faccio disegno grafo e grafico distr grado
+# ## Faccio grafo e calcolo distr grado
 
 # In[15]:
 
@@ -268,96 +267,7 @@ treCell["degree"] = gradoTre
 treCell.to_csv("../../data/Tre_towers.csv", index= False)
 
 
-# In[17]:
-
-get_ipython().magic(u'matplotlib inline')
-gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
-colori = ['#4d4d4d', '#004184','#ff3300','#ff8000','#018ECC']
-def degreeDistribution(gradi, azienda, colore):
-    pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore, linewidth=1.1)
-    pyplot.title('Degree distribution')
-    pyplot.xlabel("Degree")
-    pyplot.ylabel("Frequency")
-
-def degreeDistributionLog(gradi, azienda, colore):
-    distribuzioneRange = pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore, linewidth=1.1)
-    pyplot.title('Degree distribution')
-    pyplot.xlabel("Degree")
-    pyplot.ylabel("Frequency")
-
-    pyplot.gca().set_xscale("log")
-    pyplot.gca().set_yscale("log")
-#    pyplot.ylim(1,100)
-    
-pyplot.figure(figsize=(16,9))
-distribuzione = degreeDistributionLog(gradoRoma, gestore[0], colori[0])
-distribuzione = degreeDistributionLog(gradoTim, gestore[1], colori[1])
-distribuzione = degreeDistributionLog(gradoVoda, gestore[2], colori[2])
-distribuzione = degreeDistributionLog(gradoWind, gestore[3], colori[3])
-distribuzione = degreeDistributionLog(gradoTre, gestore[4], colori[4])
-#pyplot.xlim(1,1000)
-pyplot.legend()
-pyplot.show()
-
-pyplot.figure(figsize=(16,9))
-distribuzione = degreeDistribution(gradoRoma, gestore[0], colori[0])
-distribuzione = degreeDistribution(gradoTim, gestore[1], colori[1])
-distribuzione = degreeDistribution(gradoVoda, gestore[2], colori[2])
-distribuzione = degreeDistribution(gradoWind, gestore[3], colori[3])
-distribuzione = degreeDistribution(gradoTre, gestore[4], colori[4])
-pyplot.xlim(1,1000)
-pyplot.legend()
-pyplot.show()
-
-
-# ### Faccio istogramma del raggio delle antenne
-
-# In[18]:
-
-gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
-colori = ['#4d4d4d', '#004184','#ff3300','#ff8000','#018ECC']
-def rangeDistribution(gradi, azienda, colore):
-    pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore, linewidth=1.1)
-    pyplot.title('Range distribution')
-    pyplot.xlabel("Range")
-    pyplot.ylabel("Frequency")
-
-def rangeDistributionLog(gradi, azienda, colore):
-    distribuzioneRange = pyplot.hist(gradi, bins=max(gradi)-min(gradi), histtype='step', label=azienda, color=colore, linewidth=1.1)
-    pyplot.title('Range distribution')
-    pyplot.xlabel("Range")
-    pyplot.ylabel("Frequency")
-
-    pyplot.gca().set_xscale("log")
-    pyplot.gca().set_yscale("log")
-
-pyplot.figure(figsize=(16*1.11,9*1.11))
-#gestore = ["Roma", "Tim", "Vodafone", "Wind", "Tre"]
-
-for azienda, colore in zip(gestore,colori):
-    dataframe = pandas.read_csv("../../data/{0}_towers.csv".format(azienda))
-    raggio = dataframe['range'].values
-    distribuzione = rangeDistribution(raggio, azienda, colore)
-#    print dataframe[dataframe.range == 0]
-    pyplot.xlim(0,100)
-    pyplot.legend()
-pyplot.show()
-    
-pyplot.figure(figsize=(16*1.11,9*1.11))
-for azienda, colore in zip(gestore,colori):
-    dataframe = pandas.read_csv("../../data/{0}_towers.csv".format(azienda))
-    raggio = dataframe['range'].values
-    distribuzione = rangeDistributionLog(raggio, azienda, colore)
-#    print dataframe[dataframe.range == 0]
-    pyplot.xlim(1,9000)
-    pyplot.legend()
-pyplot.show()
-
-
-# # TODO usare graph tool
-# 
-
-# # Topologia
+# ## Topologia iniziale con networkx (molto lento)
 
 # In[5]:
 
@@ -374,16 +284,6 @@ def topologyNetx(gestore):
 for compagnia in gestore:
     print compagnia
     topo = get_ipython().magic(u'time topologyNetx(compagnia)')
-    print topo, "\n"
-
-
-# In[ ]:
-
-for compagnia in gestore:
-    print compagnia
-    adiacenza = numpy.genfromtxt("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia),delimiter=',',dtype='int') 
-    grafo = networkx.Graph(adiacenza)
-    graphSize = networkx.number_of_nodes(grafoFinal)
     print topo, "\n"
 
 

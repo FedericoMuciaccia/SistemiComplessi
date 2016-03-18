@@ -433,8 +433,8 @@ dove $E_i$ è il numero di link tra i $k_i$ primi vicini del vertice e $k_i(k_i-
 
 <!-- TODO calcolare tutta la matrice di adiacenza con la distanza geodesica al posto di quella euclidea risulta pesantissimo ($N^2$ elementi) -->
 
-<p>Prese le antenne nell'area selezionata come i nodi della rete, è necessario definire un criterio per stabilire un link. Nell'ottica di una ipotetica mesh network, la scelta è stata di considerare collegate due antenne se, nello spazio tra esse, vi è continuità di segnale, in modo che qualsiasi utente nel mezzo possa comunicare con altri utenti. Trascurando dislivelli del terreno ed edifici, è stato supposto che la porzione di spazio coperta da un'antenna sia un cerchio di raggio uguale a <code>range</code>. Il criterio scelto è stato quindi che la distanza $\d_{ij}$ tra due antenne fosse minore della somma dei loro raggi, contando una sovrapposizione di almeno il $20\%$.
-$$\d_{ij} < 0.8(r_i+r_j)$$</P>
+<p>Prese le antenne nell'area selezionata come i nodi della rete, è necessario definire un criterio per stabilire un link. Nell'ottica di una ipotetica mesh network, la scelta è stata di considerare collegate due antenne se, nello spazio tra esse, vi è continuità di segnale, in modo che qualsiasi utente nel mezzo possa comunicare con altri utenti. Trascurando dislivelli del terreno ed edifici, è stato supposto che la porzione di spazio coperta da un'antenna sia un cerchio di raggio uguale a <code>range</code>. Il criterio scelto è stato quindi che la distanza $d_{ij}$ tra due antenne fosse minore della somma dei loro raggi, contando una sovrapposizione di almeno il $20\%$.
+$$d_{ij} < 0.8(r_i+r_j)$$</P>
 
 <p>Stabilito il criterio, bisogna costruire la rete popolando la matrice di adiacenza. Dato che il criterio di linking richiede la conoscenza della distanza tra due antenne, è stato necessario calcolare le distanze tra ogni coppia di nodi. 
 

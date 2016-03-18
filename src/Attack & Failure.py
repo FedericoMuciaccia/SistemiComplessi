@@ -1,25 +1,21 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[7]:
 
-import geopy
-from geopy import distance #TODO BUGGONE
 import math
-import itertools
+#import itertools
 import pandas
 import numpy
 import networkx
-from matplotlib import pyplot
-import seaborn
-get_ipython().magic(u'matplotlib inline')
 
 
-# # Simulazione attacco, andamento D e GC in funzione dei nodi rimossi
+# ## Simulazione attacco, andamento D e GC in funzione dei nodi rimossi
+
+# ### Funzioni step-by-step (un nodo per volta)
 
 # In[8]:
 
-#Funzioni step-by-step
 def attacco(compagnia):
     adiacenzaFinal = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia)),delimiter=',',dtype='int')
     grafoFinal = networkx.Graph(adiacenzaFinal)
@@ -81,9 +77,10 @@ def failure(compagnia):
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
 
 
+# ### Funzioni a sequenze percentuali
+
 # In[9]:
 
-#Funzioni percentuali
 def attaccoPercent(compagnia, steps):
     adiacenzaFinal = numpy.genfromtxt(("/home/protoss/Documenti/Siscomp_datas/data/AdiacenzaEuclidea_{0}.csv".format(compagnia)),delimiter=',',dtype='int')
     grafoFinal = networkx.Graph(adiacenzaFinal)
@@ -151,10 +148,10 @@ def failurePercent(compagnia, steps):
         relSizeGC.append((networkx.number_of_nodes(giantCluster))/(float(graphSize)))
 
 
-# In[10]:
+# In[11]:
 
-#colori = ['#004184','#ff3300','#ff8000','#018ECC','#4d4d4d']
-colori = ['#AA3939','#226666','#7A9F35']
+colori = ['#004184','#ff3300','#ff8000','#018ECC','#4d4d4d']
+#colori = ['#AA3939','#226666','#7A9F35']
 #gestore = ["Roma"]
 gestore = ["Tim", "Vodafone", "Wind", "Tre"]
 
@@ -169,7 +166,7 @@ ascisse = []
 
 for provider in gestore:
     #%time attacco(provider)
-    get_ipython().magic(u'time attaccoPercent(provider, 100)')
+    get_ipython().magic(u'time attaccoPercent(provider, 10)')
     
 datiFinal = pandas.DataFrame()
 
@@ -191,7 +188,7 @@ datiFinal['GCsize'] = relSizeGC
 # Wall time: 37.4 s  
 #   
 
-# In[6]:
+# In[13]:
 
 #Failure
 diametro = []
@@ -200,7 +197,7 @@ aziendaFinal = []
 ascisse = []
 
 for provider in gestore:
-    get_ipython().magic(u'time failurePercent(provider, 100)')
+    get_ipython().magic(u'time failurePercent(provider, 10)')
 #    %time failure(provider)
         
 datiFinal = pandas.DataFrame()
@@ -223,88 +220,7 @@ datiFinal.to_csv("/home/protoss/Documenti/SistemiComplessi/data/Iuri/Comparazion
 # Wall time: 3min 7s  
 # 
 
-# ## Faccio i grafici
-
-# In[19]:
-
-#Attack
-import seaborn
-
-datiFinal = pandas.read_csv('/home/protoss/Documenti/SistemiComplessi/data/Iuri/AttackDataForSeaborn.csv')
-#datiFinal = pandas.read_csv('/home/protoss/Documenti/SistemiComplessi/data/Iuri/GtoolAttackDataForSeaborn.csv')
-
-seaborn.set_context("notebook", font_scale=1.1)
-seaborn.set_style("ticks")
-
-#diametro
-seaborn.lmplot('percent', 'diameter', data=datiFinal, fit_reg=False,
-               size = 9, aspect = 1.3333,
-               legend = False,
-               hue='provider', palette = colori,
-               scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Attacco: diametro')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.xlim(0, 100)
-pyplot.ylim(0, 80)
-pyplot.legend()
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/AttackD_Final', format='svg', dpi=1000)
-#pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackD_Final', format='eps', dpi=1000)
-
-#giant cluster
-seaborn.lmplot('percent', 'GCsize', data=datiFinal, fit_reg=False,
-           size = 9, aspect = 1.3333,
-           legend = False,
-           hue='provider', palette = colori,
-           scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Attacco: dimensioni relative del GC')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.xlim(0, 100)
-pyplot.ylim(0,1.1)
-pyplot.legend()
-pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/AttackGC_Final', format='svg', dpi=1000)
-#pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/iuri/gToolAttackGC_Final', format='eps', dpi=1000)
-
-
-# In[20]:
-
-#Failure
-import seaborn
-
-datiFinal = pandas.read_csv('../../data/Iuri/FailureDataForSeaborn.csv')
-
-seaborn.set_context("notebook", font_scale=1.1)
-seaborn.set_style("ticks")
-
-#diametro
-seaborn.lmplot('percent', 'diameter', data=datiFinal, fit_reg=False,
-           size = 9, aspect = 1.3333,
-           legend = False,
-           hue='provider', palette = colori,
-           scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Random failure: diametro')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.xlim(0, 100)
-pyplot.ylim(0, 20)
-pyplot.legend()
-pyplot.savefig('../../img/iuri/FailureD_Final', format='svg', dpi=1000)
-
-#giant cluster
-seaborn.lmplot('percent', 'GCsize', data=datiFinal, fit_reg=False,
-           size = 9, aspect = 1.3333,
-           legend = False,
-           hue='provider', palette = colori,
-           scatter_kws={"marker": "D", "s": 100})
-pyplot.title('Random failure: dimensioni relative del GC')
-pyplot.xlabel("%")
-pyplot.ylabel("Valore")
-pyplot.xlim(0, 100)
-pyplot.ylim(0,1.1)
-pyplot.legend()
-pyplot.savefig('../../img/iuri/FailureGC_Final', format='svg', dpi=1000)
-
+# ## Confronto metodi di attacco (parallelo, sequenziale, sequenziale step-by-step)
 
 # In[8]:
 
@@ -331,8 +247,7 @@ pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/AttackGC_Compare.sv
 pyplot.savefig('/home/protoss/Documenti/SistemiComplessi/img/AttackGC_Compare.eps', format='eps', dpi=1000)
 
 
-# # CALCOLO DEL DIAMETRO DI RETE ROMA IMPOSSIBILE, ANDAMENTO ESPONENZIALE CON L'AUMENTARE DEI NODI
-# 
+# ## Calcolo del diametro della rete complessiva impossibile, andamento quadratico con aumentare dei nodi
 # 
 # #### 10 steps
 # 
