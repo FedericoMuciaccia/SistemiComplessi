@@ -1,4 +1,9 @@
 
+## NumPy
+[homepage](http://docs.scipy.org/doc/numpy/)
+[user guide](http://docs.scipy.org/doc/numpy/user/index.html)
+[reference](http://docs.scipy.org/doc/numpy/reference/index.html)
+
 ## Pandas
 [documentation](http://pandas.pydata.org/pandas-docs/stable/)
 [API](http://pandas.pydata.org/pandas-docs/stable/api.html)
@@ -10,6 +15,9 @@
 
 ## Markdown
 [tutorial](https://guides.github.com/features/mastering-markdown/)
+
+## SciPy
+[reference](http://docs.scipy.org/doc/scipy/reference/)
 
 ## Geopy
 [homepage](https://pypi.python.org/pypi/geopy)
@@ -34,6 +42,12 @@
 
 ## Virtualenv
 [user guide](https://virtualenv.readthedocs.org/en/latest/userguide.html)
+
+## Scikit-CUDA
+[installation](https://scikit-cuda.readthedocs.org/en/latest/install.html)
+[example](https://scikit-cuda.readthedocs.org/en/latest/generated/skcuda.linalg.dot.html)
+[reference](https://scikit-cuda.readthedocs.org/en/latest/reference.html)
+[homepage](https://scikit-cuda.readthedocs.org/en/latest/index.html)
 
 ## Gmaps
 [homepage](https://pypi.python.org/pypi/gmaps)
